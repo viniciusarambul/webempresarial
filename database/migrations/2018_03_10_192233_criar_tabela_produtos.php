@@ -17,6 +17,8 @@ class CriarTabelaProdutos extends Migration
           $table->increments('id');
           $table->string('nome');
           $table->text('descricao');
+          $table->text('valorUnitario');
+          $table->text('quantidade');
           $table->timestamps();
       });
 
