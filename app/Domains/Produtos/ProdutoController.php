@@ -59,6 +59,8 @@ class ProdutoController extends Controller
     {
       $produto->nome = $request->get('nome');
       $produto->descricao = $request->get('descricao');
+      $produto->valorUnitario = $request->get('valorUnitario');
+      $produto->quantidade = $request->get('quantidade');
       $produto->save();
 
       return redirect()->route('produtos.show', ['id' => $produto->id]);
