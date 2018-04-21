@@ -1,0 +1,495 @@
+// out: ../css/custom.css, compress: true, strictMath: true
+
+@largura_menu: 60px;
+
+@tema_principal: #4678b8;
+@tema_escura: #1a4888;
+@tema_clara: #9bbde0;
+
+body{
+    background: #f0f0f0;
+
+    aside{
+        z-index: 2;
+        background: #f7f7f7;
+        position: fixed;
+        width: @largura_menu;
+        height: 100%;
+        left: 0;
+        top: 0;
+        box-shadow: 0 0 1px #cecece;
+        overflow: hidden;
+
+        .logo-area{
+            width: @largura_menu;
+            height: 70px;
+            padding: 15px 0;
+            text-align: center;
+
+            img {
+                max-width: 40px;
+            }
+        }
+
+        ul{
+            margin-top: 0;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            width: 90px;
+            display: inline-block;
+            height: ~"calc(100% - 70px)";
+
+            li{
+                box-sizing: border-box;
+                padding-right: 5px;
+                width: @largura_menu;
+                border-left: 5px solid transparent;
+                color: #848484;
+                font-size: 22px;
+                text-align: center;
+                display: block;
+                transition: all .5s ease;
+                height: 60px;
+                line-height: 60px;
+
+                i {
+                    height: auto;
+                }
+
+                &.active{
+                    border-left: 5px solid @tema_principal;
+                    color: @tema_principal;
+                    background: #eaeaea;
+                }
+
+                &:hover{
+                    background: #eaeaea;
+                }
+            }
+        }
+    }
+
+    main{
+        z-index: 1;
+        //position: absolute;
+        width: calc(~'100% - 60px');
+        height: 100%;
+        right: 0;
+        margin-left: 60px;
+        top: 0;
+        overflow: auto;
+        //        padding: 8px;
+
+        header{
+            z-index: 2;
+            width: 100%;
+            height: 70px;
+            background: #FFF;
+            display: block;
+            position: fixed;
+            overflow: hidden;
+            padding: 0 16px;
+            line-height: 70px;
+            box-shadow: 0 0 1px #cecece;
+
+            .back{
+                color: #FFF;
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                background: @tema_escura;
+                border-radius: 50%;
+                margin-top: -65px;
+                margin-left: -135px;
+                text-align: right;
+                line-height: 140px;
+                padding: 30px;
+                font-size: 2em;
+                z-index: 2;
+            }
+
+            .icon{
+                color: #FFF;
+                position: absolute;
+                z-index: 1;
+                width: 200px;
+                height: 200px;
+                background: @tema_principal;
+                border-radius: 50%;
+                margin-top: -65px;
+                margin-left: -76px;
+                text-align: right;
+                line-height: 140px;
+                padding: 30px 21px;
+                font-size: 1.3em;
+            }
+
+            .search{
+                float: right;
+                width: 20%;
+
+            }
+        }
+
+        section{
+            margin-top: 70px;
+            padding: 8px;
+            z-index: 1;
+
+            div.card{
+                padding: 8px;
+                box-shadow: 0 2px 2px 0 #e6e6e6, 0 1px 5px 0 #e6e6e6, 0 3px 1px -2px #e6e6e6;
+            }
+        }
+
+        .card.correct-answer{
+            border: 1px solid #1de9b6;
+        }
+    }
+
+    .dash-input{
+        border: none;
+        background: #eee;
+        border-radius: 4px;
+        padding: 0 8px;
+        box-sizing: border-box;
+
+        &:focus {
+            border: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+}
+
+table {
+    &.bordered {
+        tbody {
+            tr {
+                border-color: #f3f3f3;
+
+                &:last-child{
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea, textarea.materialize-textarea{
+    background: #fcfcfc;
+    border: 0;
+    padding: 10px;
+    border-radius: 3px;
+    height: auto;
+    box-shadow: inset 0px 0px 5px #e0e0e0;
+    width: calc(100% - 20px);
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea, textarea.materialize-textarea:focus:not([readonly]){
+    border: 0;
+    box-shadow: inset 0px 0px 5px #b2b1b1;
+}
+
+p {
+    &.alert-disable {
+        text-align: center;
+        color: #ccc;
+    }
+
+    &.card-intro{
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1em;
+        color: #a5a3a3;
+        margin: 8px 15px;
+        position: relative;
+
+        & a{
+            margin-top: 10px;
+            position: absolute;
+            right: 0;
+        }
+    }
+}
+
+a{
+    color: inherit !important;
+
+    &.btn{
+        font-size: 18.2px;
+
+        i{
+            color: #FFF;
+        }
+    }
+}
+
+td.with-image {
+    position: relative;
+    padding: 0 10px;
+    width: 72px;
+
+    img {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        top: 6px;
+        border-radius: 50%;
+    }
+}
+
+tr.with-options{
+    td.options{
+        display: none;
+        position: absolute;
+        right: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        background: #FFF;
+        opacity: 0;
+        transition: opacity .2s ease;
+
+        & a{
+            background: #dcdada;
+            border-radius: 50%;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-top: -4px;
+            line-height: 30px;
+            text-align: center;
+            opacity: 0.5;
+            margin-left: 5px;
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+    &:hover{
+        td.options{
+            opacity: 1;
+            display: block;
+        }
+    }
+}
+
+.no-margin{
+    margin: 0 !important;
+}
+.no-margin-bottom{
+    margin-bottom: 0 !important;
+}
+.no-margin-left{
+    margin-left: 0 !important;
+}
+.no-margin-top{
+    margin-top: 0 !important;
+}
+
+.toast{
+    &.error{
+        background: #e53935;
+    }
+    &.success{
+        background: #00897b;
+    }
+}
+
+section{
+    padding: 0 8px !important;
+}
+
+
+
+// MENSAGENS - PROFESSOR
+#chat-main{
+    height: ~"calc(90vh - 80px )";
+    color: #000000;
+
+    p{
+        padding-left: 10px;
+    }
+
+}
+
+#mensagem-envio{
+    height: ~"calc(90vh - 80px )";
+    h4{
+        padding-top: 10px;
+    }
+
+    #mensagem-main{
+        height: 70%;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+        padding-top: 10px;
+        position: relative;
+        overflow: auto;
+
+
+
+        .aluno{
+            margin-left: 20px;
+            max-width: 70%;
+            padding: 2px 10px;
+            position: relative;
+            background-color: #EEEEEE;
+            border-radius: 10px;
+            color: black;
+            margin-bottom: 10px;
+
+        }
+
+        .aluno:after{
+            color: white;
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 15px solid;
+            border-right-color: #EEEEEE;
+            top: 50%;
+            right: 100%;
+            margin-top: -15px;
+
+        }
+
+        .professor{
+            margin-right: 20px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            padding: 2px 10px;
+            position: relative;
+            background-color: #1A4888;
+            border-radius: 10px;
+            color: white;
+        }
+        .professor:after{
+            color: white;
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 15px solid;
+            border-left-color: #1A4888;
+            left: 100%;
+            top: 50%;
+            margin-top: -15px;
+
+        }
+
+    }
+
+    #texto-mensagem{
+
+        margin-top: 10px !important;
+
+        textarea{
+            resize: none;
+            visibility: visible !important;
+            height: 75px;
+        }
+
+        a{
+            width: 50px;
+            margin-top: 10px;
+        }
+
+    }
+
+}
+// FIM - MENSAGENS - PROFESSOR*/
+
+#modal-resposta{
+    #enunciado{
+        margin-bottom: 20px;
+    }
+    textarea{
+        width: 98%
+    }
+}
+
+a.linkAluno{
+    color: #039be5 !important;
+    font-size: 15px;
+}
+
+.modal-perfil, #perfil.modal{
+    width: 400px !important;
+    max-width: 80%;
+    padding: 0 !important;
+
+}
+
+main#perfil,
+.modal-perfil{
+    max-width: 100%;
+
+    header{
+        display: none;
+    }
+
+    figure{
+
+        img {
+            width: 170px;
+        }
+
+        figcaption {
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+    }
+
+    .card-info{
+        text-align: left;
+    }
+
+    .crop{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+}
+
+.view{
+    display: inline-block;
+    padding: 10px;
+}
+
+// paginacao
+
+.pagination{
+    width: 100%;
+    text-align: center;
+
+    & li{
+        margin: 5px;
+
+        & a, span {
+            color: #444;
+            display: inline-block;
+            font-size: 1.2rem;
+            padding: 0 10px;
+            line-height: 30px;
+        }
+
+        &.active {
+            background-color: #1a4888;
+            & span{
+                color: #FFF;
+            }
+        }
+
+        &.disabled {
+            opacity: 0.5;
+        }
+    }
+}

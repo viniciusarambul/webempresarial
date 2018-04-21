@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::resource('/produtos', 'Produtos\ProdutoController');
 Route::resource('/clientes', 'Clientes\ClienteController');
+Route::resource('/fornecedores', 'Fornecedores\FornecedorController');

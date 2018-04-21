@@ -2,14 +2,23 @@
 
 namespace App\Domains\Clientes;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
+      $query = Cliente::query();
+
+        if($request->get('filter')){
+            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
+        }
+
+        $clientes = $query->paginate(5);
+
         return view('clientes.index', [
-          'clientes' => $clientes
+          'clientes' => $clientes,
+          'filter'=> $request->get('filter')
         ]);
     }
 
@@ -44,7 +53,7 @@ class ClienteController extends Controller
 
     public function destroy(Cliente $cliente)
     {
-      $Cliente->delete();
+      $cliente->delete();
 
       return redirect()->route('clientes.index');
     }

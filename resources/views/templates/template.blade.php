@@ -22,6 +22,7 @@
         <link type="text/css" rel="stylesheet" href="{{ asset('css/custom.css') }}" media="screen,projection" />
         <link type="text/css" rel="stylesheet" href="{{ asset('libs/sweetAlert/sweetalert.css') }}" media="screen,projection" />
 
+        <title>{{$title}}</title>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -44,8 +45,77 @@
     </head>
 
     <body>
+        <aside>
+            <div class="logo-area">
+                <img src="{{ asset('img/logo-cart.png') }}" alt="">
+            </div>
+            <ul>
+                <li class="{{$active_router == 'clientes' ? 'active' : ''}}">
+                  <a href="{{route('clientes.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="clientes">
+                    <i class="mdi mdi-account"></i>
+                  </a>
+                </li>
+                <li class="{{$active_router == 'fornecedores' ? 'active' : ''}}">
+                  <a href="{{route('fornecedores.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="fornecedores">
+                    <i class="mdi mdi-truck"></i>
+                  </a>
+                </li>
+            </ul>
+        </aside>
 
+        <main>
 
+            <header>
+                <div class="back waves-effect waves-light">
+                    <a href="{{ route($prev_router) }}">
+                        <i class="mdi mdi-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="icon waves-effect waves-light">
+                    <i class="{{$icon}}"></i>
+                </div>
+                <div class="attempt">
+                     <b>vinicius</b>
+                     <small>email</small>
+                 </div>
+            </header>
+
+            <section>
+                @yield('container')
+            </section>
+        </main>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
+        <script>
+            $(document).ready(function () {
+                app.init();
+            });
+        </script>
+
+        @if(Session::has('error'))
+        <script>
+            app.alert('{{Session::get('error')}}', 'error');
+        </script>
+        @endif
+
+        @if(Session::has('success'))
+        <script>
+            app.alert('{{Session::get('success')}}', 'success');
+        </script>
+        @endif
+
+        @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                app.alert('{{$error}}', 'error');
+            @endforeach
+        </script>
+        @endif
     </body>
 
 </html>

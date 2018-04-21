@@ -1,0 +1,43 @@
+body {
+    background: #2c64dd
+}
+
+body .form-container {
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+body .logo-container {
+    margin: 30px auto;
+    text-align: center
+}
+
+body .logo-container img {
+    max-width: 100px
+}
+
+body .row.valign{
+    width: 270px;
+}
+
+.flat-form-container {
+    margin: 5px 0 10px 0;
+    background: #FFF;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: relative
+}
+
+.flat-form-container input {
+    margin: 0;
+    border: 0;
+    width: calc(80%);
+    padding: 15px 10px;
+    font-weight: bold
+}
+
+.flat-form-container input:focus {
+    border-bottom: none !important;
+    box-shadow: none !important
+}
