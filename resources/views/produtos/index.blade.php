@@ -1,14 +1,10 @@
-@extends('templates.template')
+@extends('templates.template', [
+    'title'=> 'produtos',
+    'prev_router'=> 'home',
+    'icon'=> 'mdi mdi-folder',
+    'active_router'=> 'produtos'
+])
 @section('container')
-
-<a href="{{ route('produtos.create') }}">Criar novo produto</a>
-@foreach($produtos as $produto)
-  <p>{{ $produto->nome }}
-    <a href="{{ route('produtos.edit', ['id' => $produto->id ]) }}">editar</a>
-    <a href="{{ route('produtos.show', [ 'id' => $produto->id ]) }}">ver</a>
-  </p>
-
-@endforeach
 
 
 <div class="row no-margin-bottom">
@@ -20,29 +16,46 @@
 </div>
 
 
+<form class="row no-margin-bottom" method="GET" action="{{ route('produtos.index') }}">
+    <div class="input col m6">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Produto (digite o Nome)" value="{{$filter}}">
+    </div>
+    <div class="input col m6">
+        <button type="submit" class="btn blue">
+            <i class="mdi mdi-magnify"></i>
+        </button>
+    </div>
+</form>
 
 <div class="row">
     <div class="col s12">
+        <p class="card-intro">
+            &nbsp;
+            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('produtos.create') }}">
+                <i class="mdi mdi-plus"></i>
+            </a>
+        </p>
         <div class="card">
             @if(count($produtos))
             <table>
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Produto</th>
                         <th>Descricao</th>
-                        <th>Valor Unitário</th>
+                        <th>Valor</th>
                         <th>Quantidade</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                  @foreach($produtos as $produto)
+                    @foreach($produtos as $produto)
                     <tr class="with-options">
                         <td>{{$produto->nome}}</td>
                         <td>{{$produto->descricao}}</td>
                         <td>{{$produto->valorUnitario}}</td>
                         <td>{{$produto->quantidade}}</td>
                         <td class="options">
-                            <a href="{{ route('produtos.show', [ 'id' => $produto->id ]) }}">
+                            <a href="{{ route('produtos.show', ['$produto' => $produto->id]) }}">
                                 <i class="mdi mdi-eye"></i>
                             </a>
                         </td>
@@ -52,8 +65,12 @@
                 </tbody>
             </table>
             @else
-            <p class="alert-disable">Não há Produtos Cadastrados.</p>
+            <p class="alert-disable">Não há produtos.</p>
             @endif
         </div>
-      </div>
+        {{ $produtos->appends(['filter'=>$filter])->links() }}
     </div>
+</div>
+
+
+@endsection

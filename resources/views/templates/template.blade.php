@@ -60,6 +60,11 @@
                     <i class="mdi mdi-truck"></i>
                   </a>
                 </li>
+                <li class="{{$active_router == 'produtos' ? 'active' : ''}}">
+                  <a href="{{route('produtos.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="produtos">
+                    <i class="mdi mdi-folder"></i>
+                  </a>
+                </li>
             </ul>
         </aside>
 

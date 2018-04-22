@@ -2,14 +2,23 @@
 
 namespace App\Domains\Produtos;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::all();
+      $query = Produto::query();
+
+        if($request->get('filter')){
+            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
+        }
+
+        $produtos = $query->paginate(5);
+
         return view('produtos.index', [
-          'produtos' => $produtos
+          'produtos' => $produtos,
+          'filter'=> $request->get('filter')
         ]);
     }
 

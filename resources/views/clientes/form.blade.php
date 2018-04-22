@@ -6,6 +6,19 @@
 ])
 @section('container')
 
+<script>
+$(document).ready(function(){
+  $('.date').mask('11/11/1111');
+  $('.time').mask('00:00:00');
+  $('.date_time').mask('00/00/0000 00:00:00');
+  $('.cep').mask('00000-000');
+  $('.telefone').mask('(00) 0000-0000');
+  $('.phone_us').mask('(000) 000-0000');
+  $('.mixed').mask('AAA 000-S0S');
+  $('.cpf').mask('000.000.000-00', {reverse: true});
+  $('.cnpj').mask('000.000.0000-00', {reverse: true});
+});
+</script>
 
 <div class="row no-margin-bottom">
     <div class="col s12">
@@ -50,7 +63,7 @@
                     </div>
                     <div class="input col s6">
                         <label for="cep">Cep</label><br />
-                        <input type="text" name="cep" id="cep" placeholder="Cep" value="{{ $cliente->cep }}">
+                        <input  class="cep" type="text" name="cep" id="cep" placeholder="Cep" value="{{ $cliente->cep }}">
                     </div>
                     <div class="input col s6">
                         <label for="bairro">Bairro</label><br />
@@ -70,17 +83,5 @@
         </div>
     </div>
 </div>
-<script>
-$(document).ready(function(){
-  $('#date').mask('11/11/1111');
-  $('#time').mask('00:00:00');
-  $('#date_time').mask('00/00/0000 00:00:00');
-  $('#cep').mask('00000-000');
-  $('#telefone').mask('(00) 0000-0000');
-  $('#phone_us').mask('(000) 000-0000');
-  $('#mixed').mask('AAA 000-S0S');
-  $('#cpf').mask('000.000.000-00', {reverse: true});
-  $('#cnpj').mask('000.000.0000-00', {reverse: true});
-});
-</script>
+
 @endsection
