@@ -65,6 +65,11 @@
                     <i class="mdi mdi-folder"></i>
                   </a>
                 </li>
+                <li class="{{$active_router == 'pedidos_compras' ? 'active' : ''}}">
+                  <a href="{{route('pedidos_compras.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Pedidos Compra">
+                    <i class="mdi mdi-briefcase"></i>
+                  </a>
+                </li>
             </ul>
         </aside>
 
