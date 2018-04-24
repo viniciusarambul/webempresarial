@@ -6,19 +6,7 @@
 ])
 @section('container')
 
-<script>
-$(document).ready(function(){
-  $('.date').mask('11/11/1111');
-  $('.time').mask('00:00:00');
-  $('.date_time').mask('00/00/0000 00:00:00');
-  $('.cep').mask('00000-000');
-  $('.telefone').mask('(00) 0000-0000');
-  $('.phone_us').mask('(000) 000-0000');
-  $('.mixed').mask('AAA 000-S0S');
-  $('.cpf').mask('000.000.000-00', {reverse: true});
-  $('.cnpj').mask('000.000.0000-00', {reverse: true});
-});
-</script>
+
 
 <div class="row no-margin-bottom">
     <div class="col s12">
@@ -31,10 +19,40 @@ $(document).ready(function(){
 <div class="row">
     <div class="col s12">
         <div class="card">
+          <button id="cpfb" class="waves-effect waves-green btn teal right">CPF</button>
+          <button id="cnpjb" class="waves-effect waves-green btn teal right">CNPJ</button>
             <form method="post" action="{{route('clientes.store')}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="id" name="id" value="{{ $cliente->id }}" />
                 <div class="row">
+
+
+                  <div id="cpff">
+                  <div  class="input col s6" style="display:none">
+                      <label for="numero">CPF</label><br />
+                      <input class="cpf" id="cpf"  type="text" name="numero" placeholder="Numero" value="{{ $cliente->numero }}">
+                  </div>
+                  <div class="input col s6">
+                      <label for="nome">Nome</label><br />
+                      <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $cliente->nome }}">
+                  </div>
+                  <div class="input col s6">
+                      <label for="sobrenome">Sobrenome</label><br />
+                      <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" value="{{ $cliente->sobrenome }}">
+                  </div>
+                  <div class="input col s6">
+                      <label for="telefone">Telefone</label><br />
+                      <input class="telefone" type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $cliente->telefone }}">
+                  </div>
+                </div>
+                  <div id="cnpjj" class="input col s6">
+                      <label for="numero">CNPJ</label><br />
+                      <input class="cnpj" id="cnpj"  type="text" name="numero" placeholder="Numero" value="{{ $cliente->numero }}">
+                  </div>
+
+
+
+
                     <div class="input col s6">
                         <label for="nome">Nome</label><br />
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $cliente->nome }}">
@@ -45,7 +63,7 @@ $(document).ready(function(){
                     </div>
                     <div class="input col s6">
                         <label for="telefone">Telefone</label><br />
-                        <input type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $cliente->telefone }}">
+                        <input class="telefone" type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $cliente->telefone }}">
                     </div>
                     <div class="input col s6">
                         <label for="nome">E-mail</label><br />
@@ -71,7 +89,7 @@ $(document).ready(function(){
                     </div>
                     <div class="input col s6">
                         <label for="numero">Numero</label><br />
-                        <input type="text" name="numero" id="numero" placeholder="Numero" value="{{ $cliente->numero }}">
+                        <input class="cpf" id="cpff" type="text" name="numero" id="numero" placeholder="Numero" value="{{ $cliente->numero }}">
                     </div>
                 </div>
 
