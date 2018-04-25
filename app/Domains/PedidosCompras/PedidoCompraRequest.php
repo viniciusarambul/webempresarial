@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Pedidos_compras;
+namespace App\Domains\PedidosCompras;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Pedido_compraRequest extends FormRequest
+class PedidoCompraRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

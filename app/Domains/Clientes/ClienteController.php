@@ -73,6 +73,8 @@ class ClienteController extends Controller
       $cliente->cidade = $request->get('cidade');
       $cliente->estado = $request->get('estado');
       $cliente->cep = $request->get('cep');
+      $cliente->cnpj = $request->get('cnpj');
+      $cliente->cpf = $request->get('cpf');
       $cliente->bairro = $request->get('bairro');
       $cliente->numero = $request->get('numero');
       $cliente->save();

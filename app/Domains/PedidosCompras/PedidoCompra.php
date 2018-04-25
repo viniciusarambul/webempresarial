@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Pedidos_compras;
+namespace App\Domains\PedidosCompras;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pedido_compra extends Model
+class PedidoCompra extends Model
 {
   protected $table = 'pedido_compra';
 }

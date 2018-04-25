@@ -40,7 +40,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Fornecedor</th>
+                        <th>Cliente</th>
                         <th>Telefone</th>
                         <th>E-mail</th>
                         <th>Cidade</th>

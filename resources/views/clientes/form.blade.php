@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card">
-          <button id="cpfb" class="waves-effect waves-green btn teal right">CPF</button>
+          <button id="cpfb" class="waves-effect waves-green btn teal right" style="margin-left: 2%;">CPF</button>
           <button id="cnpjb" class="waves-effect waves-green btn teal right">CNPJ</button>
             <form method="post" action="{{route('clientes.store')}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -27,27 +27,14 @@
                 <div class="row">
 
 
-                  <div id="cpff">
-                  <div  class="input col s6" style="display:none">
-                      <label for="numero">CPF</label><br />
-                      <input class="cpf" id="cpf"  type="text" name="numero" placeholder="Numero" value="{{ $cliente->numero }}">
+                  <div>
+                  <div id="cpff" class="input col s6" style="display:none">
+                      <label for="cpf">CPF</label><br />
+                      <input class="cpf" id="cpf"  type="text" name="cpf" placeholder="CPF" value="{{ $cliente->cpf }}">
                   </div>
-                  <div class="input col s6">
-                      <label for="nome">Nome</label><br />
-                      <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $cliente->nome }}">
-                  </div>
-                  <div class="input col s6">
-                      <label for="sobrenome">Sobrenome</label><br />
-                      <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" value="{{ $cliente->sobrenome }}">
-                  </div>
-                  <div class="input col s6">
-                      <label for="telefone">Telefone</label><br />
-                      <input class="telefone" type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $cliente->telefone }}">
-                  </div>
-                </div>
                   <div id="cnpjj" class="input col s6">
-                      <label for="numero">CNPJ</label><br />
-                      <input class="cnpj" id="cnpj"  type="text" name="numero" placeholder="Numero" value="{{ $cliente->numero }}">
+                      <label for="cnpj">CNPJ</label><br />
+                      <input class="cnpj" id="cnpj"  type="text" name="cnpj" placeholder="CNPJ" value="{{ $cliente->cnpj }}">
                   </div>
 
 

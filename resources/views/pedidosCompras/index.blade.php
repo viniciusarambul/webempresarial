@@ -2,7 +2,7 @@
     'title'=> 'Pedido Compra',
     'prev_router'=> 'home',
     'icon'=> 'mdi mdi-briefcase',
-    'active_router'=> 'pedidos_compras'
+    'active_router'=> 'pedidosCompras'
 ])
 @section('container')
 
@@ -16,7 +16,7 @@
 </div>
 
 
-<form class="row no-margin-bottom" method="GET" action="{{ route('pedidos_compras.index') }}">
+<form class="row no-margin-bottom" method="GET" action="{{ route('pedidosCompras.index') }}">
     <div class="input col m6">
         <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Fornecedor (digite o Nome)" value="{{$filter}}">
     </div>
@@ -31,12 +31,12 @@
     <div class="col s12">
         <p class="card-intro">
             &nbsp;
-            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidos_compras.create') }}">
+            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidosCompras.create') }}">
                 <i class="mdi mdi-plus"></i>
             </a>
         </p>
         <div class="card">
-            @if(count($pedidos_compras))
+            @if(count($pedidosCompras))
             <table>
                 <thead>
                     <tr>
@@ -48,14 +48,14 @@
                 </thead>
 
                 <tbody>
-                    @foreach($pedidos_compras as $pedido_compra)
+                    @foreach($pedidosCompras as $pedidoCompra)
                     <tr class="with-options">
-                        <td>{{$pedido_compra->id}}</td>
-                        <td>{{$pedido_compra->nome}}</td>
-                        <td>{{date("d-m-Y", strtotime($pedido_compra->data))}}</td>
-                        <td>{{$pedido_compra->fornecedor}}</td>
+                        <td>{{$pedidoCompra->id}}</td>
+                        <td>{{$pedidoCompra->nome}}</td>
+                        <td>{{date("d-m-Y", strtotime($pedidoCompra->data))}}</td>
+                        <td>{{$pedidoCompra->fornecedor}}</td>
                         <td class="options">
-                            <a href="{{ route('pedidos_compras.show', ['$pedido_compra' => $pedido_compra->id]) }}">
+                            <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                 <i class="mdi mdi-eye"></i>
                             </a>
                         </td>
@@ -68,7 +68,7 @@
             <p class="alert-disable">Não há pedidos.</p>
             @endif
         </div>
-        {{ $pedidos_compras->appends(['filter'=>$filter])->links() }}
+        {{ $pedidosCompras->appends(['filter'=>$filter])->links() }}
     </div>
 </div>
 

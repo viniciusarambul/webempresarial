@@ -65,8 +65,8 @@
                     <i class="mdi mdi-folder"></i>
                   </a>
                 </li>
-                <li class="{{$active_router == 'pedidos_compras' ? 'active' : ''}}">
-                  <a href="{{route('pedidos_compras.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Pedidos Compra">
+                <li class="{{$active_router == 'pedidosCompras' ? 'active' : ''}}">
+                  <a href="{{route('pedidosCompras.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Pedidos Compra">
                     <i class="mdi mdi-briefcase"></i>
                   </a>
                 </li>
@@ -96,6 +96,7 @@
         </main>
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
@@ -118,7 +119,9 @@
           $('.cpf').mask('000.000.000-00', {reverse: true});
           $('.cnpj').mask('00.000/0000-00', {reverse: true});
         });
-        </script>
+
+
+          </script>
         <script>
           $(document).ready(function(){
             $("#cpfb").click(function(){

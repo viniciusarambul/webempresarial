@@ -22,6 +22,8 @@ class CriarTabelaClientes extends Migration
           $table->text('cidade');
           $table->text('estado');
           $table->text('cep');
+          $table->text('cpf')->nullable();
+          $table->text('cnpj')->nullable();
           $table->text('bairro');
           $table->text('numero');
           $table->timestamps();
