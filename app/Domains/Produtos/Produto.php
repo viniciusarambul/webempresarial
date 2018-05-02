@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model
 {
-      public function fornecedor(){
-        return $this->hasOne('App\Fornecedor', 'id', 'fornecedor');
+      public function fornecedorNome(){
+        return $this->hasOne('App\Domains\Fornecedores', 'id', 'fornecedor');
       }
 
 }

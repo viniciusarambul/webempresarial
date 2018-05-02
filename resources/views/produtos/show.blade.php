@@ -23,7 +23,7 @@
             <p><b>Descricao: </b>{{ $produto->descricao }}</p>
             <p><b>Valor Unitário: </b>{{ $produto->valorUnitario }}</p>
             <p><b>Quantidade: </b>{{ $produto->quantidade }}</p>
-            <p><b>Fornecedor: </b>{{ $produto->$fornecedor->nome }}</p>
+            <p><b>Fornecedor: </b>{{ $produto->fornecedorNome }}</p>
         </div>
     </div>
 
