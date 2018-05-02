@@ -19,6 +19,7 @@ class CriarTabelaProdutos extends Migration
           $table->text('descricao');
           $table->text('valorUnitario');
           $table->text('quantidade');
+          $table->text('fornecedor');
           $table->timestamps();
       });
 

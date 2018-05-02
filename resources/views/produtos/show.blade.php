@@ -18,11 +18,12 @@
 <div class="row">
     <div class="col s12 m4">
         <div class="card">
-            <h5>Dados do Fornecedor</h5>
+            <h5>Dados do Produto</h5>
             <p><b>Nome: </b>{{ $produto->nome }}</p>
             <p><b>Descricao: </b>{{ $produto->descricao }}</p>
             <p><b>Valor Unitário: </b>{{ $produto->valorUnitario }}</p>
             <p><b>Quantidade: </b>{{ $produto->quantidade }}</p>
+            <p><b>Fornecedor: </b>{{ $produto->$fornecedor->nome }}</p>
         </div>
     </div>
 

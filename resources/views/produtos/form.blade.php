@@ -38,6 +38,14 @@
                         <label for="quantidade">Quantidade</label><br />
                         <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $produto->quantidade }}">
                     </div>
+                    <div class="input col s4">
+                         <label for="fornecedor">Fornecedor</label><br />
+                      <select class="browser-default" name="fornecedor">
+                      @foreach($fornecedores as $fornecedor)
+                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
+                        @endforeach
+                      </select>
+                    </div>
                   </div>
 
 
