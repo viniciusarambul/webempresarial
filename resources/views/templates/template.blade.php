@@ -70,6 +70,22 @@
                     <i class="mdi mdi-briefcase"></i>
                   </a>
                 </li>
+                <li class="{{$active_router == 'pedidosVendas' ? 'active' : ''}}">
+                  <a href="{{route('pedidosVendas.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Pedidos Venda">
+                    <i class="mdi mdi-briefcase"></i>
+                  </a>
+                </li>
+                <li class="{{$active_router == 'contasReceber' ? 'active' : ''}}">
+                  <a href="{{route('contasReceber.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Contas Receber">
+                    <i class="mdi mdi-coin"></i>
+                  </a>
+                </li>
+                <li class="{{$active_router == 'contasPagar' ? 'active' : ''}}">
+                  <a href="{{route('contasPagar.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Contas Pagar">
+                    <i class="mdi mdi-currency-usd"></i>
+                  </a>
+                </li>
+
             </ul>
         </aside>
 

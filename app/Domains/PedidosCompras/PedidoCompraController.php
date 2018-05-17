@@ -4,6 +4,7 @@ namespace App\Domains\PedidosCompras;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
+use App\Domains\Fornecedores\Fornecedor;
 
 class PedidoCompraController extends Controller
 {
@@ -61,10 +62,12 @@ class PedidoCompraController extends Controller
 
     private function form(PedidoCompra $pedidoCompra) {
         $produtos = Produto::all();
+        $fornecedores = Fornecedor::all();
 
         return view('pedidosCompras.form', [
           'pedidoCompra' => $pedidoCompra,
-          'produtos' => $produtos
+          'idProdutos' => $produtos,
+          'idFornecedor' => $fornecedores
         ]);
     }
 
@@ -73,8 +76,9 @@ class PedidoCompraController extends Controller
       $pedidoCompra->nome = $request->get('nome');
       $pedidoCompra->data = $request->get('data');
       $pedidoCompra->situacao = $request->get('situacao');
-      $pedidoCompra->fornecedor = $request->get('fornecedor');
-      $pedidoCompra->produto = $request->get('produto');
+      $pedidoCompra->idFornecedor = $request->get('idFornecedor');
+      $pedidoCompra->idProduto = $request->get('idProduto');
+      $pedidoCompra->quantidade = $request->get('quantidade');
 
       $pedidoCompra->save();
 

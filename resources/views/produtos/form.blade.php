@@ -34,10 +34,10 @@
                         <label for="valorUnitario">Valor Unitário</label><br />
                         <input type="text" name="valorUnitario" id="valorUnitario" placeholder="Valor unitario" value="{{ $produto->valorUnitario }}">
                     </div>
-                    <div class="input col s6">
+                    <!--<div class="input col s6">
                         <label for="quantidade">Quantidade</label><br />
                         <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $produto->quantidade }}">
-                    </div>
+                    </div>-->
                     <div class="input col s4">
                          <label for="fornecedor">Fornecedor</label><br />
                       <select class="browser-default" name="fornecedor">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePedidoCompra extends Migration
+class CreatePedidoVenda extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreatePedidoCompra extends Migration
      */
     public function up()
     {
-      Schema::create('pedidocompra', function (Blueprint $table) {
+      Schema::create('pedidovenda', function (Blueprint $table) {
         $table->increments('id');
         $table->string('nome');
         $table->date('data');
         $table->text('situacao');
-        $table->text('idFornecedor');
-        $table->text('idProduto');
+        $table->text('idCliente');
+        $table->text('produto');
         $table->text('quantidade');
 
 
 
         $table->timestamps();
       });
-
     }
 
     /**
@@ -36,6 +35,6 @@ class CreatePedidoCompra extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidocompra');
+        Schema::dropIfExists('pedidovenda');
     }
 }
