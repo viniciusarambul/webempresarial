@@ -47,7 +47,7 @@
     <body>
         <aside>
             <div class="logo-area">
-                <img src="{{ asset('img/logo-cart.png') }}" alt="">
+                <!--<img src="{{ asset('img/logo-cart.png') }}" alt=""> -->
             </div>
             <ul>
                 <li class="{{$active_router == 'clientes' ? 'active' : ''}}">
@@ -85,6 +85,16 @@
                     <i class="mdi mdi-currency-usd"></i>
                   </a>
                 </li>
+                <li class="">
+                  <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Ajuda">
+                    <i class="mdi mdi-help-circle-outline"></i>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Sair">
+                    <i class="mdi mdi-power"></i>
+                  </a>
+                </li>
 
             </ul>
         </aside>
@@ -101,8 +111,8 @@
                     <i class="{{$icon}}"></i>
                 </div>
                 <div class="attempt">
-                     <b>vinicius</b>
-                     <small>email</small>
+                     <b>Vinicius Arambul</b>
+                     <small>vinicius.vieira@hotmail.com</small>
                  </div>
             </header>
 

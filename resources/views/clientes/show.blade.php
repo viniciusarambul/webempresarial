@@ -18,12 +18,12 @@
 <div class="row">
     <div class="col s12 m4">
         <div class="card">
-            <h5>Dados do Fornecedor</h5>
+            <h5>Dados do Cliente</h5>
             <p><b>Nome: </b>{{ $cliente->nome }}</p>
             <p><b>Sobrenome: </b>{{ $cliente->sobrenome }}</p>
             <p><b>E-mail: </b>{{ $cliente->email }}</p>
             <p><b>Telefone: </b>{{ $cliente->telefone }}</p>
-          
+
         </div>
     </div>
     <div class="col s12 m4">

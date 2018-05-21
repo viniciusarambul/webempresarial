@@ -24,8 +24,8 @@ class CreateFornecedoresTable extends Migration
           $table->text('cep');
           $table->text('bairro');
           $table->text('numero');
-          $table->text('cpf');
-          $table->text('cnpj');
+          $table->text('cpf')->nullable();
+          $table->text('cnpj')->nullable();
           $table->timestamps();
         });
     }

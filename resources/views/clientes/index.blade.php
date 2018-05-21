@@ -1,7 +1,7 @@
 @extends('templates.template', [
     'title'=> 'clientes',
     'prev_router'=> 'home',
-    'icon'=> 'mdi mdi-truck',
+    'icon'=> 'mdi mdi-account',
     'active_router'=> 'clientes'
 ])
 @section('container')
