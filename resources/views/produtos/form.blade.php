@@ -32,7 +32,7 @@
                     </div>
                     <div class="input col s6">
                         <label for="valorUnitario">Valor Unitário</label><br />
-                        <input type="text" name="valorUnitario" id="valorUnitario" placeholder="Valor unitario" value="{{ $produto->valorUnitario }}">
+                        <input type="text" name="valorUnitario" id="valor" placeholder="Valor unitario" value="{{ $produto->valorUnitario }}">
                     </div>
                     <!--<div class="input col s6">
                         <label for="quantidade">Quantidade</label><br />

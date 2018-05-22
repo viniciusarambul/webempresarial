@@ -43,7 +43,7 @@
                         <th>Produto</th>
                         <th>Descricao</th>
                         <th>Valor</th>
-                        <th>Quantidade</th>
+                        <th>Fornecedor</th>
                     </tr>
                 </thead>
 
@@ -53,7 +53,7 @@
                         <td>{{$produto->nome}}</td>
                         <td>{{$produto->descricao}}</td>
                         <td>{{$produto->valorUnitario}}</td>
-                        <td>{{$produto->quantidade}}</td>
+                        <td>{{$produto->fornecedor}}</td>
                         <td class="options">
                             <a href="{{ route('produtos.show', ['$produto' => $produto->id]) }}">
                                 <i class="mdi mdi-eye"></i>

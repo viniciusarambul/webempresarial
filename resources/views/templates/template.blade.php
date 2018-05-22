@@ -123,6 +123,7 @@
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/jquery-price/jquery.price_format.1.8.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
@@ -147,6 +148,27 @@
         });
 
 
+          </script>
+          <script>
+
+          $(function() {
+          $('#valor').priceFormat({
+		            prefix: '',
+		            centsSeparator: ',',
+		             thousandsSeparator: '.'
+	              });
+
+          });
+
+          $(document).ready(function(e) {
+              $('#valor').blur(function () {
+          		var valor = $(this).val();
+          		if (valor == '0,00') {
+          			$(this).val(' ');
+          		}
+
+          	});
+          });
           </script>
         <script>
           $(document).ready(function(){

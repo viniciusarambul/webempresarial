@@ -17,7 +17,7 @@ class PedidoCompraController extends Controller
         }
 
         $pedidosCompras = $query->paginate(5);
-
+        $fornecedores = Fornecedor::all();
         return view('pedidosCompras.index', [
           'fornecedores' => $fornecedores,
           'pedidosCompras' => $pedidosCompras,
@@ -67,8 +67,8 @@ class PedidoCompraController extends Controller
 
         return view('pedidosCompras.form', [
           'pedidoCompra' => $pedidoCompra,
-          'idProdutos' => $produtos,
-          'idFornecedor' => $fornecedores
+          'produtos' => $produtos,
+          'fornecedores' => $fornecedores
         ]);
     }
 
