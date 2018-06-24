@@ -25,6 +25,7 @@
             <p><b>Telefone: </b>{{ $fornecedor->telefone }}</p>
             <p><b>CPF: </b>{{ $fornecedor->cpf }}</p>
             <p><b>CNPJ: </b>{{ $fornecedor->cnpj }}</p>
+            <p><b>Razão Social: </b>{{ $fornecedor->razaosocial }}</p>
         </div>
     </div>
     <div class="col s12 m4">

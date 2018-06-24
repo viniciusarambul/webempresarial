@@ -46,6 +46,10 @@
                         <label for="cnpj">CNPJ</label><br />
                         <input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" value="{{ $fornecedor->cnpj }}">
                     </div>
+                    <div class="input col s6">
+                        <label for="razaosocial">Razão Social</label><br />
+                        <input type="text" name="razaosocial" id="razaosocial" placeholder="Razão Social" value="{{ $fornecedor->razaosocial }}">
+                    </div>
                   </div>
                   <div class="row">
                     <div class="input col s6">

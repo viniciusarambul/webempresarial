@@ -18,9 +18,6 @@ class CreatePedidoCompra extends Migration
         $table->string('nome');
         $table->date('data');
         $table->text('situacao');
-        $table->text('idFornecedor');
-        $table->text('idProduto');
-        $table->text('quantidade');
 
 
 

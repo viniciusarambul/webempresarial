@@ -76,6 +76,7 @@ class FornecedorController extends Controller
       $fornecedor->cep = $request->get('cep');
       $fornecedor->bairro = $request->get('bairro');
       $fornecedor->numero = $request->get('numero');
+      $fornecedor->razaosocial = $request->get('razaosocial');
       $fornecedor->cpf = $request->get('cpf');
       $fornecedor->cnpj = $request->get('cnpj');
       $fornecedor->save();

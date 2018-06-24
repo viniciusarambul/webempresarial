@@ -34,26 +34,7 @@
                         <label for="situacao">Situacao</label><br />
                         <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $pedidoCompra->situacao }}">
                     </div>
-                    <div class="input col s6">
-                      <label for="idFornecedor">Fornecedor</label><br />
-                      <select class="browser-default" name="idFornecedor">
-                      @foreach($fornecedores as $fornecedor)
-                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="input col s6">
-                      <label for="situacao">Produto</label><br />
-                      <select class="browser-default" name="produto">
-                      @foreach($produtos as $produto)
-                        <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="input col s6">
-                        <label for="quantidade">Quantidade</label><br />
-                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $pedidoCompra->quantidade }}">
-                    </div>
+                    
                   </div>
 
 
@@ -65,5 +46,7 @@
         </div>
     </div>
 </div>
+
+
 
 @endsection

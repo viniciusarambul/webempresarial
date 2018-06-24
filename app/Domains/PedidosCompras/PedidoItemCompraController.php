@@ -6,34 +6,23 @@ use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
 
-class PedidoCompraController extends Controller
+class PedidoItemCompraController extends Controller
 {
     public function index(Request $request)
     {
-      $query = PedidoCompra::query();
 
-        if($request->get('filter')){
-            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
-        }
-
-        $pedidosCompras = $query->paginate(5);
-
-        return view('pedidosCompras.index', [
-          'pedidosCompras' => $pedidosCompras,
-          'filter'=> $request->get('filter')
-        ]);
     }
 
     public function create()
     {
-        return $this->form(new PedidoCompra());
+        return $this->form(new PedidoItem());
     }
 
-    public function store(PedidoCompraRequest $request)
+    public function store(PedidoItemRequest $request)
     {
-        $pedidoCompra = new PedidoCompra;
+        $pedidoItem = new PedidoItem;
 
-        return $this->save($pedidoCompra, $request);
+        return $this->save($pedidoItem, $request);
     }
 
     public function show(PedidoCompra $pedidoCompra)
@@ -63,9 +52,8 @@ class PedidoCompraController extends Controller
       return redirect()->route('pedidosCompras.index');
     }
 
-    private function form(PedidoCompra $pedidoCompra) {
+    private function form(PedidoItem $pedidoItem) {
         $produtos = Produto::all();
-        $fornecedores = Fornecedor::all();
 
         return view('pedidosCompras.form', [
           'pedidoCompra' => $pedidoCompra,

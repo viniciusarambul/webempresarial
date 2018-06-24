@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePedidoVenda extends Migration
+class CreatePedidosItens extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreatePedidoVenda extends Migration
      */
     public function up()
     {
-      Schema::create('pedidovenda', function (Blueprint $table) {
+      Schema::create('pedidoItens', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('nome');
-        $table->date('data');
-        $table->text('situacao');
-        $table->text('idCliente');
-        $table->text('quantidade');
-
-
+        $table->integer('idFornecedor');
+        $table->enum("tipo_pedido",['COMPRA','VENDA']);
+        $table->integer('idPedido');
+        $table->integer('idProduto');
+        $table->integer('quantidade');
+        $table->double('preco');
 
         $table->timestamps();
       });
@@ -34,6 +33,6 @@ class CreatePedidoVenda extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidovenda');
+        Schema::dropIfExists('pedidoitens');
     }
 }
