@@ -32,7 +32,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('pedidosVendas', \App\Domains\PedidosVendas\PedidoVenda::class);
         Route::model('contasReceber', \App\Domains\ContasReceber\ContaReceber::class);
         Route::model('contasPagar', \App\Domains\ContasPagar\ContaPagar::class);
+<<<<<<< HEAD
         Route::model('pedidoItem', \App\Domains\Pedidos\Pedidoitem::class);
+=======
+        Route::model('dashboard', \App\Domains\Dashboard\Dashboard::class);
+>>>>>>> af7cdd49a692146d407c82443b18b4515f0a8146
     }
 
     /**

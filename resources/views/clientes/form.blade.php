@@ -76,7 +76,7 @@
                     </div>
                     <div class="input col s6">
                         <label for="numero">Numero</label><br />
-                        <input class="cpf" id="cpff" type="text" name="numero" id="numero" placeholder="Numero" value="{{ $cliente->numero }}">
+                        <input id="numero" type="text" name="numero" id="numero" placeholder="Numero" value="{{ $cliente->numero }}">
                     </div>
                 </div>
 

@@ -10,7 +10,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Conta Pagar
+            Conta Receber
         </h4>
     </div>
 </div>

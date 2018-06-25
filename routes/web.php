@@ -22,3 +22,4 @@ Route::resource('/pedidosCompras', 'PedidosCompras\PedidoCompraController');
 Route::resource('/pedidosVendas', 'PedidosVendas\PedidoVendaController');
 Route::resource('/contasReceber', 'ContasReceber\ContaReceberController');
 Route::resource('/contasPagar', 'ContasPagar\ContaPagarController');
+Route::resource('/dashboard', 'Dashboard\Dashboard');

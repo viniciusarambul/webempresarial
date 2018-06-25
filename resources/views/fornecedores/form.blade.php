@@ -32,7 +32,7 @@
                     </div>
                     <div class="input col s6">
                         <label for="telefone">Telefone</label><br />
-                        <input type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $fornecedor->telefone }}">
+                        <input class="telefone" type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $fornecedor->telefone }}">
                     </div>
                     <div class="input col s6">
                         <label for="nome">E-mail</label><br />
@@ -40,11 +40,11 @@
                     </div>
                     <div class="input col s6">
                         <label for="cpf">CPF</label><br />
-                        <input type="text" name="cpf" id="cpf" placeholder="CPF" value="{{ $fornecedor->cpf }}">
+                        <input class="cpf" type="text" name="cpf" id="cpf" placeholder="CPF" value="{{ $fornecedor->cpf }}">
                     </div>
                     <div class="input col s6">
                         <label for="cnpj">CNPJ</label><br />
-                        <input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" value="{{ $fornecedor->cnpj }}">
+                        <input class="cnpj" type="text" name="cnpj" id="cnpj" placeholder="CNPJ" value="{{ $fornecedor->cnpj }}">
                     </div>
                     <div class="input col s6">
                         <label for="razaosocial">Razão Social</label><br />
@@ -62,7 +62,7 @@
                     </div>
                     <div class="input col s6">
                         <label for="cep">Cep</label><br />
-                        <input type="text" name="cep" id="cep" placeholder="Cep" value="{{ $fornecedor->cep }}">
+                        <input class="cep" type="text" name="cep" id="cep" placeholder="Cep" value="{{ $fornecedor->cep }}">
                     </div>
                     <div class="input col s6">
                         <label for="bairro">Bairro</label><br />

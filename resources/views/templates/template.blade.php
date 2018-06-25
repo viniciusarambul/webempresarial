@@ -50,6 +50,11 @@
                 <!--<img src="{{ asset('img/logo-cart.png') }}" alt=""> -->
             </div>
             <ul>
+                <li class="{{$active_router == 'dashboard' ? 'active' : ''}}">
+                  <a href="{{route('dashboard.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Home">
+                    <i class="mdi mdi-home"></i>
+                  </a>
+                </li>
                 <li class="{{$active_router == 'clientes' ? 'active' : ''}}">
                   <a href="{{route('clientes.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="clientes">
                     <i class="mdi mdi-account"></i>
@@ -123,6 +128,7 @@
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/jquery-price/jquery.price_format.1.8.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
@@ -147,6 +153,27 @@
         });
 
 
+          </script>
+          <script>
+
+          $(function() {
+          $('#valor').priceFormat({
+		            prefix: '',
+		            centsSeparator: ',',
+		             thousandsSeparator: '.'
+	              });
+
+          });
+
+          $(document).ready(function(e) {
+              $('#valor').blur(function () {
+          		var valor = $(this).val();
+          		if (valor == '0,00') {
+          			$(this).val(' ');
+          		}
+
+          	});
+          });
           </script>
         <script>
           $(document).ready(function(){

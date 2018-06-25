@@ -17,8 +17,9 @@ class PedidoCompraController extends Controller
         }
 
         $pedidosCompras = $query->paginate(5);
-
+        $fornecedores = Fornecedor::all();
         return view('pedidosCompras.index', [
+          'fornecedores' => $fornecedores,
           'pedidosCompras' => $pedidosCompras,
           'filter'=> $request->get('filter')
         ]);
