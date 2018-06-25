@@ -86,7 +86,7 @@
                   </a>
                 </li>
                 <li class="">
-                  <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Ajuda">
+                  <a href="http://file:///C:/tcc/manualtecnico.pdf" target="_blank" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Ajuda">
                     <i class="mdi mdi-help-circle-outline"></i>
                   </a>
                 </li>
