@@ -42,7 +42,7 @@
     <div class="col s12">
         <p class="card-intro">
             &nbsp;
-            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidosCompras.create') }}">
+            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidosCompras.pedidoItem.create',['pedidoCompra' => $pedidoCompra->id]) }}">
                 <i class="mdi mdi-plus"></i>
             </a>
         </p>

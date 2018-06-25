@@ -19,6 +19,7 @@ Route::resource('/produtos', 'Produtos\ProdutoController');
 Route::resource('/clientes', 'Clientes\ClienteController');
 Route::resource('/fornecedores', 'Fornecedores\FornecedorController');
 Route::resource('/pedidosCompras', 'PedidosCompras\PedidoCompraController');
+Route::resource('pedidosCompras.pedidoItem', 'PedidosCompras\PedidoItemCompraController');
 Route::resource('/pedidosVendas', 'PedidosVendas\PedidoVendaController');
 Route::resource('/contasReceber', 'ContasReceber\ContaReceberController');
 Route::resource('/contasPagar', 'ContasPagar\ContaPagarController');

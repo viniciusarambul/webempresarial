@@ -34,7 +34,7 @@
                         <label for="situacao">Situacao</label><br />
                         <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $contaReceber->situacao }}">
                     </div>
-                    <div class="input col s6">
+                    <div class="input col s5">
                       <label for="idCliente">Cliente</label><br />
                       <select class="browser-default" name="idCliente">
                       @foreach($clientes as $cliente)
@@ -43,30 +43,26 @@
                       </select>
                     </div>
                     <div class="input col s6">
-                      <label for="idPrduto">Produto</label><br />
-                      <select class="browser-default" name="idProduto">
-                      @foreach($produtos as $produto)
-                        <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="input col s6">
-                        <label for="quantidade">Quantidade</label><br />
-                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $contaReceber->quantidade }}">
-                    </div>
-                    <div class="input col s6">
                         <label for="parcelas">Parcelas</label><br />
                         <input type="text" name="parcelas" id="parcelas" placeholder="Parcelas" value="{{ $contaReceber->parcelas }}">
                     </div>
-                    <div class="input col s6">
-                        <label for="tipoPagamento">Tipo Pagamento</label><br />
-                        <input type="text" name="tipoPagamento" id="tipoPagamento" placeholder="Tipo Pagamento" value="{{ $contaReceber->tipoPagamento }}">
+                    <div class="input col s5" style="margin-right: 8%">
+                      <label for="tipoPagamento">Tipo Pagamento</label><br />
+                      <select class="browser-default" name="tipoPagamento">
+
+                        <option value="0">A Vista</option>
+                        <option value="1">A prazo</option>
+
+                      </select>
                     </div>
+
                     <div class="input col s6">
                         <label for="valor">Valor</label><br />
                         <input type="text" name="valor" id="valor" placeholder="Valor" value="{{ $contaReceber->valor }}">
                     </div>
                   </div>
+
+
 
 
                 <div class="row">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
+use App\Domains\Pedidos\Pedidoitem;
 
 class PedidoItemCompraController extends Controller
 {
@@ -13,16 +14,18 @@ class PedidoItemCompraController extends Controller
 
     }
 
-    public function create()
+    public function create(PedidoCompra $pedidoCompra)
     {
-        return $this->form(new PedidoItem());
+        return $this->form($pedidoCompra, new PedidoItem());
     }
 
-    public function store(PedidoItemRequest $request)
+    public function store(PedidoCompraRequest $pedidoCompra, PedidoItemRequest $request)
     {
-        $pedidoItem = new PedidoItem;
+        if ($request->get('id')){
+            return $this->save($pedidoCompra, $request, PedidoItem::find($request->get('id')));
+        }
 
-        return $this->save($pedidoItem, $request);
+        return $this->save($pedidoCompra, $request, new PedidoItem());
     }
 
     public function show(PedidoCompra $pedidoCompra)
@@ -35,9 +38,9 @@ class PedidoItemCompraController extends Controller
         ]);
     }
 
-    public function edit(PedidoCompra $pedidoCompra)
+    public function edit(PedidoCompra $pedidoCompra, PedidoItem $pedidoItem)
     {
-      return $this->form($pedidoCompra);
+      return $this->form($pedidoCompra, $pedidoItem);
     }
 
     public function update(PedidoCompraRequest $request, PedidoCompra $pedidoCompra)
@@ -52,13 +55,13 @@ class PedidoItemCompraController extends Controller
       return redirect()->route('pedidosCompras.index');
     }
 
-    private function form(PedidoItem $pedidoItem) {
+    private function form(PedidoCompra $pedidoCompra, PedidoItem $pedidoItem) {
+        $pedidoProduto = PedidoItem::select('id', 'idproduto')->where('idpedido', $pedidoCompra->id)->get();
+
         $produtos = Produto::all();
 
-        return view('pedidosCompras.form', [
-          'pedidoCompra' => $pedidoCompra,
+        return view('pedidosItens.form', [
           'produtos' => $produtos,
-          'fornecedores' => $fornecedores
         ]);
     }
 
