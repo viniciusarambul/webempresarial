@@ -17,7 +17,7 @@ class CriarTabelaProdutos extends Migration
           $table->increments('id');
           $table->string('nome');
           $table->integer('categoria');
-          $table->text('valorUnitario');
+          $table->text('valorUnitario')->nullable();
           $table->text('quantidade')->nullable();
           $table->text('fornecedor');
           $table->timestamps();

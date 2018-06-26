@@ -4,6 +4,7 @@ namespace App\Domains\Pedidos;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Produtos\Produto;
+use App\Domains\Fornecedores\Fornecedor;
 
 
 class Pedidoitem extends Model
@@ -14,6 +15,9 @@ class Pedidoitem extends Model
 
   public function produto(){
     return $this->hasOne(Produto::class, 'id','idProduto');
+  }
+  public function fornecedor(){
+    return $this->hasOne(Fornecedor::class, 'id','idFornecedor');
   }
   public function getTotalAttribute(){
     return $this->preco*$this->quantidade;

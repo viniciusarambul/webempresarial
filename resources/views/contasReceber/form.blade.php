@@ -10,7 +10,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Conta Receber
+           Cadastro de Conta a Receber
         </h4>
     </div>
 </div>
@@ -27,14 +27,23 @@
                         <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ $contaReceber->descricao }}">
                     </div>
                     <div class="input col s6">
-                        <label for="data">Data</label><br />
+                        <label for="data">Data Emissão</label><br />
                         <input type="date" name="data" id="data" placeholder="Data" value="{{ $contaReceber->data }}">
                     </div>
-                    <div class="input col s6">
-                        <label for="situacao">Situacao</label><br />
-                        <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $contaReceber->situacao }}">
-                    </div>
+
                     <div class="input col s5">
+                         <label for="situacao">Situação *</label><br />
+                      <select class="browser-default" required name="situacao">
+                        <option value="">Selecione</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Fechado">Fechado</option>
+                      </select>
+                    </div>
+                    <div class="input col s6" style="margin-left:8%;">
+                        <label for="data">Data Vencimento</label><br />
+                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $contaReceber->data_vencimento }}">
+                    </div>
+                    <div class="input col s5" >
                       <label for="idCliente">Cliente</label><br />
                       <select class="browser-default" name="idCliente">
                       @foreach($clientes as $cliente)
@@ -42,19 +51,25 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="input col s6">
-                        <label for="parcelas">Parcelas</label><br />
-                        <input type="text" name="parcelas" id="parcelas" placeholder="Parcelas" value="{{ $contaReceber->parcelas }}">
-                    </div>
-                    <div class="input col s5" style="margin-right: 8%">
-                      <label for="tipoPagamento">Tipo Pagamento</label><br />
+                    <div class="input col s5" style="margin-left: 8%">
+                      <label for="tipoPagamento">Tipo Documento</label><br />
                       <select class="browser-default" name="tipoPagamento">
 
-                        <option value="0">A Vista</option>
-                        <option value="1">A prazo</option>
+                        <option value="0">Boleto</option>
+                        <option value="1">Cartão de Crédito</option>
+                        <option value="2">Cartão de Débito</option>
+                        <option value="3">Cheque</option>
+                        <option value="4">Duplicata</option>
+                        <option value="5">Promissória</option>
+                        <option value="6">Recibo</option>
 
                       </select>
                     </div>
+                    <div class="input col s6">
+                        <label for="parcelas">Parcelas (Preencha apenas para lançamentos parcelados)</label><br />
+                        <input type="text" name="parcelas" id="parcelas" placeholder="Parcelas" value="{{ $contaReceber->parcelas }}">
+                    </div>
+
 
                     <div class="input col s6">
                         <label for="valor">Valor</label><br />

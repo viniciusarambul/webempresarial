@@ -60,10 +60,8 @@ class CategoriaController extends Controller
     }
 
     private function form(Categoria $categoria) {
-        $fornecedores = Fornecedor::all();
         return view('categorias.form', [
           'categoria' => $categoria,
-          'fornecedores' => $fornecedores
         ]);
     }
 

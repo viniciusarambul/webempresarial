@@ -73,17 +73,16 @@
                         <input type="text" name="numero" id="numero" placeholder="Numero" required value="{{ $fornecedor->numero }}">
                     </div>
 
-                    <p style="margin-left: 2%">* Campos Obrigatórios</p>
 
 
                 </div>
-
+      <p style="margin-left: 2%">* Campos Obrigatórios</p>
                 <div class="row">
                     <button type="submit" class="waves-effect waves-green btn teal right">Salvar</button>
                     <a class="waves-effect waves-green btn-flat right" href="{{ route('fornecedores.index') }}">Cancelar</a>
                 </div>
             </form>
-            <p style="margin-left: 2%">* Campos Obrigatórios</p>
+
         </div>
     </div>
 </div>

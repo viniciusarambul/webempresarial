@@ -31,7 +31,7 @@ class MainController extends Controller
      }
      else
      {
-      return back()->with('error', 'Wrong Login Details');
+      return back()->with('error', 'Credenciais de Login Incorretas');
      }
 
     }

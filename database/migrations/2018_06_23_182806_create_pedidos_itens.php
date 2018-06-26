@@ -15,12 +15,12 @@ class CreatePedidosItens extends Migration
     {
       Schema::create('pedidoItens', function (Blueprint $table) {
         $table->increments('id');
-        $table->integer('idFornecedor');
+        $table->integer('idFornecedor')->nullable();
         $table->enum("tipo_pedido",['COMPRA','VENDA']);
         $table->integer('idPedido');
         $table->integer('idProduto');
         $table->integer('quantidade');
-        $table->double('preco');
+        $table->text('preco');
 
         $table->timestamps();
       });

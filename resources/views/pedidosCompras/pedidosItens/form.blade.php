@@ -21,7 +21,16 @@
             <form method="post" action="{{route('pedidosCompras.pedidoItem.store', ['pedidoCompra' => $pedidoCompra->id])}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
+                <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
                 <div class="row">
+                  <div class="input col s6">
+                    <label for="idFornecedor">Fornecedor</label><br />
+                    <select class="browser-default" name="idFornecedor">
+                    @foreach($fornecedores as $fornecedor)
+                      <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
+                      @endforeach
+                    </select>
+                  </div>
                   <div class="input col s6">
                     <label for="idProduto">Produto</label><br />
                     <select class="browser-default" name="idProduto">
@@ -31,12 +40,17 @@
                     </select>
                   </div>
                     <div class="input col s6">
-                        <label for="data">Data</label><br />
-                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $pedidoCompra->data }}">
+                        <label for="quantidade">Quantidade</label><br />
+                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
                     </div>
                     <div class="input col s6">
-                        <label for="situacao">Situacao</label><br />
-                        <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $pedidoCompra->situacao }}">
+                        <label for="valorTotal">Valor Unitário</label><br />
+                        <input type="text" name="situacao" id="situacao" readonly>
+
+                    </div>
+                    <div class="input col s6">
+                        <label for="preco">Valor Total</label><br />
+                        <input type="text" name="preco" id="valor" value="{{ $pedidoItem->preco }}">
 
                     </div>
 

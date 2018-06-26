@@ -80,7 +80,7 @@ class PedidoCompraController extends Controller
       $pedidoCompra->nome = $request->get('nome');
       $pedidoCompra->data = $request->get('data');
       $pedidoCompra->situacao = $request->get('situacao');
-
+      
       $pedidoCompra->save();
 
       return redirect()->route('pedidosCompras.show', ['id' => $pedidoCompra->id]);

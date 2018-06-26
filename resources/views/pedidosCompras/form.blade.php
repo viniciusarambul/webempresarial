@@ -23,16 +23,16 @@
                 <input type="hidden" id="id" name="id" value="{{ $pedidoCompra->id }}" />
                 <div class="row">
                     <div class="input col s6">
-                        <label for="nome">Nome</label><br />
+                        <label for="nome">Nome *</label><br />
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $pedidoCompra->nome }}">
                     </div>
                     <div class="input col s6">
-                        <label for="data">Data</label><br />
-                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $pedidoCompra->data }}">
+                        <label for="data">Data *</label><br />
+                        <input type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoCompra->data }}">
                     </div>
                     <div class="input col s4">
                          <label for="situacao">Situação *</label><br />
-                      <select class="browser-default" name="situacao">
+                      <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
                         <option value="Aberto">Aberto</option>
                         <option value="Fechado">Fechado</option>

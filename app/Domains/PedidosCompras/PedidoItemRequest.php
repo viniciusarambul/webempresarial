@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Categorias;
+namespace App\Domains\PedidosCompras;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriaRequest extends FormRequest
+class PedidoItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class CategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            'descricao' => 'required'
+            'quantidade' => 'required'
         ];
     }
 }

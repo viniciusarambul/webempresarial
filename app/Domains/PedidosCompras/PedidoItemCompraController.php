@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Pedidos\Pedidoitem;
+use App\Domains\PedidosCompras\PedidosCompras;
 
 class PedidoItemCompraController extends Controller
 {
@@ -17,9 +18,10 @@ class PedidoItemCompraController extends Controller
     public function create(PedidoCompra $pedidoCompra)
     {
         return $this->form($pedidoCompra, new PedidoItem());
+
     }
 
-    public function store(PedidoCompraRequest $pedidoCompra, PedidoItemRequest $request)
+    public function store(PedidoCompra $pedidoCompra, PedidoItemRequest $request)
     {
         if ($request->get('id')){
             return $this->save($pedidoCompra, $request, PedidoItem::find($request->get('id')));
@@ -56,23 +58,29 @@ class PedidoItemCompraController extends Controller
     }
 
     private function form(PedidoCompra $pedidoCompra, PedidoItem $pedidoItem) {
-        $pedidoProduto = PedidoItem::select('id', 'idproduto')->where('idpedido', $pedidoCompra->id)->get();
 
         $produtos = Produto::all();
+        $fornecedores = Fornecedor::all();
 
-        return view('pedidosItens.form', [
+        return view('pedidosCompras.pedidosItens.form', [
           'produtos' => $produtos,
+          'pedidoCompra' => $pedidoCompra,
+          'pedidoItem' => $pedidoItem,
+          'fornecedores' => $fornecedores
         ]);
     }
 
-    private function save(PedidoCompra $pedidoCompra, PedidoCompraRequest $request)
+    private function save(PedidoCompra $pedidoCompra, PedidoItemRequest $request, PedidoItem $pedidoItem)
     {
-      $pedidoCompra->nome = $request->get('nome');
-      $pedidoCompra->data = $request->get('data');
-      $pedidoCompra->situacao = $request->get('situacao');
 
-      $pedidoCompra->save();
+      $pedidoItem->idProduto = $request->get('idProduto');
+      $pedidoItem->quantidade = $request->get('quantidade');
+      $pedidoItem->idFornecedor = $request->get('idFornecedor');
+      $pedidoItem->idPedido = $pedidoCompra->id;
+      $pedidoItem->preco = $request->get('preco');
 
-      return redirect()->route('pedidosCompras.show', ['id' => $pedidoCompra->id]);
+      $pedidoItem->save();
+
+      return redirect()->route('pedidosCompras.show', ['pedidoCompra' => $pedidoCompra->id])->with('success', 'Item inserido com Sucesso');
     }
 }

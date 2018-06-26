@@ -52,6 +52,7 @@
                 <thead>
                     <tr>
                         <th>Produto</th>
+                        <th>Fornecedor</th>
                         <th>Quantidade</th>
                         <th>Valor</th>
                         <th>Total</th>
@@ -62,7 +63,8 @@
                 <tbody>
                     @foreach($pedidoCompra->itens as $item)
                     <tr class="with-options">
-                        <td>{{$item->produto}}</td>
+                        <td>{{$item->produto->nome}}</td>
+                        <td>{{$item->fornecedor->nome}}</td>
                         <td>{{$item->quantidade}}</td>
                         <td>{{$item->preco}}</td>
                         <td>{{$item->total}}</td>
