@@ -51,7 +51,7 @@
             </div>
             <ul>
                 <li class="{{$active_router == 'dashboard' ? 'active' : ''}}">
-                  <a href="{{route('dashboard.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Home">
+                  <a href="{{route('dashboard.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard">
                     <i class="mdi mdi-home"></i>
                   </a>
                 </li>
@@ -63,6 +63,11 @@
                 <li class="{{$active_router == 'fornecedores' ? 'active' : ''}}">
                   <a href="{{route('fornecedores.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="fornecedores">
                     <i class="mdi mdi-truck"></i>
+                  </a>
+                </li>
+                <li class="{{$active_router == 'categorias' ? 'active' : ''}}">
+                  <a href="{{route('categorias.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="categorias">
+                    <i class="mdi mdi-folder"></i>
                   </a>
                 </li>
                 <li class="{{$active_router == 'produtos' ? 'active' : ''}}">

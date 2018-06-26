@@ -4,6 +4,7 @@ namespace App\Domains\Produtos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Fornecedores\Fornecedor;
+use App\Domains\Categorias\Categoria;
 
 class ProdutoController extends Controller
 {
@@ -61,20 +62,22 @@ class ProdutoController extends Controller
 
     private function form(Produto $produto) {
         $fornecedores = Fornecedor::all();
+        $categorias = Categoria::all();
         return view('produtos.form', [
           'produto' => $produto,
-          'fornecedores' => $fornecedores
+          'fornecedores' => $fornecedores,
+          'categorias' => $categorias
         ]);
     }
 
     private function save(Produto $produto, ProdutoRequest $request)
     {
       $produto->nome = $request->get('nome');
-      $produto->descricao = $request->get('descricao');
       $produto->valorUnitario = $request->get('valorUnitario');
       $produto->quantidade = $request->get('quantidade');
       $produto->fornecedor = $request->get('fornecedor');
-      
+      $produto->categoria = $request->get('categoria');
+
       $produto->save();
 
       return redirect()->route('produtos.show', ['id' => $produto->id]);

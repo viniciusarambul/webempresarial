@@ -30,10 +30,13 @@
                         <label for="data">Data</label><br />
                         <input type="date" name="data" id="data" placeholder="Data" value="{{ $pedidoCompra->data }}">
                     </div>
-                    <div class="input col s6">
-                        <label for="situacao">Situacao</label><br />
-                        <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $pedidoCompra->situacao }}">
-                      
+                    <div class="input col s4">
+                         <label for="situacao">Situação *</label><br />
+                      <select class="browser-default" name="situacao">
+                        <option value="">Selecione</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Fechado">Fechado</option>
+                      </select>
                     </div>
 
                   </div>
