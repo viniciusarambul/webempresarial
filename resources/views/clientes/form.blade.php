@@ -6,7 +6,8 @@
 ])
 @section('container')
 
-
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/vendor/artesaos/cidades/js/scripts.js"></script>
 
 <div class="row no-margin-bottom">
     <div class="col s12">
@@ -78,6 +79,13 @@
                         <label for="numero">Numero *</label><br />
                         <input id="numero" type="text" name="numero" id="numero" placeholder="Numero" required value="{{ $cliente->numero }}">
                     </div>
+
+                    <div class="input col s6">
+                    <select id="uf" default="MG"></select>
+                    <select id="cidade"></select>
+                  </div>
+
+                
 
                     <p style="margin-left: 2%">* Campos Obrigatórios</p>
 
