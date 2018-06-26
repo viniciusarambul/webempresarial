@@ -59,10 +59,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="input col s6">
-                        <label for="cidade">Cidade *</label><br />
-                        <input type="text" name="cidade" id="cidade" placeholder="Cidade" required value="{{ $cliente->cidade }}">
-                    </div>
+
                     <div class="input col s6">
                         <label for="estado">Estado *</label><br />
                         <input type="text" name="estado" id="estado" placeholder="Estado" required value="{{ $cliente->estado }}">
@@ -80,12 +77,12 @@
                         <input id="numero" type="text" name="numero" id="numero" placeholder="Numero" required value="{{ $cliente->numero }}">
                     </div>
 
-                    <div class="input col s6">
-                    <select id="uf" default="MG"></select>
-                    <select id="cidade"></select>
+                    <div class="input col s5">
+                    <select class="browser-default" id="uf" default="PR"></select>
+                    <select class="browser-default" id="cidade"></select>
                   </div>
 
-                
+
 
                     <p style="margin-left: 2%">* Campos Obrigatórios</p>
 
@@ -100,5 +97,11 @@
         </div>
     </div>
 </div>
-
+<script>
+     $('#uf').ufs({
+         onChange: function(uf){
+             $('#cidade').cidades({uf: uf});
+         }
+     });
+  </script>
 @endsection
