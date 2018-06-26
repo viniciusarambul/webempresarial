@@ -62,6 +62,7 @@
                     <a class="waves-effect waves-green btn-flat right" href="{{ route('pedidosVendas.index') }}">Cancelar</a>
                 </div>
             </form>
+            <p style="margin-left: 2%">* Campos Obrigatórios</p>
         </div>
     </div>
 </div>
