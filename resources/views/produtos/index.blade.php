@@ -65,7 +65,7 @@
                 </tbody>
             </table>
             @else
-            <p class="alert-disable">Não há produtos.</p>
+            <p class="alert-disable">Não há Produtos cadastrados.</p>
             @endif
         </div>
         {{ $produtos->appends(['filter'=>$filter])->links() }}

@@ -67,7 +67,7 @@
                 </tbody>
             </table>
             @else
-            <p class="alert-disable">Não há pedidos.</p>
+            <p class="alert-disable">Não há Contas a pagar.</p>
             @endif
         </div>
         {{ $contasPagar->appends(['filter'=>$filter])->links() }}

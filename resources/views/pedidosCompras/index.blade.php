@@ -65,7 +65,7 @@
                 </tbody>
             </table>
             @else
-            <p class="alert-disable">Não há pedidos.</p>
+            <p class="alert-disable">Não há Pedidos Compra.</p>
             @endif
         </div>
         {{ $pedidosCompras->appends(['filter'=>$filter])->links() }}

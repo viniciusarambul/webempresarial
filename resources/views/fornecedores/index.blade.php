@@ -65,7 +65,7 @@
                 </tbody>
             </table>
             @else
-            <p class="alert-disable">Não há alunos vinculados à esta escola.</p>
+            <p class="alert-disable">Não há Fornecedores cadastrados.</p>
             @endif
         </div>
         {{ $fornecedores->appends(['filter'=>$filter])->links() }}
