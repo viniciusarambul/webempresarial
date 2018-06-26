@@ -62,7 +62,7 @@
                 <tbody>
                     @foreach($pedidoCompra->itens as $item)
                     <tr class="with-options">
-                        <td>{{$item->produto->nome}}</td>
+                        <td>{{$item->produto}}</td>
                         <td>{{$item->quantidade}}</td>
                         <td>{{$item->preco}}</td>
                         <td>{{$item->total}}</td>

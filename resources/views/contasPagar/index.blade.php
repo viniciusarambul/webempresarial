@@ -18,7 +18,7 @@
 
 <form class="row no-margin-bottom" method="GET" action="{{ route('contasPagar.index') }}">
     <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Fornecedor (digite o Nome)" value="{{$filter}}">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar uma Despesa (digite o Nome)" value="{{$filter}}">
     </div>
     <div class="input col m6">
         <button type="submit" class="btn blue">

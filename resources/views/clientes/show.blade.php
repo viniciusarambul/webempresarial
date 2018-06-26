@@ -9,7 +9,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            {{ $cliente->nome }}
+          {{ $cliente->nome }}
         </h4>
     </div>
 </div>

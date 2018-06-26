@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col s12 m4">
         <div class="card">
-            <h5>Dados do Pedido</h5>
+            <h5>Dados da Despesa</h5>
             <p><b>Descrição: </b>{{ $contaPagar->descricao }}</p>
             <p><b>Data: </b>{{ $contaPagar->data }}</p>
             <p><b>Fornecedor: </b>{{ $contaPagar->idFornecedor }}</p>

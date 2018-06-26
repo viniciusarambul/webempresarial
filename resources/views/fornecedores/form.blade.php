@@ -10,7 +10,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Fornecedores
+            Cadastro de Fornecedor
         </h4>
     </div>
 </div>
@@ -23,24 +23,24 @@
                 <input type="hidden" id="id" name="id" value="{{ $fornecedor->id }}" />
                 <div class="row">
                     <div class="input col s6">
-                        <label for="nome">Nome</label><br />
-                        <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $fornecedor->nome }}">
+                        <label for="nome">Nome *</label><br />
+                        <input type="text" name="nome" id="nome" placeholder="Nome" required value="{{ $fornecedor->nome }}">
                     </div>
                     <div class="input col s6">
-                        <label for="sobrenome">Sobrenome</label><br />
-                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" value="{{ $fornecedor->sobrenome }}">
+                        <label for="sobrenome">Sobrenome *</label><br />
+                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required value="{{ $fornecedor->sobrenome }}">
                     </div>
                     <div class="input col s6">
-                        <label for="telefone">Telefone</label><br />
-                        <input class="telefone" type="text" name="telefone" id="telefone" placeholder="telefone" value="{{ $fornecedor->telefone }}">
+                        <label for="telefone">Telefone *</label><br />
+                        <input class="telefone" type="text" name="telefone" id="telefone" required placeholder="telefone" value="{{ $fornecedor->telefone }}">
                     </div>
                     <div class="input col s6">
-                        <label for="nome">E-mail</label><br />
-                        <input type="text" name="email" id="email" placeholder="Email" value="{{ $fornecedor->email }}">
+                        <label for="nome">E-mail *</label><br />
+                        <input type="text" name="email" id="email" placeholder="Email" required value="{{ $fornecedor->email }}">
                     </div>
                     <div class="input col s6">
                         <label for="cpf">CPF</label><br />
-                        <input class="cpf" type="text" name="cpf" id="cpf" placeholder="CPF" value="{{ $fornecedor->cpf }}">
+                        <input class="cpf" type="text" name="cpf" id="cpf" placeholder="CPF"  value="{{ $fornecedor->cpf }}">
                     </div>
                     <div class="input col s6">
                         <label for="cnpj">CNPJ</label><br />
@@ -53,26 +53,27 @@
                   </div>
                   <div class="row">
                     <div class="input col s6">
-                        <label for="cidade">Cidade</label><br />
-                        <input type="text" name="cidade" id="cidade" placeholder="Cidade" value="{{ $fornecedor->cidade }}">
+                        <label for="cidade">Cidade *</label><br />
+                        <input type="text" name="cidade" id="cidade" placeholder="Cidade" required value="{{ $fornecedor->cidade }}">
                     </div>
                     <div class="input col s6">
-                        <label for="estado">Estado</label><br />
-                        <input type="text" name="estado" id="estado" placeholder="Estado" value="{{ $fornecedor->estado }}">
+                        <label for="estado">Estado *</label><br />
+                        <input type="text" name="estado" id="estado" placeholder="Estado" required value="{{ $fornecedor->estado }}">
                     </div>
                     <div class="input col s6">
-                        <label for="cep">Cep</label><br />
-                        <input class="cep" type="text" name="cep" id="cep" placeholder="Cep" value="{{ $fornecedor->cep }}">
+                        <label for="cep">Cep *</label><br />
+                        <input class="cep" type="text" name="cep" id="cep" placeholder="Cep" required value="{{ $fornecedor->cep }}">
                     </div>
                     <div class="input col s6">
-                        <label for="bairro">Bairro</label><br />
-                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" value="{{ $fornecedor->bairro }}">
+                        <label for="bairro">Bairro *</label><br />
+                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" required value="{{ $fornecedor->bairro }}">
                     </div>
                     <div class="input col s6">
-                        <label for="numero">Numero</label><br />
-                        <input type="text" name="numero" id="numero" placeholder="Numero" value="{{ $fornecedor->numero }}">
+                        <label for="numero">Numero *</label><br />
+                        <input type="text" name="numero" id="numero" placeholder="Numero" required value="{{ $fornecedor->numero }}">
                     </div>
 
+                    <p style="margin-left: 2%">* Campos Obrigatórios</p>
 
 
                 </div>

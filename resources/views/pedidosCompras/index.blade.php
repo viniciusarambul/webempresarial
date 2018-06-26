@@ -18,7 +18,7 @@
 
 <form class="row no-margin-bottom" method="GET" action="{{ route('pedidosCompras.index') }}">
     <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Fornecedor (digite o Nome)" value="{{$filter}}">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Pedido (digite o Nome)" value="{{$filter}}">
     </div>
     <div class="input col m6">
         <button type="submit" class="btn blue">
@@ -42,8 +42,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Data</th>
-                        <th>Fornecedor</th>
+                        <th>Data Pedido</th>
                     </tr>
                 </thead>
 
@@ -53,7 +52,6 @@
                         <td>{{$pedidoCompra->id}}</td>
                         <td>{{$pedidoCompra->nome}}</td>
                         <td>{{date("d-m-Y", strtotime($pedidoCompra->data))}}</td>
-                        <td>{{$pedidoCompra->fornecedor}}</td>
                         <td class="options">
                             <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                 <i class="mdi mdi-eye"></i>
