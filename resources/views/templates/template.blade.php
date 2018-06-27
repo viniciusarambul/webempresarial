@@ -10,6 +10,11 @@
           gtag('js', new Date());
 
           gtag('config', 'UA-114938863-2');
+
+
+          function goBack() {
+              window.history.back();
+          }
         </script>
 
         <script>window.csrf_token = '{{ csrf_token() }}';</script>
@@ -51,7 +56,7 @@
             </div>
             <ul>
                 <li class="{{$active_router == 'dashboard' ? 'active' : ''}}">
-                  <a href="{{route('dashboard.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard">
+                  <a href="{{url('dashboard')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard">
                     <i class="mdi mdi-home"></i>
                   </a>
                 </li>
@@ -113,7 +118,7 @@
 
             <header>
                 <div class="back waves-effect waves-light">
-                    <a href="{{ route($prev_router) }}">
+                    <a onclick="goBack()">
                         <i class="mdi mdi-arrow-left"></i>
                     </a>
                 </div>

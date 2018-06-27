@@ -41,7 +41,7 @@
                 <thead>
                     <tr>
                         <th>Produto</th>
-                        <th>Descricao</th>
+                        <th>Categoria</th>
                         <th>Valor</th>
                         <th>Fornecedor</th>
                     </tr>
@@ -51,7 +51,7 @@
                     @foreach($produtos as $produto)
                     <tr class="with-options">
                         <td>{{$produto->nome}}</td>
-                        <td>{{$produto->descricao}}</td>
+                        <td>{{$produto->categoria}}</td>
                         <td>{{$produto->valorUnitario}}</td>
                         <td>{{$produto->fornecedor}}</td>
                         <td class="options">

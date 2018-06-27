@@ -10,7 +10,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Pedido Item
+            Pedido Item - Pedido Compra #{{ $pedidoCompra->id }}
         </h4>
     </div>
 </div>

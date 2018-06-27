@@ -88,4 +88,34 @@ class ContaReceberController extends Controller
 
       return redirect()->route('contasReceber.show', ['id' => $contaReceber->id]);
     }
+
+
+    function calcularParcelas($nParcelas, $dataVencimento = null){
+        if($dataVencimento != null){
+      	$dataVencimento = explode( "-",$dataVencimento);
+      	$dia = $dataVencimento[0];
+      	$mes = $dataVencimento[1];
+      	$ano = $dataVencimento[2];
+        } else {
+      	$dia = date("d");
+      	$mes = date("m");
+      	$ano = date("Y");
+        }
+
+  for($x = 1; $x <= $nParcelas; $x++){
+    $dataVencParcela = date("Y-m-d",strtotime("+".$x." month",mktime(0, 0, 0,$mes,$dia,$ano)));
+
+    if(mysql_query("INSERT INTO contareceber
+    	(parcelas,dataVencimento,valor)
+      	VALUES ('".$x."','".$dataVencParcela."','1.99')"))
+    {
+	echo "Parcela [".$x."]: ".$dataVencParcela."<br/>";
+    } else {
+	die("Erro ao inserir a parcela ".$x.": ".mysql_error());
+    }
+  }//for
+}//function
+
+
+
 }

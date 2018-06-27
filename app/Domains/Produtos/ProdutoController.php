@@ -17,9 +17,10 @@ class ProdutoController extends Controller
         }
 
         $produtos = $query->paginate(5);
-
+        $categorias = Categoria::all();
         return view('produtos.index', [
           'produtos' => $produtos,
+          'categorias' => $categorias,
           'filter'=> $request->get('filter')
         ]);
     }
