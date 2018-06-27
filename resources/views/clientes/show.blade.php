@@ -23,6 +23,7 @@
             <p><b>Sobrenome: </b>{{ $cliente->sobrenome }}</p>
             <p><b>E-mail: </b>{{ $cliente->email }}</p>
             <p><b>Telefone: </b>{{ $cliente->telefone }}</p>
+            <p><b>Status: </b>{{ $cliente->status }}</p>
 
         </div>
     </div>

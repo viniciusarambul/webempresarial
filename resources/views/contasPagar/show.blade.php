@@ -18,13 +18,12 @@
 <div class="row">
     <div class="col s12 m4">
         <div class="card">
-            <h5>Dados da Despesa</h5>
+            <h5>Dados da Receita</h5>
             <p><b>Descrição: </b>{{ $contaPagar->descricao }}</p>
-            <p><b>Data: </b>{{ $contaPagar->data }}</p>
+            <p><b>Data de Emissão: </b>{{date("d-m-Y", strtotime( $contaPagar->dataEmissao)) }}</p>
+            <p><b>Data de Vencimento: </b>{{ date("d-m-Y", strtotime($contaPagar->dataVencimento)) }}</p>
             <p><b>Fornecedor: </b>{{ $contaPagar->idFornecedor }}</p>
             <p><b>Situacao: </b>{{ $contaPagar->situacao }}</p>
-            <p><b>Produto: </b>{{ $contaPagar->idProduto }}</p>
-            <p><b>Quantidade: </b>{{ $contaPagar->quantidade }}</p>
             <p><b>Parcelas: </b>{{ $contaPagar->parcelas }}</p>
             <p><b>Tipo de Pagamento: </b>{{ $contaPagar->tipoPagamento }}</p>
             <p><b>Valor: </b>{{ $contaPagar->valor }}</p>

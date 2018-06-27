@@ -20,7 +20,7 @@
 
    @if(isset(Auth::user()->email))
     <div class="alert alert-danger success-block">
-     <strong>Welcome {{ Auth::user()->email }}</strong>
+     <strong>Bem-Vindo {{ Auth::user()->email }}</strong>
      <br />
      <a href="{{ url('/main/logout') }}">Logout</a>
      <br />

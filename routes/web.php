@@ -20,11 +20,14 @@ Route::resource('/clientes', 'Clientes\ClienteController');
 Route::resource('/fornecedores', 'Fornecedores\FornecedorController');
 Route::resource('/pedidosCompras', 'PedidosCompras\PedidoCompraController');
 Route::resource('pedidosCompras.pedidoItem', 'PedidosCompras\PedidoItemCompraController');
+Route::resource('pedidosCompras.pedidoTitulo', 'PedidosCompras\PedidoTituloCompraController');
 Route::resource('/pedidosVendas', 'PedidosVendas\PedidoVendaController');
+Route::resource('pedidosVendas.pedidoItem', 'PedidosVendas\PedidoItemVendaController');
+Route::resource('pedidosVendas.pedidoTitulo', 'PedidosVendas\PedidoTituloVendaController');
 Route::resource('/contasReceber', 'ContasReceber\ContaReceberController');
 Route::resource('/contasPagar', 'ContasPagar\ContaPagarController');
 Route::resource('/categorias', 'Categorias\CategoriaController');
-Route::resource('/dashboard', 'Dashboard\Dashboard');
+Route::resource('/dashboard', 'Dashboard\DashboardController');
 
 
 

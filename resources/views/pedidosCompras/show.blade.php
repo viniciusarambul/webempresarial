@@ -21,7 +21,23 @@
             <h5>Dados do Pedido</h5>
             <p><b>Nome: </b>{{ $pedidoCompra->nome }}</p>
             <p><b>Data: </b>{{ $pedidoCompra->data }}</p>
-            <p><b>Fornecedor: </b>{{ $pedidoCompra->fornecedor }}</p>
+            <p><b>Situacao: </b>{{ $pedidoCompra->situacao }}</p>
+
+        </div>
+    </div>
+
+
+    <div class="col s12 m4" style="margin-top:-2.4%;">
+      <p class="card-intro">
+          &nbsp;
+          <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidosCompras.pedidoTitulo.create',['pedidoCompra' => $pedidoCompra->id]) }}">
+              <i class="mdi mdi-plus"></i>
+          </a>
+      </p>
+        <div class="card">
+            <h5>Dados do Pagamento</h5>
+            <p><b>Nome: </b>{{ $pedidoCompra->nome }}</p>
+            <p><b>Data: </b>{{ $pedidoCompra->data }}</p>
             <p><b>Situacao: </b>{{ $pedidoCompra->situacao }}</p>
 
         </div>

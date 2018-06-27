@@ -17,9 +17,10 @@ class PedidoVendaController extends Controller
         }
 
         $pedidosVendas = $query->paginate(5);
-
+        $clientes = Cliente::all();
         return view('pedidosVendas.index', [
           'pedidosVendas' => $pedidosVendas,
+          'clientes' => $clientes,
           'filter'=> $request->get('filter')
         ]);
     }
@@ -38,9 +39,12 @@ class PedidoVendaController extends Controller
 
     public function show(PedidoVenda $pedidoVenda)
     {
-        return view('pedidosVendas.show', [
-          'pedidoVenda' => $pedidoVenda
-        ]);
+      return view('pedidosVendas.show', [
+        'pedidoVenda' => $pedidoVenda,
+        'total' => $pedidoVenda->itens->reduce(function($total, $item){
+          return $total+$item->preco;
+        })
+      ]);
     }
 
     public function edit(PedidoVenda $pedidoVenda)
@@ -76,9 +80,6 @@ class PedidoVendaController extends Controller
       $pedidoVenda->nome = $request->get('nome');
       $pedidoVenda->data = $request->get('data');
       $pedidoVenda->situacao = $request->get('situacao');
-      $pedidoVenda->cliente = $request->get('cliente');
-      $pedidoVenda->produto = $request->get('produto');
-      $pedidoVenda->quantidade = $request->get('quantidade');
 
       $pedidoVenda->save();
 

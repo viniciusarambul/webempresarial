@@ -30,7 +30,10 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('fornecedore', \App\Domains\Fornecedores\Fornecedor::class);
         Route::model('pedidosCompra', \App\Domains\PedidosCompras\PedidoCompra::class);
         Route::model('pedidoItem', \App\Domains\PedidosCompras\PedidoItemCompra::class);
-        Route::model('pedidosVendas', \App\Domains\PedidosVendas\PedidoVenda::class);
+        Route::model('pedidoTitulo', \App\Domains\PedidosCompras\PedidoTituloCompra::class);
+        Route::model('pedidosVenda', \App\Domains\PedidosVendas\PedidoVenda::class);
+        Route::model('pedidoItem', \App\Domains\PedidosVendas\PedidoItemVenda::class);
+        Route::model('pedidoTitulo', \App\Domains\PedidosVendas\PedidoTituloVenda::class);
         Route::model('contasReceber', \App\Domains\ContasReceber\ContaReceber::class);
         Route::model('contasPagar', \App\Domains\ContasPagar\ContaPagar::class);
         Route::model('categoria', \App\Domains\Categorias\Categoria::class);

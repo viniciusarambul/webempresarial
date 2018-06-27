@@ -28,7 +28,7 @@
                     </div>
                     <div class="input col s4">
                          <label for="categoria">Categoria *</label><br />
-                      <select class="browser-default" name="categoria">
+                      <select class="browser-default" required name="categoria">
                         <option value="">Selecione</option>
                       @foreach($categorias as $categoria)
                         <option value="{{ $categoria->id }}">{{ $categoria->descricao }}</option>

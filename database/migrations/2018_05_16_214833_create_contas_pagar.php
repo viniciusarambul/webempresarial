@@ -16,7 +16,8 @@ class CreateContasPagar extends Migration
       Schema::create('contapagar', function (Blueprint $table) {
         $table->increments('id');
         $table->string('descricao');
-        $table->date('data');
+        $table->date('dataEmissao');
+        $table->date('dataVencimento');
         $table->text('situacao');
         $table->text('idFornecedor')->nullable();
         $table->text('idProduto')->nullable();

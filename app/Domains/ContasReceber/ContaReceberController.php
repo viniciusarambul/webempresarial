@@ -74,7 +74,8 @@ class ContaReceberController extends Controller
     private function save(ContaReceber $contaReceber, ContaReceberRequest $request)
     {
       $contaReceber->descricao = $request->get('descricao');
-      $contaReceber->data = $request->get('data');
+      $contaReceber->dataEmissao = $request->get('dataEmissao');
+      $contaReceber->dataVencimento = $request->get('dataVencimento');
       $contaReceber->situacao = $request->get('situacao');
       $contaReceber->idCliente = $request->get('idCliente');
       $contaReceber->idProduto = $request->get('idProduto');

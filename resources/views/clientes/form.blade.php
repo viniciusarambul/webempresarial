@@ -38,8 +38,13 @@
                       <input class="cnpj" id="cnpj"  type="text" name="cnpj" placeholder="CNPJ" value="{{ $cliente->cnpj }}">
                   </div>
 
-
-
+                  <div class="input col s5">
+                       <label for="status">Status *</label><br />
+                    <select class="browser-default" required name="status">
+                      <option value="Ativo">Ativo</option>
+                      <option value="Inativo">Inativo</option>
+                    </select>
+                  </div>
 
                     <div class="input col s6">
                         <label for="nome">Nome *</label><br />
@@ -80,13 +85,8 @@
                         <input id="numero" type="text" name="numero" id="numero" placeholder="Numero" required value="{{ $cliente->numero }}">
                     </div>
 
-
-
-
-                    <p style="margin-left: 2%">* Campos Obrigatórios</p>
-
-
                 </div>
+                  <p style="margin-left: 2%">* Campos Obrigatórios</p>
 
                 <div class="row">
                     <button type="submit" class="waves-effect waves-green btn teal right">Salvar</button>

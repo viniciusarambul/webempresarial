@@ -20,7 +20,8 @@
         <div class="card">
             <h5>Dados da Receita</h5>
             <p><b>Descrição: </b>{{ $contaReceber->descricao }}</p>
-            <p><b>Data: </b>{{ $contaReceber->data }}</p>
+            <p><b>Data de Emissão: </b>{{date("d-m-Y", strtotime( $contaReceber->dataEmissao)) }}</p>
+            <p><b>Data de Vencimento: </b>{{ date("d-m-Y", strtotime($contaReceber->dataVencimento)) }}</p>
             <p><b>Cliente: </b>{{ $contaReceber->idCliente }}</p>
             <p><b>Situacao: </b>{{ $contaReceber->situacao }}</p>
             <p><b>Parcelas: </b>{{ $contaReceber->parcelas }}</p>

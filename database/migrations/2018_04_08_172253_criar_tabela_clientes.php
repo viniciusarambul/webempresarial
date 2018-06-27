@@ -17,6 +17,7 @@ class CriarTabelaClientes extends Migration
           $table->increments('id');
           $table->string('nome');
           $table->string('sobrenome');
+          $table->string('status');
           $table->text('telefone');
           $table->text('email');
           $table->text('cidade');

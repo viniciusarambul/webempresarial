@@ -77,6 +77,7 @@ class ClienteController extends Controller
       $cliente->cpf = $request->get('cpf');
       $cliente->bairro = $request->get('bairro');
       $cliente->numero = $request->get('numero');
+      $cliente->status = $request->get('status');
       $cliente->save();
 
       return redirect()->route('clientes.show', ['id' => $cliente->id]);

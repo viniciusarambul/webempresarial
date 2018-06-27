@@ -3,11 +3,12 @@
 namespace App\Domains\Produtos;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Domains\Fornecedores\Fornecedor;
 
 class Produto extends Model
 {
-      public function fornecedorNome(){
-        return $this->hasOne('App\Domains\Fornecedores', 'id', 'fornecedor');
-      }
+  public function fornecedor(){
+    return $this->hasOne(Fornecedor::class, 'id','fornecedor');
+  }
 
 }

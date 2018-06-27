@@ -17,6 +17,7 @@ class CreateFornecedoresTable extends Migration
           $table->increments('id');
           $table->string('nome');
           $table->string('sobrenome');
+          $table->text('status');
           $table->text('telefone');
           $table->text('email');
           $table->text('cidade');

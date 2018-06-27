@@ -23,37 +23,22 @@
                 <input type="hidden" id="id" name="id" value="{{ $pedidoVenda->id }}" />
                 <div class="row">
                     <div class="input col s6">
-                        <label for="nome">Nome</label><br />
+                        <label for="nome">Nome *</label><br />
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $pedidoVenda->nome }}">
                     </div>
                     <div class="input col s6">
-                        <label for="data">Data</label><br />
-                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $pedidoVenda->data }}">
+                        <label for="data">Data *</label><br />
+                        <input type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoVenda->data }}">
                     </div>
-                    <div class="input col s6">
-                        <label for="situacao">Situacao</label><br />
-                        <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $pedidoVenda->situacao }}">
-                    </div>
-                    <div class="input col s6">
-                      <label for="cliente">Cliente</label><br />
-                      <select class="browser-default" name="cliente">
-                      @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
-                        @endforeach
+                    <div class="input col s4">
+                         <label for="situacao">Situação *</label><br />
+                      <select class="browser-default" required name="situacao">
+                        <option value="">Selecione</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Fechado">Fechado</option>
                       </select>
                     </div>
-                    <div class="input col s6">
-                      <label for="situacao">Produto</label><br />
-                      <select class="browser-default" name="produto">
-                      @foreach($produtos as $produto)
-                        <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="input col s6">
-                        <label for="quantidade">Quantidade</label><br />
-                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $pedidoVenda->quantidade }}">
-                    </div>
+
                   </div>
 
 

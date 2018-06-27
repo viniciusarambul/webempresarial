@@ -50,6 +50,14 @@
                         <label for="razaosocial">Razão Social</label><br />
                         <input type="text" name="razaosocial" id="razaosocial" placeholder="Razão Social" value="{{ $fornecedor->razaosocial }}">
                     </div>
+                    <div class="input col s5">
+                         <label for="status">Status *</label><br />
+                      <select class="browser-default" required name="status">
+                        <option value="">Selecione</option>
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="input col s6">

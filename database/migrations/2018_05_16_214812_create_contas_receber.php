@@ -16,7 +16,8 @@ class CreateContasReceber extends Migration
       Schema::create('contareceber', function (Blueprint $table) {
         $table->increments('id');
         $table->string('descricao');
-        $table->date('data');
+        $table->date('dataEmissao');
+        $table->date('dataVencimento');
         $table->text('situacao');
         $table->text('idCliente')->nullable();
         $table->text('idProduto')->nullable();

@@ -101,7 +101,7 @@
                   </a>
                 </li>
                 <li class="">
-                  <a href="" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Sair">
+                  <a href="{{ url('/main/logout') }}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Sair">
                     <i class="mdi mdi-power"></i>
                   </a>
                 </li>
@@ -139,7 +139,7 @@
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/tinymce/js/tinymce/tinymce.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
-        
+
         <script>
             $(document).ready(function () {
                 app.init();

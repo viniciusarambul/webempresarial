@@ -18,8 +18,6 @@ class CreatePedidoVenda extends Migration
         $table->string('nome');
         $table->date('data');
         $table->text('situacao');
-        $table->text('idCliente');
-        $table->text('quantidade');
 
 
 

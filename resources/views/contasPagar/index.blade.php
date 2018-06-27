@@ -42,8 +42,10 @@
                     <tr>
                         <th>ID</th>
                         <th>Descricao</th>
-                        <th>Data</th>
+                        <th>Data de Emissão</th>
+                        <th>Data de Vencimento</th>
                         <th>Fornecedor</th>
+                        <th>Situação</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
@@ -53,8 +55,10 @@
                     <tr class="with-options">
                         <td>{{$contaPagar->id}}</td>
                         <td>{{$contaPagar->descricao}}</td>
-                        <td>{{date("d-m-Y", strtotime($contaPagar->data))}}</td>
-                        <td>{{$contaPagar->fornecedor}}</td>
+                        <td>{{date("d-m-Y", strtotime($contaPagar->dataEmissao))}}</td>
+                        <td>{{date("d-m-Y", strtotime($contaPagar->dataVencimento))}}</td>
+                        <td>{{$contaPagar->idFornecedor}}</td>
+                        <td>{{$contaPagar->situacao}}</td>
                         <td>{{$contaPagar->valor}}</td>
                         <td class="options">
                             <a href="{{ route('contasPagar.show', ['$contaPagar' => $contaPagar->id]) }}">

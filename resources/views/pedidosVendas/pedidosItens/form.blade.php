@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card">
-            <form method="post" action="{{route('pedidosCompras.pedidoItem.store', ['pedidoCompra' => $pedidoCompra->id])}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('pedidosVendas.pedidoItem.store', ['pedidoVenda' => $pedidoVenda->id])}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
                 <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
@@ -59,7 +59,7 @@
 
                 <div class="row">
                     <button type="submit" class="waves-effect waves-green btn teal right">Salvar</button>
-                    <a class="waves-effect waves-green btn-flat right" href="{{ route('pedidosCompras.index') }}">Cancelar</a>
+                    <a class="waves-effect waves-green btn-flat right" href="{{ route('pedidosVendas.index') }}">Cancelar</a>
                 </div>
             </form>
         </div>

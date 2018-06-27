@@ -27,8 +27,8 @@
                         <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ $contaReceber->descricao }}">
                     </div>
                     <div class="input col s6">
-                        <label for="data">Data Emissão</label><br />
-                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $contaReceber->data }}">
+                        <label for="dataEmissao">Data Emissão</label><br />
+                        <input type="date" name="dataEmissao" id="dataEmissao" placeholder="Data" value="{{ $contaReceber->dataEmissao }}">
                     </div>
 
                     <div class="input col s5">
@@ -36,12 +36,13 @@
                       <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
                         <option value="Aberto">Aberto</option>
-                        <option value="Fechado">Fechado</option>
+                        <option value="Fechado">Baixado</option>
+                        <option value="Atrasado">Atrasado</option>
                       </select>
                     </div>
                     <div class="input col s6" style="margin-left:8%;">
-                        <label for="data">Data Vencimento</label><br />
-                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $contaReceber->data_vencimento }}">
+                        <label for="dataVencimento">Data Vencimento</label><br />
+                        <input type="date" name="dataVencimento" id="dataVencimento" placeholder="Data" value="{{ $contaReceber->dataVencimento }}">
                     </div>
                     <div class="input col s5" >
                       <label for="idCliente">Cliente</label><br />

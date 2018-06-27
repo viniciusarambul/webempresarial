@@ -79,6 +79,7 @@ class FornecedorController extends Controller
       $fornecedor->razaosocial = $request->get('razaosocial');
       $fornecedor->cpf = $request->get('cpf');
       $fornecedor->cnpj = $request->get('cnpj');
+      $fornecedor->status = $request->get('status');
       $fornecedor->save();
 
       return redirect()->route('fornecedores.show', ['id' => $fornecedor->id]);

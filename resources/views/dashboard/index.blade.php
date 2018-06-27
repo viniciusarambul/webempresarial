@@ -4,4 +4,5 @@
     'icon'=> 'mdi mdi-home',
     'active_router'=> 'dashboard'
 ])
+
 @section('container')

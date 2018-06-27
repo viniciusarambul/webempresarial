@@ -74,7 +74,8 @@ class ContaPagarController extends Controller
     private function save(ContaPagar $contaPagar, ContaPagarRequest $request)
     {
       $contaPagar->descricao = $request->get('descricao');
-      $contaPagar->data = $request->get('data');
+      $contaPagar->dataEmissao = $request->get('dataEmissao');
+      $contaPagar->dataVencimento = $request->get('dataVencimento');
       $contaPagar->situacao = $request->get('situacao');
       $contaPagar->idFornecedor = $request->get('idFornecedor');
       $contaPagar->idProduto = $request->get('idProduto');

@@ -27,14 +27,24 @@
                         <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ $contaPagar->descricao }}">
                     </div>
                     <div class="input col s6">
-                        <label for="data">Data</label><br />
-                        <input type="date" name="data" id="data" placeholder="Data" value="{{ $contaPagar->data }}">
+                        <label for="dataEmissao">Data Emissão</label><br />
+                        <input type="date" name="dataEmissao" id="dataEmissao" placeholder="Data" value="{{ $contaPagar->dataEmissao }}">
                     </div>
-                    <div class="input col s6">
-                        <label for="situacao">Situacao</label><br />
-                        <input type="text" name="situacao" id="situacao" placeholder="situacao" value="{{ $contaPagar->situacao }}">
+
+                    <div class="input col s5">
+                         <label for="situacao">Situação *</label><br />
+                      <select class="browser-default" required name="situacao">
+                        <option value="">Selecione</option>
+                        <option value="Aberto">Aberto</option>
+                        <option value="Fechado">Baixado</option>
+                        <option value="Atrasado">Atrasado</option>
+                      </select>
                     </div>
-                    <div class="input col s6">
+                    <div class="input col s6" style="margin-left:8%;">
+                        <label for="dataVencimento">Data Vencimento</label><br />
+                        <input type="date" name="dataVencimento" id="dataVencimento" placeholder="Data" value="{{ $contaPagar->dataVencimento }}">
+                    </div>
+                    <div class="input col s5" >
                       <label for="idFornecedor">Fornecedor</label><br />
                       <select class="browser-default" name="idFornecedor">
                       @foreach($fornecedores as $fornecedor)
@@ -42,31 +52,33 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="input col s6">
-                      <label for="idPrduto">Produto</label><br />
-                      <select class="browser-default" name="idProduto">
-                      @foreach($produtos as $produto)
-                        <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
-                        @endforeach
+                    <div class="input col s5" style="margin-left: 8%">
+                      <label for="tipoPagamento">Tipo Documento</label><br />
+                      <select class="browser-default" name="tipoPagamento">
+
+                        <option value="0">Boleto</option>
+                        <option value="1">Cartão de Crédito</option>
+                        <option value="2">Cartão de Débito</option>
+                        <option value="3">Cheque</option>
+                        <option value="4">Duplicata</option>
+                        <option value="5">Promissória</option>
+                        <option value="6">Recibo</option>
+
                       </select>
                     </div>
                     <div class="input col s6">
-                        <label for="quantidade">Quantidade</label><br />
-                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $contaPagar->quantidade }}">
-                    </div>
-                    <div class="input col s6">
-                        <label for="parcelas">Parcelas</label><br />
+                        <label for="parcelas">Parcelas (Preencha apenas para lançamentos parcelados)</label><br />
                         <input type="text" name="parcelas" id="parcelas" placeholder="Parcelas" value="{{ $contaPagar->parcelas }}">
                     </div>
-                    <div class="input col s6">
-                        <label for="tipoPagamento">Tipo Pagamento</label><br />
-                        <input type="text" name="tipoPagamento" id="tipoPagamento" placeholder="Tipo Pagamento" value="{{ $contaPagar->tipoPagamento }}">
-                    </div>
+
+
                     <div class="input col s6">
                         <label for="valor">Valor</label><br />
                         <input type="text" name="valor" id="valor" placeholder="Valor" value="{{ $contaPagar->valor }}">
                     </div>
                   </div>
+
+
 
 
                 <div class="row">
