@@ -41,7 +41,7 @@
                   </div>
                     <div class="input col s6">
                         <label for="quantidade">Quantidade</label><br />
-                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
+                        <input type="number" name="quantidade" id="quantidade" min="1" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
                     </div>
                     <div class="input col s6">
                         <label for="valorTotal">Valor Unitário</label><br />
