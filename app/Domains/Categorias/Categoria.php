@@ -11,7 +11,7 @@ class Categoria extends Model
   protected $table = 'categorias';
 
   public function produtos(){
-    return $this->hasMany(Produto::class, 'id', 'categoria');
+    return $this->hasOne(Produto::class, 'id', 'categoria');
   }
 
 }

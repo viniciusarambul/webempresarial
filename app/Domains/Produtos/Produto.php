@@ -13,7 +13,7 @@ class Produto extends Model
   }
 
   public function categoria(){
-    return $this->hasOne(Categoria::class, 'categoria','id');
+    return $this->belongsTo(Categoria::class,'categoria', 'id');
   }
 
 }
