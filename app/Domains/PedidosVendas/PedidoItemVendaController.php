@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
+use App\Domains\Clientes\Cliente;
 use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\PedidosVendas\PedidosVendas;
 
@@ -61,12 +62,14 @@ class PedidoItemVendaController extends Controller
 
         $produtos = Produto::all();
         $fornecedores = Fornecedor::all();
+        $clientes = Cliente::all();
 
         return view('pedidosVendas.pedidosItens.form', [
           'produtos' => $produtos,
           'pedidoVenda' => $pedidoVenda,
           'pedidoItem' => $pedidoItem,
-          'fornecedores' => $fornecedores
+          'fornecedores' => $fornecedores,
+          'clientes' => $clientes
         ]);
     }
 

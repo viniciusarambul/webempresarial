@@ -23,12 +23,19 @@
                 <input type="hidden" id="id" name="id" value="{{ $pedidoTitulo->id }}" />
                 <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoTitulo->idPedido }}" />
                 <div class="row">
-                  <div class="input col s6">
-                      <label for="dataEmissao">Data Emissão</label><br />
-                      <input type="date" name="dataEmissao" id="dataEmissao" placeholder="Data" value="{{ $pedidoTitulo->dataEmissao }}">
-                  </div>
 
                   <div class="input col s6">
+                      <label for="dataEmissao">Data Emissão</label><br />
+                      <input type="date" name="dataEmissao" id="dataEmissao" required placeholder="Data" value="{{ $pedidoTitulo->dataEmissao }}">
+                  </div>
+
+
+                                    <div class="input col s6">
+                                        <label for="dataVencimento">Data Vencimento</label><br />
+                                        <input type="date" name="dataVencimento" id="dataVencimento" required placeholder="Data" value="{{ $pedidoTitulo->dataVencimento }}">
+                                    </div>
+
+                  <div class="input col s5">
                        <label for="situacao">Situação *</label><br />
                     <select class="browser-default" required name="situacao">
                       <option value="">Selecione</option>
@@ -38,7 +45,7 @@
                     </select>
                   </div>
 
-                  <div class="input col s6" >
+                  <div class="input col s5" style="margin-left:8%;">
                     <label for="tipoPagamento">Tipo Documento</label><br />
                     <select class="browser-default" name="tipoPagamento">
 
@@ -53,10 +60,6 @@
                     </select>
                   </div>
 
-                  <div class="input col s5">
-                      <label for="dataVencimento">Data Vencimento</label><br />
-                      <input type="date" name="dataVencimento" id="dataVencimento" placeholder="Data" value="{{ $pedidoTitulo->dataVencimento }}">
-                  </div>
                   <div class="input col s6">
                       <label for="parcelas">Parcelas (Preencha apenas para lançamentos parcelados)</label><br />
                       <input type="text" name="parcelas" id="parcelas" placeholder="Parcelas" value="{{ $pedidoTitulo->parcelas }}">
