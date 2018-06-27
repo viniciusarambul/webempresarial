@@ -23,11 +23,11 @@
                 <input type="hidden" id="id" name="id" value="{{ $contaPagar->id }}" />
                 <div class="row">
                     <div class="input col s6">
-                        <label for="descricao">Descrição</label><br />
+                        <label for="descricao">Descrição *</label><br />
                         <input type="text" name="descricao" id="descricao" placeholder="Descrição" value="{{ $contaPagar->descricao }}">
                     </div>
                     <div class="input col s6">
-                        <label for="dataEmissao">Data Emissão</label><br />
+                        <label for="dataEmissao">Data Emissão *</label><br />
                         <input type="date" name="dataEmissao" id="dataEmissao" placeholder="Data" value="{{ $contaPagar->dataEmissao }}">
                     </div>
 
@@ -41,11 +41,11 @@
                       </select>
                     </div>
                     <div class="input col s6" style="margin-left:8%;">
-                        <label for="dataVencimento">Data Vencimento</label><br />
+                        <label for="dataVencimento">Data Vencimento *</label><br />
                         <input type="date" name="dataVencimento" id="dataVencimento" placeholder="Data" value="{{ $contaPagar->dataVencimento }}">
                     </div>
                     <div class="input col s5" >
-                      <label for="idFornecedor">Fornecedor</label><br />
+                      <label for="idFornecedor">Fornecedor *</label><br />
                       <select class="browser-default" name="idFornecedor">
                       @foreach($fornecedores as $fornecedor)
                         <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
@@ -53,7 +53,7 @@
                       </select>
                     </div>
                     <div class="input col s5" style="margin-left: 8%">
-                      <label for="tipoPagamento">Tipo Documento</label><br />
+                      <label for="tipoPagamento">Tipo Documento *</label><br />
                       <select class="browser-default" name="tipoPagamento">
 
                         <option value="0">Boleto</option>
@@ -73,7 +73,7 @@
 
 
                     <div class="input col s6">
-                        <label for="valor">Valor</label><br />
+                        <label for="valor">Valor *</label><br />
                         <input type="text" name="valor" id="valor" placeholder="Valor" value="{{ $contaPagar->valor }}">
                     </div>
                   </div>
