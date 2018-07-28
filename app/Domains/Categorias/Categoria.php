@@ -10,8 +10,7 @@ class Categoria extends Model
 
   protected $table = 'categorias';
 
-  public function produtos(){
-    return $this->hasOne(Produto::class, 'id', 'categoria');
+  public function produto(){
+    return $this->belongsTo(Produto::class);
   }
-
 }

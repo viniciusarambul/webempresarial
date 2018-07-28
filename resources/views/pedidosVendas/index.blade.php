@@ -43,7 +43,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Data</th>
-                        <th>Cliente</th>
+                        <th>Situação</th>
                     </tr>
                 </thead>
 
@@ -53,7 +53,7 @@
                         <td>{{$pedidoVenda->id}}</td>
                         <td>{{$pedidoVenda->nome}}</td>
                         <td>{{date("d-m-Y", strtotime($pedidoVenda->data))}}</td>
-                        <td>{{$pedidoVenda->cliente}}</td>
+                        <td>{{$pedidoVenda->situacao}}</td>
                         <td class="options">
                             <a href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
                                 <i class="mdi mdi-eye"></i>

@@ -66,6 +66,7 @@ class ClienteController extends Controller
 
     private function save(Cliente $cliente, ClienteRequest $request)
     {
+
       $cliente->nome = $request->get('nome');
       $cliente->sobrenome = $request->get('sobrenome');
       $cliente->telefone = $request->get('telefone');
