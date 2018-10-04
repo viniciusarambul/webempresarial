@@ -1,8 +1,8 @@
 @extends('templates.template', [
-    'title'=> 'produtos',
+    'title'=> 'usuarios',
     'prev_router'=> 'home',
     'icon'=> 'mdi mdi-folder',
-    'active_router'=> 'produtos'
+    'active_router'=> 'usuarios'
 ])
 @section('container')
 
@@ -10,15 +10,15 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Produtos
+            Usuarios
         </h4>
     </div>
 </div>
 
 
-<form class="row no-margin-bottom" method="GET" action="{{ route('produtos.index') }}">
+<form class="row no-margin-bottom" method="GET" action="{{ route('usuarios.index') }}">
     <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Produto (digite o Nome)" value="{{$filter}}">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Usuario (digite o Nome)" value="{{$filter}}">
     </div>
     <div class="input col m6">
         <button type="submit" class="btn blue">
@@ -31,31 +31,28 @@
     <div class="col s12">
         <p class="card-intro">
             &nbsp;
-            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('produtos.create') }}">
+            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('usuarios.create') }}">
                 <i class="mdi mdi-plus"></i>
             </a>
         </p>
         <div class="card">
-            @if(count($produtos))
+            @if(count($usuarios))
             <table>
                 <thead>
                     <tr>
-                        <th>Produto</th>
-                        <th>Categoria</th>
-                        <th>Valor</th>
-                        <th>Fornecedor</th>
+                        <th>ID</th>
+                        <th>Descricao</th>
+
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach($produtos as $produto)
+                    @foreach($usuarios as $usuario)
                     <tr class="with-options">
-                        <td>{{$produto->nome}}</td>
-                        <td>{{$produto->categorias->descricao}}</td>
-                        <td>{{$produto->valorUnitario}}</td>
-                        <td>{{$produto->fornecedores->nome}}</td>
+                        <td>{{$usuario->id}}</td>
+                        <td>{{$usuario->descricao}}</td>
                         <td class="options">
-                            <a href="{{ route('produtos.show', ['$produto' => $produto->id]) }}">
+                            <a href="{{ route('usuarios.show', ['$usuario' => $usuario->id]) }}">
                                 <i class="mdi mdi-eye"></i>
                             </a>
                         </td>
@@ -65,10 +62,10 @@
                 </tbody>
             </table>
             @else
-            <p class="alert-disable">Não há Produtos cadastrados.</p>
+            <p class="alert-disable">Não há usuarios.</p>
             @endif
         </div>
-        {{ $produtos->appends(['filter'=>$filter])->links() }}
+        {{ $usuarios->appends(['filter'=>$filter])->links() }}
     </div>
 </div>
 

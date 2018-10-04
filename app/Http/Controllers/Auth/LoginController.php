@@ -36,4 +36,20 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'login' => 'required', 'senha' => 'required',
+        ]);
+
+        $credentials = $request->only('login', 'senha');
+
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect()->url('/');
+    }
 }

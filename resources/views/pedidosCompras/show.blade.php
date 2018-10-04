@@ -82,11 +82,11 @@
                         <td>{{$item->produto->nome}}</td>
                         <td>{{$item->fornecedor->nome}}</td>
                         <td>{{$item->quantidade}}</td>
-                        <td>{{$item->preco}}</td>
-                        <td>{{$item->total}}</td>
+                        <td>{{number_format($item->preco, 2, ',', '.')}}</td>
+                        <td>{{number_format($item->total, 2, ',', '.')}}</td>
                         <td class="options">
                             <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                                <i class="mdi mdi-pencil"></i>
                             </a>
                         </td>
 

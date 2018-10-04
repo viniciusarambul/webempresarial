@@ -8,12 +8,12 @@ use App\Domains\Categorias\Categoria;
 
 class Produto extends Model
 {
-  public function fornecedor(){
+  public function fornecedores(){
     return $this->hasOne(Fornecedor::class, 'id','fornecedor');
   }
 
-  public function categoria(){
-    return $this->hasOne(Categoria::class);
+  public function categorias(){
+    return $this->hasOne(Categoria::class, 'id', 'categoria');
   }
 
 }

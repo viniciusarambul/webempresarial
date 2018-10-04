@@ -56,12 +56,17 @@
             </div>
             <ul>
                 <li class="{{$active_router == 'dashboard' ? 'active' : ''}}">
-                  <a href="{{url('dashboard')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard">
+                  <a href="{{route('dashboard')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Dashboard">
                     <i class="mdi mdi-home"></i>
                   </a>
                 </li>
                 <li class="{{$active_router == 'clientes' ? 'active' : ''}}">
                   <a href="{{route('clientes.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="clientes">
+                    <i class="mdi mdi-account"></i>
+                  </a>
+                </li>
+                <li class="{{$active_router == 'vendedores' ? 'active' : ''}}">
+                  <a href="{{route('vendedores.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Vendedores">
                     <i class="mdi mdi-account"></i>
                   </a>
                 </li>
@@ -98,6 +103,11 @@
                 <li class="{{$active_router == 'contasPagar' ? 'active' : ''}}">
                   <a href="{{route('contasPagar.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Contas Pagar">
                     <i class="mdi mdi-currency-usd"></i>
+                  </a>
+                </li>
+                <li class="{{$active_router == 'usuario' ? 'active' : ''}}">
+                  <a href="{{route('usuarios.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Usuarios">
+                    <i class="mdi mdi-account"></i>
                   </a>
                 </li>
                 <li class="">

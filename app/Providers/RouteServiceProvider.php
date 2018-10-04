@@ -27,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::model('produto', \App\Domains\Produtos\Produto::class);
         Route::model('cliente', \App\Domains\Clientes\Cliente::class);
+        Route::model('vendedore', \App\Domains\Vendedores\Vendedor::class);
         Route::model('fornecedore', \App\Domains\Fornecedores\Fornecedor::class);
         Route::model('pedidosCompra', \App\Domains\PedidosCompras\PedidoCompra::class);
         Route::model('pedidoItem', \App\Domains\PedidosCompras\PedidoItemCompra::class);

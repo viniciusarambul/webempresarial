@@ -18,6 +18,7 @@ class CreatePedidoVenda extends Migration
         $table->string('nome');
         $table->date('data');
         $table->text('situacao');
+        $table->integer('idVendedor');
 
 
 

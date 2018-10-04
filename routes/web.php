@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::resource('/produtos', 'Produtos\ProdutoController');
 Route::resource('/clientes', 'Clientes\ClienteController');
+Route::resource('/vendedores', 'Vendedores\VendedorController');
 Route::resource('/fornecedores', 'Fornecedores\FornecedorController');
 Route::resource('/pedidosCompras', 'PedidosCompras\PedidoCompraController');
 Route::resource('pedidosCompras.pedidoItem', 'PedidosCompras\PedidoItemCompraController');
@@ -27,7 +28,8 @@ Route::resource('pedidosVendas.pedidoTitulo', 'PedidosVendas\PedidoTituloVendaCo
 Route::resource('/contasReceber', 'ContasReceber\ContaReceberController');
 Route::resource('/contasPagar', 'ContasPagar\ContaPagarController');
 Route::resource('/categorias', 'Categorias\CategoriaController');
-Route::resource('/dashboard', 'Dashboard\DashboardController');
+Route::resource('/usuarios', 'Usuarios\UsuarioController');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 
 

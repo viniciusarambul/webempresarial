@@ -18,10 +18,6 @@
   <div class="container box">
    <h3 align="center">Login Web Empresarial</h3><br />
 
-   @if(isset(Auth::user()->email))
-    <script>window.location="/main/successlogin";</script>
-   @endif
-
    @if ($message = Session::get('error'))
    <div class="alert alert-danger alert-block">
     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -42,12 +38,12 @@
    <form method="post" action="{{ url('/main/checklogin') }}">
     {{ csrf_field() }}
     <div class="form-group">
-     <label>Email</label>
-     <input type="email" name="email" class="form-control" />
+     <label>Login</label>
+     <input type="text" name="login" class="form-control" />
     </div>
     <div class="form-group">
      <label>Senha</label>
-     <input type="password" name="password" class="form-control" />
+     <input type="password" name="senha" class="form-control" />
     </div>
     <div class="form-group">
      <input type="submit" name="login" class="btn btn-primary" value="Login" />

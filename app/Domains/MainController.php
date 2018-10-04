@@ -3,8 +3,10 @@
 namespace App\Domains;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Domains\Usuarios\Usuario;
 use Validator;
 use Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class MainController extends Controller
 {
@@ -15,24 +17,24 @@ class MainController extends Controller
 
     function checklogin(Request $request)
     {
-     $this->validate($request, [
-      'email'   => 'required|email',
-      'password'  => 'required|alphaNum|min:3'
-     ]);
 
-     $user_data = array(
-      'email'  => $request->get('email'),
-      'password' => $request->get('password')
-     );
+      $this->validate($request, [
+          'login' => 'required', 'senha' => 'required',
+      ]);
 
-     if(Auth::attempt($user_data))
-     {
-      return redirect('main/successlogin');
-     }
-     else
-     {
-      return back()->with('error', 'Credenciais de Login Incorretas');
-     }
+      $credentials = $request->only('login', 'senha');
+
+      $usuario = Usuario::where('login', $request->get('login'))
+                          ->where('senha', $request->get('senha'))
+                          ->first();
+      
+      if ($usuario)
+      {
+          Auth::login($usuario, $request->has('remember'));
+          return redirect('/dashboard');
+      }
+
+      return redirect()->back()->with('error', 'Credenciais erradas');
 
     }
 

@@ -11,6 +11,6 @@ class Categoria extends Model
   protected $table = 'categorias';
 
   public function produto(){
-    return $this->belongsTo(Produto::class);
+    return $this->belongsTo(Produto::class, 'categoria', 'id');
   }
 }
