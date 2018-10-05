@@ -136,8 +136,8 @@
                     <i class="{{$icon}}"></i>
                 </div>
                 <div class="attempt">
-                     <b>Vinicius Arambul</b>
-                     <small>vinicius.vieira@hotmail.com</small>
+                     <b>{{ auth()->user()->nome }}</b>
+                     <small>{{ auth()->user()->email }}</small>
                  </div>
             </header>
 

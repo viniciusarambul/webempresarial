@@ -46,7 +46,7 @@
      <input type="password" name="senha" class="form-control" />
     </div>
     <div class="form-group">
-     <input type="submit" name="login" class="btn btn-primary" value="Login" />
+     <button type="submit" class="btn btn-primary">Entrar</button>
     </div>
    </form>
   </div>
