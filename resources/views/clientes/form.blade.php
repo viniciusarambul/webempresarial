@@ -37,6 +37,10 @@
                       <label for="cnpj">CNPJ</label><br />
                       <input class="cnpj" id="cnpj"  type="text" name="cnpj" placeholder="CNPJ" value="{{ $cliente->cnpj }}">
                   </div>
+                  <div id="razao" class="input col s6">
+                      <label for="razao">Razão Social</label><br />
+                      <input class="razao" id="razao"  type="text" name="razao" placeholder="Razão Social" value="{{ $cliente->razao }}">
+                  </div>
 
                   <div class="input col s5">
                        <label for="status">Status *</label><br />

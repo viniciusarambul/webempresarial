@@ -41,7 +41,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Descricao</th>
+                        <th>Nome</th>
+                        <th>Login</th>
+                        <th>E-mail</th>
 
                     </tr>
                 </thead>
@@ -50,7 +52,9 @@
                     @foreach($usuarios as $usuario)
                     <tr class="with-options">
                         <td>{{$usuario->id}}</td>
-                        <td>{{$usuario->descricao}}</td>
+                        <td>{{$usuario->nome}}</td>
+                        <td>{{$usuario->login}}</td>
+                        <td>{{$usuario->email}}</td>
                         <td class="options">
                             <a href="{{ route('usuarios.show', ['$usuario' => $usuario->id]) }}">
                                 <i class="mdi mdi-eye"></i>

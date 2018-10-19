@@ -9,7 +9,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Usuario - {{ $usuario->descricao }}
+            Usuario - {{ $usuario->login }}
         </h4>
     </div>
 </div>
@@ -19,7 +19,9 @@
     <div class="col s12 m4">
         <div class="card">
             <h5>Dados da Usuario</h5>
-            <p><b>Descricao: </b>{{ $usuario->descricao }}</p>
+            <p><b>Nome: </b>{{ $usuario->nome }}</p>
+            <p><b>Login: </b>{{ $usuario->login }}</p>
+            <p><b>E-mail: </b>{{ $usuario->email }}</p>
 
         </div>
     </div>

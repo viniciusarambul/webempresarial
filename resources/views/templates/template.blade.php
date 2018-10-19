@@ -201,11 +201,13 @@
             $("#cpfb").click(function(){
               $('#cpf').val('');
               $("#cnpjj").hide();
+              $("#razao").hide();
               $("#cpff").show();
             });
             $("#cnpjb").click(function(){
               $('#cnpj').val('');
               $("#cnpjj").show();
+              $("#razao").show();
               $("#cpff").hide();
             });
           });
