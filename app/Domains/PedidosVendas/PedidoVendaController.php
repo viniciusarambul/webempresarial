@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Clientes\Cliente;
+use App\Domains\Vendedores\Vendedor;
 
 class PedidoVendaController extends Controller
 {
@@ -67,11 +68,13 @@ class PedidoVendaController extends Controller
     private function form(PedidoVenda $pedidoVenda) {
         $produtos = Produto::all();
         $clientes = Cliente::all();
+        $vendedores = Vendedor::all();
 
         return view('pedidosVendas.form', [
           'pedidoVenda' => $pedidoVenda,
           'produtos' => $produtos,
-          'clientes' => $clientes
+          'clientes' => $clientes,
+          'vendedores' => $vendedores
         ]);
     }
 
@@ -79,6 +82,7 @@ class PedidoVendaController extends Controller
     {
       $pedidoVenda->nome = $request->get('nome');
       $pedidoVenda->data = $request->get('data');
+      $pedidoVenda->idVendedor = $request->get('idVendedor');
       $pedidoVenda->situacao = $request->get('situacao');
 
       $pedidoVenda->save();

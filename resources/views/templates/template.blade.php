@@ -26,7 +26,15 @@
 
         <link type="text/css" rel="stylesheet" href="{{ asset('css/custom.css') }}" media="screen,projection" />
         <link type="text/css" rel="stylesheet" href="{{ asset('libs/sweetAlert/sweetalert.css') }}" media="screen,projection" />
-
+        <link type="text/css" rel="stylesheet" href="{{ asset('libs/morris/morris.css') }}" media="screen,projection" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+       <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
         <title>{{$title}}</title>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -150,6 +158,9 @@
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/jquery-price/jquery.price_format.1.8.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/morris.js/morris.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/morris.js/morris.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/morris.js/raphael-min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/tinymce/js/tinymce/tinymce.min.js') }}"></script>

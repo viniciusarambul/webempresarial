@@ -22,4 +22,5 @@ class Pedidoitem extends Model
   public function getTotalAttribute(){
     return $this->preco*$this->quantidade;
   }
+
 }
