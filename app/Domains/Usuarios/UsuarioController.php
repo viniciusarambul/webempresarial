@@ -32,7 +32,7 @@ class UsuarioController extends Controller
       if ($request->get('id')) {
             return $this->save(Usuario::find($request->get('id')), $request);
         }
-        return $this->save($usuario, $request);
+        return $this->save(new Usuario(), $request);
     }
 
     public function show(Usuario $usuario)

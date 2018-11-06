@@ -32,7 +32,7 @@ class VendedorController extends Controller
       if ($request->get('id')) {
             return $this->save(Vendedor::find($request->get('id')), $request);
         }
-        return $this->save($vendedor, $request);
+        return $this->save(new Vendedor(), $request);
     }
 
     public function show(Vendedor $vendedor)

@@ -33,7 +33,7 @@ class CategoriaController extends Controller
       if ($request->get('id')) {
             return $this->save(Categoria::find($request->get('id')), $request);
         }
-        return $this->save($categoria, $request);
+        return $this->save(new Categoria(), $request);
     }
 
     public function show(Categoria $categoria)

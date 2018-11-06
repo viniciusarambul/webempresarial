@@ -36,7 +36,7 @@ class PedidoCompraController extends Controller
       if ($request->get('id')) {
             return $this->save(PedidoCompra::find($request->get('id')), $request);
         }
-        return $this->save($pedidoCompra, $request);
+        return $this->save(new PedidoCompra(), $request);
     }
 
     public function show(PedidoCompra $pedidoCompra)

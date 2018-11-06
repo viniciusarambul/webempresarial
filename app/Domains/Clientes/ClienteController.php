@@ -32,7 +32,7 @@ class ClienteController extends Controller
       if ($request->get('id')) {
             return $this->save(Cliente::find($request->get('id')), $request);
         }
-        return $this->save($cliente, $request);
+        return $this->save(new Cliente(), $request);
     }
 
     public function show(Cliente $cliente)

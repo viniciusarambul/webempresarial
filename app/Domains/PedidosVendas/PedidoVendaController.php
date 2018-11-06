@@ -36,8 +36,8 @@ class PedidoVendaController extends Controller
       if ($request->get('id')) {
             return $this->save(PedidoVenda::find($request->get('id')), $request);
         }
-        return $this->save($pedidoVenda, $request);
-        
+        return $this->save(new PedidoVenda(), $request);
+
     }
 
     public function show(PedidoVenda $pedidoVenda)

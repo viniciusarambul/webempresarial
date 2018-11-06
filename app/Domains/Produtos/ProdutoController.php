@@ -35,7 +35,7 @@ class ProdutoController extends Controller
       if ($request->get('id')) {
             return $this->save(Produto::find($request->get('id')), $request);
         }
-        return $this->save($produto, $request);
+        return $this->save(new Produto(), $request);
     }
 
     public function show(Produto $produto)

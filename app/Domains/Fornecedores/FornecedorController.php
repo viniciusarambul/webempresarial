@@ -33,7 +33,7 @@ class FornecedorController extends Controller
       if ($request->get('id')) {
             return $this->save(Fornecedor::find($request->get('id')), $request);
         }
-        return $this->save($fornecedor, $request);
+        return $this->save(new Fornecedor(), $request);
     }
 
     public function show(Fornecedor $fornecedor)
