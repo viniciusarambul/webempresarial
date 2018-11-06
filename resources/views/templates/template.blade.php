@@ -188,7 +188,21 @@
           $('.cpf').mask('000.000.000-00', {reverse: true});
           $('.cnpj').mask('00.000/0000-00', {reverse: true});
         });
+        $(document).ready(function(e) {
+        $('#cpf').blur(function () {
+		          var cpf = $(this).val();
 
+      		$.post('validacpf.php', {cpf:cpf}, function (resposta) {
+      			console.log(resposta);
+      			if (resposta == '1') {
+      				$('#cpf').val('');
+      				alert('CPF inválido, por favor verifique e informe novamente.');
+      				$('#erro').fadeIn(300).html('CPF inválido, por favor verifique e informe novamente.');
+      				$('#cpf').val('');
+      			}
+      		});
+      	});
+      });
 
           </script>
           <script>
@@ -215,7 +229,6 @@
         <script>
           $(document).ready(function(){
             $("#cpfb").click(function(){
-              $('#cpf').val('');
               $("#cnpjj").hide();
               $("#razao").hide();
               $("#cpff").show();

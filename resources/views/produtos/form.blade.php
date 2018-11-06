@@ -31,7 +31,7 @@
                       <select class="browser-default" required name="categoria">
                         <option value="">Selecione</option>
                       @foreach($categorias as $categoria)
-                        <option value="{{ $categoria->id }}">{{ $categoria->descricao }}</option>
+                        <option value="{{ $categoria->id }}"{{$categoria->id ? 'selected' : '' }}>{{ $categoria->descricao }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -44,7 +44,7 @@
                       <select class="browser-default" name="fornecedor">
                         <option value="">Selecione</option>
                       @foreach($fornecedores as $fornecedor)
-                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
+                        <option value="{{ $fornecedor->id }}" {{$fornecedor->id ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
                         @endforeach
                       </select>
                     </div>
