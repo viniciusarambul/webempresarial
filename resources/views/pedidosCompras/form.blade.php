@@ -34,8 +34,9 @@
                          <label for="situacao">Situação *</label><br />
                       <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
-                        <option value="Aberto">Aberto</option>
-                        <option value="Fechado">Fechado</option>
+                        <option value="0">Aberto</option>
+                        <option value="1">Fechado</option>
+                        <option value="2">Cancelado</option>
                       </select>
                     </div>
 

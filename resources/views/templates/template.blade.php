@@ -93,6 +93,11 @@
                     <i class="mdi mdi-folder"></i>
                   </a>
                 </li>
+                <li class="{{$active_router == 'estoque' ? 'active' : ''}}">
+                  <a href="{{route('estoque')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="estoque">
+                    <i class="mdi mdi-calendar"></i>
+                  </a>
+                </li>
                 <li class="{{$active_router == 'pedidosCompras' ? 'active' : ''}}">
                   <a href="{{route('pedidosCompras.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Pedidos Compra">
                     <i class="mdi mdi-briefcase"></i>

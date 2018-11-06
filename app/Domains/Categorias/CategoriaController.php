@@ -30,8 +30,9 @@ class CategoriaController extends Controller
 
     public function store(CategoriaRequest $request)
     {
-        $categoria = new Categoria;
-
+      if ($request->get('id')) {
+            return $this->save(Categoria::find($request->get('id')), $request);
+        }
         return $this->save($categoria, $request);
     }
 

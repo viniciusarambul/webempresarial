@@ -31,8 +31,9 @@ class ContaPagarController extends Controller
 
     public function store(ContaPagarRequest $request)
     {
-        $contaPagar = new ContaPagar;
-
+      if ($request->get('id')) {
+            return $this->save(ContaPagar::find($request->get('id')), $request);
+        }
         return $this->save($contaPagar, $request);
     }
 

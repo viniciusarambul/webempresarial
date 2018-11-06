@@ -31,8 +31,9 @@ class ContaReceberController extends Controller
 
     public function store(ContaReceberRequest $request)
     {
-        $contaReceber = new ContaReceber;
-
+      if ($request->get('id')) {
+            return $this->save(ContaReceber::find($request->get('id')), $request);
+        }
         return $this->save($contaReceber, $request);
     }
 

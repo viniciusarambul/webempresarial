@@ -33,9 +33,11 @@ class PedidoVendaController extends Controller
 
     public function store(PedidoVendaRequest $request)
     {
-        $pedidoVenda = new PedidoVenda;
-
+      if ($request->get('id')) {
+            return $this->save(PedidoVenda::find($request->get('id')), $request);
+        }
         return $this->save($pedidoVenda, $request);
+        
     }
 
     public function show(PedidoVenda $pedidoVenda)
@@ -84,6 +86,22 @@ class PedidoVendaController extends Controller
       $pedidoVenda->data = $request->get('data');
       $pedidoVenda->idVendedor = $request->get('idVendedor');
       $pedidoVenda->situacao = $request->get('situacao');
+
+      if($pedidoVenda->situacao == 1){
+        $pedidoVenda->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade -= $item->quantidade;
+          $produto->save();
+        });
+      }
+
+      if($pedidoVenda->situacao == 2){
+        $pedidoVenda->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade += $item->quantidade;
+          $produto->save();
+        });
+      }
 
       $pedidoVenda->save();
 

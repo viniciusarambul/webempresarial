@@ -29,8 +29,9 @@ class UsuarioController extends Controller
 
     public function store(UsuarioRequest $request)
     {
-        $usuario = new Usuario;
-
+      if ($request->get('id')) {
+            return $this->save(Usuario::find($request->get('id')), $request);
+        }
         return $this->save($usuario, $request);
     }
 

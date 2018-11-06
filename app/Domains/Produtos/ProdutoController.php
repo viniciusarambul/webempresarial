@@ -32,8 +32,9 @@ class ProdutoController extends Controller
 
     public function store(ProdutoRequest $request)
     {
-        $produto = new Produto;
-
+      if ($request->get('id')) {
+            return $this->save(Produto::find($request->get('id')), $request);
+        }
         return $this->save($produto, $request);
     }
 

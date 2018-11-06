@@ -29,8 +29,9 @@ class VendedorController extends Controller
 
     public function store(VendedorRequest $request)
     {
-        $vendedor = new Vendedor;
-
+      if ($request->get('id')) {
+            return $this->save(Vendedor::find($request->get('id')), $request);
+        }
         return $this->save($vendedor, $request);
     }
 

@@ -29,8 +29,9 @@ class ClienteController extends Controller
 
     public function store(ClienteRequest $request)
     {
-        $cliente = new Cliente;
-
+      if ($request->get('id')) {
+            return $this->save(Cliente::find($request->get('id')), $request);
+        }
         return $this->save($cliente, $request);
     }
 

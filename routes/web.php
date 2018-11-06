@@ -30,6 +30,7 @@ Route::resource('/contasPagar', 'ContasPagar\ContaPagarController');
 Route::resource('/categorias', 'Categorias\CategoriaController');
 Route::resource('/usuarios', 'Usuarios\UsuarioController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/estoque', 'EstoqueController@index')->name('estoque');
 
 
 

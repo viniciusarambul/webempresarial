@@ -4,6 +4,7 @@ namespace App\Domains\PedidosCompras;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
+use App\Domains\Pedidos\PedidoItem;
 use App\Domains\Fornecedores\Fornecedor;
 
 class PedidoCompraController extends Controller
@@ -32,8 +33,9 @@ class PedidoCompraController extends Controller
 
     public function store(PedidoCompraRequest $request)
     {
-        $pedidoCompra = new PedidoCompra;
-
+      if ($request->get('id')) {
+            return $this->save(PedidoCompra::find($request->get('id')), $request);
+        }
         return $this->save($pedidoCompra, $request);
     }
 
@@ -80,7 +82,24 @@ class PedidoCompraController extends Controller
       $pedidoCompra->nome = $request->get('nome');
       $pedidoCompra->data = $request->get('data');
       $pedidoCompra->situacao = $request->get('situacao');
-      
+
+
+      if($pedidoCompra->situacao == 1){
+        $pedidoCompra->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade += $item->quantidade;
+          $produto->save();
+        });
+      }
+
+      if($pedidoCompra->situacao == 2){
+        $pedidoCompra->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade -= $item->quantidade;
+          $produto->save();
+        });
+      }
+
       $pedidoCompra->save();
 
       return redirect()->route('pedidosCompras.show', ['id' => $pedidoCompra->id]);

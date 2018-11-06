@@ -21,7 +21,7 @@
             <h5>Dados do Pedido</h5>
             <p><b>Nome: </b>{{ $pedidoVenda->nome }}</p>
             <p><b>Data: </b>{{ $pedidoVenda->data }}</p>
-            <p><b>Situacao: </b>{{ $pedidoVenda->situacao }}</p>
+            <p><b>Situacao: </b>{{ $pedidoVenda->situacao_descricao }}</p>
 
         </div>
     </div>

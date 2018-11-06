@@ -30,8 +30,9 @@ class FornecedorController extends Controller
 
     public function store(FornecedorRequest $request)
     {
-        $fornecedor = new Fornecedor;
-
+      if ($request->get('id')) {
+            return $this->save(Fornecedor::find($request->get('id')), $request);
+        }
         return $this->save($fornecedor, $request);
     }
 
