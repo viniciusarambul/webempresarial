@@ -68,8 +68,13 @@
                     <i class="mdi mdi-home"></i>
                   </a>
                 </li>
+                <li class="{{$active_router == 'relatorios' ? 'active' : ''}}">
+                  <a href="{{route('relatorios')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Relatórios">
+                    <i class="mdi mdi-chart-line"></i>
+                  </a>
+                </li>
                 <li class="{{$active_router == 'clientes' ? 'active' : ''}}">
-                  <a href="{{route('clientes.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="clientes">
+                  <a href="{{route('clientes.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Clientes">
                     <i class="mdi mdi-account"></i>
                   </a>
                 </li>
@@ -79,22 +84,22 @@
                   </a>
                 </li>
                 <li class="{{$active_router == 'fornecedores' ? 'active' : ''}}">
-                  <a href="{{route('fornecedores.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="fornecedores">
+                  <a href="{{route('fornecedores.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Fornecedores">
                     <i class="mdi mdi-truck"></i>
                   </a>
                 </li>
                 <li class="{{$active_router == 'categorias' ? 'active' : ''}}">
-                  <a href="{{route('categorias.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="categorias">
+                  <a href="{{route('categorias.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Categorias">
                     <i class="mdi mdi-folder"></i>
                   </a>
                 </li>
                 <li class="{{$active_router == 'produtos' ? 'active' : ''}}">
-                  <a href="{{route('produtos.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="produtos">
+                  <a href="{{route('produtos.index')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Produtos">
                     <i class="mdi mdi-folder"></i>
                   </a>
                 </li>
                 <li class="{{$active_router == 'estoque' ? 'active' : ''}}">
-                  <a href="{{route('estoque')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="estoque">
+                  <a href="{{route('estoque')}}" class="tooltipped" data-position="right" data-delay="50" data-tooltip="Estoque">
                     <i class="mdi mdi-calendar"></i>
                   </a>
                 </li>
@@ -186,7 +191,7 @@
           $('.celular').mask('(00) 00000-0000');
           $('.mixed').mask('AAA 000-S0S');
           $('.cpf').mask('000.000.000-00', {reverse: true});
-          $('.cnpj').mask('00.000/0000-00', {reverse: true});
+          $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
         });
         $(document).ready(function(e) {
         $('#cpf').blur(function () {
@@ -234,7 +239,6 @@
               $("#cpff").show();
             });
             $("#cnpjb").click(function(){
-              $('#cnpj').val('');
               $("#cnpjj").show();
               $("#razao").show();
               $("#cpff").hide();

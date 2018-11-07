@@ -3,6 +3,8 @@
 namespace App\Domains\Fornecedores;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Domains\Core\Types\CPF;
+use App\Domains\Core\Types\CNPJ;
 
 class FornecedorController extends Controller
 {
@@ -68,6 +70,7 @@ class FornecedorController extends Controller
 
     private function save(Fornecedor $fornecedor, FornecedorRequest $request)
     {
+      try{
       $fornecedor->nome = $request->get('nome');
       $fornecedor->sobrenome = $request->get('sobrenome');
       $fornecedor->telefone = $request->get('telefone');
@@ -78,11 +81,24 @@ class FornecedorController extends Controller
       $fornecedor->bairro = $request->get('bairro');
       $fornecedor->numero = $request->get('numero');
       $fornecedor->razaosocial = $request->get('razaosocial');
-      $fornecedor->cpf = $request->get('cpf');
-      $fornecedor->cnpj = $request->get('cnpj');
+      $fornecedor->cpf = new CPF($request->get('cpf'));
+      $fornecedor->cnpj = new CNPJ($request->get('cnpj'));
       $fornecedor->status = $request->get('status');
-      $fornecedor->save();
 
+      $fornecedor->save();
       return redirect()->route('fornecedores.show', ['id' => $fornecedor->id]);
+
+      } catch(\Exception $e){
+        return redirect()->back()->with('error', $e->getMessage());
+      }
+    }
+
+    public function Baixar()
+    {
+        $fornecedores = Fornecedor::all();
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('fornecedores.relatorio', ['fornecedores' => $fornecedores]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
 }

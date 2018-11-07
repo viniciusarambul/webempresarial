@@ -5,8 +5,10 @@ namespace App\Domains\Core\Types;
 class CPF implements TypeInterface{
   private function validator(string $str){
 
+
         $cpf = str_pad(preg_replace('/[^0-9]/', '', $str), 11, '0', STR_PAD_LEFT);
         // Verifica se nenhuma das sequências abaixo foi digitada, caso seja, retorna falso
+
         if ( strlen($cpf) != 11 || $cpf == '00000000000' || $cpf == '11111111111' ||
          $cpf == '22222222222' || $cpf == '33333333333' || $cpf == '44444444444' ||
          $cpf == '55555555555' || $cpf == '66666666666' || $cpf == '77777777777' ||
@@ -26,6 +28,8 @@ class CPF implements TypeInterface{
           //echo 0;
           return true;
 
+
+
   }
 
     public static function check(string $str){}
@@ -40,6 +44,7 @@ class CPF implements TypeInterface{
       if(!$this->validator($str)){
         throw new \Exception("CPF Inválido");
       }
+
       $this->value = $str;
     }
 

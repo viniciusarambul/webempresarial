@@ -31,7 +31,11 @@ Route::resource('/categorias', 'Categorias\CategoriaController');
 Route::resource('/usuarios', 'Usuarios\UsuarioController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/estoque', 'EstoqueController@index')->name('estoque');
-
+Route::get('produto/pdf', 'Produtos\ProdutoController@Baixar')->name('produtos.relatorio');
+Route::get('cliente/pdf', 'Clientes\ClienteController@Baixar')->name('clientes.relatorio');
+Route::get('fornecedor/pdf', 'Fornecedores\FornecedorController@Baixar')->name('fornecedores.relatorio');
+Route::get('vendedor/pdf', 'Vendedores\VendedorController@Baixar')->name('vendedores.relatorio');
+Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
 
 
 Route::get('/main', 'MainController@index');

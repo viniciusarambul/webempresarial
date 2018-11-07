@@ -3,6 +3,8 @@
 namespace App\Domains\Vendedores;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Domains\Core\Types\CPF;
+use App\Domains\Core\Types\CNPJ;
 
 class VendedorController extends Controller
 {
@@ -67,6 +69,7 @@ class VendedorController extends Controller
 
     private function save(Vendedor $vendedor, VendedorRequest $request)
     {
+      try{
 
       $vendedor->nome = $request->get('nome');
       $vendedor->sobrenome = $request->get('sobrenome');
@@ -75,13 +78,26 @@ class VendedorController extends Controller
       $vendedor->cidade = $request->get('cidade');
       $vendedor->estado = $request->get('estado');
       $vendedor->cep = $request->get('cep');
-      $vendedor->cnpj = $request->get('cnpj');
-      $vendedor->cpf = $request->get('cpf');
+      $vendedor->cnpj = new CNPJ($request->get('cnpj'));
+      $vendedor->cpf = new CPF($request->get('cpf'));
       $vendedor->bairro = $request->get('bairro');
       $vendedor->numero = $request->get('numero');
       $vendedor->status = $request->get('status');
       $vendedor->save();
 
       return redirect()->route('vendedores.show', ['id' => $vendedor->id]);
+
+      } catch(\Exception $e){
+        return redirect()->back()->with('error', $e->getMessage());
+      }
+    }
+
+    public function Baixar()
+    {
+        $vendedores = Vendedor::all();
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('vendedores.relatorio', ['vendedores' => $vendedores]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
 }

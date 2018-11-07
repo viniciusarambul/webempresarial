@@ -4,6 +4,7 @@ namespace App\Domains\Clientes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
+use App\Domains\Core\Types\CNPJ;
 
 class ClienteController extends Controller
 {
@@ -93,5 +94,15 @@ class ClienteController extends Controller
       }
 
     }
+
+    public function Baixar()
+    {
+        $clientes = Cliente::all();
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $clientes]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
+    }
+
 
 }

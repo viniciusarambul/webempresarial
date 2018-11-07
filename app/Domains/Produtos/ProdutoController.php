@@ -84,4 +84,15 @@ class ProdutoController extends Controller
 
       return redirect()->route('produtos.show', ['id' => $produto->id]);
     }
+
+
+    public function Baixar()
+    {
+        $produtos = Produto::all();
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('produtos.relatorio', ['produtos' => $produtos]);
+        //$pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
+    }
+
 }
