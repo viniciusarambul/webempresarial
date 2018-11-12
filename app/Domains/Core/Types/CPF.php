@@ -47,5 +47,8 @@ class CPF implements TypeInterface{
 
       $this->value = $str;
     }
+    function __toString(){
+      return $this->value;
+    }
 
 }

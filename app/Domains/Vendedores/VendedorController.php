@@ -78,8 +78,10 @@ class VendedorController extends Controller
       $vendedor->cidade = $request->get('cidade');
       $vendedor->estado = $request->get('estado');
       $vendedor->cep = $request->get('cep');
-      $vendedor->cnpj = new CNPJ($request->get('cnpj'));
-      $vendedor->cpf = new CPF($request->get('cpf'));
+      $cnpj = new CNPJ($request->get('cnpj'));
+      $vendedor->cnpj = $cnpj->get();
+      $cpf = new CPF($request->get('cpf'));
+      $vendedor->cpf = $cpf->get();
       $vendedor->bairro = $request->get('bairro');
       $vendedor->numero = $request->get('numero');
       $vendedor->status = $request->get('status');

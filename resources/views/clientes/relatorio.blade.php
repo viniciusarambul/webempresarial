@@ -12,6 +12,9 @@
           main {
               position: relative;
               width: 100%;
+              margin-left: 2%;
+              margin-right: 2%;
+              margin-bottom: 2%;
           }
 
           main header,
@@ -36,8 +39,14 @@
     <body>
 
 
-
 <main>
+    <table style="width: 100% !important; margin-top: 5%;">
+      <tr>
+        <td style="font-size: 25px!important; padding: 20px; width: 80%!important;">WEB EMPRESARIAL</td>
+        
+      </tr>
+    </table>
+
   <h1 align="center">Clientes</h1>
       <table style="width: 100% !important">
                 <thead>

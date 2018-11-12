@@ -12,10 +12,10 @@ class Vendedor extends Model
   public function vendedor(){
     return $this->hasOne(Vendedors::class, 'id','idVendedor');
   }
-  public function setCpfAttribute(CPF $cpf){
-    $this->cpf = $cpf->get();
-  }
-  public function setCnpjAttribute(CNPJ $cnpj){
-    $this->cnpj = $cnpj->get();
-  }
+  // public function setCpfAttribute(CPF $cpf){
+  //   $this->cpf = $cpf->get();
+  // }
+  // public function setCnpjAttribute(CNPJ $cnpj){
+  //   $this->cnpj = $cnpj->get();
+  // }
 }

@@ -81,8 +81,10 @@ class FornecedorController extends Controller
       $fornecedor->bairro = $request->get('bairro');
       $fornecedor->numero = $request->get('numero');
       $fornecedor->razaosocial = $request->get('razaosocial');
-      $fornecedor->cpf = new CPF($request->get('cpf'));
-      $fornecedor->cnpj = new CNPJ($request->get('cnpj'));
+      $cnpj = new CNPJ($request->get('cnpj'));
+      $fornecedor->cnpj = $cnpj->get();
+      $cpf = new CPF($request->get('cpf'));
+      $fornecedor->cpf = $cpf->get();
       $fornecedor->status = $request->get('status');
 
       $fornecedor->save();

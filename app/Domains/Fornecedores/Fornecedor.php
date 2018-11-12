@@ -19,10 +19,10 @@ class Fornecedor extends Model
     return $this->hasOne(Fornecedor::class, 'id','fornecedor');
   }
 
-  public function setCpfAttribute(CPF $cpf){
-    $this->cpf = $cpf->get();
-  }
-  public function setCnpjAttribute(CNPJ $cnpj){
-    $this->cnpj = $cnpj->get();
-  }
+  // public function setCpfAttribute(CPF $cpf){
+  //   $this->cpf = $cpf->get();
+  // }
+  // public function setCnpjAttribute(CNPJ $cnpj){
+  //   $this->cnpj = $cnpj->get();
+  // }
 }

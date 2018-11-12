@@ -70,6 +70,7 @@ class ClienteController extends Controller
 
     private function save(Cliente $cliente, ClienteRequest $request)
     {
+
       try{
 
       $cliente->nome = $request->get('nome');
@@ -79,8 +80,10 @@ class ClienteController extends Controller
       $cliente->cidade = $request->get('cidade');
       $cliente->estado = $request->get('estado');
       $cliente->cep = $request->get('cep');
-      $cliente->cnpj = $request->get('cnpj');
-      $cliente->cpf = new CPF($request->get('cpf'));
+      $cnpj = new CNPJ($request->get('cnpj'));
+      $cliente->cnpj = $cnpj->get();
+      $cpf = new CPF($request->get('cpf'));
+      $cliente->cpf = $cpf->get();
       $cliente->bairro = $request->get('bairro');
       $cliente->numero = $request->get('numero');
       $cliente->status = $request->get('status');

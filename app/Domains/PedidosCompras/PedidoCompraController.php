@@ -94,11 +94,17 @@ class PedidoCompraController extends Controller
 
       if($pedidoCompra->situacao == 2){
         $pedidoCompra->itens->each(function($item){
+
           $produto = $item->produto;
           $produto->quantidade -= $item->quantidade;
+          if($produto->quantidade < 0){
+            $produto->quantidade = 0;
+          }
           $produto->save();
         });
       }
+
+
 
       $pedidoCompra->save();
 
