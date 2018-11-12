@@ -14,7 +14,7 @@
               width: 100%;
               margin-left: 2%;
               margin-right: 2%;
-              margin-bottom: 2%;
+              padding-bottom: 2%;
           }
 
           main header,
@@ -34,16 +34,30 @@
             font-size: 13px;
           }
 
+          .header,.footer {
+              width: 100%;
+              text-align: center;
+              position: fixed;
+          }
+          .header {
+              top: 0px;
+          }
+          .footer {
+              bottom: 0px;
+          }
+          .pagenum:before {
+              content: counter(page);
+          }
+
       </style>
   </head>
     <body>
-
 
 <main>
     <table style="width: 100% !important; margin-top: 5%;">
       <tr>
         <td style="font-size: 25px!important; padding: 20px; width: 80%!important;">WEB EMPRESARIAL</td>
-        
+
       </tr>
     </table>
 
