@@ -71,6 +71,7 @@ class UsuarioController extends Controller
       $usuario->email = $request->get('email');
       $usuario->login = $request->get('login');
       $usuario->senha = $request->get('senha');
+      $usuario->grupo_id = $request->get('grupo_id');
 
       $usuario->save();
 

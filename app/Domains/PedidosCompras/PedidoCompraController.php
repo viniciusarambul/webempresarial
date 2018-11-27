@@ -49,6 +49,14 @@ class PedidoCompraController extends Controller
         ]);
     }
 
+    public function baixa(PedidoCompra $pedidoCompra)
+    {
+    
+      return view('pedidosCompras.baixa', [
+        'pedidoCompra' => $pedidoCompra
+      ]);
+    }
+
     public function edit(PedidoCompra $pedidoCompra)
     {
       return $this->form($pedidoCompra);

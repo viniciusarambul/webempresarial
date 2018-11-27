@@ -26,15 +26,12 @@
 
         <link type="text/css" rel="stylesheet" href="{{ asset('css/custom.css') }}" media="screen,projection" />
         <link type="text/css" rel="stylesheet" href="{{ asset('libs/sweetAlert/sweetalert.css') }}" media="screen,projection" />
-        <link type="text/css" rel="stylesheet" href="{{ asset('libs/morris/morris.css') }}" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="{{ asset('libs/morris.js/morris.css') }}" media="screen,projection" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-        <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+
         <title>{{$title}}</title>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -165,17 +162,18 @@
         </main>
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script>
+        <!-- <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script> -->
         <script type="text/javascript" src="{{ asset('libs/jquery-price/jquery.price_format.1.8.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/morris.js/morris.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libs/morris.js/morris.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/morris.js/raphael-min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/tinymce/js/tinymce/tinymce.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
-
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
         <script>
             $(document).ready(function () {
                 app.init();
@@ -230,6 +228,25 @@
 
           	});
           });
+
+          $(function() {
+          $('#valorPago').priceFormat({
+		            prefix: '',
+		            centsSeparator: ',',
+		             thousandsSeparator: '.'
+	              });
+
+          });
+
+          $(document).ready(function(e) {
+              $('#valorPago').blur(function () {
+          		var valor = $(this).val();
+          		if (valor == '0,00') {
+          			$(this).val(' ');
+          		}
+
+          	});
+          });
           </script>
         <script>
           $(document).ready(function(){
@@ -245,6 +262,7 @@
             });
           });
         </script>
+
 
         @if(Session::has('error'))
         <script>

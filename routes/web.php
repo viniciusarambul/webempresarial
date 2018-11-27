@@ -19,6 +19,7 @@ Route::resource('/produtos', 'Produtos\ProdutoController');
 Route::resource('/clientes', 'Clientes\ClienteController');
 Route::resource('/vendedores', 'Vendedores\VendedorController');
 Route::resource('/fornecedores', 'Fornecedores\FornecedorController');
+Route::get('/pedidosCompras/{id}/baixa', 'PedidosCompras\PedidoCompraController@baixa')->name('pedidosCompras.baixa');
 Route::resource('/pedidosCompras', 'PedidosCompras\PedidoCompraController');
 Route::resource('pedidosCompras.pedidoItem', 'PedidosCompras\PedidoItemCompraController');
 Route::resource('pedidosCompras.pedidoTitulo', 'PedidosCompras\PedidoTituloCompraController');

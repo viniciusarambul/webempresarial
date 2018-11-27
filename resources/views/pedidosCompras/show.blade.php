@@ -78,6 +78,7 @@
 
                 <tbody>
                     @foreach($pedidoCompra->itens as $item)
+
                     <tr class="with-options">
                         <td>{{$item->produto->nome}}</td>
                         <td>{{$item->fornecedor->nome}}</td>
@@ -92,6 +93,10 @@
 
                     </tr>
                     @endforeach
+                    <tr>
+                      <td colspan="4"></td>
+                    </tr>
+
                 </tbody>
             </table>
             @else

@@ -38,6 +38,14 @@
                         <label for="senha">Senha *</label><br />
                         <input type="text" name="senha" id="senha" placeholder="Descrição" value="{{ $usuario->senha }}">
                     </div>
+                    <div class="input col s4">
+                         <label for="grupo_id">Grupo *</label><br />
+                      <select class="browser-default" required name="grupo_id">
+                        <option value="">Selecione</option>
+                        <option value="1">Administrador</option>
+
+                      </select>
+                    </div
                   </div>
 
 
