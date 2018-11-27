@@ -51,7 +51,6 @@ class PedidoCompraController extends Controller
 
     public function baixa(PedidoCompra $pedidoCompra)
     {
-    
       return view('pedidosCompras.baixa', [
         'pedidoCompra' => $pedidoCompra
       ]);

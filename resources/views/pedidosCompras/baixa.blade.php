@@ -9,7 +9,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            {{ $pedidoCompra->nome }}
+            Nome: {{ $pedidoCompra->nome }}
         </h4>
     </div>
 </div>
@@ -22,7 +22,7 @@
             <p><b>Nome: </b>{{ $pedidoCompra->nome }}</p>
             <p><b>Data: </b>{{ $pedidoCompra->data }}</p>
             <p><b>Situacao: </b>{{ $pedidoCompra->situacao_descricao }}</p>
-            <p><b>Valor Pedido: </b>{{ $pedidoCompra->situacao_descricao }}</p>
+            <p><b>Valor Pedido: </b>{{ $pedidoCompra->valor }}</p>
 
         </div>
     </div>
@@ -36,10 +36,10 @@
     <div class="input col s4">
          <label for="situacao">Situação *</label><br />
       <select class="browser-default" required name="situacao">
-        <option value="">Selecione</option>
-        <option value="0">Aberto</option>
-        <option value="1">Fechado</option>
-        <option value="2">Cancelado</option>
+        <option value="" >Selecione</option>
+        <option value="0" <?php if($pedidoCompra->situacao == 0) {echo 'selected';} ?>>Aberto</option>
+        <option value="1" <?php if($pedidoCompra->situacao == 1) {echo 'selected';} ?>>Fechado</option>
+        <option value="2" <?php if($pedidoCompra->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
       </select>
     </div>
 
