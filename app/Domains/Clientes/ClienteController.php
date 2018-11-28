@@ -113,12 +113,16 @@ class ClienteController extends Controller
         $datainicial = $request->get('data_incial');
         $datafinal = $request->get('data_final');
         if($datainicial <> ''){
-        $clientes = db::select('SELECT * from tcc.clientes where DATE(created_at) >= "$datainicial" and DATE(created_at) <= "$datafinal"');
+          $inicio = $datafinal;
+          $fim = $datafinal;
+        $clientes = db::select("SELECT * from tcc.clientes where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal'");
       }else{
-        $clientes = db::select('SELECT * from tcc.clientes');
+        $inicio = '';
+        $fim ='';
+        $clientes = db::select("SELECT * from tcc.clientes");
       }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $clientes]);
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $clientes, 'inicio' => $inicio, 'fim' => $fim]);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
