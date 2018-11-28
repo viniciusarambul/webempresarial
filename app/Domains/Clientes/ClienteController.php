@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -98,9 +99,24 @@ class ClienteController extends Controller
 
     }
 
-    public function Baixar()
+    public function consulta(Request $request){
+      $clientes = Cliente::all();
+      return view('clientes.consulta', [
+        'clientes' => $clientes
+
+      ]);
+
+    }
+
+    public function Baixar(Request $request)
     {
-        $clientes = Cliente::all();
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        if($datainicial <> ''){
+        $clientes = db::select('SELECT * from tcc.clientes where DATE(created_at) >= "$datainicial" and DATE(created_at) <= "$datafinal"');
+      }else{
+        $clientes = db::select('SELECT * from tcc.clientes');
+      }
 
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $clientes]);
         $pdf->setPaper('A4', 'landscape');
