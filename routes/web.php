@@ -38,7 +38,10 @@ Route::get('fornecedor/pdf', 'Fornecedores\FornecedorController@Baixar')->name('
 Route::get('vendedor/pdf', 'Vendedores\VendedorController@Baixar')->name('vendedores.relatorio');
 Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
 
-Route::get('/consultas', 'Clientes\ClienteController@consulta')->name('clientes.consulta');
+Route::get('/consultasClientes', 'Clientes\ClienteController@consulta')->name('clientes.consulta');
+Route::get('/consultasFornecedores', 'Fornecedores\FornecedorController@consulta')->name('fornecedores.consulta');
+Route::get('/consultasVendedores', 'Vendedores\VendedorController@consulta')->name('vendedores.consulta');
+Route::get('/consultasProdutos', 'Produtos\ProdutoController@consulta')->name('produtos.consulta');
 
 Route::get('/main', 'MainController@index');
 Route::post('/main/checklogin', 'MainController@checklogin');

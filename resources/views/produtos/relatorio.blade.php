@@ -12,6 +12,9 @@
           main {
               position: relative;
               width: 100%;
+              margin-left: 2%;
+              margin-right: 2%;
+              padding-bottom: 2%;
           }
 
           main header,
@@ -38,6 +41,14 @@
 
 
 <main>
+  <table style="width: 100% !important; margin-top: 5%;">
+    <tr>
+      <td style="font-size: 25px!important; padding: 20px; width: 60%!important;">WEB EMPRESARIAL</td>
+
+      <td style="width: 20%!important; text-align: center"><b>Filtros Selecionados </b><br><br>Filtro De:{{date('d/m/Y', strtotime($inicio))}}<br>Filtro Até:{{date('d/m/Y', strtotime($fim))}}</td>
+
+    </tr>
+  </table>
   <h1 align="center">Produtos</h1>
       <table style="width: 100% !important">
                 <thead>

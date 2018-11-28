@@ -112,10 +112,11 @@ class ClienteController extends Controller
     {
         $datainicial = $request->get('data_incial');
         $datafinal = $request->get('data_final');
+        $filtronome = $request->get('nome');
         if($datainicial <> ''){
           $inicio = $datafinal;
           $fim = $datafinal;
-        $clientes = db::select("SELECT * from tcc.clientes where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal'");
+        $clientes = db::select("SELECT * from tcc.clientes where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
       }else{
         $inicio = '';
         $fim ='';

@@ -1,16 +1,17 @@
 @extends('templates.template', [
-    'title'=> 'clientes',
+    'title'=> 'produtos',
     'prev_router'=> 'home',
     'icon'=> 'mdi mdi-account',
-    'active_router'=> 'clientes'
+    'active_router'=> 'produtos'
 ])
 @section('container')
 
+<
 <div class="row">
     <div class="col s12">
         <div class="card">
           <div class="card-content" >
-            <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('clientes.relatorio') }}">
+            <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('produtos.relatorio') }}">
               <div class="row">
                 <div class="col s12">
                   <h1 style="text-align: center">Filtros</h1>

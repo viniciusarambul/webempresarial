@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
+use Illuminate\Support\Facades\DB;
 
 class VendedorController extends Controller
 {
@@ -94,11 +95,31 @@ class VendedorController extends Controller
       }
     }
 
-    public function Baixar()
-    {
-        $vendedores = Vendedor::all();
+    public function consulta(Request $request){
+      $vendedores = Vendedor::all();
+      return view('clientes.consulta', [
+        'vendedores' => $vendedores
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('vendedores.relatorio', ['vendedores' => $vendedores]);
+      ]);
+
+    }
+
+    public function Baixar(Request $request)
+    {
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        $filtronome = $request->get('nome');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+        $vendedores = db::select("SELECT * from tcc.vendedors where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
+      }else{
+        $inicio = '';
+        $fim ='';
+        $vendedores = db::select("SELECT * from tcc.vendedors");
+      }
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('vendedores.relatorio', ['vendedores' => $vendedores, 'inicio' => $inicio, 'fim' => $fim]);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }

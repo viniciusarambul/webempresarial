@@ -85,13 +85,31 @@ class ProdutoController extends Controller
       return redirect()->route('produtos.show', ['id' => $produto->id]);
     }
 
+    public function consulta(Request $request){
+      $produtos = Produto::all();
+      return view('produtos.consulta', [
+        'produtos' => $produtos
 
-    public function Baixar()
+      ]);
+
+    }
+    public function Baixar(Request $request)
     {
-        $produtos = Produto::all();
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        $filtronome = $request->get('nome');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+        $produtos = db::select("SELECT * from tcc.produtos where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
+      }else{
+        $inicio = '';
+        $fim ='';
+        $produtos = db::select("SELECT * from tcc.produtos");
+      }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('produtos.relatorio', ['produtos' => $produtos]);
-        //$pdf->setPaper('A4', 'landscape');
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('produtos.relatorio', ['produtos' => $produtos, 'inicio' => $inicio, 'fim' => $fim]);
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
 

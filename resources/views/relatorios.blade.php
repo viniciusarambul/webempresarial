@@ -10,7 +10,7 @@
   <div class="col s12 m4" style="margin-top:-2.4%;">
     <p class="card-intro">
         &nbsp;
-        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultas') }}">
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasClientes') }}">
             <i class="mdi mdi-chart-line"></i>
         </a>
     </p>
@@ -31,7 +31,7 @@
   <div class="col s12 m4" style="margin-top:-2.4%;">
     <p class="card-intro">
         &nbsp;
-        <a class="waves-effect waves-teal blue btn-floating right" href="fornecedor/pdf">
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasFornecedores') }}">
             <i class="mdi mdi-chart-line"></i>
         </a>
     </p>
@@ -52,7 +52,7 @@
   <div class="col s12 m4" style="margin-top:-2.4%;">
     <p class="card-intro">
         &nbsp;
-        <a class="waves-effect waves-teal blue btn-floating right" href="vendedor/pdf">
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasVendedores') }}">
             <i class="mdi mdi-chart-line"></i>
         </a>
     </p>
@@ -77,7 +77,7 @@
   <div class="col s12 m4" style="margin-top:-2.4%;">
     <p class="card-intro">
         &nbsp;
-        <a class="waves-effect waves-teal blue btn-floating right" href="produto/pdf">
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasProdutos') }}">
             <i class="mdi mdi-chart-line"></i>
         </a>
     </p>

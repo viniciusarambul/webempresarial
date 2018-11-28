@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
+use Illuminate\Support\Facades\DB;
 
 class FornecedorController extends Controller
 {
@@ -95,11 +96,31 @@ class FornecedorController extends Controller
       }
     }
 
-    public function Baixar()
-    {
-        $fornecedores = Fornecedor::all();
+    public function consulta(Request $request){
+      $fornecedores = Fornecedor::all();
+      return view('fornecedores.consulta', [
+        'fornecedores' => $fornecedores
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('fornecedores.relatorio', ['fornecedores' => $fornecedores]);
+      ]);
+
+    }
+
+    public function Baixar(Request $request)
+    {
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        $filtronome = $request->get('nome');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+        $fornecedores = db::select("SELECT * from tcc.fornecedores where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
+      }else{
+        $inicio = '';
+        $fim ='';
+        $fornecedores = db::select("SELECT * from tcc.fornecedores");
+      }
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('fornecedores.relatorio', ['fornecedores' => $fornecedores, 'inicio' => $inicio, 'fim' => $fim]);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
