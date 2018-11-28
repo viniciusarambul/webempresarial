@@ -20,7 +20,7 @@
         <div class="card">
             <h5>Dados do Pedido</h5>
             <p><b>Nome: </b>{{ $pedidoCompra->nome }}</p>
-            <p><b>Data: </b>{{ $pedidoCompra->data }}</p>
+            <p><b>Data: </b>{{ date('d/m/Y', strtotime($pedidoCompra->data)) }}</p>
             <p><b>Situacao: </b>{{ $pedidoCompra->situacao_descricao }}</p>
 
         </div>
@@ -37,7 +37,7 @@
         <div class="card">
             <h5>Dados do Pagamento</h5>
             <p><b>Nome: </b>{{ $pedidoCompra->nome }}</p>
-            <p><b>Data: </b>{{ $pedidoCompra->data }}</p>
+            <p><b>Data: </b>{{ date('d/m/Y', strtotime($pedidoCompra->data)) }}</p>
             <p><b>Situacao: </b>{{ $pedidoCompra->situacao }}</p>
 
         </div>
@@ -63,6 +63,7 @@
             </a>
         </p>
         <div class="card">
+          <?php $totalpedido = 0; ?>
             @if(count($pedidoCompra->itens))
             <table>
                 <thead>
@@ -92,9 +93,12 @@
                         </td>
 
                     </tr>
+                    <?php $totaltudo = $totalpedido+=$item->total;?>
                     @endforeach
+
                     <tr>
-                      <td colspan="4"></td>
+                      <td colspan="4" style="text-align: right">Total</td>
+                      <td colspan="1">{{number_format($totaltudo, 2, ',', '.')}}</td>
                     </tr>
 
                 </tbody>

@@ -26,6 +26,10 @@ class PedidoCompra extends Model
     return $this->hasMany(Pedidoitem::class, 'idPedido', 'id')->where('tipo_pedido', 'COMPRA');
   }
 
+  public function titulos(){
+    return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id');
+  }
+
 
 
 }
