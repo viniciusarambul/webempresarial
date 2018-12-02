@@ -42,6 +42,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Descricao</th>
+                        <th>Ações</th>
 
                     </tr>
                 </thead>
@@ -51,9 +52,13 @@
                     <tr class="with-options">
                         <td>{{$categoria->id}}</td>
                         <td>{{$categoria->descricao}}</td>
-                        <td class="options">
-                            <a href="{{ route('categorias.show', ['$categoria' => $categoria->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('categorias.edit', ['$categoria' => $categoria->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            
+                            <a class="waves-effect waves-light btn black" href="{{ route('categorias.show', ['$categoria' => $categoria->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 

@@ -34,10 +34,11 @@
                          <label for="situacao">Situação *</label><br />
                       <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
-                        <option value="0">Aberto</option>
-                        <option value="1">Fechado</option>
-                        <option value="2">Cancelado</option>
+                        <option value="0" <?php if($pedidoCompra->situacao == 0) {echo 'selected';} ?>>Aberto</option>
+                        <option value="1" <?php if($pedidoCompra->situacao == 1) {echo 'selected';} ?>>Fechado</option>
+                        <option value="2" <?php if($pedidoCompra->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
                       </select>
+                      
                     </div>
 
                   </div>

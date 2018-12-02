@@ -1,11 +1,30 @@
 @extends('templates.template', [
-    'title'=> 'Pedido Compra',
+    'title'=> 'Pedido Venda',
     'prev_router'=> 'home',
     'icon'=> 'mdi mdi-briefcase',
     'active_router'=> 'pedidosItens'
 ])
 @section('container')
 
+<script>
+function calculo()
+{
+//passando os valores do campo do form para as variaveis
+
+valor1 = parseFloat(document.meu_form.quantidade.value);
+valor2 = parseFloat(document.meu_form.valorUnitario.value);
+
+soma = eval(valor1 * valor2); //fazendo a soma
+
+//no evento do onblur para que nao apareça 'undefined'
+//eu faço a seguinte condição
+//se a soma for diferente de undefined ele mostra no valor total
+if(soma != undefined)
+{
+document.meu_form.preco.value = soma;
+}
+}
+</script>
 
 <div class="row no-margin-bottom">
     <div class="col s12">
@@ -18,16 +37,16 @@
 <div class="row">
     <div class="col s12">
         <div class="card">
-            <form method="post" action="{{route('pedidosVendas.pedidoItem.store', ['pedidoVenda' => $pedidoVenda->id])}}" enctype="multipart/form-data">
+            <form method="post" name="meu_form" action="{{route('pedidosVendas.pedidoItem.store', ['pedidoVenda' => $pedidoVenda->id])}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
                 <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
                 <div class="row">
                   <div class="input col s6">
-                    <label for="idCliente">Cliente</label><br />
+                    <label for="idFornecedor">Fornecedor</label><br />
                     <select class="browser-default" name="idFornecedor">
-                    @foreach($clientes as $cliente)
-                      <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                    @foreach($fornecedores as $fornecedor)
+                      <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
                       @endforeach
                     </select>
                   </div>
@@ -39,20 +58,20 @@
                       @endforeach
                     </select>
                   </div>
-                    <div class="input col s6">
-                        <label for="quantidade">Quantidade</label><br />
-                        <input type="text" name="quantidade" id="quantidade" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
-                    </div>
-                    <div class="input col s6">
-                        <label for="valorTotal">Valor Unitário</label><br />
-                        <input type="text" name="situacao" id="situacao" readonly>
+                  <div class="input col s6">
+                      <label for="quantidade">Quantidade</label><br />
+                      <input type="text" name="quantidade" id="quantidade" min="1" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
+                  </div>
+                  <div class="input col s6">
+                      <label for="valorUnitario">Valor Unitário</label><br />
+                      <input type="text" name="valorUnitario" id="valorUnitario" >
 
-                    </div>
-                    <div class="input col s6">
-                        <label for="preco">Valor Total</label><br />
-                        <input type="text" name="preco" id="preco" value="{{ $pedidoItem->preco }}">
+                  </div>
+                  <div class="input col s6">
+                      <label for="preco">Valor Total</label><br />
+                      <input type="text" onBlur="calculo();" name="preco" id="preco" value="{{ $pedidoItem->preco }}">
 
-                    </div>
+                  </div>
 
                   </div>
 

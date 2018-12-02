@@ -7,6 +7,8 @@ use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Pedidos\Pedidotitulo;
 use App\Domains\PedidosCompras\PedidosCompras;
+use App\Domains\ContasReceber\ContaReceber;
+
 
 class PedidoTituloCompraController extends Controller
 {
@@ -81,7 +83,22 @@ class PedidoTituloCompraController extends Controller
       $pedidoTitulo->tipoPagamento = $request->get('tipoPagamento');
       $pedidoTitulo->parcelas = $request->get('parcelas');
 
-      $pedidoTitulo->save();
+      $pedidoTitulo->save();  
+
+      if($pedidoTitulo->wasRecentlyCreated){
+        $parcelas = $pedidoTitulo->parcelas ? $pedidoTitulo->parcelas : 1;
+        for ($x = 0; $x<$parcelas; $x++){
+          $conta = new ContaReceber;
+          $conta->idPedidoCompra = $pedidoCompra->id;
+          $conta->descricao = 'Pedido Compra ' . $pedidoVenda->id;
+          $conta->dataEmissao = $pedidoTitulo->dataEmissao;
+          $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
+          $conta->situacao = $pedidoCompra->situacao;
+          $conta->valor = round($pedidoTitulo->preco/$pedidoTitulo->parcelas, 2);
+
+          $conta->save();
+        }
+      }
 
       return redirect()->route('pedidosCompras.show', ['pedidoCompra' => $pedidoCompra->id])->with('success', 'Titulo inserido com Sucesso');
     }

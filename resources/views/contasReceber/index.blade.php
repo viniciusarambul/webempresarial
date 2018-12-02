@@ -47,6 +47,7 @@
                         <th>Cliente</th>
                         <th>Situação</th>
                         <th>Valor</th>
+                        <th style="text-align: center">Ação</th>
                     </tr>
                 </thead>
 
@@ -55,14 +56,20 @@
                     <tr class="with-options">
                         <td>{{$contaReceber->id}}</td>
                         <td>{{$contaReceber->descricao}}</td>
-                        <td>{{date("d-m-Y", strtotime($contaReceber->dataEmissao))}}</td>
-                        <td>{{date("d-m-Y", strtotime($contaReceber->dataVencimento))}}</td>
-                        <td>{{$contaReceber->idCliente}}</td>
-                        <td>{{$contaReceber->situacao}}</td>
+                        <td>{{date("d/m/Y", strtotime($contaReceber->dataEmissao))}}</td>
+                        <td>{{date("d/m/Y", strtotime($contaReceber->dataVencimento))}}</td>
+                        <td>{{$contaReceber->clientes ? $contaReceber->clientes->nome : ''}}</td>
+                        <td>{{$contaReceber->situacao_descricao}}</td>
                         <td>{{$contaReceber->valor}}</td>
-                        <td class="options">
-                            <a href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('contasReceber.edit', ['$contaReceber' => $contaReceber->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn blue" href="{{ route('contasReceber.baixa', ['$contaReceber' => $contaReceber->id]) }}">
+                                <span style="font-size: 14px; color: white">Baixar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn black" href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 

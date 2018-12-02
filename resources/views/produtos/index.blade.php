@@ -44,6 +44,7 @@
                         <th>Categoria</th>
                         <th>Valor</th>
                         <th>Fornecedor</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -54,9 +55,12 @@
                         <td>{{$produto->categorias->descricao}}</td>
                         <td>{{$produto->valorUnitario}}</td>
                         <td>{{$produto->fornecedores->nome}}</td>
-                        <td class="options">
-                            <a href="{{ route('produtos.show', ['$produto' => $produto->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('produtos.edit', ['$produto' => $produto->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn black" href="{{ route('produtos.show', ['$produto' => $produto->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 

@@ -44,6 +44,7 @@
                         <th>Nome</th>
                         <th>Data</th>
                         <th>Situação</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -54,9 +55,12 @@
                         <td>{{$pedidoVenda->nome}}</td>
                         <td>{{date("d-m-Y", strtotime($pedidoVenda->data))}}</td>
                         <td>{{$pedidoVenda->situacao_descricao}}</td>
-                        <td class="options">
-                            <a href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('pedidosVendas.edit', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn black" href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 

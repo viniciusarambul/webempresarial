@@ -35,9 +35,9 @@
                          <label for="situacao">Situação *</label><br />
                       <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
-                        <option value="Aberto">Aberto</option>
-                        <option value="Fechado">Baixado</option>
-                        <option value="Atrasado">Atrasado</option>
+                        <option value="0" <?php if($contaReceber->situacao == '0') {echo 'selected';} ?>>Aberto</option>
+                        <option value="1" <?php if($contaReceber->situacao == '1') {echo 'selected';} ?>>Baixado</option>
+                        <option value="2" <?php if($contaReceber->situacao == '2') {echo 'selected';} ?>>Atrasado</option>
                       </select>
                     </div>
                     <div class="input col s6" style="margin-left:8%;">

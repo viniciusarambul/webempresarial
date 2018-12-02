@@ -71,7 +71,7 @@
                         <th>Produto</th>
                         <th>Fornecedor</th>
                         <th>Quantidade</th>
-                        <th>Valor</th>
+                        <th>Valor Unitário</th>
                         <th>Total</th>
 
                     </tr>
@@ -84,8 +84,8 @@
                         <td>{{$item->produto->nome}}</td>
                         <td>{{$item->fornecedor->nome}}</td>
                         <td>{{$item->quantidade}}</td>
+                        <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                         <td>{{number_format($item->preco, 2, ',', '.')}}</td>
-                        <td>{{number_format($item->total, 2, ',', '.')}}</td>
                         <td class="options">
                             <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                 <i class="mdi mdi-pencil"></i>
@@ -93,7 +93,7 @@
                         </td>
 
                     </tr>
-                    <?php $totaltudo = $totalpedido+=$item->total;?>
+                    <?php $totaltudo = $totalpedido+=$item->preco;?>
                     @endforeach
 
                     <tr>

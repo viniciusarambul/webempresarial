@@ -35,7 +35,7 @@
                                         <input type="date" name="dataVencimento" id="dataVencimento" required placeholder="Data" value="{{ $pedidoTitulo->dataVencimento }}">
                                     </div>
 
-                  <div class="input col s5">
+                  <div class="input col s6">
                        <label for="situacao">Situação *</label><br />
                     <select class="browser-default" required name="situacao">
                       <option value="">Selecione</option>
@@ -45,7 +45,7 @@
                     </select>
                   </div>
 
-                  <div class="input col s5" style="margin-left:8%;">
+                  <div class="input col s6" style="margin-left:8%;">
                     <label for="tipoPagamento">Tipo Documento</label><br />
                     <select class="browser-default" name="tipoPagamento">
 

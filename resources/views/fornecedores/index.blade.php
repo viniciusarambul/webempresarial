@@ -18,7 +18,7 @@
 
 <form class="row no-margin-bottom" method="GET" action="{{ route('fornecedores.index') }}">
     <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Fornecedor (digite o Nome)" value="{{$filter}}">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Fornecedor (digite o CPF ou CNPJ)" value="{{$filter}}">
     </div>
     <div class="input col m6">
         <button type="submit" class="btn blue">
@@ -42,8 +42,11 @@
                     <tr>
                         <th>Fornecedor</th>
                         <th>Telefone</th>
+                        <th>CPF</th>
+                        <th>CNPJ</th>
                         <th>E-mail</th>
                         <th>Cidade</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -52,11 +55,16 @@
                     <tr class="with-options">
                         <td>{{$fornecedor->nome}}</td>
                         <td>{{$fornecedor->telefone}}</td>
+                        <td>{{$fornecedor->cpf}}</td>
+                        <td>{{$fornecedor->cnpj}}</td>
                         <td>{{$fornecedor->email}}</td>
                         <td>{{$fornecedor->cidade}}</td>
-                        <td class="options">
-                            <a href="{{ route('fornecedores.show', ['$fornecedor' => $fornecedor->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('fornecedores.edit', ['$fornecedor' => $fornecedor->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn black" href="{{ route('fornecedores.show', ['$fornecedor' => $fornecedor->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 

@@ -45,8 +45,12 @@
 
     <div class="input col s6">
         <label for="valorPago">Valor Pago </label><br />
-        <input type="text" name="valorPago" id="valorPago" min="0" placeholder="Valor Pago" value="{{ $pedidoCompra->valorPago }}">
+        <input type="text" name="valorPago" id="valorPago" min="0" value="{{ $pedidoCompra->valorPago }}">
     </div>
+  </div>
+  <div class="row">
+      <button type="submit" class="waves-effect waves-green btn teal right">Salvar</button>
+      <a class="waves-effect waves-green btn-flat right" href="{{ route('pedidosCompras.index') }}">Cancelar</a>
   </div>
 </form>
 </div>

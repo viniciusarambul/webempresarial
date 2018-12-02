@@ -47,6 +47,7 @@
                         <th>Fornecedor</th>
                         <th>Situação</th>
                         <th>Valor</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -60,9 +61,15 @@
                         <td>{{$contaPagar->idFornecedor}}</td>
                         <td>{{$contaPagar->situacao}}</td>
                         <td>{{$contaPagar->valor}}</td>
-                        <td class="options">
-                            <a href="{{ route('contasPagar.show', ['$contaPagar' => $contaPagar->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('contasPagar.edit', ['$contaPagar' => $contaPagar->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn blue" href="{{ route('contasPagar.baixa', ['$contaPagar' => $contaPagar->id]) }}">
+                                <span style="font-size: 14px; color: white">Baixar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn black" href="{{ route('contasPagar.show', ['$contaPagar' => $contaPagar->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 

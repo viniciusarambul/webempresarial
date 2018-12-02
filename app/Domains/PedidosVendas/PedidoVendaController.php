@@ -86,6 +86,7 @@ class PedidoVendaController extends Controller
       $pedidoVenda->data = $request->get('data');
       $pedidoVenda->idVendedor = $request->get('idVendedor');
       $pedidoVenda->situacao = $request->get('situacao');
+      $pedidoVenda->idCliente = $request->get('idCliente');
 
       if($pedidoVenda->situacao == 1){
         $pedidoVenda->itens->each(function($item){

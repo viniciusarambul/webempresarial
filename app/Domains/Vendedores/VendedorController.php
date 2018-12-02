@@ -13,9 +13,10 @@ class VendedorController extends Controller
     {
       $query = Vendedor::query();
 
-        if($request->get('filter')){
-            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
-        }
+      if($request->get('filter')){
+          $query->where('cpf', 'like', '%' . $request->get('filter') . '%')
+          ->orWhere('cnpj', 'like', '%' . $request->get('filter') . '%');
+      }
 
         $vendedores = $query->paginate(5);
 

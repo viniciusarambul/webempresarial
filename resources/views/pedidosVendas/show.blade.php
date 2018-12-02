@@ -33,6 +33,7 @@
           <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidosVendas.pedidoTitulo.create',['pedidoVenda' => $pedidoVenda->id]) }}">
               <i class="mdi mdi-plus"></i>
           </a>
+
       </p>
         <div class="card">
             <h5>Dados do Pagamento</h5>
@@ -63,6 +64,7 @@
             </a>
         </p>
         <div class="card">
+          <?php $totalpedido = 0; ?>
             @if(count($pedidoVenda->itens))
             <table>
                 <thead>
@@ -70,7 +72,7 @@
                         <th>Produto</th>
                         <th>Fornecedor</th>
                         <th>Quantidade</th>
-                        <th>Valor</th>
+                        <th>Valor Unitário</th>
                         <th>Total</th>
 
                     </tr>
@@ -82,8 +84,8 @@
                         <td>{{$item->produto->nome}}</td>
                         <td>{{$item->fornecedor->nome}}</td>
                         <td>{{$item->quantidade}}</td>
-                        <td>{{$item->preco}}</td>
-                        <td>{{$item->total}}</td>
+                        <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
+                        <td>{{number_format($item->preco, 2, ',', '.')}}</td>
                         <td class="options">
                             <a href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
                                 <i class="mdi mdi-eye"></i>
@@ -91,7 +93,13 @@
                         </td>
 
                     </tr>
+                    <?php $totaltudo = $totalpedido+=$item->preco;?>
                     @endforeach
+
+                    <tr>
+                      <td colspan="4" style="text-align: right">Total</td>
+                      <td colspan="1">{{number_format($totaltudo, 2, ',', '.')}}</td>
+                    </tr>
                 </tbody>
             </table>
             @else

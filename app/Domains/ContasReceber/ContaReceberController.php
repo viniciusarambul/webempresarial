@@ -72,8 +72,26 @@ class ContaReceberController extends Controller
         ]);
     }
 
+
+    public function baixa(ContaReceber $contaReceber)
+    {
+
+      return view('contasReceber.baixa', [
+        'contaReceber' => $contaReceber,
+      ]);
+    }
+
+
+
     private function save(ContaReceber $contaReceber, ContaReceberRequest $request)
     {
+      if($request->get('baixa') == null){
+      $contaReceber->situacao = $request->get('situacao');
+      $contaReceber->valorPago = $request->get('valorPago');
+      $contaReceber->dataPagamento = $request->get('dataPagamento');
+
+      $contaReceber->save();
+    }else{
       $contaReceber->descricao = $request->get('descricao');
       $contaReceber->dataEmissao = $request->get('dataEmissao');
       $contaReceber->dataVencimento = $request->get('dataVencimento');
@@ -85,7 +103,22 @@ class ContaReceberController extends Controller
       $contaReceber->tipoPagamento = $request->get('tipoPagamento');
       $contaReceber->valor = $request->get('valor');
 
+
       $contaReceber->save();
+    }
+      if($contaReceber->wasRecentlyCreated){
+        $parcelas = $contaReceber->parcelas ? $contaReceber->parcelas : 1;
+        for ($x = 0; $x<$parcelas; $x++){
+          $conta = new ContaReceber;
+          $conta->descricao = $contaReceber->id . '/' . $contaReceber->parcela;
+          $conta->dataEmissao = $contaReceber->dataEmissao;
+          $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
+          $conta->situacao = $contaReceber->situacao;
+          $conta->valor = round($contaReceber->valor/$contaReceber->parcelas, 2);
+
+          $conta->save();
+        }
+      }
 
       return redirect()->route('contasReceber.show', ['id' => $contaReceber->id]);
     }

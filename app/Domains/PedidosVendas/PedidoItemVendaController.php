@@ -81,6 +81,7 @@ class PedidoItemVendaController extends Controller
       $pedidoItem->idFornecedor = $request->get('idFornecedor');
       $pedidoItem->idPedido = $pedidoVenda->id;
       $pedidoItem->preco = $request->get('preco');
+      $pedidoItem->valorUnitario = $request->get('valorUnitario');
 
       $pedidoItem->save();
 

@@ -53,7 +53,7 @@ class PedidoCompraController extends Controller
     {
       return view('pedidosCompras.baixa', [
         'pedidoCompra' => $pedidoCompra,
-        
+
       ]);
     }
 
@@ -90,7 +90,7 @@ class PedidoCompraController extends Controller
       $pedidoCompra->nome = $request->get('nome');
       $pedidoCompra->data = $request->get('data');
       $pedidoCompra->situacao = $request->get('situacao');
-
+      $pedidoCompra->valorPago = $request->get('valorPago');
 
       if($pedidoCompra->situacao == 1){
         $pedidoCompra->itens->each(function($item){

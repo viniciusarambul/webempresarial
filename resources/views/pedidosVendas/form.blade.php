@@ -34,9 +34,9 @@
                          <label for="situacao">Situação *</label><br />
                       <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
-                        <option value="0">Aberto</option>
-                        <option value="1">Fechado</option>
-                        <option value="2">Cancelado</option>
+                        <option value="0"  <?php if($pedidoVenda->situacao == 0) {echo 'selected';} ?>>Aberto</option>
+                        <option value="1" <?php if($pedidoVenda->situacao == 1) {echo 'selected';} ?>>Fechado</option>
+                        <option value="2" <?php if($pedidoVenda->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
                       </select>
                     </div>
                     <div class="input col s6">
@@ -46,7 +46,16 @@
                         <option value="{{ $vendedor->id }}">{{ $vendedor->nome }}</option>
                         @endforeach
                       </select>
-                    </div
+                    </div>
+
+                    <div class="input col s6">
+                      <label for="idCliente">Cliente</label><br />
+                      <select class="browser-default" name="idCliente">
+                      @foreach($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                        @endforeach
+                      </select>
+                    </div>
 
                   </div>
 

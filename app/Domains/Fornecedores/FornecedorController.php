@@ -13,9 +13,10 @@ class FornecedorController extends Controller
     {
       $query = Fornecedor::query();
 
-        if($request->get('filter')){
-            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
-        }
+      if($request->get('filter')){
+          $query->where('cpf', 'like', '%' . $request->get('filter') . '%')
+          ->orWhere('cnpj', 'like', '%' . $request->get('filter') . '%');
+      }
 
         $fornecedores = $query->paginate(5);
 

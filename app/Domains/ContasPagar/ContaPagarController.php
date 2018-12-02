@@ -72,20 +72,53 @@ class ContaPagarController extends Controller
         ]);
     }
 
+    public function baixa(ContaPagar $contaPagar)
+    {
+
+      return view('contasPagar.baixa', [
+        'contaPagar' => $contaPagar,
+      ]);
+    }
+
+
+
     private function save(ContaPagar $contaPagar, ContaPagarRequest $request)
     {
+      if($request->get('baixa') == null){
+      $contaPagar->situacao = $request->get('situacao');
+      $contaPagar->valorPago = $request->get('valorPago');
+      $contaPagar->dataPagamento = $request->get('dataPagamento');
+
+      $contaPagar->save();
+    }else{
       $contaPagar->descricao = $request->get('descricao');
       $contaPagar->dataEmissao = $request->get('dataEmissao');
       $contaPagar->dataVencimento = $request->get('dataVencimento');
       $contaPagar->situacao = $request->get('situacao');
-      $contaPagar->idFornecedor = $request->get('idFornecedor');
+      $contaPagar->idCliente = $request->get('idCliente');
       $contaPagar->idProduto = $request->get('idProduto');
       $contaPagar->quantidade = $request->get('quantidade');
       $contaPagar->parcelas = $request->get('parcelas');
       $contaPagar->tipoPagamento = $request->get('tipoPagamento');
       $contaPagar->valor = $request->get('valor');
 
+
       $contaPagar->save();
+    }
+
+      if($contaPagar->wasRecentlyCreated){
+        $parcelas = $contaPagar->parcelas ? $contaPagar->parcelas : 1;
+        for ($x = 0; $x<$parcelas; $x++){
+          $conta = new ContaPagar;
+          $conta->descricao = $contaPagar->id . '/' . $contaPagar->parcela;
+          $conta->dataEmissao = $contaPagar->dataEmissao;
+          $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
+          $conta->situacao = $contaPagar->situacao;
+          $conta->valor = round($contaPagar->valor/$contaPagar->parcelas, 2);
+
+          $conta->save();
+        }
+      }
 
       return redirect()->route('contasPagar.show', ['id' => $contaPagar->id]);
     }

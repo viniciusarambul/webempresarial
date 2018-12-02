@@ -44,6 +44,7 @@
                         <th>Nome</th>
                         <th>Data Pedido</th>
                         <th>Situação</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -52,18 +53,14 @@
                     <tr class="with-options">
                         <td>{{$pedidoCompra->id}}</td>
                         <td>{{$pedidoCompra->nome}}</td>
-                        <td>{{date("d-m-Y", strtotime($pedidoCompra->data))}}</td>
+                        <td>{{date("d/m/Y", strtotime($pedidoCompra->data))}}</td>
                         <td>{{$pedidoCompra->situacao_descricao}}</td>
-                        <td class="options">
-                          <a href="{{ route('pedidosCompras.edit', ['$pedidoCompra' => $pedidoCompra->id]) }}">
-                              <i class="mdi mdi-pencil"></i>
-                          </a>
-                          <a href="{{ route('pedidosCompras.baixa', ['$pedidoCompra' => $pedidoCompra->id]) }}">
-                              <i class="mdi mdi-check"></i>
-                          </a>
-
-                            <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
-                                <i class="mdi mdi-eye"></i>
+                        <td style="width: 30%">
+                            <a  class="waves-effect waves-light btn" href="{{ route('pedidosCompras.edit', ['$pedidoCompra' => $pedidoCompra->id]) }}">
+                                <span style="font-size: 14px;color: white">Editar</span>
+                            </a>
+                            <a class="waves-effect waves-light btn black" href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
                             </a>
                         </td>
 
