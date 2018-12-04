@@ -16,11 +16,9 @@ class DashboardController extends Controller
     {
 //SELECT YEAR(pc.data) as ano, MONTH(pc.data) as mes, count(pc.data) as contador
 //FROM pedidoitens pi left join pedidocompra pc on pc.id = pi.idPedido group by YEAR(pc.data), MONTH(pc.data)
-      $pedidocomprabar = db::select('SELECT YEAR(pc.data) as ano, MONTH(pc.data) as mes, count(pc.data) as contador
-      FROM pedidoitens pi left join pedidocompra pc on pc.id = pi.idPedido group by YEAR(pc.data), MONTH(pc.data)');
+      $pedidocomprabar = db::select("SELECT YEAR(pc.data) AS ano,  MONTH(pc.data) AS mes, COUNT(pc.data) as contador, SUM(pi.preco) AS contadorpreco FROM pedidocompra pc LEFT JOIN pedidoitens pi ON pi.idPedido = pc.id WHERE pi.tipo_pedido = 'COMPRA' GROUP BY YEAR(pc.data) , MONTH(pc.data)");
 
-      $pedidovendabar = db::select('SELECT YEAR(pc.data) as ano, MONTH(pc.data) as mes, count(pc.data) as contador
-      FROM pedidoitens pi left join pedidovenda pc on pc.id = pi.idPedido group by YEAR(pc.data), MONTH(pc.data)');
+      $pedidovendabar = db::select("SELECT  YEAR(pc.data) AS ano,  MONTH(pc.data) AS mes, COUNT(pc.data) as contador, SUM(pi.preco) AS contadorpreco FROM pedidovenda pc LEFT JOIN pedidoitens pi ON pi.idPedido = pc.id WHERE pi.tipo_pedido = 'VENDA' GROUP BY YEAR(pc.data) , MONTH(pc.data)");
 
       $clientesmes = db::select('SELECT YEAR(created_at) as ano, MONTH(created_at) as mes, count(created_at) as contador
       FROM clientes group by YEAR(created_at), MONTH(created_at)');
