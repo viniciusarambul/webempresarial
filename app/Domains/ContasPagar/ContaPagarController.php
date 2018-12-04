@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Produtos\Produto;
+use Illuminate\Support\Facades\DB;
 
 class ContaPagarController extends Controller
 {
@@ -122,4 +123,35 @@ class ContaPagarController extends Controller
 
       return redirect()->route('contasPagar.show', ['id' => $contaPagar->id]);
     }
+
+    public function consulta(Request $request){
+      $contasPagar = ContaPagar::all();
+      return view('contasPagar.consulta', [
+        'contasPagar' => $contasPagar
+
+      ]);
+
+    }
+    public function Baixar(Request $request)
+    {
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        // $situacao = $request->get('situacao');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+          // $situacao = $situacao;
+        $contasPagar = db::select("SELECT cp.*, pc.nome as pedidocompranome, pc.data as datapedido, f.nome as fornecedornome  from tcc.contapagar cp left join pedidocompra pc on pc.id = cp.idPedidoCompra left join fornecedores f on f.id = pc.idFornecedor where cp.dataVencimento >= '$datainicial' and cp.dataVencimento <= '$datafinal'  ");
+      }else{
+        $inicio = '';
+        $fim ='';
+        // $situacao = $situacao;
+        $contasPagar = db::select("SELECT cp.*, pc.nome as pedidocompranome, pc.data as datapedido, f.nome as fornecedornome  from tcc.contapagar cp left join pedidocompra pc on pc.id = cp.idPedidoCompra left join fornecedores f on f.id = pc.idFornecedor");
+      }
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contasPagar.relatorio', ['contasPagar' => $contasPagar, 'inicio' => $inicio, 'fim' => $fim]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
+    }
+
 }

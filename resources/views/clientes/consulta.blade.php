@@ -1,5 +1,5 @@
 @extends('templates.template', [
-    'title'=> 'clientes',
+    'title'=> 'Relatório de Clientes',
     'prev_router'=> 'home',
     'icon'=> 'mdi mdi-account',
     'active_router'=> 'clientes'
@@ -13,7 +13,7 @@
             <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('clientes.relatorio') }}">
               <div class="row">
                 <div class="col s12">
-                  <h1 style="text-align: center">Filtros</h1>
+                  <h1 style="text-align: center">Filtro Rel. Cliente</h1>
                 </div>
                 <div class=" col s6">
                   <h3 style="text-align: center">Data de criação</h3>

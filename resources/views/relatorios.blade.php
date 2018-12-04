@@ -95,6 +95,53 @@
 
       </div>
   </div>
+  <div class="col s12 m4" style="margin-top:-2.4%;">
+    <p class="card-intro">
+        &nbsp;
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasPedidosVendas') }}">
+            <i class="mdi mdi-chart-line"></i>
+        </a>
+    </p>
+      <div class="card">
+          <h5>Relatório de Pedidos de Vendas</h5>
+
+      </div>
+
+    <p class="card-intro">
+        &nbsp;
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasPedidosCompras') }}">
+            <i class="mdi mdi-chart-line"></i>
+        </a>
+    </p>
+      <div class="card">
+          <h5>Relatório de Pedidos de Compras</h5>
+
+      </div>
+  </div>
+
+  <div class="col s12 m4" style="margin-top:-2.4%;">
+    <p class="card-intro">
+        &nbsp;
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasContasPagar') }}">
+            <i class="mdi mdi-chart-line"></i>
+        </a>
+    </p>
+      <div class="card">
+          <h5>Relatório de Contas Pagar</h5>
+
+      </div>
+
+    <p class="card-intro">
+        &nbsp;
+        <a class="waves-effect waves-teal blue btn-floating right" href="{{ url('consultasContasReceber') }}">
+            <i class="mdi mdi-chart-line"></i>
+        </a>
+    </p>
+      <div class="card">
+          <h5>Relatório de Contas Receber</h5>
+
+      </div>
+  </div>
 
 </div>
 

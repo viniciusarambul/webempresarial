@@ -59,7 +59,7 @@
                         <td>{{date("d-m-Y", strtotime($contaPagar->dataEmissao))}}</td>
                         <td>{{date("d-m-Y", strtotime($contaPagar->dataVencimento))}}</td>
                         <td>{{$contaPagar->idFornecedor}}</td>
-                        <td>{{$contaPagar->situacao}}</td>
+                        <td>{{$contaPagar->situacao_descricao}}</td>
                         <td>{{$contaPagar->valor}}</td>
                         <td style="width: 30%">
                             <a  class="waves-effect waves-light btn" href="{{ route('contasPagar.edit', ['$contaPagar' => $contaPagar->id]) }}">

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Clientes\Cliente;
 use App\Domains\Vendedores\Vendedor;
+use Illuminate\Support\Facades\DB;
+
 
 class PedidoVendaController extends Controller
 {
@@ -107,5 +109,32 @@ class PedidoVendaController extends Controller
       $pedidoVenda->save();
 
       return redirect()->route('pedidosVendas.show', ['id' => $pedidoVenda->id]);
+    }
+
+    public function consulta(Request $request){
+      $pedidosVendas = PedidoVenda::all();
+      return view('pedidosVendas.consulta', [
+        'pedidosVendas' => $pedidosVendas
+
+      ]);
+
+    }
+    public function Baixar(Request $request)
+    {
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+        $pedidosVendas = db::select("SELECT pv.*, c.nome as clientenome, v.nome as vendedornome from tcc.pedidovenda pv left join clientes c on c.id = pv.idCliente left join vendedors v on v.id=pv.idVendedor where data >= '$datainicial' and data <= '$datafinal'");
+      }else{
+        $inicio = '';
+        $fim ='';
+        $pedidosVendas = db::select("SELECT pv.*, c.nome as clientenome, v.nome as vendedornome from tcc.pedidovenda pv left join clientes c on c.id = pv.idCliente left join vendedors v on v.id=pv.idVendedor ");
+      }
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pedidosVendas.relatorio', ['pedidosVendas' => $pedidosVendas, 'inicio' => $inicio, 'fim' => $fim]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
 }

@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Clientes\Cliente;
 use App\Domains\Produtos\Produto;
+use Illuminate\Support\Facades\DB;
+
 
 class ContaReceberController extends Controller
 {
@@ -121,6 +123,36 @@ class ContaReceberController extends Controller
       }
 
       return redirect()->route('contasReceber.show', ['id' => $contaReceber->id]);
+    }
+
+    public function consulta(Request $request){
+      $contasReceber = ContaReceber::all();
+      return view('contasReceber.consulta', [
+        'contasReceber' => $contasReceber
+
+      ]);
+
+    }
+    public function Baixar(Request $request)
+    {
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        // $situacao = $request->get('situacao');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+          // $situacao = $situacao;
+        $contasReceber = db::select("SELECT cp.*, pc.nome as pedidovendanome, pc.data as datapedido, f.nome as clientenome  from tcc.contareceber cp left join pedidovenda pc on pc.id = cp.idPedidoVenda left join clientes f on f.id = pc.idCliente where cp.dataVencimento >= '$datainicial' and cp.dataVencimento <= '$datafinal'  ");
+      }else{
+        $inicio = '';
+        $fim ='';
+        // $situacao = $situacao;
+        $contasReceber = db::select("SELECT cp.*, pc.nome as pedidovendanome, pc.data as datapedido, f.nome as clientenome  from tcc.contareceber cp left join pedidovenda pc on pc.id = cp.idPedidoVenda left join clientes f on f.id = pc.idCliente");
+      }
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contasReceber.relatorio', ['contasReceber' => $contasReceber, 'inicio' => $inicio, 'fim' => $fim]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
 
 
