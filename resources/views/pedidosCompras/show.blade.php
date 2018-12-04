@@ -41,6 +41,7 @@
             <p><b>Situacao: </b>{{ $pedidoCompra->situacao }}</p>
 
         </div>
+
     </div>
 
 

@@ -79,11 +79,12 @@ class PedidoTituloCompraController extends Controller
       $pedidoTitulo->dataVencimento = $request->get('dataVencimento');
       $pedidoTitulo->situacao = $request->get('situacao');
       $pedidoTitulo->idPedido = $pedidoCompra->id;
+      $pedidoTitulo->tipo_pedido = 'COMPRA';
       $pedidoTitulo->preco = $request->get('preco');
       $pedidoTitulo->tipoPagamento = $request->get('tipoPagamento');
       $pedidoTitulo->parcelas = $request->get('parcelas');
 
-      $pedidoTitulo->save();  
+      $pedidoTitulo->save();
 
       if($pedidoTitulo->wasRecentlyCreated){
         $parcelas = $pedidoTitulo->parcelas ? $pedidoTitulo->parcelas : 1;

@@ -28,7 +28,7 @@
                 <div class="row">
 
 
-                  <div>
+
                   <div id="cpff" class="input col s6" style="display:none">
                       <label for="cpf">CPF</label><br />
                       <input class="cpf" id="cpf"  type="text" name="cpf" placeholder="CPF" value="{{ $vendedor->cpf }}">
@@ -36,6 +36,10 @@
                   <div id="cnpjj" class="input col s6">
                       <label for="cnpj">CNPJ</label><br />
                       <input class="cnpj" id="cnpj"  type="text" name="cnpj" placeholder="CNPJ" value="{{ $vendedor->cnpj }}">
+                  </div>
+                  <div id="razao" class="input col s6">
+                      <label for="razao">Razão Social</label><br />
+                      <input class="razao" id="razao"  type="text" name="razao" placeholder="Razão Social" value="{{ $vendedor->razao }}">
                   </div>
 
                   <div class="input col s5">
@@ -62,7 +66,7 @@
                         <label for="nome">E-mail *</label><br />
                         <input type="text" name="email" id="email" placeholder="Email" required value="{{ $vendedor->email }}">
                     </div>
-                  </div>
+
                   <div class="row">
                     <div class="input col s6">
                         <label for="cidade">Cidade *</label><br />

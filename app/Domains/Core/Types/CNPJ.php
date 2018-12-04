@@ -3,7 +3,11 @@
 namespace App\Domains\Core\Types;
 
 class CNPJ implements TypeInterface{
-  private function validator(string $str){
+  private function validator(string $str = null){
+
+    if($str == null){
+      return true;
+    }
 
   $cnpj = preg_replace( '/[^0-9]/', '', $str );
 
@@ -70,7 +74,10 @@ class CNPJ implements TypeInterface{
        return true;
    }
 
+
+
 }
+
 
 public static function check(string $str){}
 public function get(){
@@ -80,11 +87,13 @@ public function getMasked(){
   return $this->value;
 }
 private $value = '';
-public function __construct(string $str){
+public function __construct(string $str = null){
 
   if(!$this->validator($str)){
     throw new \Exception("CNPJ Inválido");
   }
+
+
   $this->value = $str;
 }
 

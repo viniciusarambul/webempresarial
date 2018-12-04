@@ -22,9 +22,13 @@ class PedidoVenda extends Model
       return "Cancelado";
     }
   }
-  
+
   public function itens(){
     return $this->hasMany(Pedidoitem::class, 'idPedido', 'id')->where('tipo_pedido', 'VENDA');
+  }
+
+  public function titulos(){
+    return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id');
   }
 
   public function vendedores(){

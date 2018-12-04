@@ -78,6 +78,7 @@ class PedidoTituloVendaController extends Controller
       $pedidoTitulo->dataVencimento = $request->get('dataVencimento');
       $pedidoTitulo->situacao = $request->get('situacao');
       $pedidoTitulo->idPedido = $pedidoVenda->id;
+      $pedidoTitulo->tipo_pedido = 'VENDA';
       $pedidoTitulo->preco = $request->get('preco');
       $pedidoTitulo->tipoPagamento = $request->get('tipoPagamento');
       $pedidoTitulo->parcelas = $request->get('parcelas');
@@ -94,8 +95,11 @@ class PedidoTituloVendaController extends Controller
           $conta->idCliente = $pedidoVenda->idCliente;
           $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
           $conta->situacao = $pedidoVenda->situacao;
+          if($pedidoTitulo->parcelas == null){
+            $conta->valor = $pedidoTitulo->preco;
+          }else{
           $conta->valor = round($pedidoTitulo->preco/$pedidoTitulo->parcelas, 2);
-
+          }
           $conta->save();
         }
       }
