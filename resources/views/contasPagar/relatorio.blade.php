@@ -82,7 +82,7 @@
               <td style="text-align: center">{{$contaPagar->fornecedornome }}</td>
               <td style="text-align: center">{{ date('d/m/Y', strtotime($contaPagar->dataEmissao)) }}</td>
               <td style="text-align: center">{{ date('d/m/Y', strtotime($contaPagar->dataVencimento)) }}</td>
-              <td style="text-align: right">R$ {{ $contaPagar->valor }}</td>
+              <td style="text-align: right">R$ {{ number_format($contaPagar->valor, 2, ',', '.') }}</td>
 
 
         </tr>

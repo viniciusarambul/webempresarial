@@ -9,7 +9,7 @@ use App\Domains\Pedidos\Pedidotitulo;
 class PedidoCompra extends Model
 {
   protected $table = 'pedidoCompra';
-  protected $appends = ['situacao_descricao'];
+  protected $appends = ['situacao_descricao', 'totalpreco'];
 
   public function getSituacaoDescricaoAttribute(){
     if($this->situacao == 0){
@@ -29,6 +29,12 @@ class PedidoCompra extends Model
 
   public function titulo(){
     return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id');
+  }
+
+  public function getTotalPrecoAttribute(){
+    return $this->itens->reduce(function($total, $item){
+      return $total+=$item->valorUnitario*$item->quantidade;
+    });
   }
 
 

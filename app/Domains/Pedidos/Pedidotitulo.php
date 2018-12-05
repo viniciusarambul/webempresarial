@@ -28,4 +28,5 @@ class Pedidotitulo extends Model
   public function getTotalAttribute(){
     return $this->preco*$this->quantidade;
   }
+
 }

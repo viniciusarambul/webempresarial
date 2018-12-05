@@ -28,20 +28,27 @@
 
 
     <div class="col s12 m4" style="margin-top:-2.4%;">
+
       <p class="card-intro">
           &nbsp;
           <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('pedidosCompras.pedidoTitulo.create',['pedidoCompra' => $pedidoCompra->id]) }}">
               <i class="mdi mdi-plus"></i>
           </a>
       </p>
+
       <h5>Dados do Pagamento</h5>
-      @if(count($pedidoCompra->titulo->contas))
+
         <div class="card">
-            <p><b>Nome: </b>{{ $pedidoCompra->titulo->contas }}</p>
-            <p><b>Data: </b>{{ date('d/m/Y', strtotime($pedidoCompra->data)) }}</p>
-            <p><b>Situacao: </b>{{ $pedidoCompra->situacao }}</p>
+          @if(!empty($pedidoCompra->titulo))
+            <p><b>Codigo Titulo: </b>{{ $pedidoCompra->titulo->id }}</p>
+            <p><b>Data Emissão: </b>{{ date('d/m/Y', strtotime($pedidoCompra->titulo->dataEmissao)) }}</p>
+            <p><b>Primeiro Vencimento: </b>{{ date('d/m/Y', strtotime($pedidoCompra->titulo->dataEmissao)) }}</p>
+            <p><b>Situacao: </b>{{ $pedidoCompra->titulo->situacao }}</p>
+            @else
+            <p>Não existe Dados de Pagamento do Pedido</p>
+            @endif
         </div>
-        @endif
+
 
     </div>
 
@@ -53,7 +60,7 @@
           {{ csrf_field() }}
            <input type="hidden" name="_method" value="DELETE">
            <button class="btn block red">Excluir</button>
-        <a class="btn blue white-text" href="{{ route('pedidosCompras.edit', ['id' => $pedidoCompra->id ]) }}"><i class="mdi mdi-pencil"></i>Editar</a>
+        <a class="btn blue white-text" href="{{ route('pedidosCompras.create', ['id' => $pedidoCompra->id ]) }}"><i class="mdi mdi-pencil"></i>Editar</a>
   </form>
 
 
@@ -88,7 +95,7 @@
                         <td>{{$item->quantidade}}</td>
                         <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                         <td>{{number_format($item->preco, 2, ',', '.')}}</td>
-                        <td class="options">
+                        <td >
                             <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                 <i class="mdi mdi-pencil"></i>
                             </a>
@@ -100,7 +107,7 @@
 
                     <tr>
                       <td colspan="4" style="text-align: right">Total</td>
-                      <td colspan="1">{{number_format($totaltudo, 2, ',', '.')}}</td>
+                      <td colspan="1">{{number_format($pedidoCompra->totalpreco, 2, ',', '.')}}</td>
                     </tr>
 
                 </tbody>

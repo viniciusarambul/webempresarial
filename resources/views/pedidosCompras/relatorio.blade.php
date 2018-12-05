@@ -58,7 +58,6 @@
                         <th align="center" style="width:20% !important">Descrição</th>
                         <th align="center" style="width:15% !important">Situação</th>
                         <th align="center" style="width:25% !important">Fornecedor</th>
-                        <th align="center" style="width:25% !important">Valor</th>
                     </tr>
                 </thead>
 
@@ -74,7 +73,6 @@
               <td style="text-align: right">{{ $pedidoCompra->nome }}</td>
               <td style="text-align: center"> <?php echo $status[$pedidoCompra->situacao]?> </td>
               <td style="text-align: center">{{ $pedidoCompra->nomeFornecedor }}</td>
-              <td style="text-align: center">nao feito </td>
 
 
         </tr>

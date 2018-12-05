@@ -82,7 +82,7 @@
               <td style="text-align: center">{{$contaReceber->clientenome }}</td>
               <td style="text-align: center">{{ date('d/m/Y', strtotime($contaReceber->dataEmissao)) }}</td>
               <td style="text-align: center">{{ date('d/m/Y', strtotime($contaReceber->dataVencimento)) }}</td>
-              <td style="text-align: right">R$ {{ $contaReceber->valor }}</td>
+              <td style="text-align: right">R$ {{ number_format($contaReceber->valor, 2, ',', '.') }}</td>
 
 
         </tr>

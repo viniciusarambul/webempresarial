@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Categorias\Categoria;
+use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
@@ -101,11 +102,11 @@ class ProdutoController extends Controller
         if($datainicial <> ''){
           $inicio = $datafinal;
           $fim = $datafinal;
-        $produtos = db::select("SELECT * from tcc.produtos where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
+        $produtos = db::select("SELECT p.*, c.descricao as descricaocategoria, f.nome as nomeFornecedor from tcc.produtos p left join categorias c on c.id = p.categoria left join fornecedores f on f.id = p.fornecedor where DATE(p.created_at) >= '$datainicial' and DATE(p.created_at) <= '$datafinal' and p.nome like '%". $filtronome ."%'");
       }else{
         $inicio = '';
         $fim ='';
-        $produtos = db::select("SELECT * from tcc.produtos");
+        $produtos = db::select("SELECT p.*, c.descricao as descricaocategoria, f.nome as nomeFornecedor from tcc.produtos p left join categorias c on c.id = p.categoria left join fornecedores f on f.id = p.fornecedor");
       }
 
         $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('produtos.relatorio', ['produtos' => $produtos, 'inicio' => $inicio, 'fim' => $fim]);

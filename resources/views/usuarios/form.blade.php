@@ -43,6 +43,8 @@
                       <select class="browser-default" required name="grupo_id">
                         <option value="">Selecione</option>
                         <option value="1">Administrador</option>
+                        <option value="2">Secretário(a)</option>
+                        <option value="3">Gerente</option>
 
                       </select>
                     </div
@@ -54,9 +56,35 @@
                     <a class="waves-effect waves-green btn-flat right" href="{{ route('usuarios.index') }}">Cancelar</a>
                 </div>
             </form>
+            <div class="row">
+              <div class="col s3"></div>
+              <div class="col s6">
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header">Administrador</div>
+                    <div class="collapsible-body"><span style="margin-left: 5%">Acesso total ao sistema</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header">Secretário(a)</div>
+                    <div class="collapsible-body"><span style="margin-left: 5%">Acesso a toda a parte de cadastros de clientes, fornecedores, vendedores, categorias e produtos.</span></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header">Gerente</div>
+                    <div class="collapsible-body"><span style="margin-left: 5%">Acesso a todos os cadastros inclusos no tipo secretário e incluindo pedidos de compras, vendas e titulos </span></div>
+                  </li>
+                </ul>
+              </div>
+              <div class="col s3"></div>
+            </div>
             <p style="margin-left: 2%">* Campos Obrigatórios</p>
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+var elems = document.querySelectorAll('.collapsible');
+var instances = M.Collapsible.init(elems, options);
+});
+</script>
 
 @endsection

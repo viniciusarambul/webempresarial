@@ -46,7 +46,6 @@ class PedidoVendaController extends Controller
     {
       return view('pedidosVendas.show', [
         'pedidoVenda' => $pedidoVenda,
-        'titulo' => $peidoVenda->titulos,
         'total' => $pedidoVenda->itens->reduce(function($total, $item){
           return $total+$item->preco;
         })

@@ -66,7 +66,7 @@
 
                   <div class="input col s3">
                       <label for="preco">Valor</label><br />
-                      <input type="text" name="preco" id="preco" placeholder="Valor" value="{{ $pedidoTitulo->valor }}">
+                      <input type="text" name="preco" id="preco" placeholder="Valor" value="{{ $pedidoCompra->totalpreco }}">
                   </div>
                 </div>
 

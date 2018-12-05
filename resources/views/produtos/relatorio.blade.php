@@ -70,10 +70,10 @@
 
 
               <td>{{ $product->nome }}</td>
-              <td style="text-align: center">{{ $product->categorias->descricao }}</td>
+              <td style="text-align: center">{{ $product->descricaocategoria }}</td>
               <td style="text-align: right">R${{ $product->valorUnitario }}</td>
               <td style="text-align: center">{{ $product->quantidade }}</td>
-              <td style="text-align: center">{{ $product->fornecedores->nome }}</td>
+              <td style="text-align: center">{{ $product->nomeFornecedor }}</td>
 
 
         </tr>
