@@ -92,6 +92,7 @@
                         <th>Quantidade</th>
                         <th>Valor Unitário</th>
                         <th>Total</th>
+                        <th>Ação</th>
 
                     </tr>
                 </thead>
@@ -105,9 +106,16 @@
                         <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                         <td>{{number_format($item->preco, 2, ',', '.')}}</td>
                         <td >
-                            <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
-                                <i class="mdi mdi-pencil"></i>
-                            </a>
+                          @if($pedidoCompra->situacao == 1)
+
+                          @else
+                          <form class="col s12 m4" method="post" action="{{ route('pedidosCompras.pedidoItem.destroy',['idPedido' => $pedidoCompra->id, 'id' => $item->id])}}">
+                              {{ csrf_field() }}
+                               <input type="hidden" name="_method" value="DELETE">
+                               <input type="hidden" name="id" id="id" value="{{$item->id}}">
+                               <button class="btn block red">Excluir</button>
+                          </form>
+                        @endif
                         </td>
 
                     </tr>

@@ -5,6 +5,8 @@ namespace App\Domains\Pedidos;
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
+use App\Domains\PedidosCompras\PedidoCompra;
+use App\Domains\PedidosVendas\PedidoVenda;
 
 
 class Pedidoitem extends Model

@@ -54,7 +54,7 @@ class PedidoItemCompraController extends Controller
     {
       $pedidoItem->delete();
 
-      return redirect()->route('pedidosCompras.index');
+      return redirect()->route('pedidosCompras.show');
     }
 
     private function form(PedidoCompra $pedidoCompra, PedidoItem $pedidoItem) {
