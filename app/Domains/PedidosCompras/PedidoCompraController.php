@@ -4,7 +4,7 @@ namespace App\Domains\PedidosCompras;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
-use App\Domains\Pedidos\PedidoItem;
+use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\Fornecedores\Fornecedor;
 use Illuminate\Support\Facades\DB;
 

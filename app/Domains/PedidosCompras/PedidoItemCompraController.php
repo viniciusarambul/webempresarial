@@ -5,8 +5,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
-use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\PedidosCompras\PedidosCompras;
+
+use App\Domains\Pedidos\Pedidoitem;
 
 class PedidoItemCompraController extends Controller
 {

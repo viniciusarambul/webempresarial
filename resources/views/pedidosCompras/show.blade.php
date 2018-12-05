@@ -29,7 +29,7 @@
 
     <div class="col s12 m4" style="margin-top:-2.4%;">
 
-      @if($pedidoCompra->situacao == 1)
+      @if($pedidoCompra->situacao == 1 || $pedidoCompra->titulo->id > 0)
 
       @else
       <p class="card-intro">
@@ -72,7 +72,7 @@
 @endif
 
     <div class="col s12">
-      @if($pedidoCompra->situacao == 1)
+      @if($pedidoCompra->situacao == 1 )
 
       @else
         <p class="card-intro">

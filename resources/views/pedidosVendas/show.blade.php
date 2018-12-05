@@ -28,7 +28,7 @@
 
 
     <div class="col s12 m4" style="margin-top:-2.4%;">
-      @if($pedidoVenda->situacao == 1)
+      @if($pedidoVenda->situacao == 1 || !empty($pedidoVenda->titulo))
 
       @else
       <p class="card-intro">
