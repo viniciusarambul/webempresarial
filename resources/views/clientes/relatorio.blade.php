@@ -57,8 +57,8 @@
     <table style="width: 100% !important; margin-top: 5%;">
       <tr>
         <td style="font-size: 25px!important; padding: 20px; width: 60%!important;">WEB EMPRESARIAL</td>
-        
-        <td style="width: 20%!important; text-align: center"><b>Filtros Selecionados </b><br><br>Filtro De:{{date('d/m/Y', strtotime($inicio))}}<br>Filtro Até:{{date('d/m/Y', strtotime($fim))}}</td>
+
+        <td style="width: 20%!important; text-align: center"><b>Filtros Selecionados </b><br><br>Filtro De:{{$inicio ? date('d/m/Y', strtotime($inicio)) : 'Todos'}}<br>Filtro Até:{{$fim ? date('d/m/Y', strtotime($fim)) : 'Todos'}}</td>
 
       </tr>
     </table>

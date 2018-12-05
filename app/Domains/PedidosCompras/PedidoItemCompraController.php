@@ -50,9 +50,9 @@ class PedidoItemCompraController extends Controller
       return $this->save($pedidoCompra, $request);
     }
 
-    public function destroy(PedidoCompra $pedidoCompra)
+    public function destroy(PedidoCompra $pedidoCompra, PedidoItem $pedidoItem)
     {
-      $pedidoCompra->delete();
+      $pedidoItem->delete();
 
       return redirect()->route('pedidosCompras.index');
     }
