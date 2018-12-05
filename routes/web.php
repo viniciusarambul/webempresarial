@@ -39,12 +39,20 @@ Route::get('produto/pdf', 'Produtos\ProdutoController@Baixar')->name('produtos.r
 Route::get('cliente/pdf', 'Clientes\ClienteController@Baixar')->name('clientes.relatorio');
 Route::get('fornecedor/pdf', 'Fornecedores\FornecedorController@Baixar')->name('fornecedores.relatorio');
 Route::get('vendedor/pdf', 'Vendedores\VendedorController@Baixar')->name('vendedores.relatorio');
+Route::get('pedidoVenda/pdf', 'PedidosVendas\PedidoVendaController@Baixar')->name('pedidosVendas.relatorio');
+Route::get('pedidoCompra/pdf', 'PedidosCompras\PedidoCompraController@Baixar')->name('pedidosCompras.relatorio');
+Route::get('contaPagar/pdf', 'ContasPagar\ContaPagarController@Baixar')->name('contasPagar.relatorio');
+Route::get('contaReceber/pdf', 'ContasReceber\ContaReceberController@Baixar')->name('contasReceber.relatorio');
 Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
 
 Route::get('/consultasClientes', 'Clientes\ClienteController@consulta')->name('clientes.consulta');
 Route::get('/consultasFornecedores', 'Fornecedores\FornecedorController@consulta')->name('fornecedores.consulta');
 Route::get('/consultasVendedores', 'Vendedores\VendedorController@consulta')->name('vendedores.consulta');
 Route::get('/consultasProdutos', 'Produtos\ProdutoController@consulta')->name('produtos.consulta');
+Route::get('/consultasPedidosVendas', 'PedidosVendas\PedidoVendaController@consulta')->name('pedidosVendas.consulta');
+Route::get('/consultasPedidosCompras', 'PedidosCompras\PedidoCompraController@consulta')->name('produtos.consulta');
+Route::get('/consultasContasPagar', 'ContasPagar\ContaPagarController@consulta')->name('contasPagar.consulta');
+Route::get('/consultasContasReceber', 'ContasReceber\ContaReceberController@consulta')->name('contasReceber.consulta');
 
 Route::get('/main', 'MainController@index');
 Route::post('/main/checklogin', 'MainController@checklogin');

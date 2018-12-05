@@ -42,14 +42,7 @@ document.meu_form.preco.value = soma;
                 <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
                 <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
                 <div class="row">
-                  <div class="input col s6">
-                    <label for="idFornecedor">Fornecedor</label><br />
-                    <select class="browser-default" name="idFornecedor">
-                    @foreach($fornecedores as $fornecedor)
-                      <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
-                      @endforeach
-                    </select>
-                  </div>
+                
                   <div class="input col s6">
                     <label for="idProduto">Produto</label><br />
                     <select class="browser-default" name="idProduto">

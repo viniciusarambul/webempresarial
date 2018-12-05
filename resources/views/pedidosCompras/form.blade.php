@@ -22,15 +22,15 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="id" name="id" value="{{ $pedidoCompra->id }}" />
                 <div class="row">
-                    <div class="input col s6">
-                        <label for="nome">Nome *</label><br />
+                    <div class="input col s3">
+                        <label for="nome">Descrição *</label><br />
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $pedidoCompra->nome }}">
                     </div>
-                    <div class="input col s6">
+                    <div class="input col s3">
                         <label for="data">Data *</label><br />
                         <input type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoCompra->data }}">
                     </div>
-                    <div class="input col s4">
+                    <div class="input col s3">
                          <label for="situacao">Situação *</label><br />
                       <select class="browser-default" required name="situacao">
                         <option value="">Selecione</option>
@@ -38,7 +38,15 @@
                         <option value="1" <?php if($pedidoCompra->situacao == 1) {echo 'selected';} ?>>Fechado</option>
                         <option value="2" <?php if($pedidoCompra->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
                       </select>
-                      
+
+                    </div>
+                    <div class="input col s3">
+                      <label for="idFornecedor">Fornecedor</label><br />
+                      <select class="browser-default" name="idFornecedor">
+                      @foreach($fornecedores as $fornecedor)
+                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
+                        @endforeach
+                      </select>
                     </div>
 
                   </div>

@@ -1,22 +1,23 @@
 @extends('templates.template', [
-    'title'=> 'fornecedores',
+    'title'=> 'Contas Pagar',
     'prev_router'=> 'home',
     'icon'=> 'mdi mdi-account',
-    'active_router'=> 'fornecedores'
+    'active_router'=> 'relatorios'
 ])
 @section('container')
 
+<
 <div class="row">
     <div class="col s12">
         <div class="card">
           <div class="card-content" >
-            <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('fornecedores.relatorio') }}">
+            <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('contasReceber.relatorio') }}">
               <div class="row">
                 <div class="col s12">
-                  <h1 style="text-align: center">Filtro Rel. Fornecedores</h1>
+                  <h1 style="text-align: center">Filtro Rel. Contas Receber</h1>
                 </div>
                 <div class=" col s6">
-                  <h3 style="text-align: center">Data de criação</h3>
+                  <h3 style="text-align: center">Data de Emissão</h3>
                   <div class="input col s6">
                       <label for="data_inicial">De</label>
                       <input type="date" name="data_incial" id="data_inicial" >
@@ -27,15 +28,16 @@
                   </div>
                 </div>
 
+                <div class="input col s6">
+                  <h3 style="text-align: center">Situação</h3>
+                  <select class="browser-default" name="situacao">
+                    <option value="">Selecione</option>
+                    <option value="0" >Aberto</option>
+                    <option value="1" >Fechado</option>
+                    <option value="2" >Cancelado</option>
+                  </select>
+                </div>
 
-                <div class=" col s6">
-                  <h3 style="text-align: center">Nome</h3>
-                  <div class="col s12">
-                    <label for="nome">Nome:</label>
-                    <input type="text" name="nome" id="nome" >
-                  </div>
-
-              </div>
               </div>
 
             <div class="row">
@@ -46,6 +48,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

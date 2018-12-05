@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Pedidos\PedidoItem;
 use App\Domains\Fornecedores\Fornecedor;
+use Illuminate\Support\Facades\DB;
+
 
 class PedidoCompraController extends Controller
 {
@@ -91,6 +93,7 @@ class PedidoCompraController extends Controller
       $pedidoCompra->data = $request->get('data');
       $pedidoCompra->situacao = $request->get('situacao');
       $pedidoCompra->valorPago = $request->get('valorPago');
+      $pedidoCompra->idFornecedor = $request->get('idFornecedor');
 
       if($pedidoCompra->situacao == 1){
         $pedidoCompra->itens->each(function($item){
@@ -118,4 +121,33 @@ class PedidoCompraController extends Controller
 
       return redirect()->route('pedidosCompras.show', ['id' => $pedidoCompra->id]);
     }
+
+
+    public function consulta(Request $request){
+      $pedidosCompras = PedidoCompra::all();
+      return view('pedidosCompras.consulta', [
+        'pedidosCompras' => $pedidosCompras
+
+      ]);
+
+    }
+    public function Baixar(Request $request)
+    {
+        $datainicial = $request->get('data_incial');
+        $datafinal = $request->get('data_final');
+        if($datainicial <> ''){
+          $inicio = $datafinal;
+          $fim = $datafinal;
+        $pedidosCompras = db::select("SELECT pv.*, f.nome as nomeFornecedor from tcc.pedidocompra pv left join fornecedores f on f.id = pv.idFornecedor where data >= '$datainicial' and data <= '$datafinal'");
+      }else{
+        $inicio = '';
+        $fim ='';
+        $pedidosCompras = db::select("SELECT  pv.*, f.nome as nomeFornecedor from tcc.pedidocompra pv left join fornecedores f on f.id = pv.idFornecedor");
+      }
+
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pedidosCompras.relatorio', ['pedidosCompras' => $pedidosCompras, 'inicio' => $inicio, 'fim' => $fim]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
+    }
+
 }

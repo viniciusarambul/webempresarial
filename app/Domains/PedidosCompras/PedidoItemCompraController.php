@@ -75,12 +75,10 @@ class PedidoItemCompraController extends Controller
 
       $pedidoItem->idProduto = $request->get('idProduto');
       $pedidoItem->quantidade = $request->get('quantidade');
-      $pedidoItem->idFornecedor = $request->get('idFornecedor');
       $pedidoItem->tipo_pedido = 'COMPRA';
       $pedidoItem->idPedido = $pedidoCompra->id;
       $pedidoItem->preco = $request->get('preco');
       $pedidoItem->valorUnitario = $request->get('valorUnitario');
-      dd($pedidoItem);
       $pedidoItem->save();
 
 
