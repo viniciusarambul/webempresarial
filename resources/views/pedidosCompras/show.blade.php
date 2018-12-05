@@ -34,13 +34,14 @@
               <i class="mdi mdi-plus"></i>
           </a>
       </p>
+      <h5>Dados do Pagamento</h5>
+      @if(count($pedidoCompra->titulo->contas))
         <div class="card">
-            <h5>Dados do Pagamento</h5>
-            <p><b>Nome: </b>{{ $pedidoCompra->nome }}</p>
+            <p><b>Nome: </b>{{ $pedidoCompra->titulo->contas }}</p>
             <p><b>Data: </b>{{ date('d/m/Y', strtotime($pedidoCompra->data)) }}</p>
             <p><b>Situacao: </b>{{ $pedidoCompra->situacao }}</p>
-
         </div>
+        @endif
 
     </div>
 

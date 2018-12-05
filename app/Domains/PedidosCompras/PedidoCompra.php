@@ -4,6 +4,7 @@ namespace App\Domains\PedidosCompras;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Pedidos\Pedidoitem;
+use App\Domains\Pedidos\Pedidotitulo;
 
 class PedidoCompra extends Model
 {
@@ -26,7 +27,7 @@ class PedidoCompra extends Model
     return $this->hasMany(Pedidoitem::class, 'idPedido', 'id')->where('tipo_pedido', 'COMPRA');
   }
 
-  public function titulos(){
+  public function titulo(){
     return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id');
   }
 

@@ -7,7 +7,7 @@ use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Pedidos\Pedidotitulo;
 use App\Domains\PedidosCompras\PedidosCompras;
-use App\Domains\ContasReceber\ContaReceber;
+use App\Domains\ContasPagar\ContaPagar;
 
 
 class PedidoTituloCompraController extends Controller
@@ -89,14 +89,17 @@ class PedidoTituloCompraController extends Controller
       if($pedidoTitulo->wasRecentlyCreated){
         $parcelas = $pedidoTitulo->parcelas ? $pedidoTitulo->parcelas : 1;
         for ($x = 0; $x<$parcelas; $x++){
-          $conta = new ContaReceber;
+          $conta = new ContaPagar;
           $conta->idPedidoCompra = $pedidoCompra->id;
-          $conta->descricao = 'Pedido Compra ' . $pedidoVenda->id;
+          $conta->descricao = 'Pedido Compra ' . $pedidoCompra->id;
           $conta->dataEmissao = $pedidoTitulo->dataEmissao;
           $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
           $conta->situacao = $pedidoCompra->situacao;
+          if($pedidoTitulo->parcelas == null){
+            $conta->valor = $pedidoTitulo->preco;
+          }else{
           $conta->valor = round($pedidoTitulo->preco/$pedidoTitulo->parcelas, 2);
-
+          }
           $conta->save();
         }
       }

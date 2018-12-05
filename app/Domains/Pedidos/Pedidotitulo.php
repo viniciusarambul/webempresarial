@@ -5,6 +5,7 @@ namespace App\Domains\Pedidos;
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
+use App\Domains\ContasPagar\ContaPagar;
 
 
 class Pedidotitulo extends Model
@@ -19,6 +20,11 @@ class Pedidotitulo extends Model
   public function fornecedor(){
     return $this->hasOne(Fornecedor::class, 'id','idFornecedor');
   }
+
+  public function contas(){
+    return $this->hasMany(ContaPagar::class, 'idPedidoCompra', 'id');
+  }
+
   public function getTotalAttribute(){
     return $this->preco*$this->quantidade;
   }
