@@ -5,6 +5,7 @@ use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Produtos\Produto;
+use App\Domains\ContasPagar\ContaPagar;
 
 
 class Fornecedor extends Model
@@ -19,6 +20,9 @@ class Fornecedor extends Model
     return $this->hasOne(Fornecedor::class, 'id','fornecedor');
   }
 
+  public function contaPagar(){
+    return $this->hasMany(ContaPagar::class, 'idFornecedor', 'id');
+  }
   // public function setCpfAttribute(CPF $cpf){
   //   $this->cpf = $cpf->get();
   // }

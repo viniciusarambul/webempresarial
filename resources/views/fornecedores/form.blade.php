@@ -40,19 +40,13 @@
                       <input class="razao" id="razao"  type="text" name="razao" placeholder="Razão Social" value="{{ $fornecedor->razaosocial }}">
                   </div>
 
-                  <div class="input col s5">
-                       <label for="status">Status *</label><br />
-                    <select class="browser-default" required name="status">
-                      <option value="Ativo">Ativo</option>
-                      <option value="Inativo">Inativo</option>
-                    </select>
-                  </div>
 
-                    <div class="input col s6">
+
+                    <div id="nome" class="input col s6">
                         <label for="nome">Nome *</label><br />
                         <input type="text" name="nome" id="nome" placeholder="Nome" required value="{{ $fornecedor->nome }}">
                     </div>
-                    <div class="input col s6">
+                    <div id="sobrenome" class="input col s6">
                         <label for="sobrenome">Sobrenome *</label><br />
                         <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required value="{{ $fornecedor->sobrenome }}">
                     </div>
@@ -85,6 +79,14 @@
                     <div class="input col s6">
                         <label for="numero">Numero *</label><br />
                         <input id="numero" type="text" name="numero" id="numero" placeholder="Numero" required value="{{ $fornecedor->numero }}">
+                    </div>
+
+                    <div class="input col s5">
+                         <label for="status">Status *</label><br />
+                      <select class="browser-default" required name="status">
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                      </select>
                     </div>
 
                 </div>

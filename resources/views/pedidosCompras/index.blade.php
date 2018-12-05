@@ -18,7 +18,7 @@
 
 <form class="row no-margin-bottom" method="GET" action="{{ route('pedidosCompras.index') }}">
     <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Pedido (digite o Nome)" value="{{$filter}}">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Pedido (digite a Descrição)" value="{{$filter}}">
     </div>
     <div class="input col m6">
         <button type="submit" class="btn blue">
@@ -41,9 +41,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
+                        <th>Descrição</th>
                         <th>Data Pedido</th>
                         <th>Situação</th>
+                        <th>Valor Compra</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -55,13 +56,20 @@
                         <td>{{$pedidoCompra->nome}}</td>
                         <td>{{date("d/m/Y", strtotime($pedidoCompra->data))}}</td>
                         <td>{{$pedidoCompra->situacao_descricao}}</td>
+                        <td>{{number_format($pedidoCompra->titulo->preco,2,',','.')}}</td>
                         <td style="width: 30%">
+                          @if($pedidoCompra->situacao == 1)
+                          <a class="waves-effect waves-light btn black" href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
+                              <span style="font-size: 14px; color: white">Ver</span>
+                          </a>
+                          @else
                             <a  class="waves-effect waves-light btn" href="{{ route('pedidosCompras.edit', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                 <span style="font-size: 14px;color: white">Editar</span>
                             </a>
                             <a class="waves-effect waves-light btn black" href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                 <span style="font-size: 14px; color: white">Ver</span>
                             </a>
+                            @endif
                         </td>
 
                     </tr>

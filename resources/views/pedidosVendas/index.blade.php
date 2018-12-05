@@ -41,9 +41,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome</th>
+                        <th>Descrição</th>
                         <th>Data</th>
                         <th>Situação</th>
+                        <th>Valor Venda</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -53,15 +54,22 @@
                     <tr class="with-options">
                         <td>{{$pedidoVenda->id}}</td>
                         <td>{{$pedidoVenda->nome}}</td>
-                        <td>{{date("d-m-Y", strtotime($pedidoVenda->data))}}</td>
+                        <td>{{date("d/m/Y", strtotime($pedidoVenda->data))}}</td>
                         <td>{{$pedidoVenda->situacao_descricao}}</td>
+                        <td>{{number_format($pedidoVenda->titulo->preco,2 ,',','.')}}</td>
                         <td style="width: 30%">
+                          @if($pedidoVenda->situacao == 1)
+                          <a class="waves-effect waves-light btn black" href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                              <span style="font-size: 14px; color: white">Ver</span>
+                          </a>
+                          @else
                             <a  class="waves-effect waves-light btn" href="{{ route('pedidosVendas.edit', ['$pedidoVenda' => $pedidoVenda->id]) }}">
                                 <span style="font-size: 14px;color: white">Editar</span>
                             </a>
                             <a class="waves-effect waves-light btn black" href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
                                 <span style="font-size: 14px; color: white">Ver</span>
                             </a>
+                            @endif
                         </td>
 
                     </tr>

@@ -9,7 +9,7 @@
 <div class="row no-margin-bottom">
     <div class="col s12">
         <h4>
-            Nome: {{ $contaReceber->nome }}
+            Nome: {{ $contaReceber->descricao }}
         </h4>
     </div>
 </div>
@@ -22,7 +22,7 @@
             <p><b>Descrição: </b>{{ $contaReceber->descricao }}</p>
             <p><b>Data: </b>{{ date('d/m/Y' , strtotime($contaReceber->dataEmissao)) }}</p>
             <p><b>Situacao: </b>{{ $contaReceber->situacao_descricao}}</p>
-            <p><b>Valor Pedido: </b>{{ $contaReceber->valor }}</p>
+            <p><b>Valor Receita: </b>{{ number_format($contaReceber->valor, 2,',','.') }}</p>
 
         </div>
     </div>
@@ -44,11 +44,11 @@
       </select>
 
     </div>
-    <div class="input col s6">
+    <div class="input col s4">
         <label for="dataPagamento">Data Pagamento</label><br />
         <input type="date" name="dataPagamento" id="dataPagamento" placeholder="Data" value="{{ $contaReceber->dataPagamento }}">
     </div>
-    <div class="input col s6">
+    <div class="input col s4">
         <label for="valorPago">Valor Pago </label><br />
         <input type="text" name="valorPago" id="valorPago" min="0" value="{{ $contaReceber->valorPago }}">
     </div>

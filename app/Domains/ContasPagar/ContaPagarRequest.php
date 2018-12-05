@@ -24,7 +24,7 @@ class ContaPagarRequest extends FormRequest
     public function rules()
     {
         return [
-            'descricao' => 'required'
+            'id' => 'required'
         ];
     }
 }

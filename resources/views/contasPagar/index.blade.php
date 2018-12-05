@@ -58,10 +58,11 @@
                         <td>{{$contaPagar->descricao}}</td>
                         <td>{{date("d-m-Y", strtotime($contaPagar->dataEmissao))}}</td>
                         <td>{{date("d-m-Y", strtotime($contaPagar->dataVencimento))}}</td>
-                        <td>{{$contaPagar->idFornecedor}}</td>
+                        <td>{{$contaPagar->fornecedor->nome}}</td>
                         <td>{{$contaPagar->situacao_descricao}}</td>
-                        <td>{{$contaPagar->valor}}</td>
+                        <td>{{number_format($contaPagar->valor, 2,',','.')}}</td>
                         <td style="width: 30%">
+                            @if($contaPagar->situacao != 1)
                             <a  class="waves-effect waves-light btn" href="{{ route('contasPagar.edit', ['$contaPagar' => $contaPagar->id]) }}">
                                 <span style="font-size: 14px;color: white">Editar</span>
                             </a>
@@ -71,6 +72,14 @@
                             <a class="waves-effect waves-light btn black" href="{{ route('contasPagar.show', ['$contaPagar' => $contaPagar->id]) }}">
                                 <span style="font-size: 14px; color: white">Ver</span>
                             </a>
+                            @else
+                            <a class="waves-effect waves-light btn black" href="{{ route('contasPagar.show', ['$contaPagar' => $contaPagar->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
+                            </a>
+                            <a class="waves-effect waves-light btn red" href="{{ route('contasPagar.baixa', ['$contaPagar' => $contaPagar->id]) }}">
+                                <span style="font-size: 14px; color: white">Cancelar Baixa</span>
+                            </a>
+                            @endif
                         </td>
 
                     </tr>

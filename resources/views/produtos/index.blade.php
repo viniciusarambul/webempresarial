@@ -42,7 +42,7 @@
                     <tr>
                         <th>Produto</th>
                         <th>Categoria</th>
-                        <th>Valor</th>
+                        <!-- <th>Valor</th> -->
                         <th>Fornecedor</th>
                         <th>Ações</th>
                     </tr>
@@ -53,7 +53,7 @@
                     <tr class="with-options">
                         <td>{{$produto->nome}}</td>
                         <td>{{$produto->categorias->descricao}}</td>
-                        <td>{{$produto->valorUnitario}}</td>
+                        <!-- <td>{{$produto->valorUnitario}}</td> -->
                         <td>{{$produto->fornecedores->nome}}</td>
                         <td style="width: 30%">
                             <a  class="waves-effect waves-light btn" href="{{ route('produtos.edit', ['$produto' => $produto->id]) }}">

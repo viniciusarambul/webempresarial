@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Domains\Produtos\Produto;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\ContasPagar\ContaPagar;
+use App\Domains\ContasReceber\ContaReceber;
 
 
 class Pedidotitulo extends Model

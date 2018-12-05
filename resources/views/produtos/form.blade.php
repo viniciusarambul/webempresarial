@@ -22,7 +22,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" id="id" name="id" value="{{ $produto->id }}" />
                 <div class="row">
-                    <div class="input col s6">
+                    <div class="input col s4">
                         <label for="nome">Nome *</label><br />
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $produto->nome }}">
                     </div>
@@ -35,9 +35,9 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="input col s6">
+                    <div class="input col s6" style="display:none">
                         <label for="valorUnitario">Valor Unitário *</label><br />
-                        <input type="text" name="valorUnitario" id="valor" min="0" placeholder="Valor unitario" value="{{ $produto->valorUnitario }}">
+                        <input type="hidden" name="valorUnitario" id="valor" min="0" placeholder="Valor unitario" value="{{ $produto->valorUnitario }}">
                     </div>
                     <div class="input col s4">
                          <label for="fornecedor">Fornecedor *</label><br />

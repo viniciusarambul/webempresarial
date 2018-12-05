@@ -18,7 +18,7 @@
 
 <form class="row no-margin-bottom" method="GET" action="{{ route('contasReceber.index') }}">
     <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar uma Receita (digite o Nome)" value="{{$filter}}">
+        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar uma Receita (digite a Descrição)" value="{{$filter}}">
     </div>
     <div class="input col m6">
         <button type="submit" class="btn blue">
@@ -44,6 +44,7 @@
                         <th>Descricao</th>
                         <th>Data de Emissão</th>
                         <th>Data de Vencimento</th>
+                        <th>Vendedor</th>
                         <th>Cliente</th>
                         <th>Situação</th>
                         <th>Valor</th>
@@ -59,9 +60,11 @@
                         <td>{{date("d/m/Y", strtotime($contaReceber->dataEmissao))}}</td>
                         <td>{{date("d/m/Y", strtotime($contaReceber->dataVencimento))}}</td>
                         <td>{{$contaReceber->clientes ? $contaReceber->clientes->nome : ''}}</td>
+                        <td>{{$contaReceber->vendedores ? $contaReceber->vendedores->nome : ''}}</td>
                         <td>{{$contaReceber->situacao_descricao}}</td>
-                        <td>{{$contaReceber->valor}}</td>
+                        <td>{{number_format($contaReceber->valor, 2,',','.')}}</td>
                         <td style="width: 30%">
+                            @if($contaReceber->situacao != 1)
                             <a  class="waves-effect waves-light btn" href="{{ route('contasReceber.edit', ['$contaReceber' => $contaReceber->id]) }}">
                                 <span style="font-size: 14px;color: white">Editar</span>
                             </a>
@@ -71,6 +74,14 @@
                             <a class="waves-effect waves-light btn black" href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
                                 <span style="font-size: 14px; color: white">Ver</span>
                             </a>
+                            @else
+                            <a class="waves-effect waves-light btn black" href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
+                                <span style="font-size: 14px; color: white">Ver</span>
+                            </a>
+                            <a class="waves-effect waves-light btn red" href="{{ route('contasReceber.baixa', ['$contaReceber' => $contaReceber->id]) }}">
+                                <span style="font-size: 14px; color: white">Cancelar Baixa</span>
+                            </a>
+                            @endif
                         </td>
 
                     </tr>

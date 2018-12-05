@@ -23,10 +23,12 @@
             <p><b>Data de Emissão: </b>{{date("d-m-Y", strtotime( $contaReceber->dataEmissao)) }}</p>
             <p><b>Data de Vencimento: </b>{{ date("d-m-Y", strtotime($contaReceber->dataVencimento)) }}</p>
             <p><b>Cliente: </b>{{ $contaReceber->idCliente }}</p>
-            <p><b>Situacao: </b>{{ $contaReceber->situacao }}</p>
+            <p><b>Situacao: </b>{{ $contaReceber->situacao_descricao }}</p>
             <p><b>Parcelas: </b>{{ $contaReceber->parcelas }}</p>
             <p><b>Tipo de Pagamento: </b>{{ $contaReceber->tipoPagamento }}</p>
             <p><b>Valor: </b>{{ $contaReceber->valor }}</p>
+            <p><b>Data Pagamento: </b>{{ $contaReceber->dataPagamento ? date("d/m/Y", strtotime($contaReceber->dataPagamento)) : '' }}</p>
+            <p><b>Valor Pago: </b>{{ $contaReceber->valorPago }}</p>
 
         </div>
     </div>

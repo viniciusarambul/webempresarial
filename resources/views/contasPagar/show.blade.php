@@ -18,15 +18,17 @@
 <div class="row">
     <div class="col s12 m4">
         <div class="card">
-            <h5>Dados da Receita</h5>
+            <h5>Dados da Despesa</h5>
             <p><b>Descrição: </b>{{ $contaPagar->descricao }}</p>
-            <p><b>Data de Emissão: </b>{{date("d-m-Y", strtotime( $contaPagar->dataEmissao)) }}</p>
-            <p><b>Data de Vencimento: </b>{{ date("d-m-Y", strtotime($contaPagar->dataVencimento)) }}</p>
+            <p><b>Data de Emissão: </b>{{date("d/m/Y", strtotime( $contaPagar->dataEmissao)) }}</p>
+            <p><b>Data de Vencimento: </b>{{ date("d/m/Y", strtotime($contaPagar->dataVencimento)) }}</p>
             <p><b>Fornecedor: </b>{{ $contaPagar->idFornecedor }}</p>
-            <p><b>Situacao: </b>{{ $contaPagar->situacao }}</p>
+            <p><b>Situacao: </b>{{ $contaPagar->situacao_descricao }}</p>
             <p><b>Parcelas: </b>{{ $contaPagar->parcelas }}</p>
             <p><b>Tipo de Pagamento: </b>{{ $contaPagar->tipoPagamento }}</p>
-            <p><b>Valor: </b>{{ $contaPagar->valor }}</p>
+            <p><b>Valor: </b>{{ number_format($contaPagar->valor, 2, ',','.') }}</p>
+            <p><b>Data Pagamento: </b>{{$contaPagar->dataPagamento ? date("d/m/Y", strtotime($contaPagar->dataPagamento)) : '' }}</p>
+            <p><b>Valor Pago: </b>{{ $contaPagar->valorPago }}</p>
 
         </div>
     </div>

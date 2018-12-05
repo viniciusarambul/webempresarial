@@ -95,6 +95,9 @@ class PedidoTituloVendaController extends Controller
           $conta->idCliente = $pedidoVenda->idCliente;
           $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
           $conta->situacao = $pedidoVenda->situacao;
+          $conta->idVendedor = $pedidoVenda->idVendedor;
+          $conta->tipoPagamento = $pedidoTitulo->tipoPagamento;
+          $conta->parcelas = $pedidoTitulo->parcelas;
           if($pedidoTitulo->parcelas == null){
             $conta->valor = $pedidoTitulo->preco;
           }else{

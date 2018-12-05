@@ -15,6 +15,7 @@
  </head>
  <body>
   <br />
+  <div class="col s12" style="margin-top: 10%;">
   <div class="container box">
    <h3 align="center">Login Web Empresarial</h3><br />
 
@@ -50,5 +51,6 @@
     </div>
    </form>
   </div>
+</div>
  </body>
 </html>

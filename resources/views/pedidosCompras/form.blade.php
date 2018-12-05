@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="input col s3">
                         <label for="nome">Descrição *</label><br />
-                        <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $pedidoCompra->nome }}">
+                        <input type="text" name="nome" id="nome" placeholder="Descrição" value="{{ $pedidoCompra->nome }}">
                     </div>
                     <div class="input col s3">
                         <label for="data">Data *</label><br />

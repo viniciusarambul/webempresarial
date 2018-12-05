@@ -253,12 +253,16 @@
             $("#cpfb").click(function(){
               $("#cnpjj").hide();
               $("#razao").hide();
+              $("#sobrenome").show();
+              $("#nome").show();
               $("#cpff").show();
             });
             $("#cnpjb").click(function(){
               $("#cnpjj").show();
               $("#razao").show();
               $("#cpff").hide();
+              $("#nome").hide();
+              $("#sobrenome").hide();
             });
           });
         </script>

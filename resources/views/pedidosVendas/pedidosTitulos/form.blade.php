@@ -32,7 +32,7 @@
                        <label for="situacao">Situação *</label><br />
                     <select class="browser-default" required name="situacao">
                       <option value="">Selecione</option>
-                      <option value="Aberto" <?php if($pedidoVenda->situacao == 'Aberto') {echo 'selected';} ?>>Aberto</option>
+                      <option value="Aberto" <?php if($pedidoVenda->situacao == 'Aberto') {echo 'selected';} ?> selected>Aberto</option>
                       <option value="Fechado" <?php if($pedidoVenda->situacao == 'Fechado') {echo 'selected';} ?>>Baixado</option>
                       <option value="Atrasado" <?php if($pedidoVenda->situacao == 'Atrasado') {echo 'selected';} ?>>Atrasado</option>
                     </select>
@@ -66,7 +66,7 @@
 
                   <div class="input col s3">
                       <label for="preco">Valor</label><br />
-                      <input type="text" name="preco" id="preco" placeholder="Valor" value="{{ $pedidoTitulo->valor }}">
+                      <input type="text" name="preco" id="preco" placeholder="Valor" value="{{ $pedidoVenda->totalpreco }}">
                   </div>
                 </div>
 

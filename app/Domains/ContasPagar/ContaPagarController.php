@@ -85,6 +85,7 @@ class ContaPagarController extends Controller
 
     private function save(ContaPagar $contaPagar, ContaPagarRequest $request)
     {
+
       if($request->get('baixa') == null){
       $contaPagar->situacao = $request->get('situacao');
       $contaPagar->valorPago = $request->get('valorPago');
