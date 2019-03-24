@@ -28,7 +28,7 @@ class PedidoCompra extends Model
   }
 
   public function titulo(){
-    return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id');
+    return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id')->where('tipo_pedido', 'COMPRA');
   }
 
   public function getTotalPrecoAttribute(){

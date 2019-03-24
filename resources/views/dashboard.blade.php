@@ -18,7 +18,7 @@
 
       </div>
     </div>
-      <div class="card">
+      <!-- <div class="card">
         <div class="row">
     <div class="col s6"><h4 style="text-align: center">Clientes</h4>
         <div id="chartcliente"></div>
@@ -36,7 +36,7 @@
     <div class="col s6"><h4 style="text-align: center">Categorias</h4>
         <div id="chartcategorias"></div>
     </div>
-  </div>
+  </div> -->
 
 </div>
 <script>

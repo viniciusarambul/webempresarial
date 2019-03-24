@@ -29,7 +29,7 @@ class PedidoVenda extends Model
   }
 
   public function titulo(){
-    return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id');
+    return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id')->where('tipo_pedido', 'VENDA');
   }
   public function vendedores(){
     return $this->hasMany(Vendedor::class, 'idVendedor', 'id');

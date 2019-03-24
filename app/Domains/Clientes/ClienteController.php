@@ -18,7 +18,7 @@ class ClienteController extends Controller
             ->orWhere('cnpj', 'like', '%' . $request->get('filter') . '%');
         }
 
-        $clientes = $query->paginate(5);
+        $clientes = $query->paginate(1);
 
         return view('clientes.index', [
           'clientes' => $clientes,

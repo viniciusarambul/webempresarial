@@ -42,7 +42,7 @@ document.meu_form.preco.value = soma;
                 <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
                 <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
                 <div class="row">
-                
+
                   <div class="input col s6">
                     <label for="idProduto">Produto</label><br />
                     <select class="browser-default" name="idProduto">
@@ -62,7 +62,7 @@ document.meu_form.preco.value = soma;
                     </div>
                     <div class="input col s6">
                         <label for="preco">Valor Total</label><br />
-                        <input type="text" onBlur="calculo();" name="preco" id="preco" value="{{ $pedidoItem->preco }}">
+                        <input type="text" onBlur="calculo();" name="preco" id="preco" value="{{ number_format($pedidoItem->preco,2,',','.') }}">
 
                     </div>
 

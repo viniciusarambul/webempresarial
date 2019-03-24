@@ -29,7 +29,7 @@
 
     <div class="col s12 m4" style="margin-top:-2.4%;">
 
-      @if($pedidoCompra->situacao == 1)
+      @if($pedidoCompra->situacao == 1 || !empty($pedidoCompra->titulo))
 
       @else
       <p class="card-intro">
@@ -67,7 +67,7 @@
           {{ csrf_field() }}
            <input type="hidden" name="_method" value="DELETE">
            <button class="btn block red">Excluir</button>
-        <a class="btn blue white-text" href="{{ route('pedidosCompras.create', ['id' => $pedidoCompra->id ]) }}"><i class="mdi mdi-pencil"></i>Editar</a>
+        <a class="btn blue white-text" href="{{ route('pedidosCompras.edit', ['id' => $pedidoCompra->id ]) }}"><i class="mdi mdi-pencil"></i>Editar</a>
   </form>
 @endif
 
@@ -105,9 +105,7 @@
                         <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                         <td>{{number_format($item->preco, 2, ',', '.')}}</td>
                         <td >
-                            <a href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
-                                <i class="mdi mdi-pencil"></i>
-                            </a>
+
                         </td>
 
                     </tr>

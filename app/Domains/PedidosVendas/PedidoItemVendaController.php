@@ -77,6 +77,11 @@ class PedidoItemVendaController extends Controller
     {
 
       $pedidoItem->idProduto = $request->get('idProduto');
+      if($request->get('quantidade') > $pedidoItem->produto->quantidade){
+        return redirect()->back()->with('error', 'Quantidade Indisponivel');
+      }else{
+
+      $pedidoItem->idProduto = $request->get('idProduto');
       $pedidoItem->quantidade = $request->get('quantidade');
       $pedidoItem->idFornecedor = $request->get('idFornecedor');
       $pedidoItem->tipo_pedido = 'VENDA';
@@ -86,5 +91,6 @@ class PedidoItemVendaController extends Controller
       $pedidoItem->save();
 
       return redirect()->route('pedidosVendas.show', ['pedidoVenda' => $pedidoVenda->id])->with('success', 'Item inserido com Sucesso');
+    }
     }
 }

@@ -56,8 +56,8 @@
                     <tr class="with-options">
                         <td>{{$contaPagar->id}}</td>
                         <td>{{$contaPagar->descricao}}</td>
-                        <td>{{date("d-m-Y", strtotime($contaPagar->dataEmissao))}}</td>
-                        <td>{{date("d-m-Y", strtotime($contaPagar->dataVencimento))}}</td>
+                        <td>{{date("d/m/Y", strtotime($contaPagar->dataEmissao))}}</td>
+                        <td>{{date("d/m/Y", strtotime($contaPagar->dataVencimento))}}</td>
                         <td>{{$contaPagar->fornecedor->nome}}</td>
                         <td>{{$contaPagar->situacao_descricao}}</td>
                         <td>{{number_format($contaPagar->valor, 2,',','.')}}</td>

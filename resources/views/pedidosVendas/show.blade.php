@@ -20,7 +20,7 @@
         <div class="card">
             <h5>Dados do Pedido</h5>
             <p><b>Nome: </b>{{ $pedidoVenda->nome }}</p>
-            <p><b>Data: </b>{{ $pedidoVenda->data }}</p>
+            <p><b>Data: </b>{{ date('d/m/Y', strtotime($pedidoVenda->data)) }}</p>
             <p><b>Situacao: </b>{{ $pedidoVenda->situacao_descricao }}</p>
 
         </div>
@@ -28,7 +28,7 @@
 
 
     <div class="col s12 m4" style="margin-top:-2.4%;">
-      @if($pedidoVenda->situacao == 1)
+      @if($pedidoVenda->situacao == 1 || !empty($pedidoVenda->titulo))
 
       @else
       <p class="card-intro">
@@ -103,11 +103,7 @@
                         <td>{{$item->quantidade}}</td>
                         <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                         <td>{{number_format($item->preco, 2, ',', '.')}}</td>
-                        <td >
-                            <a href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
-                                <i class="mdi mdi-eye"></i>
-                            </a>
-                        </td>
+                      
 
                     </tr>
                     <?php $totaltudo = $totalpedido+=$item->preco;?>
