@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Clientes\Cliente;
+use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\Vendedores\Vendedor;
 use Illuminate\Support\Facades\DB;
 

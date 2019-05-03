@@ -73,6 +73,7 @@ class PedidoItemVendaController extends Controller
         ]);
     }
 
+
     private function save(PedidoVenda $pedidoVenda, PedidoItemRequest $request, PedidoItem $pedidoItem)
     {
 
@@ -91,6 +92,7 @@ class PedidoItemVendaController extends Controller
       $pedidoItem->save();
 
       return redirect()->route('pedidosVendas.show', ['pedidoVenda' => $pedidoVenda->id])->with('success', 'Item inserido com Sucesso');
+      }
     }
     }
 }

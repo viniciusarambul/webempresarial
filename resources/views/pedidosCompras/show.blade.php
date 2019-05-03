@@ -29,7 +29,7 @@
 
     <div class="col s12 m4" style="margin-top:-2.4%;">
 
-      @if($pedidoCompra->situacao == 1 || !empty($pedidoCompra->titulo))
+      @if($pedidoCompra->situacao == 1 || $pedidoCompra->titulo->id > 0)
 
       @else
       <p class="card-intro">
@@ -72,7 +72,7 @@
 @endif
 
     <div class="col s12">
-      @if($pedidoCompra->situacao == 1)
+      @if($pedidoCompra->situacao == 1 )
 
       @else
         <p class="card-intro">
@@ -92,6 +92,7 @@
                         <th>Quantidade</th>
                         <th>Valor Unitário</th>
                         <th>Total</th>
+                        <th>Ação</th>
 
                     </tr>
                 </thead>
@@ -105,7 +106,20 @@
                         <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                         <td>{{number_format($item->preco, 2, ',', '.')}}</td>
                         <td >
+<<<<<<< HEAD
 
+=======
+                          @if($pedidoCompra->situacao == 1)
+
+                          @else
+                          <form class="col s12 m4" method="post" action="{{ route('pedidosCompras.pedidoItem.destroy',['idPedido' => $pedidoCompra->id, 'id' => $item->id])}}">
+                              {{ csrf_field() }}
+                               <input type="hidden" name="_method" value="DELETE">
+                               <input type="hidden" name="id" id="id" value="{{$item->id}}">
+                               <button class="btn block red">Excluir</button>
+                          </form>
+                        @endif
+>>>>>>> 5d45b0d4d577a2876a54cbd72810604c1696ddec
                         </td>
 
                     </tr>
