@@ -53,7 +53,7 @@
                         <li class="label">Appicações</li>
                         <li><a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i>  Cadastros  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
-                                <li><a href="chart-flot.html">Flot</a></li>
+                                <li><a href="{{route('categorias.index')}}">Categorias</a></li>
                                 <li><a href="chart-morris.html">Morris</a></li>
                                 <li><a href="chartjs.html">Chartjs</a></li>
                                 <li><a href="chartist.html">Chartist</a></li>

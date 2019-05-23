@@ -1,78 +1,86 @@
-@extends('templates.template', [
-    'title'=> 'categorias',
-    'prev_router'=> 'home',
-    'icon'=> 'mdi mdi-folder',
-    'active_router'=> 'categorias'
-])
-@section('container')
+@extends('templates.layout')
+@section('content-wrap')
+<link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+        <div class="content-wrap">
+                <div class="main">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <!-- /# column -->
+                            <div class="col-lg-4 p-l-0 title-margin-left">
+                                <div class="page-header">
+                                    <div class="page-title">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                            <li class="breadcrumb-item active">Table-Basic</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /# column -->
+                        </div>
+                        <!-- /# row -->
+                        <section id="main-content">
+                            <div class="row">
+
+                                <!-- /# column -->
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-title">
+                                            <h4>Listagem de Categorias </h4>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                  @if(count($categorias))
+                                                    <table class="table table-hover ">
+                                                      <thead>
+                                                          <tr>
+                                                              <th>ID</th>
+                                                              <th>Descricao</th>
+                                                              <th>Ações</th>
+
+                                                          </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                          @foreach($categorias as $categoria)
+                                                          <tr class="with-options">
+                                                              <td>{{$categoria->id}}</td>
+                                                              <td>{{$categoria->descricao}}</td>
+                                                              <td style="width: 30%">
+
+                                                                  <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('categorias.edit', ['$categoria' => $categoria->id]) }}"><i class="ti-settings"></i>Editar</a>
+
+                                                                  <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('categorias.destroy', ['$categoria' => $categoria->id]) }}"><i class="ti-settings"></i>Excluir</button>
 
 
-<div class="row no-margin-bottom">
-    <div class="col s12">
-        <h4>
-            Categorias
-        </h4>
-    </div>
-</div>
+                                                              </td>
 
+                                                          </tr>
+                                                          @endforeach
+                                                      </tbody>
+                                                </table>
+                                                @else
+                                                <p class="alert-disable">Não há categorias.</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /# card -->
+                                </div>
+                                <!-- /# column -->
+                            </div>
+                            <!-- /# row -->
 
-<form class="row no-margin-bottom" method="GET" action="{{ route('categorias.index') }}">
-    <div class="input col m6">
-        <input type="text" name="filter" class="no-margin-bottom" placeholder="Buscar um Categoria (digite o Nome)" value="{{$filter}}">
-    </div>
-    <div class="input col m6">
-        <button type="submit" class="btn blue">
-            <i class="mdi mdi-magnify"></i>
-        </button>
-    </div>
-</form>
-
-<div class="row">
-    <div class="col s12">
-        <p class="card-intro">
-            &nbsp;
-            <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('categorias.create') }}">
-                <i class="mdi mdi-plus"></i>
-            </a>
-        </p>
-        <div class="card">
-            @if(count($categorias))
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descricao</th>
-                        <th>Ações</th>
-
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach($categorias as $categoria)
-                    <tr class="with-options">
-                        <td>{{$categoria->id}}</td>
-                        <td>{{$categoria->descricao}}</td>
-                        <td style="width: 30%">
-                            <a  class="waves-effect waves-light btn" href="{{ route('categorias.edit', ['$categoria' => $categoria->id]) }}">
-                                <span style="font-size: 14px;color: white">Editar</span>
-                            </a>
-                            
-                            <a class="waves-effect waves-light btn black" href="{{ route('categorias.show', ['$categoria' => $categoria->id]) }}">
-                                <span style="font-size: 14px; color: white">Ver</span>
-                            </a>
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @else
-            <p class="alert-disable">Não há categorias.</p>
-            @endif
-        </div>
-        {{ $categorias->appends(['filter'=>$filter])->links() }}
-    </div>
-</div>
-
-
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="footer">
+                                        <p>2018 © Admin Board. - <a href="#">example.com</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
 @endsection

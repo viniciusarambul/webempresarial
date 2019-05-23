@@ -95,4 +95,3 @@ class PedidoItemVendaController extends Controller
       }
     }
     }
-}

@@ -1,10 +1,5 @@
-@extends('templates.template', [
-    'title'=> 'categorias',
-    'prev_router'=> 'home',
-    'icon'=> 'mdi mdi-folder',
-    'active_router'=> 'categorias'
-])
-@section('container')
+@extends('templates.layout')
+@section('content-wrap')
 
 
 <div class="row no-margin-bottom">
