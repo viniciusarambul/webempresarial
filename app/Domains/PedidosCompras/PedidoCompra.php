@@ -8,7 +8,7 @@ use App\Domains\Pedidos\Pedidotitulo;
 
 class PedidoCompra extends Model
 {
-  protected $table = 'pedidoCompra';
+  protected $table = 'pedidocompra';
   protected $appends = ['situacao_descricao', 'totalpreco'];
 
   public function getSituacaoDescricaoAttribute(){

@@ -8,6 +8,7 @@ use App\Domains\Clientes\Cliente;
 use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\Vendedores\Vendedor;
 use Illuminate\Support\Facades\DB;
+use App\Domains\Pedidos\Pedidotitulo;
 
 
 class PedidoVendaController extends Controller
@@ -43,10 +44,16 @@ class PedidoVendaController extends Controller
 
     }
 
-    public function show(PedidoVenda $pedidoVenda)
+    public function show(PedidoVenda $pedidoVenda,PedidoItem $pedidoItem, PedidoTitulo $pedidoTitulo)
     {
+
+      $produtos = Produto::all();
+
       return view('pedidosVendas.show', [
         'pedidoVenda' => $pedidoVenda,
+        'pedidoTitulo' => $pedidoTitulo,
+        'pedidoItem' => $pedidoItem,
+        'produtos' => $produtos,
         'total' => $pedidoVenda->itens->reduce(function($total, $item){
           return $total+$item->preco;
         })

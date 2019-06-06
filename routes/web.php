@@ -22,6 +22,7 @@ Route::resource('/fornecedores', 'Fornecedores\FornecedorController');
 Route::get('/pedidosCompras/{pedidoCompra}/baixa', 'PedidosCompras\PedidoCompraController@baixa')->name('pedidosCompras.baixa');
 Route::get('/contasReceber/{contaReceber}/baixa', 'ContasReceber\ContaReceberController@baixa')->name('contasReceber.baixa');
 Route::get('/contasPagar/{contaPagar}/baixa', 'ContasPagar\ContaPagarController@baixa')->name('contasPagar.baixa');
+Route::get('/contasPagar/{contaPagar}/cancel', 'ContasPagar\ContaPagarController@cancel')->name('contasPagar.cancel');
 // Route::get('/contasReceber/{contaReceber}/baixa', 'ContasReceber\ContaReceberController@baixado')->name('contasReceber.baixa');
 Route::resource('/pedidosCompras', 'PedidosCompras\PedidoCompraController');
 Route::resource('pedidosCompras.pedidoItem', 'PedidosCompras\PedidoItemCompraController');

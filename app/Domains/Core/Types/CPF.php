@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Domains\Core\Types;
+use App\Exceptions\Handler;
+use Exception;
 
 class CPF implements TypeInterface{
   private function validator(string $str = null){

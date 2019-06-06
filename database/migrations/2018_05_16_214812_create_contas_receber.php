@@ -13,7 +13,7 @@ class CreateContasReceber extends Migration
      */
     public function up()
     {
-      Schema::create('contareceber', function (Blueprint $table) {
+      Schema::create('contaReceber', function (Blueprint $table) {
         $table->increments('id');
         $table->string('descricao');
         $table->date('dataEmissao');
@@ -40,6 +40,6 @@ class CreateContasReceber extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contareceber');
+        Schema::dropIfExists('contaReceber');
     }
 }

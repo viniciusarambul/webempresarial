@@ -38,7 +38,7 @@
         <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
             <div class="nano">
                 <div class="nano-content">
-                    <div class="logo"><a href="index.html"><!-- <img src="assets/images/logo.png" alt="" /> --><span>Focus</span></a></div>
+                    <div class="logo"><a href="{{route('dashboard')}}"><!-- <img src="assets/images/logo.png" alt="" /> --><span>WEB EMPRESARIAL</span></a></div>
                     <ul>
                         <li class="label">Main</li>
                         <li class="active"><a class="sidebar-sub-toggle"><i class="ti-home"></i> Dashboard<span class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -54,12 +54,12 @@
                         <li><a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i>  Cadastros  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
                                 <li><a href="{{route('categorias.index')}}">Categorias</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chartjs.html">Chartjs</a></li>
-                                <li><a href="chartist.html">Chartist</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
-                                <li><a href="chart-sparkline.html">Sparkle</a></li>
-                                <li><a href="chart-knob.html">Knob</a></li>
+                                <li><a href="{{route('clientes.index')}}">Clientes</a></li>
+                                <li><a href="{{route('fornecedores.index')}}">Fornecedores</a></li>
+                                <li><a href="{{route('produtos.index')}}">Produtos</a></li>
+                                <li><a href="{{route('vendedores.index')}}">Vendedores</a></li>
+                                <li><a href="{{route('usuarios.index')}}">Usuários</a></li>
+
                             </ul>
                         </li>
                         <li><a class="sidebar-sub-toggle"><i class="ti-bar-chart-alt"></i>  Relatórios  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -75,24 +75,17 @@
                         </li>
                         <li><a class="sidebar-sub-toggle"><i class="ti-slice"></i>  Pedidos  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chartjs.html">Chartjs</a></li>
-                                <li><a href="chartist.html">Chartist</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
-                                <li><a href="chart-sparkline.html">Sparkle</a></li>
-                                <li><a href="chart-knob.html">Knob</a></li>
+                                <li><a href="{{route('pedidosCompras.index')}}">Compra</a></li>
+                                <li><a href="{{route('pedidosVendas.index')}}">Venda</a></li>
+                                <li><a href="{{route('estoque')}}">Estoque</a></li>
+
                             </ul>
                         </li>
                         <li><a class="sidebar-sub-toggle"><i class="ti-money"></i>  Financeiro  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chartjs.html">Chartjs</a></li>
-                                <li><a href="chartist.html">Chartist</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
-                                <li><a href="chart-sparkline.html">Sparkle</a></li>
-                                <li><a href="chart-knob.html">Knob</a></li>
+                                <li><a href="{{route('contasPagar.index')}}">Contas a Pagar</a></li>
+                                <li><a href="{{route('contasReceber.index')}}">Contas a Receber</a></li>
+                                <li><a href="{{route('contasReceber.index')}}">Fluxo de Caixa</a></li>
                             </ul>
                         </li>
                         <li><a href="app-event-calender.html"><i class="ti-calendar"></i> Calendário </a></li>
@@ -328,6 +321,171 @@
         <script src="{{ asset('assets/js/lib/owl-carousel/owl.carousel.min.js')}}"></script>
         <script src="{{ asset('assets/js/lib/owl-carousel/owl.carousel-init.js')}}"></script>
         <script src="{{ asset('assets/js/scripts.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
+        <!-- <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script> -->
+        <script type="text/javascript" src="{{ asset('libs/jquery-price/jquery.price_format.1.8.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/morris.js/morris.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/morris.js/raphael-min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
         <!-- scripit init-->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script>
+      $(document).ready(function () {
+          app.init();
+      });
+      </script>
+      <script>
+      $(document).ready(function(){
+      $('.date').mask('11/11/1111');
+      $('.time').mask('00:00:00');
+      $('.date_time').mask('00/00/0000 00:00:00');
+      $('#cep').mask('00000-000');
+      $('#telefone').mask('(00) 0000-0000');
+      $('#celular').mask('(00) 00000-0000');
+      $('.mixed').mask('AAA 000-S0S');
+      $('.cpf').mask('000.000.000-00', {reverse: true});
+      $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
+      });
 
+
+      </script>
+
+      <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <!-- Adicionando Javascript -->
+    <script type="text/javascript" >
+
+        $(document).ready(function() {
+
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+                $("#ibge").val("");
+            }
+
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+                        $("#uf").val("...");
+                        $("#ibge").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#rua").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+                                $("#ibge").val(dados.ibge);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+
+    </script>
+
+      <script>
+
+      $(function() {
+      $('#valor').priceFormat({
+          prefix: '',
+          centsSeparator: ',',
+           thousandsSeparator: '.'
+          });
+
+      });
+
+      $(document).ready(function(e) {
+        $('#valor').blur(function () {
+        var valor = $(this).val();
+        if (valor == '0,00') {
+          $(this).val(' ');
+        }
+
+      });
+      });
+
+      $(function() {
+      $('#valorPago').priceFormat({
+          prefix: '',
+          centsSeparator: ',',
+           thousandsSeparator: '.'
+          });
+
+      });
+
+      $(document).ready(function(e) {
+        $('#valorPago').blur(function () {
+        var valor = $(this).val();
+        if (valor == '0,00') {
+          $(this).val(' ');
+        }
+
+      });
+      });
+      </script>
+      <script>
+      $(document).ready(function(){
+      $("#cpfb").click(function(){
+        $("#cnpjj").hide();
+        $("#razao").hide();
+        $("#sobrenome").show();
+        $("#nome").show();
+        $("#cpff").show();
+      });
+      $("#cnpjb").click(function(){
+        $("#cnpjj").show();
+        $("#razao").show();
+        $("#cpff").hide();
+        $("#nome").hide();
+        $("#sobrenome").hide();
+      });
+      });
+      </script>
         </body>

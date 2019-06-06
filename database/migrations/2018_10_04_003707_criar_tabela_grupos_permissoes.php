@@ -27,6 +27,6 @@ class CriarTabelaGruposPermissoes extends Migration
       */
      public function down()
      {
-         Schema::dropIfExists('grupos');
+         Schema::dropIfExists('grupos_permissoes');
      }
   }

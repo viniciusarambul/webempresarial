@@ -83,7 +83,7 @@ class ProdutoController extends Controller
 
       $produto->save();
 
-      return redirect()->route('produtos.show', ['id' => $produto->id]);
+      return redirect()->route('produtos.index');
     }
 
     public function consulta(Request $request){

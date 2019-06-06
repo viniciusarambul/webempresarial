@@ -81,13 +81,33 @@ class ContaPagarController extends Controller
       ]);
     }
 
+    public function cancel(ContaPagar $contaPagar, Request $request){
+
+
+      $contaPagar->situacao = 0;
+      $contaPagar->valorPago = 0;
+      $contaPagar->dataPagamento = '0000-00-00';
+      $contaPagar->save();
+      $query = ContaPagar::query();
+
+        if($request->get('filter')){
+            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
+        }
+
+        $contasPagar = $query->paginate(5);
+      return view('contasPagar.index',[
+        'contasPagar' => $contasPagar,
+        'filter' => $request->get('filter')
+      ]);
+    }
+
 
 
     private function save(ContaPagar $contaPagar, ContaPagarRequest $request)
     {
 
       if($request->get('baixa') == null){
-      $contaPagar->situacao = $request->get('situacao');
+      $contaPagar->situacao = 1;
       $contaPagar->valorPago = $request->get('valorPago');
       $contaPagar->dataPagamento = $request->get('dataPagamento');
 
@@ -97,7 +117,7 @@ class ContaPagarController extends Controller
       $contaPagar->dataEmissao = $request->get('dataEmissao');
       $contaPagar->dataVencimento = $request->get('dataVencimento');
       $contaPagar->situacao = $request->get('situacao');
-      $contaPagar->idCliente = $request->get('idCliente');
+      $contaPagar->idFornecedor = $request->get('idFornecedor');
       $contaPagar->idProduto = $request->get('idProduto');
       $contaPagar->quantidade = $request->get('quantidade');
       $contaPagar->parcelas = $request->get('parcelas');
@@ -107,6 +127,22 @@ class ContaPagarController extends Controller
 
       $contaPagar->save();
     }
+
+      if($contaPagar->valorPago < $contaPagar->valor){
+        $contanova = new ContaPagar;
+        $contanova->descricao = $contaPagar->id .'Parcial'. $contaPagar->descricao;
+        $contanova->dataEmissao = date('Y-m-d');
+        $contanova->dataVencimento = date('Y-m-d', strtotime('+' . 30 . 'days'));
+        $contanova->situacao = 0;
+        $contanova->idFornecedor = $contaPagar->idFornecedor;
+        $contanova->idProduto = $contaPagar->idProduto;
+        $contanova->quantidade = $contaPagar->quantidade;
+        $contanova->parcelas = '1';
+        $contanova->tipoPagamento = $contaPagar->tipoPagamento;
+        $contanova->valor = ($contaPagar->valor - $contaPagar->valorPago);
+
+        $contanova->save();
+      }
 
       if($contaPagar->wasRecentlyCreated){
         $parcelas = $contaPagar->parcelas ? $contaPagar->parcelas : 1;

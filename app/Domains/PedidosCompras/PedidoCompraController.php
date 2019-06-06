@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
 use App\Domains\Pedidos\Pedidoitem;
+use App\Domains\Pedidos\Pedidotitulo;
 use App\Domains\Fornecedores\Fornecedor;
 use Illuminate\Support\Facades\DB;
 
@@ -41,10 +42,15 @@ class PedidoCompraController extends Controller
         return $this->save(new PedidoCompra(), $request);
     }
 
-    public function show(PedidoCompra $pedidoCompra)
+    public function show(PedidoCompra $pedidoCompra,PedidoItem $pedidoItem, PedidoTitulo $pedidoTitulo)
     {
+        
+        $produtos = Produto::all();
         return view('pedidosCompras.show', [
           'pedidoCompra' => $pedidoCompra,
+          'pedidoTitulo' => $pedidoTitulo,
+          'pedidoItem' => $pedidoItem,
+          'produtos' => $produtos,
           'total' => $pedidoCompra->itens->reduce(function($total, $item){
             return $total+$item->preco;
           })

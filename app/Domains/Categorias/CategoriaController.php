@@ -72,6 +72,6 @@ class CategoriaController extends Controller
 
       $categoria->save();
 
-      return redirect()->route('categorias.show', ['id' => $categoria->id]);
+      return redirect()->route('categorias.index', ['id' => $categoria->id]);
     }
 }

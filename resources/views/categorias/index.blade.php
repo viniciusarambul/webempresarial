@@ -2,7 +2,7 @@
 @section('content-wrap')
 <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
         <div class="content-wrap">
-                <div class="main">
+              <div class="main" >
                     <div class="container-fluid">
                         <div class="row">
 
@@ -19,13 +19,38 @@
                             </div>
                             <!-- /# column -->
                         </div>
+                        <form  method="GET" action="{{ route('categorias.index') }}">
+                          <div class="row">
+                            <div class="col-lg-6">
+
+                                <input class="form-control input-default "  type="text" name="filter" placeholder="Buscar Categoria" value="{{$filter}}" />
+
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Filtrar</button>
+                              </div>
+                          </div>
+
+
+
+                        </form>
                         <!-- /# row -->
                         <section id="main-content">
                             <div class="row">
 
                                 <!-- /# column -->
                                 <div class="col-lg-12">
+                                  <p >
+
+                                      <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="{{ route('categorias.create') }}">
+                                          <i class="ti-plus"></i>Adicionar
+                                      </a>
+
+                                  </p>
                                     <div class="card">
+
+
+
                                         <div class="card-title">
                                             <h4>Listagem de Categorias </h4>
 
@@ -72,13 +97,7 @@
                             </div>
                             <!-- /# row -->
 
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="footer">
-                                        <p>2018 © Admin Board. - <a href="#">example.com</a></p>
-                                    </div>
-                                </div>
-                            </div>
+
                         </section>
                     </div>
                 </div>

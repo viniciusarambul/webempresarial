@@ -9,7 +9,7 @@ use App\Domains\Pedidos\Pedidotitulo;
 
 class PedidoVenda extends Model
 {
-  protected $table = 'pedidoVenda';
+  protected $table = 'pedidovenda';
   protected $appends = ['situacao_descricao', 'totalpreco'];
 
   public function getSituacaoDescricaoAttribute(){

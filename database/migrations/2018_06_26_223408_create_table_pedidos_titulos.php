@@ -13,7 +13,7 @@ class CreateTablePedidosTitulos extends Migration
      */
     public function up()
     {
-      Schema::create('pedidoTitulos', function (Blueprint $table) {
+      Schema::create('pedidotitulos', function (Blueprint $table) {
         $table->increments('id');
         $table->integer('idFornecedor')->nullable();
         $table->enum("tipo_pedido",['COMPRA','VENDA'])->nullable();

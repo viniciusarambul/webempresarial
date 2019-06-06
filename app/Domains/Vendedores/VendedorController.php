@@ -87,10 +87,10 @@ class VendedorController extends Controller
       $vendedor->bairro = $request->get('bairro');
       $vendedor->numero = $request->get('numero');
       $vendedor->status = $request->get('status');
-      $vendedor->razao = $request->get('razao');
+    
       $vendedor->save();
 
-      return redirect()->route('vendedores.show', ['id' => $vendedor->id]);
+      return redirect()->route('vendedores.index');
 
       } catch(\Exception $e){
         return redirect()->back()->with('error', $e->getMessage());

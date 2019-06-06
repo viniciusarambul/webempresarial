@@ -7,6 +7,7 @@ use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
 use Illuminate\Support\Facades\DB;
 
+
 class ClienteController extends Controller
 {
     public function index(Request $request)
@@ -92,7 +93,7 @@ class ClienteController extends Controller
 
       $cliente->save();
 
-      return redirect()->route('clientes.show', ['id' => $cliente->id]);
+      return redirect()->route('clientes.index', ['id' => $cliente->id]);
 
       } catch(\Exception $e){
         return redirect()->back()->with('error', $e->getMessage());

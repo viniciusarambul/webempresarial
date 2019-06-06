@@ -90,7 +90,7 @@ class FornecedorController extends Controller
       $fornecedor->status = $request->get('status');
 
       $fornecedor->save();
-      return redirect()->route('fornecedores.show', ['id' => $fornecedor->id]);
+      return redirect()->route('fornecedores.index', ['id' => $fornecedor->id]);
 
       } catch(\Exception $e){
         return redirect()->back()->with('error', $e->getMessage());

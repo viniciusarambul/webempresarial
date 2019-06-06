@@ -1,73 +1,93 @@
-@extends('templates.template', [
-    'title'=> 'Pedido Venda',
-    'prev_router'=> 'home',
-    'icon'=> 'mdi mdi-briefcase',
-    'active_router'=> 'pedidosVendas'
-])
-@section('container')
+@extends('templates.layout')
+@section('content-wrap')
 
-
-<div class="row no-margin-bottom">
-    <div class="col s12">
-        <h4>
-            Pedido Venda
-        </h4>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-            <form method="post" action="{{route('pedidosVendas.store')}}" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="id" name="id" value="{{ $pedidoVenda->id }}" />
+<div class="content-wrap">
+        <div class="main" >
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="input col s6">
-                        <label for="nome">Nome *</label><br />
-                        <input type="text" name="nome" id="nome" placeholder="Nome" value="{{ $pedidoVenda->nome }}">
-                    </div>
-                    <div class="input col s6">
-                        <label for="data">Data *</label><br />
-                        <input type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoVenda->data }}">
-                    </div>
-                    <div class="input col s6">
-                         <label for="situacao">Situação *</label><br />
-                      <select class="browser-default" required name="situacao">
-                        <option value="">Selecione</option>
-                        <option value="0"  <?php if($pedidoVenda->situacao == 0) {echo 'selected';} ?>>Aberto</option>
-                        <option value="1" <?php if($pedidoVenda->situacao == 1) {echo 'selected';} ?>>Fechado</option>
-                        <option value="2" <?php if($pedidoVenda->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
-                      </select>
-                    </div>
-                    <div class="input col s6">
-                      <label for="idVendedor">Vendedor</label><br />
-                      <select class="browser-default" name="idVendedor">
-                      @foreach($vendedores as $vendedor)
-                        <option value="{{ $vendedor->id }}">{{ $vendedor->nome }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-
-                    <div class="input col s6">
-                      <label for="idCliente">Cliente</label><br />
-                      <select class="browser-default" name="idCliente">
-                      @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-
+                  <div class="col-lg-8 p-r-0 title-margin-right">
+                      <div class="page-header">
+                          <div class="page-title">
+                              <h1>Cadastro de Pedidos de Vendas</h1>
+                          </div>
+                      </div>
                   </div>
-
-
-                <div class="row">
-                    <button type="submit" class="waves-effect waves-green btn teal right">Salvar</button>
-                    <a class="waves-effect waves-green btn-flat right" href="{{ route('pedidosVendas.index') }}">Cancelar</a>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-l-0 title-margin-left">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Table-Basic</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
                 </div>
-            </form>
-            <p style="margin-left: 2%">* Campos Obrigatórios</p>
-        </div>
-    </div>
-</div>
+                <!-- /# row -->
+                <section id="main-content">
+                  <div class="row">
+                      <div class="col s12">
+                          <div class="card">
+                              <form method="post" action="{{route('pedidosVendas.store')}}" enctype="multipart/form-data">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                  <input type="hidden" id="id" name="id" value="{{ $pedidoVenda->id }}" />
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                          <label for="nome">Descrição *</label><br />
+                                          <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Descrição" value="{{ $pedidoVenda->nome }}">
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <label for="data">Data *</label><br />
+                                          <input class="form-control input-default " type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoVenda->data }}">
+                                      </div>
+                                      <div class="col-lg-3">
+                                           <label for="situacao">Situação *</label><br />
+                                        <select class="form-control input-default " required name="situacao">
+                                          <option value="">Selecione</option>
+                                          <option value="0" <?php if($pedidoVenda->situacao == 0) {echo 'selected';} ?>>Aberto</option>
+                                          <option value="1" <?php if($pedidoVenda->situacao == 1) {echo 'selected';} ?>>Fechado</option>
+                                          <option value="2" <?php if($pedidoVenda->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
+                                        </select>
+
+                                      </div>
+                                      <div class="col-lg-6">
+                                        <label for="idCliente">Cliente</label><br />
+                                        <select class="form-control input-default " name="idCliente">
+                                        @foreach($clientes as $cliente)
+                                          <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                      <div class="col-lg-6">
+                                        <label for="idVendedor">Vendedor</label><br />
+                                        <select class="form-control input-default " name="idVendedor">
+                                        @foreach($vendedores as $vendedor)
+                                          <option value="{{ $vendedor->id }}">{{ $vendedor->nome }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+
+                                    </div>
+
+
+                                    <p style="margin-left: 2%">* Campos Obrigatórios</p>
+
+                                    <div class="row" style="margin-top: 2%">
+                                        <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
+                                        <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('pedidosVendas.index') }}">Cancelar</a>
+                                    </div>
+                              </form>
+
+                          </div>
+                      </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+
 
 @endsection
