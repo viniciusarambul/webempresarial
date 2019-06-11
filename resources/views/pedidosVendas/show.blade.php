@@ -152,7 +152,7 @@
                               @else
 
                               @if(empty($pedidoVenda->titulo))
-                          
+
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPagamento">
                                   Adicionar Pagamento
                                 </button>
@@ -224,10 +224,10 @@
                                 <div class="col s12">
                                     <div class="card">
                                         <form method="post" name="meu_form" action="{{route('pedidosVendas.pedidoItem.store', ['pedidoVenda' => $pedidoVenda->id])}}" enctype="multipart/form-data">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
-                                            <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
-                                            <div class="row">
+                                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                          <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
+                                          <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
+                                          <div class="row">
 
                                               <div class="col-lg-6">
                                                 <label for="idProduto">Produto</label><br />
@@ -252,11 +252,7 @@
 
                                                 </div>
 
-                                              </div>
-
-
-
-
+                                            </div>
                                     </div>
                                 </div>
 

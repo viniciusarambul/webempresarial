@@ -4,6 +4,9 @@ namespace App\Domains\Categorias;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Fornecedores\Fornecedor;
+use App\Domains\Produtos\Produto;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class CategoriaController extends Controller
 {
@@ -55,9 +58,15 @@ class CategoriaController extends Controller
 
     public function destroy(Categoria $categoria)
     {
-      $categoria->delete();
+        $produto = Produto::where('categoria', $categoria->id)->get();
 
-      return redirect()->route('categorias.index');
+        if ($produto->count() > 0) {
+          return redirect()->route('categorias.index')->with('error', 'Não pode excluir Categoria vinculado à um Produto');
+        }
+
+         $categoria->delete();
+
+         return redirect()->route('categorias.index')->with('success', 'Categoria excluida com sucesso');
     }
 
     private function form(Categoria $categoria) {

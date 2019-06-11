@@ -16,7 +16,7 @@ class PedidoCompra extends Model
       return "Aberto";
     }
     if($this->situacao == 1){
-      return "Fechado";
+      return "Faturado";
     }
     if($this->situacao == 2){
       return "Cancelado";

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Categorias\Categoria;
+use App\Domains\Pedidos\Pedidoitem;
 use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
@@ -58,9 +59,15 @@ class ProdutoController extends Controller
 
     public function destroy(Produto $produto)
     {
+      $pedido = Pedidoitem::where('idProduto', $produto->id)->get();
+
+      if ($pedido->count() > 0) {
+        return redirect()->route('produtos.index')->with('error', 'Não pode excluir produto vinculado à uma Venda ou Compra');
+      }
+
       $produto->delete();
 
-      return redirect()->route('produtos.index');
+      return redirect()->route('produtos.index')->with('success', 'Produto excluido com sucesso');
     }
 
     private function form(Produto $produto) {
@@ -83,7 +90,7 @@ class ProdutoController extends Controller
 
       $produto->save();
 
-      return redirect()->route('produtos.index');
+      return redirect()->route('produtos.index')->with('success', 'Produto inserido com sucesso');
     }
 
     public function consulta(Request $request){

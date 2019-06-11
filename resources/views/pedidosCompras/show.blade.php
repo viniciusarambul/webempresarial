@@ -55,7 +55,7 @@
                               <div class="row">
                                 <div class="col-lg-6">
                                 <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"   href="{{ route('pedidosCompras.edit', ['$pedidoCompra' => $pedidoCompra->id]) }}"><i class="ti-settings"></i>Editar</a>
-                                <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosCompras.destroy', ['$pedidoCompra' => $pedidoCompra->id]) }}"><i class="ti-settings"></i>Excluir</button></a>
+                                <a class="btn btn-danger btn-flat m-b-15 m-l-15" style="color:white"  data-toggle="modal" data-target="#exclusao">Excluir</a>
 
                               </div>
                               </div>
@@ -67,15 +67,8 @@
 
                       <div class="row">
                         <div class="col s12">
-                          @if($pedidoCompra->situacao == 1 )
+                          @if($pedidoCompra->situacao <> 1 )
 
-                          @else
-
-                                &nbsp;
-                            <!--    <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidosCompras.pedidoItem.create',['pedidoCompra' => $pedidoCompra->id]) }}">
-                                  <i class="ti-plus"></i>Adicionar Produto
-
-                                </a> -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meuModal">
                                   Adicionar Produtos
                                 </button>
@@ -152,7 +145,7 @@
                               @else
 
                               @if(empty($pedidoCompra->titulo))
-                            
+
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPagamento">
                                   Adicionar Pagamento
                                 </button>
@@ -345,7 +338,33 @@
                 </div>
             </div>
           </div>
-      </div>
+      </div><!-- MODAL EXCLUSÃO -->
+      <div class="modal" tabindex="-1" role="dialog" id="exclusao">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="card">
+                        <div class="col-lg-12">
+                          Deseja realmente excluir o Cliente <span id="categoriaDescricao"> </span> {{$pedidoCompra->nome}} ?
+                        </div>
+                        <form class="col-lg-12" method="post" action="{{ route('pedidosCompras.destroy',['$pedidoCompra' => $pedidoCompra->id])}}">
+                            {{ csrf_field() }}
+                             <input type="hidden" name="_method" value="DELETE">
+                             <input type="hidden" name="id" id="id" value="{{$pedidoCompra->id}}">
+                             <div class="col-lg-12">
+                                 <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Sim</button>
+                                   <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('pedidosCompras.index') }}">Cancelar</a>
+                              </div>
+                        </form>
+
+                      </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
 
 
 @endsection

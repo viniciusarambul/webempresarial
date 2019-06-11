@@ -83,12 +83,32 @@ class ContaReceberController extends Controller
       ]);
     }
 
+    public function cancel(ContaReceber $contaReceber, Request $request){
+
+
+      $contaReceber->situacao = 0;
+      $contaReceber->valorPago = 0;
+      $contaReceber->dataPagamento = '0000-00-00';
+      $contaReceber->save();
+      $query = ContaReceber::query();
+
+        if($request->get('filter')){
+            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
+        }
+
+        $contasReceber = $query->paginate(5);
+      return view('contasReceber.index',[
+        'contasReceber' => $contasReceber,
+        'filter' => $request->get('filter')
+      ]);
+    }
+
 
 
     private function save(ContaReceber $contaReceber, ContaReceberRequest $request)
     {
       if($request->get('baixa') == null){
-      $contaReceber->situacao = $request->get('situacao');
+      $contaReceber->situacao = 1;
       $contaReceber->valorPago = $request->get('valorPago');
       $contaReceber->dataPagamento = $request->get('dataPagamento');
 
@@ -108,6 +128,24 @@ class ContaReceberController extends Controller
 
       $contaReceber->save();
     }
+
+    if($contaReceber->valorPago < $contaReceber->valor){
+      $contanova = new ContaReceber;
+      $contanova->descricao = $contaReceber->id .'Parcial'. $contaReceber->descricao;
+      $contanova->dataEmissao = date('Y-m-d');
+      $contanova->dataVencimento = date('Y-m-d', strtotime('+' . 30 . 'days'));
+      $contanova->situacao = 0;
+      $contanova->idFornecedor = $contaReceber->idVendedor;
+      $contanova->idProduto = $contaReceber->idCliente;
+      $contanova->quantidade = $contaReceber->quantidade;
+      $contanova->parcelas = '1';
+      $contanova->tipoPagamento = $contaReceber->tipoPagamento;
+      $contanova->valor = ($contaReceber->valor - $contaReceber->valorPago);
+
+      $contanova->save();
+    }
+
+
       if($contaReceber->wasRecentlyCreated){
         $parcelas = $contaReceber->parcelas ? $contaReceber->parcelas : 1;
         for ($x = 0; $x<$parcelas; $x++){

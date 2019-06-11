@@ -2,6 +2,20 @@
 @section('content-wrap')
 <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
         <div class="content-wrap">
+          @if (\Session::has('error'))
+              <div class="alert alert-danger">
+                  <ul>
+                      <li>{!! \Session::get('error') !!}</li>
+                  </ul>
+              </div>
+          @endif
+          @if (\Session::has('success'))
+              <div class="alert alert-success">
+                  <ul>
+                      <li>{!! \Session::get('success') !!}</li>
+                  </ul>
+              </div>
+          @endif
               <div class="main" >
                     <div class="container-fluid">
                         <div class="row">
@@ -72,12 +86,12 @@
                                                           <tr class="with-options">
                                                               <td>{{$categoria->id}}</td>
                                                               <td>{{$categoria->descricao}}</td>
-                                                              <td style="width: 30%">
+                                                              <td >
 
-                                                                  <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('categorias.edit', ['$categoria' => $categoria->id]) }}"><i class="ti-settings"></i>Editar</a>
-
-                                                                  <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('categorias.destroy', ['$categoria' => $categoria->id]) }}"><i class="ti-settings"></i>Excluir</button>
-
+                                                                  <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('categorias.edit', ['$categoria' => $categoria->id]) }}"><i class="ti-settings"></i>Ver</a>
+                                                                  <!--<a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  data-toggle="modal" data-target="#meuModal" ><i class="ti-settings"></i>Excluir</a>-->
+                                                                  <!-- <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" onclick="deletar({{$categoria->id}},'{{$categoria->descricao}}')"><i class="ti-settings"></i>Excluir</a>
+                                                                  -->
 
                                                               </td>
 
@@ -102,4 +116,8 @@
                     </div>
                 </div>
             </div>
+
+
+
+
 @endsection

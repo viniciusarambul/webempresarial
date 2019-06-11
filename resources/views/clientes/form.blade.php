@@ -110,6 +110,7 @@
                                     <div class="row" style="margin-top: 2%">
                                         <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
                                         <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('clientes.index') }}">Cancelar</a>
+                                        <a class="btn btn-danger btn-flat m-b-15 m-l-15" style="color:white"  data-toggle="modal" data-target="#meuModal">Excluir</a>
                                     </div>
                               </form>
                           </div>
@@ -120,5 +121,34 @@
             </div>
           </div>
         </div>
-                  
-                  @endsection
+
+
+        <!-- MODAL EXCLUSÃO -->
+        <div class="modal" tabindex="-1" role="dialog" id="meuModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                          <div class="col-lg-12">
+                            Deseja realmente excluir o Cliente <span id="categoriaDescricao"> </span> {{$cliente->nome}} ?
+                          </div>
+                          <form class="col-lg-12" method="post" action="{{ route('clientes.destroy',['$cliente' => $cliente->id])}}">
+                              {{ csrf_field() }}
+                               <input type="hidden" name="_method" value="DELETE">
+                               <input type="hidden" name="id" id="id" value="{{$cliente->id}}">
+                               <div class="col-lg-12">
+                                   <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Sim</button>
+                                     <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('clientes.index') }}">Cancelar</a>
+                                </div>
+                          </form>
+
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+@endsection

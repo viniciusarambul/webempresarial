@@ -2,6 +2,20 @@
 @section('content-wrap')
 <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
         <div class="content-wrap">
+          @if (\Session::has('error'))
+              <div class="alert alert-danger">
+                  <ul>
+                      <li>{!! \Session::get('error') !!}</li>
+                  </ul>
+              </div>
+          @endif
+          @if (\Session::has('success'))
+              <div class="alert alert-success">
+                  <ul>
+                      <li>{!! \Session::get('success') !!}</li>
+                  </ul>
+              </div>
+          @endif
                 <div class="main">
                     <div class="container-fluid">
                         <div class="row">
@@ -72,10 +86,10 @@
                                                   <td>{{$cliente->cidade}}</td>
                                                   <td style="width: 30%">
 
-                                                      <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('clientes.edit', ['$cliente' => $cliente->id]) }}"><i class="ti-settings"></i>Editar</a>
+                                                      <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('clientes.edit', ['$cliente' => $cliente->id]) }}"><i class="ti-settings"></i>Ver</a>
 
-                                                      <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('clientes.destroy', ['$cliente' => $cliente->id]) }}"><i class="ti-settings"></i>Excluir</button>
-
+                                                      <!--<a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('clientes.destroy', ['$cliente' => $cliente->id]) }}"><i class="ti-settings"></i>Excluir</button>
+                                                      -->
 
                                                   </td>
 

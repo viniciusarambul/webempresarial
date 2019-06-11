@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
+use App\Domains\PedidosVendas\PedidoVenda;
 use Illuminate\Support\Facades\DB;
 
 class VendedorController extends Controller
@@ -58,9 +59,14 @@ class VendedorController extends Controller
 
     public function destroy(Vendedor $vendedor)
     {
+      $pedido = PedidoVenda::where('idVendedor', $vendedor->id)->get();
+
+      if ($pedido->count() > 0) {
+        return redirect()->route('vendedores.index')->with('error', 'Não pode excluir Vendedor vinculado à uma Venda');
+      }
       $vendedor->delete();
 
-      return redirect()->route('vendedores.index');
+      return redirect()->route('vendedores.index')->with('success', 'Vendedor excluido com sucesso');
     }
 
     private function form(Vendedor $vendedor) {
@@ -87,7 +93,7 @@ class VendedorController extends Controller
       $vendedor->bairro = $request->get('bairro');
       $vendedor->numero = $request->get('numero');
       $vendedor->status = $request->get('status');
-    
+
       $vendedor->save();
 
       return redirect()->route('vendedores.index');

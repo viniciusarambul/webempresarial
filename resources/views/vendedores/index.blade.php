@@ -73,10 +73,10 @@
                                                   <td>{{$vendedor->email}}</td>
                                                   <td>{{$vendedor->cidade}}</td>
                                                   <td style="width: 30%">
-                                                    <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('vendedores.edit', ['$vendedor' => $vendedor->id]) }}"><i class="ti-settings"></i>Editar</a>
+                                                    <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('vendedores.edit', ['$vendedor' => $vendedor->id]) }}"><i class="ti-settings"></i>Ver</a>
 
-                                                    <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('vendedores.destroy', ['$vendedor' => $vendedor->id]) }}"><i class="ti-settings"></i>Excluir</button>
-
+                                                    <!--<a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('vendedores.destroy', ['$vendedor' => $vendedor->id]) }}"><i class="ti-settings"></i>Excluir</button>
+                                                    -->
                                                   </td>
 
                                               </tr>

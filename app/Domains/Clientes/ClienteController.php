@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
 use Illuminate\Support\Facades\DB;
+use App\Domains\PedidosVendas\PedidoVenda;
 
 
 class ClienteController extends Controller
@@ -59,9 +60,15 @@ class ClienteController extends Controller
 
     public function destroy(Cliente $cliente)
     {
+      $pedido = PedidoVenda::where('id_cliente', $cliente->id)->get();
+
+      if ($pedido->count() > 0) {
+        return redirect()->route('clientes.index')->with('error', 'Não pode excluir Cliente vinculado à uma Venda');
+      }
+
       $cliente->delete();
 
-      return redirect()->route('clientes.index');
+      return redirect()->route('clientes.index')->with('success', 'Vendedor excluido com sucesso');
     }
 
     private function form(Cliente $cliente) {

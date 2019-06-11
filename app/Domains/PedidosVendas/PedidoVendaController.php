@@ -127,6 +127,15 @@ class PedidoVendaController extends Controller
       ]);
 
     }
+
+    public function faturar(PedidoVenda $pedidoVenda){
+
+
+      $pedidoVenda->situacao = 1;
+      $pedidoVenda->save();
+      return redirect()->route('pedidosVendas.index');
+    }
+
     public function Baixar(Request $request)
     {
         $datainicial = $request->get('data_incial');

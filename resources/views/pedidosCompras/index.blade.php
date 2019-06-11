@@ -74,11 +74,14 @@
                                                     <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}"><i class="ti-settings"></i>Ver / Editar</a>
 
                                                     @else
+                                                    <a class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidosCompras.faturar', ['$pedidoCompra' => $pedidoCompra->id]) }}">
+                                                      Faturar
+                                                    </a>
                                                     <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}"><i class="ti-settings"></i>Ver / Editar</a>
 
-                                                      <a class="waves-effect waves-light btn black" href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
+                                                      <!--<a class="waves-effect waves-light btn black" href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}">
                                                           <span style="font-size: 14px; color: white">Ver</span>
-                                                      </a>
+                                                      </a>-->
                                                       @endif
                                                   </td>
 

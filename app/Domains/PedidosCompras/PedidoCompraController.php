@@ -44,7 +44,7 @@ class PedidoCompraController extends Controller
 
     public function show(PedidoCompra $pedidoCompra,PedidoItem $pedidoItem, PedidoTitulo $pedidoTitulo)
     {
-        
+
         $produtos = Produto::all();
         return view('pedidosCompras.show', [
           'pedidoCompra' => $pedidoCompra,
@@ -128,6 +128,13 @@ class PedidoCompraController extends Controller
       return redirect()->route('pedidosCompras.show', ['id' => $pedidoCompra->id]);
     }
 
+    public function faturar(PedidoCompra $pedidoCompra){
+
+
+      $pedidoCompra->situacao = 1;
+      $pedidoCompra->save();
+      return redirect()->route('pedidosCompras.index');
+    }
 
     public function consulta(Request $request){
       $pedidosCompras = PedidoCompra::all();

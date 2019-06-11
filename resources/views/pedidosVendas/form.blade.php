@@ -47,7 +47,7 @@
                                         <select class="form-control input-default " required name="situacao">
                                           <option value="">Selecione</option>
                                           <option value="0" <?php if($pedidoVenda->situacao == 0) {echo 'selected';} ?>>Aberto</option>
-                                          <option value="1" <?php if($pedidoVenda->situacao == 1) {echo 'selected';} ?>>Fechado</option>
+                                          <option value="1" <?php if($pedidoVenda->situacao == 1) {echo 'selected';} ?>>Faturado</option>
                                           <option value="2" <?php if($pedidoVenda->situacao == 2) {echo 'selected';} ?>>Cancelado</option>
                                         </select>
 

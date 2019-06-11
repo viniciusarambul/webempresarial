@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Domains\Core\Types\CPF;
 use App\Domains\Core\Types\CNPJ;
 use Illuminate\Support\Facades\DB;
+use App\Domains\PedidosCompras\PedidoCompra;
 
 class FornecedorController extends Controller
 {
@@ -59,9 +60,15 @@ class FornecedorController extends Controller
 
     public function destroy(Fornecedor $fornecedor)
     {
+      $pedido = PedidoCompra::where('idFornecedor', $fornecedor->id)->get();
+
+      if ($pedido->count() > 0) {
+        return redirect()->route('fornecedores.index')->with('error', 'Não pode excluir Fornecedor vinculado à uma Compra');;
+      }
+
       $fornecedor->delete();
 
-      return redirect()->route('fornecedores.index');
+      return redirect()->route('fornecedores.index')->with('success', 'Fornecedor excluido com sucesso');
     }
 
     private function form(Fornecedor $fornecedor) {
