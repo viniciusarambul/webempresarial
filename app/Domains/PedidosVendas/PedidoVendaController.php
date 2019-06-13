@@ -141,17 +141,18 @@ class PedidoVendaController extends Controller
         $datainicial = $request->get('data_incial');
         $datafinal = $request->get('data_final');
         if($datainicial <> ''){
-          $inicio = $datafinal;
+          $inicio = $datainicial;
           $fim = $datafinal;
-        $pedidosVendas = db::select("SELECT pv.*, c.nome as clientenome, v.nome as vendedornome from tcc.pedidovenda pv left join clientes c on c.id = pv.idCliente left join vendedors v on v.id=pv.idVendedor where data >= '$datainicial' and data <= '$datafinal'");
-      }else{
+        $pedidosVendas = db::select("SELECT pv.*,pi.*, c.nome as clientenome, v.nome as vendedornome from sandbox.pedidovenda pv left join sandbox.pedidoitens pi on pi.idPedido = pv.id left join sandbox.clientes c on c.id = pv.idCliente left join sandbox.vendedors v on v.id=pv.idVendedor where data >= '$datainicial' and data <= '$datafinal' order by pv.id");
+        }else{
         $inicio = '';
         $fim ='';
-        $pedidosVendas = db::select("SELECT pv.*, c.nome as clientenome, v.nome as vendedornome from tcc.pedidovenda pv left join clientes c on c.id = pv.idCliente left join vendedors v on v.id=pv.idVendedor ");
+        $pedidosVendas = db::select("SELECT pv.*,pi.*, c.nome as clientenome, v.nome as vendedornome from sandbox.pedidovenda pv left join sandbox.pedidoitens pi on pi.idPedido = pv.id left join sandbox.clientes c on c.id = pv.idCliente left join sandbox.vendedors v on v.id=pv.idVendedor");
       }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pedidosVendas.relatorio', ['pedidosVendas' => $pedidosVendas, 'inicio' => $inicio, 'fim' => $fim]);
-        $pdf->setPaper('A4', 'landscape');
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('pedidosVendas.relatorio', ['pedidosVendas' => $pedidosVendas, 'inicio' => $inicio, 'fim' => $fim]);
         return $pdf->stream();
     }
 }

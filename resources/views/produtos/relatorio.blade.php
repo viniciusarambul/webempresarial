@@ -6,7 +6,7 @@
               font-family: 'Arial', sans-serif;
               margin: 0;
               font-size: 15px;
-              background-color: #ccc;
+
           }
 
           main {
@@ -45,7 +45,6 @@
     <tr>
       <td style="font-size: 25px!important; padding: 20px; width: 60%!important;">WEB EMPRESARIAL</td>
 
-      <td style="width: 20%!important; text-align: center"><b>Filtros Selecionados </b><br><br>Filtro De:{{date('d/m/Y', strtotime($inicio))}}<br>Filtro Até:{{date('d/m/Y', strtotime($fim))}}</td>
 
     </tr>
   </table>
@@ -57,7 +56,9 @@
                         <th align="center" style="width:20% !important">Nome</th>
                         <th align="center" style="width:20% !important">Categoria</th>
                         <th align="center" style="width:15% !important">Valor Unitário</th>
+                        <th align="center" style="width:15% !important">Valor Venda</th>
                         <th align="center" style="width:25% !important">Quantidade em Estoque</th>
+                        <th align="center" style="width:25% !important">Valor em Estoque</th>
                         <th align="center" style="width:20% !important">Fornecedor</th>
                     </tr>
                 </thead>
@@ -71,8 +72,10 @@
 
               <td>{{ $product->nome }}</td>
               <td style="text-align: center">{{ $product->descricaocategoria }}</td>
-              <td style="text-align: right">R${{ $product->valorUnitario }}</td>
+              <td style="text-align: right">R${{ number_format($product->valorUnitario, 2, ',','.') }}</td>
+              <td style="text-align: right">R${{ number_format($product->valorSugerido, 2, ',','.') }}</td>
               <td style="text-align: center">{{ $product->quantidade }}</td>
+              <td style="text-align: center">{{ number_format($product->quantidade*$product->valorSugerido, 2, ',','.') }}</td>
               <td style="text-align: center">{{ $product->nomeFornecedor }}</td>
 
 

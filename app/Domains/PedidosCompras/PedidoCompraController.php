@@ -4,6 +4,7 @@ namespace App\Domains\PedidosCompras;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Produtos\Produto;
+use App\Domains\Categorias\Categoria;
 use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\Pedidos\Pedidotitulo;
 use App\Domains\Fornecedores\Fornecedor;
@@ -46,10 +47,14 @@ class PedidoCompraController extends Controller
     {
 
         $produtos = Produto::all();
+        $categorias = Categoria::all();
+        $fornecedores = Fornecedor::all();
         return view('pedidosCompras.show', [
           'pedidoCompra' => $pedidoCompra,
           'pedidoTitulo' => $pedidoTitulo,
           'pedidoItem' => $pedidoItem,
+          'categorias' => $categorias,
+          'fornecedores' => $fornecedores,
           'produtos' => $produtos,
           'total' => $pedidoCompra->itens->reduce(function($total, $item){
             return $total+$item->preco;
@@ -133,6 +138,14 @@ class PedidoCompraController extends Controller
 
       $pedidoCompra->situacao = 1;
       $pedidoCompra->save();
+
+
+        $pedidoCompra->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade += $item->quantidade;
+          $produto->save();
+        });
+
       return redirect()->route('pedidosCompras.index');
     }
 

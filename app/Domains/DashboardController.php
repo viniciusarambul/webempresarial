@@ -32,6 +32,14 @@ class DashboardController extends Controller
       $categoriasmes = db::select('SELECT YEAR(created_at) as ano, MONTH(created_at) as mes, count(created_at) as contador
       FROM categorias group by YEAR(created_at), MONTH(created_at)');
 
+      date_default_timezone_set('America/Sao_Paulo');
+      $hoje = date('Y-m-d');
+
+      $recebidos = db::select("SELECT SUM(valorPago) as soma FROM sandbox.contaReceber where dataPagamento = '$hoje'");
+      $pagos = db::select("SELECT SUM(valorPago) as soma FROM sandbox.contaPagar where dataPagamento = '$hoje'");
+      $vendasdia = db::select("SELECT SUM(preco) as soma FROM sandbox.pedidotitulos where tipo_pedido = 'VENDA' and dataEmissao = '$hoje'");
+      $comprasdia = db::select("SELECT SUM(preco) as soma FROM sandbox.pedidotitulos where tipo_pedido = 'COMPRA' and dataEmissao = '$hoje'");
+      //$fluxo = db::select("SELECT SUM(preco) as soma FROM sandbox.pedidotitulos where tipo_pedido = 'COMPRA' and dataEmissao = '$hoje'");
 
      return view('dashboard',[
        'pedidocomprabar' => $pedidocomprabar,
@@ -39,7 +47,11 @@ class DashboardController extends Controller
        'clientesmes' => $clientesmes,
        'fornecedoresmes' => $fornecedoresmes,
        'produtosmes' => $produtosmes,
-       'categoriasmes' => $categoriasmes
+       'categoriasmes' => $categoriasmes,
+       'recebidos' => $recebidos,
+       'pagos' => $pagos,
+       'vendasdia' => $vendasdia,
+       'comprasdia' => $comprasdia
      ]);
     }
 }

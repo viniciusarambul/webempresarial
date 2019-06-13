@@ -36,7 +36,7 @@
                                   <div class="row">
                                       <div class="col-lg-6">
                                           <label for="nome">Descrição *</label><br />
-                                          <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Descrição" value="{{ $pedidoCompra->nome }}">
+                                          <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Descrição" required value="{{ $pedidoCompra->nome }}">
                                       </div>
                                       <div class="col-lg-3">
                                           <label for="data">Data *</label><br />

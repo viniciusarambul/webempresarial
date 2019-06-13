@@ -1,50 +1,56 @@
-@extends('templates.template', [
-    'title'=> 'vendedores',
-    'prev_router'=> 'home',
-    'icon'=> 'mdi mdi-account',
-    'active_router'=> 'vendedores'
-])
-@section('container')
+@extends('templates.layout')
+@section('content-wrap')
+<link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+        <div class="content-wrap">
+                <div class="main">
+                    <div class="container-fluid">
+                        <section id="main-content">
 
-<div class="row">
-    <div class="col s12">
-        <div class="card">
-          <div class="card-content" >
-            <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('vendedores.relatorio') }}">
-              <div class="row">
-                <div class="col s12">
-                  <h1 style="text-align: center">Filtro Rel. Vendedores</h1>
-                </div>
-                <div class=" col s6">
-                  <h3 style="text-align: center">Data de criação</h3>
-                  <div class="input col s6">
-                      <label for="data_inicial">De</label>
-                      <input type="date" name="data_incial" id="data_inicial" >
+                          <div class="row">
+                              <div class="col s12">
+                                  <div class="card">
+                                    <div class="card-content" >
+                                      <form class="row no-margin-bottom" target="_blank" method="GET" action="{{ route('vendedores.relatorio') }}">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <h1 style="text-align: center">Filtro Rel. Vendedor</h1>
+                                          </div>
+                                          <div class="col-lg-6">
+
+                                            <div class="input col-lg-12" >
+                                              <label for="cidade">Cidade *</label><br />
+                                              <select class="form-control input-default" name="cidade">
+                                                    <option value="">Selecione</option>
+                                              @foreach($vendedores as $cliente)
+
+                                                <option value="{{ $cliente->cidade }}">{{ $cliente->cidade }}</option>
+                                                @endforeach
+                                              </select>
+                                            </div>
+                                              <div class="col-lg-12">
+                                                <label for="nome">Nome:</label>
+                                                <input class="form-control input-default " type="text" name="nome" id="nome" >
+                                              </div>
+
+                                          </div>
+                                          </div>
+
+
+
+                                        </div>
+
+                                      <div class="row">
+                                        <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Consultar</button>
+
+                                      </div>
+                                </form>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
                   </div>
-                  <div class="input col s6">
-                      <label for="data_final">Até</label>
-                      <input type="date" name="data_final" id="data_final" >
-                  </div>
-                </div>
-
-
-                <div class=" col s6">
-                  <h3 style="text-align: center">Nome</h3>
-                  <div class="col s12">
-                    <label for="nome">Nome:</label>
-                    <input type="text" name="nome" id="nome" >
-                  </div>
-
-              </div>
-              </div>
-
-            <div class="row">
-              <button type="submit"  class="waves-effect waves-green btn teal right">Consultar</button>
-            </div>
-      </form>
-          </div>
-        </div>
-    </div>
-</div>
 
 @endsection

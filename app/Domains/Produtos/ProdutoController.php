@@ -84,6 +84,7 @@ class ProdutoController extends Controller
     {
       $produto->nome = $request->get('nome');
       $produto->valorUnitario = $request->get('valorUnitario');
+      $produto->valorSugerido = $request->get('valorSugerido');
       $produto->quantidade = $request->get('quantidade');
       $produto->fornecedor = $request->get('fornecedor');
       $produto->categoria = $request->get('categoria');
@@ -94,30 +95,41 @@ class ProdutoController extends Controller
     }
 
     public function consulta(Request $request){
-      $produtos = Produto::all();
+        $produtos = db::select("SELECT id, nome from sandbox.fornecedores");
       return view('produtos.consulta', [
         'produtos' => $produtos
 
       ]);
 
     }
+
+    public function produto(Produto $produto){
+
+      return view('pedidosCompras.produtos',[
+            'produto' => $produto
+      ]);
+
+    }
     public function Baixar(Request $request)
     {
-        $datainicial = $request->get('data_incial');
-        $datafinal = $request->get('data_final');
+
         $filtronome = $request->get('nome');
-        if($datainicial <> ''){
-          $inicio = $datafinal;
-          $fim = $datafinal;
-        $produtos = db::select("SELECT p.*, c.descricao as descricaocategoria, f.nome as nomeFornecedor from tcc.produtos p left join categorias c on c.id = p.categoria left join fornecedores f on f.id = p.fornecedor where DATE(p.created_at) >= '$datainicial' and DATE(p.created_at) <= '$datafinal' and p.nome like '%". $filtronome ."%'");
+        $filtrofornecedor = $request->get('fornecedor');
+        if($filtrofornecedor <> ''){
+
+        $produtos = db::select("SELECT p.*, c.descricao as descricaocategoria, f.nome as nomeFornecedor from sandbox.produtos p left join sandbox.categorias c on c.id = p.categoria left join
+          fornecedores f on f.id = p.fornecedor where p.fornecedor = '$filtrofornecedor' and p.nome like '%". $filtronome ."%'");
       }else{
-        $inicio = '';
-        $fim ='';
-        $produtos = db::select("SELECT p.*, c.descricao as descricaocategoria, f.nome as nomeFornecedor from tcc.produtos p left join categorias c on c.id = p.categoria left join fornecedores f on f.id = p.fornecedor");
+
+        $produtos = db::select("SELECT * from sandbox.produtos where nome like '%". $filtronome ."%'");
       }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('produtos.relatorio', ['produtos' => $produtos, 'inicio' => $inicio, 'fim' => $fim]);
-        $pdf->setPaper('A4', 'landscape');
+        //$pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $produtos, 'inicio' => $inicio, 'fim' => $fim]);
+        //$pdf->setPaper('A4', 'landscape');
+        //return $pdf->stream();
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('produtos.relatorio', ['produtos' => $produtos]);
         return $pdf->stream();
     }
 

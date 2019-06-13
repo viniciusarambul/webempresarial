@@ -20,7 +20,7 @@ class ClienteController extends Controller
             ->orWhere('cnpj', 'like', '%' . $request->get('filter') . '%');
         }
 
-        $clientes = $query->paginate(1);
+        $clientes = $query->paginate(10);
 
         return view('clientes.index', [
           'clientes' => $clientes,
@@ -60,7 +60,7 @@ class ClienteController extends Controller
 
     public function destroy(Cliente $cliente)
     {
-      $pedido = PedidoVenda::where('id_cliente', $cliente->id)->get();
+      $pedido = PedidoVenda::where('idCliente', $cliente->id)->get();
 
       if ($pedido->count() > 0) {
         return redirect()->route('clientes.index')->with('error', 'Não pode excluir Cliente vinculado à uma Venda');
@@ -109,9 +109,13 @@ class ClienteController extends Controller
     }
 
     public function consulta(Request $request){
-      $clientes = Cliente::all();
+    //  $clientes = Cliente::all()->groupBy('cidade')->get();
+      $clientes = db::select("SELECT cidade from sandbox.clientes group by cidade");
+
+
       return view('clientes.consulta', [
-        'clientes' => $clientes
+        'clientes' => $clientes,
+
 
       ]);
 
@@ -122,18 +126,21 @@ class ClienteController extends Controller
         $datainicial = $request->get('data_incial');
         $datafinal = $request->get('data_final');
         $filtronome = $request->get('nome');
-        if($datainicial <> ''){
-          $inicio = $datafinal;
-          $fim = $datafinal;
-        $clientes = db::select("SELECT * from tcc.clientes where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
+        $filtrocidade = $request->get('cidade');
+        if($filtrocidade <> ''){
+
+        $clientes = db::select("SELECT * from sandbox.clientes where cidade = '$filtrocidade' and nome like '%". $filtronome ."%'");
       }else{
-        $inicio = '';
-        $fim ='';
-        $clientes = db::select("SELECT * from tcc.clientes");
+
+        $clientes = db::select("SELECT * from sandbox.clientes where nome like '%". $filtronome ."%'");
       }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $clientes, 'inicio' => $inicio, 'fim' => $fim]);
-        $pdf->setPaper('A4', 'landscape');
+        //$pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $clientes, 'inicio' => $inicio, 'fim' => $fim]);
+        //$pdf->setPaper('A4', 'landscape');
+        //return $pdf->stream();
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('clientes.relatorio', ['clientes' => $clientes]);
         return $pdf->stream();
     }
 

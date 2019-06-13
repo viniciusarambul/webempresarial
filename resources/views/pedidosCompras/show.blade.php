@@ -74,10 +74,10 @@
                                 </button>
 
                             @endif
-                            <div class="card">
+                            <div class="card table-responsive">
                               <?php $totalpedido = 0; ?>
                                 @if(count($pedidoCompra->itens))
-                                <table>
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Produto</th>
@@ -96,7 +96,7 @@
                                             <td>{{$item->produto->nome}}</td>
                                             <td>{{$item->quantidade}}</td>
                                             <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
-                                            <td>{{number_format($item->preco, 2, ',', '.')}}</td>
+                                            <td style="text-align: right">R$ {{number_format($item->preco, 2, ',', '.')}}</td>
                                             <td >
                                 @if($pedidoCompra->situacao == 1)
 
@@ -122,7 +122,7 @@
 
                                         <tr>
                                           <td colspan="3" style="text-align: right">Total</td>
-                                          <td colspan="1">{{number_format($pedidoCompra->totalpreco, 2, ',', '.')}}</td>
+                                          <td colspan="1">R$ {{number_format($pedidoCompra->totalpreco, 2, ',', '.')}}</td>
                                         </tr>
 
                                     </tbody>
@@ -178,16 +178,27 @@
                 </div>
               </div>
 
-              <script>
-
-              $('#meuModal').on('shown.bs.modal', function () {
-                $('#meuInput').trigger('focus')
-              })
-
-              </script>
-
 
               <script>
+              $(document).ready(function(e) {
+
+                  $('#idProduto').on('change', function() {
+                    var produto  = $('#idProduto option:selected').val();
+
+                    console.log('Produto = '+ produto);
+
+                    $.get('/produtos/' + produto, function (resposta) {
+                       $('#id_produto div').remove();
+                        $('#id_produto').append(resposta);
+                       //$('#id_matricula').innerHTML(resposta)
+                       console.log(resposta);
+                    });
+
+                  });
+
+
+                });
+
               function calculo()
               {
               //passando os valores do campo do form para as variaveis
@@ -205,6 +216,7 @@
               document.meu_form.preco.value = soma;
               }
               }
+
               </script>
 
 
@@ -221,11 +233,16 @@
                                             <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
                                             <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
                                             <div class="row">
+                                              <button type="button" class="btn btn-primary" data-dismiss="modal"  data-toggle="modalCadastrarProduto" data-target="#modalCadastrarProduto">
+                                                Adicionar Produtos
+                                              </button>
 
                                               <div class="col-lg-6">
                                                 <label for="idProduto">Produto</label><br />
-                                                <select class="form-control input-default " name="idProduto">
+                                                <select id="idProduto" class="form-control input-default " name="idProduto">
+                                                  <option value="">Selecione</option>
                                                 @foreach($produtos as $produto)
+
                                                   <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
                                                   @endforeach
                                                 </select>
@@ -234,16 +251,16 @@
                                                     <label for="quantidade">Quantidade</label><br />
                                                     <input class="form-control input-default " type="text" name="quantidade" id="quantidade" min="1" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <label for="valorUnitario">Valor Unitário</label><br />
-                                                    <input class="form-control input-default " type="text" name="valorUnitario" id="valorUnitario" >
-
+                                                <div class="col-lg-6" id="id_produto">
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <label for="preco">Valor Total</label><br />
                                                     <input class="form-control input-default " type="text" onBlur="calculo();" name="preco" id="preco" value="{{ number_format($pedidoItem->preco,2,',','.') }}">
 
                                                 </div>
+
+
+
 
                                               </div>
 
@@ -265,6 +282,7 @@
                   </div>
                 </div>
               </div>
+
 
 
       <!-- MODAL PAGAMENTO -->
@@ -365,6 +383,80 @@
               </div>
           </div>
         </div>
+
+                      <!-- modal para criação de produtos -->
+                      <!--<div class="modalCadastrarProduto" tabindex="-1"  role="dialog" id="modalCadastrarProduto">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+
+                              <div class="row">
+                                  <div class="col s12">
+                                      <div class="card">
+                                          <form method="post" action="{{route('produtos.store')}}" enctype="multipart/form-data">
+                                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                              <input type="hidden" id="id" name="id" value="{{ $produto->id }}" />
+                                              <div class="row">
+                                                <div class="col-lg-6">
+                                                  <div class="input col s4">
+                                                      <label for="nome">Nome *</label><br />
+                                                      <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Nome" value="{{ $produto->nome }}">
+                                                  </div>
+                                                  <div class="input col s4">
+                                                       <label for="categoria">Categoria *</label><br />
+                                                    <select class="form-control input-default " required name="categoria">
+                                                      <option value="">Selecione</option>
+                                                    @foreach($categorias as $categoria)
+                                                      <option value="{{ $categoria->id }}"{{$categoria->id ? 'selected' : '' }}>{{ $categoria->descricao }}</option>
+                                                      @endforeach
+                                                    </select>
+                                                  </div>
+
+                                                  <div class="input col s4">
+                                                       <label for="fornecedor">Fornecedor *</label><br />
+                                                    <select class="form-control input-default " required name="fornecedor">
+                                                      <option value="">Selecione</option>
+                                                    @foreach($fornecedores as $fornecedor)
+                                                      <option value="{{ $fornecedor->id }}" {{$fornecedor->id ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
+                                                      @endforeach
+                                                    </select>
+                                                  </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                  <div class="input col s4">
+                                                      <label for="valorUnitario">Valor Unitário *</label><br />
+                                                      <input class="form-control input-default " type="text" name="valorUnitario" id="nome" placeholder="Valor Unitário" value="{{ $produto->valorUnitario }}">
+                                                  </div>
+                                                  <div class="input col s4">
+                                                      <label for="valorSugerido">Valor Sugerido Venda *</label><br />
+                                                      <input class="form-control input-default " type="text" name="valorSugerido" id="valorSugerido" placeholder="Valor Sugerido" value="{{ $produto->valorSugerido }}">
+                                                  </div>
+                                                </div>
+                                              </div>
+
+
+                                              <div class="row" style="margin-top: 2%">
+                                                  <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
+                                                  <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('produtos.index') }}">Cancelar</a>
+                                                  <a class="btn btn-danger btn-flat m-b-15 m-l-15" style="color:white"  data-toggle="modal" data-target="#meuModal">Excluir</a>
+                                              </div>
+                                          </form>
+                                          <p style="margin-left: 2%">* Campos Obrigatórios</p>
+                                      </div>
+                                  </div>
+                              </div>
+
+                            </div>
+                            <div class="row">
+                                <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
+                                <a class="btn btn-danger btn-flat m-b-15 m-l-15"href="{{ route('pedidosCompras.show', ['pedidoCompra' => $pedidoCompra->id]) }}">Cancelar</a>
+                            </div>
+                              </form>
+
+                          </div>
+                        </div>
+                      </div>-->
+
 
 
 @endsection

@@ -4,41 +4,17 @@
         <div class="content-wrap">
                 <div class="main">
                     <div class="container-fluid">
-                        <div class="row">
-
-                            <!-- /# column -->
-                            <div class="col-lg-4 p-l-0 title-margin-left">
-                                <div class="page-header">
-                                    <div class="page-title">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Table-Basic</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /# column -->
-                        </div>
-
-                        <!-- /# row -->
 
                         <section id="main-content">
-
-                          <div class="row no-margin-bottom">
-                              <div class="col s12">
-                                  <h4>
-                                      Estoque
-                                  </h4>
-                              </div>
-                          </div>
 
 
                           <div class="row">
                               <div class="col s12">
 
-                                  <div class="card">
+                                  <div class="card table-responsive">
+                                    <h4>Estoque de Produtos</h4>
                                       @if(count($produtos))
-                                      <table>
+                                      <table class="table table-bordered">
                                           <thead>
                                               <tr>
                                                   <th>Produto</th>
@@ -56,7 +32,7 @@
                                                   <td>{{$produto->categorias->descricao}}</td>
                                                   <!-- <td>{{$produto->valorUnitario}}</td> -->
                                                   <td>{{$produto->fornecedores->nome}}</td>
-                                                  <td style="text-align: center">{{$produto->quantidade}}</td>
+                                                  <td style="text-align: center">{{isset($produto->quantidade) ? $produto->quantidade : '0'}}</td>
 
 
                                               </tr>

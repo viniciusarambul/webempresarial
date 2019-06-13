@@ -18,21 +18,7 @@
           @endif
               <div class="main" >
                     <div class="container-fluid">
-                        <div class="row">
-
-                            <!-- /# column -->
-                            <div class="col-lg-4 p-l-0 title-margin-left">
-                                <div class="page-header">
-                                    <div class="page-title">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Table-Basic</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /# column -->
-                        </div>
+                  
                         <form  method="GET" action="{{ route('categorias.index') }}">
                           <div class="row">
                             <div class="col-lg-6">
@@ -61,18 +47,10 @@
                                       </a>
 
                                   </p>
-                                    <div class="card">
-
-
-
-                                        <div class="card-title">
-                                            <h4>Listagem de Categorias </h4>
-
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
+                                          <div class="card table-responsive">
+                                                <h4>Listagem de Categorias </h4>
                                                   @if(count($categorias))
-                                                    <table class="table table-hover ">
+                                                    <table class="table table-bordered">
                                                       <thead>
                                                           <tr>
                                                               <th>ID</th>
@@ -102,9 +80,9 @@
                                                 @else
                                                 <p class="alert-disable">Não há categorias.</p>
                                                 @endif
-                                            </div>
+
                                         </div>
-                                    </div>
+
                                     <!-- /# card -->
                                 </div>
                                 <!-- /# column -->

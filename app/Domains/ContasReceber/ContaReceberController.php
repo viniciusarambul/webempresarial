@@ -15,7 +15,8 @@ class ContaReceberController extends Controller
       $query = ContaReceber::query();
 
         if($request->get('filter')){
-            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
+          $query->where('id', 'like', '%' . $request->get('filter') . '%')
+          ->orWhere('descricao', 'like', '%' . $request->get('filter') . '%');
         }
 
         $contasReceber = $query->paginate(5);
@@ -131,11 +132,11 @@ class ContaReceberController extends Controller
 
     if($contaReceber->valorPago < $contaReceber->valor){
       $contanova = new ContaReceber;
-      $contanova->descricao = $contaReceber->id .'Parcial'. $contaReceber->descricao;
+      $contanova->descricao = $contaReceber->id .' Parcial '. $contaReceber->descricao;
       $contanova->dataEmissao = date('Y-m-d');
       $contanova->dataVencimento = date('Y-m-d', strtotime('+' . 30 . 'days'));
       $contanova->situacao = 0;
-      $contanova->idFornecedor = $contaReceber->idVendedor;
+      $contanova->idVendedor = $contaReceber->idVendedor;
       $contanova->idProduto = $contaReceber->idCliente;
       $contanova->quantidade = $contaReceber->quantidade;
       $contanova->parcelas = '1';
@@ -160,7 +161,7 @@ class ContaReceberController extends Controller
         }
       }
 
-      return redirect()->route('contasReceber.show', ['id' => $contaReceber->id]);
+      return redirect()->route('contasReceber.index');
     }
 
     public function consulta(Request $request){

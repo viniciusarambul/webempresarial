@@ -102,7 +102,13 @@ class PedidoTituloCompraController extends Controller
             $conta->valor = $pedidoTitulo->preco;
           }else{
           $conta->valor = round($pedidoTitulo->preco/$pedidoTitulo->parcelas, 2);
+          $valorquebrado_total = round($pedidoTitulo->preco -($conta->valor*$pedidoTitulo->parcelas),2);
+            for($i=1;$i<=$pedidoTitulo->parcelas;$i++){
+              if($i==$pedidoTitulo->parcelas)
+              $conta->valor=$conta->valor + $valorquebrado_total;
+            }
           }
+          
           $conta->save();
         }
       }

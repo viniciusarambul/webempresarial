@@ -6,7 +6,7 @@
               font-family: 'Arial', sans-serif;
               margin: 0;
               font-size: 15px;
-              background-color: #ccc;
+
           }
 
           main {
@@ -58,25 +58,24 @@
       <tr>
         <td style="font-size: 25px!important; padding: 20px; width: 60%!important;">WEB EMPRESARIAL</td>
 
-        <td style="width: 20%!important; text-align: center"><b>Filtros Selecionados </b><br><br>Filtro De:{{$inicio ? date('d/m/Y', strtotime($inicio)) : 'Todos'}}<br>Filtro Até:{{$fim ? date('d/m/Y', strtotime($fim)) : 'Todos'}}</td>
 
       </tr>
     </table>
 
   <h1 align="center">Relatório de Clientes</h1>
-      <table style="width: 100% !important">
+      <table >
                 <thead>
                     <tr>
 
                         <th align="center" style="width:11% !important">Nome</th>
                         <th align="center" style="width:12% !important">Sobrenome</th>
-                        <th align="center" style="width:5% !important">Status</th>
+                        <th align="center" style="width:11% !important">Status</th>
                         <th align="center" style="width:11% !important">Telefone</th>
-                        <th align="center" style="width:13% !important">E-mail</th>
+                        <th align="center" style="width:11% !important">E-mail</th>
                         <th align="center" style="width:11% !important">Cidade</th>
                         <th align="center" style="width:11% !important">Estado</th>
                         <th align="center" style="width:11% !important">CPF</th>
-                        <th align="center" style="width:13% !important">CNPJ</th>
+                        <th align="center" style="width:11% !important">CNPJ</th>
                     </tr>
                 </thead>
 
@@ -84,9 +83,6 @@
 
             @foreach($clientes as $cliente)
         <tr>
-
-
-
               <td>{{ $cliente->nome }}</td>
               <td style="text-align: center">{{ $cliente->sobrenome }}</td>
               <td style="text-align: center">{{ $cliente->status }}</td>

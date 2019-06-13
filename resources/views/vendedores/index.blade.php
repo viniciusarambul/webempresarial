@@ -4,21 +4,7 @@
         <div class="content-wrap">
                 <div class="main">
                     <div class="container-fluid">
-                        <div class="row">
 
-                            <!-- /# column -->
-                            <div class="col-lg-4 p-l-0 title-margin-left">
-                                <div class="page-header">
-                                    <div class="page-title">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Table-Basic</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /# column -->
-                        </div>
                         <!-- /# row -->
                         <form  method="GET" action="{{ route('vendedores.index') }}">
                           <div class="row">
@@ -31,15 +17,8 @@
                                 <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Filtrar</button>
                               </div>
                           </div>
-
-
-
                         </form>
                         <section id="main-content">
-
-
-
-
                           <div class="row">
                               <div class="col s12">
                                   <p class="card-intro">
@@ -48,9 +27,10 @@
                                           <i class="ti-plus"></i>Adicionar
                                       </a>
                                   </p>
-                                  <div class="card">
+                                  <div class="card table-responsive">
+                                    <h4>Listagem de Vendedores</h4>
                                       @if(count($vendedores))
-                                      <table>
+                                      <table class="table table-bordered">
                                           <thead>
                                               <tr>
                                                   <th>Vendedor</th>
@@ -72,7 +52,7 @@
                                                   <td>{{$vendedor->cnpj}}</td>
                                                   <td>{{$vendedor->email}}</td>
                                                   <td>{{$vendedor->cidade}}</td>
-                                                  <td style="width: 30%">
+                                                  <td>
                                                     <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('vendedores.edit', ['$vendedor' => $vendedor->id]) }}"><i class="ti-settings"></i>Ver</a>
 
                                                     <!--<a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('vendedores.destroy', ['$vendedor' => $vendedor->id]) }}"><i class="ti-settings"></i>Excluir</button>

@@ -38,6 +38,7 @@ Route::resource('/contasPagar', 'ContasPagar\ContaPagarController');
 Route::resource('/categorias', 'Categorias\CategoriaController');
 Route::resource('/usuarios', 'Usuarios\UsuarioController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/fluxoCaixa', 'FluxoController@index')->name('fluxoCaixa');
 Route::get('/estoque', 'EstoqueController@index')->name('estoque');
 Route::get('produto/pdf', 'Produtos\ProdutoController@Baixar')->name('produtos.relatorio');
 Route::get('cliente/pdf', 'Clientes\ClienteController@Baixar')->name('clientes.relatorio');
@@ -48,6 +49,10 @@ Route::get('pedidoCompra/pdf', 'PedidosCompras\PedidoCompraController@Baixar')->
 Route::get('contaPagar/pdf', 'ContasPagar\ContaPagarController@Baixar')->name('contasPagar.relatorio');
 Route::get('contaReceber/pdf', 'ContasReceber\ContaReceberController@Baixar')->name('contasReceber.relatorio');
 Route::get('/relatorios', 'RelatoriosController@index')->name('relatorios');
+
+Route::get('produtos/{produto}', 'Produtos\ProdutoController@produto');
+
+
 
 Route::get('/consultasClientes', 'Clientes\ClienteController@consulta')->name('clientes.consulta');
 Route::get('/consultasFornecedores', 'Fornecedores\FornecedorController@consulta')->name('fornecedores.consulta');
@@ -62,3 +67,10 @@ Route::get('/main', 'MainController@index');
 Route::post('/main/checklogin', 'MainController@checklogin');
 Route::get('main/successlogin', 'MainController@successlogin');
 Route::get('main/logout', 'MainController@logout');
+
+
+Route::get('pdf', function () {
+  $pdf = App::make('dompdf.wrapper');
+  $pdf->loadHTML('<h1>Test</h1>');
+  return $pdf->stream();
+});

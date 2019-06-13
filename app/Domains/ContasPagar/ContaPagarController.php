@@ -14,7 +14,8 @@ class ContaPagarController extends Controller
       $query = ContaPagar::query();
 
         if($request->get('filter')){
-            $query->where('nome', 'like', '%' . $request->get('filter') . '%');
+            $query->where('id', 'like', '%' . $request->get('filter') . '%')
+            ->orWhere('descricao', 'like', '%' . $request->get('filter') . '%');
         }
 
         $contasPagar = $query->paginate(5);
@@ -158,7 +159,7 @@ class ContaPagarController extends Controller
         }
       }
 
-      return redirect()->route('contasPagar.show', ['id' => $contaPagar->id]);
+      return redirect()->route('contasPagar.index');
     }
 
     public function consulta(Request $request){
@@ -178,15 +179,20 @@ class ContaPagarController extends Controller
           $inicio = $datafinal;
           $fim = $datafinal;
           // $situacao = $situacao;
-        $contasPagar = db::select("SELECT cp.*, pc.nome as pedidocompranome, pc.data as datapedido, f.nome as fornecedornome  from tcc.contapagar cp left join pedidocompra pc on pc.id = cp.idPedidoCompra left join fornecedores f on f.id = pc.idFornecedor where cp.dataVencimento >= '$datainicial' and cp.dataVencimento <= '$datafinal'  ");
+        $contasPagar = db::select("SELECT cp.*, pc.nome as pedidocompranome, pc.data as datapedido, f.nome as fornecedornome  from sandbox.contaPagar cp left join pedidocompra pc on pc.id = cp.idPedidoCompra left join fornecedores f on f.id = pc.idFornecedor where cp.dataVencimento >= '$datainicial' and cp.dataVencimento <= '$datafinal'  ");
       }else{
         $inicio = '';
         $fim ='';
         // $situacao = $situacao;
-        $contasPagar = db::select("SELECT cp.*, pc.nome as pedidocompranome, pc.data as datapedido, f.nome as fornecedornome  from tcc.contapagar cp left join pedidocompra pc on pc.id = cp.idPedidoCompra left join fornecedores f on f.id = pc.idFornecedor");
+        $contasPagar = db::select("SELECT cp.*, pc.nome as pedidocompranome, pc.data as datapedido, f.nome as fornecedornome  from sandbox.contaPagar cp left join pedidocompra pc on pc.id = cp.idPedidoCompra left join fornecedores f on f.id = pc.idFornecedor");
       }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contasPagar.relatorio', ['contasPagar' => $contasPagar, 'inicio' => $inicio, 'fim' => $fim]);
+        //$pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contasPagar.relatorio', ['contasPagar' => $contasPagar, 'inicio' => $inicio, 'fim' => $fim]);
+        //$pdf->setPaper('A4', 'landscape');
+        //return $pdf->stream();
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('contasPagar.relatorio', ['contasPagar' => $contasPagar, 'inicio' => $inicio, 'fim' => $fim]);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }

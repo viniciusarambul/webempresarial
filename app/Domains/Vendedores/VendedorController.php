@@ -104,8 +104,9 @@ class VendedorController extends Controller
     }
 
     public function consulta(Request $request){
-      $vendedores = Vendedor::all();
-      return view('clientes.consulta', [
+      $vendedores = db::select("SELECT cidade from sandbox.clientes group by cidade");
+
+      return view('vendedores.consulta', [
         'vendedores' => $vendedores
 
       ]);
@@ -114,21 +115,23 @@ class VendedorController extends Controller
 
     public function Baixar(Request $request)
     {
-        $datainicial = $request->get('data_incial');
-        $datafinal = $request->get('data_final');
+
         $filtronome = $request->get('nome');
-        if($datainicial <> ''){
-          $inicio = $datafinal;
-          $fim = $datafinal;
-        $vendedores = db::select("SELECT * from tcc.vendedors where DATE(created_at) >= '$datainicial' and DATE(created_at) <= '$datafinal' and nome like '%". $filtronome ."%'");
+        $filtrocidade = $request->get('cidade');
+        if($filtrocidade <> ''){
+
+        $vendedores = db::select("SELECT * from sandbox.vendedors where cidade = '$filtrocidade' and nome like '%". $filtronome ."%'");
       }else{
-        $inicio = '';
-        $fim ='';
-        $vendedores = db::select("SELECT * from tcc.vendedors");
+
+        $vendedores = db::select("SELECT * from sandbox.vendedors where nome like '%". $filtronome ."%'");
       }
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('vendedores.relatorio', ['vendedores' => $vendedores, 'inicio' => $inicio, 'fim' => $fim]);
-        $pdf->setPaper('A4', 'landscape');
+        //$pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $vendedores, 'inicio' => $inicio, 'fim' => $fim]);
+        //$pdf->setPaper('A4', 'landscape');
+        //return $pdf->stream();
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('clientes.relatorio', ['clientes' => $vendedores]);
         return $pdf->stream();
     }
 }

@@ -4,21 +4,6 @@
         <div class="content-wrap">
                 <div class="main">
                     <div class="container-fluid">
-                        <div class="row">
-
-                            <!-- /# column -->
-                            <div class="col-lg-4 p-l-0 title-margin-left">
-                                <div class="page-header">
-                                    <div class="page-title">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Table-Basic</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /# column -->
-                        </div>
                         <form  method="GET" action="{{ route('contasReceber.index') }}">
                           <div class="row">
                             <div class="col-lg-6">
@@ -30,26 +15,21 @@
                                 <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Filtrar</button>
                               </div>
                           </div>
-
-
-
                         </form>
                         <!-- /# row -->
 
                         <section id="main-content">
-
-
                           <div class="row">
                               <div class="col s12">
-                                  <p class="card-intro">
-                                      &nbsp;
-                                      <a class="waves-effect waves-teal blue btn-floating right" href="{{ route('contasReceber.create') }}">
-                                          <i class="mdi mdi-plus"></i>
-                                      </a>
-                                  </p>
-                                  <div class="card">
+                                <p class="card-intro">
+                                    &nbsp;
+                                    <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.create') }}">
+                                        <i class="ti-plus"></i>Adicionar
+                                    </a>
+                                </p>
+                                  <div class="card table-responsive">
                                       @if(count($contasReceber))
-                                      <table>
+                                      <table class="table table-bordered">
                                           <thead>
                                               <tr>
                                                   <th>ID</th>
@@ -67,15 +47,16 @@
                                           <tbody>
                                               @foreach($contasReceber as $contaReceber)
                                               <tr class="with-options">
-                                                  <td>{{$contaReceber->id}}</td>
-                                                  <td>{{$contaReceber->descricao}}</td>
-                                                  <td>{{date("d/m/Y", strtotime($contaReceber->dataEmissao))}}</td>
-                                                  <td>{{date("d/m/Y", strtotime($contaReceber->dataVencimento))}}</td>
-                                                  <td>{{$contaReceber->clientes ? $contaReceber->clientes->nome : ''}}</td>
-                                                  <td>{{$contaReceber->vendedores ? $contaReceber->vendedores->nome : ''}}</td>
-                                                  <td>{{$contaReceber->situacao_descricao}}</td>
-                                                  <td>{{number_format($contaReceber->valor, 2,',','.')}}</td>
+                                                  <td style="width: 2%">{{$contaReceber->id}}</td>
+                                                  <td style="width: 18%">{{$contaReceber->descricao}}</td>
+                                                  <td style="width: 10%">{{date("d/m/Y", strtotime($contaReceber->dataEmissao))}}</td>
+                                                  <td style="width: 10%">{{date("d/m/Y", strtotime($contaReceber->dataVencimento))}}</td>
+                                                  <td style="width: 10%">{{$contaReceber->clientes ? $contaReceber->clientes->nome : ''}}</td>
+                                                  <td style="width: 5%">{{$contaReceber->vendedores ? $contaReceber->vendedores->nome : 'Nenhum'}}</td>
+                                                  <td style="width: 5%">{{$contaReceber->situacao_descricao}}</td>
+                                                  <td style="width: 10%">R$ {{isset($contaReceber->valor) ? number_format($contaReceber->valor, 2,',','.') : '0,00'}}</td>
                                                   <td style="width: 30%">
+
                                                       @if($contaReceber->situacao != 1)
                                                       <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('contasReceber.edit', ['$contaReceber' => $contaReceber->id]) }}">
                                                           <i class="ti-settings"></i>Editar</a>
@@ -85,10 +66,10 @@
 
                                                       @else
                                                       <a class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
-                                                          <span style="font-size: 14px; color: white">Ver</span>
+                                                          <i class="ti-eye"></i>Ver</a>
                                                       </a>
-                                                      <a class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.cancel', ['$contaReceber' => $contaReceber->id]) }}">
-                                                          <span style="font-size: 14px; color: white">Cancelar Baixa</span>
+                                                      <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.cancel', ['$contaReceber' => $contaReceber->id]) }}">
+                                                        <i class="ti-close"></i>Cancelar Baixa</a>
                                                       </a>
                                                       @endif
                                                   </td>

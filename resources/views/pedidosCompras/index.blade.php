@@ -4,21 +4,7 @@
         <div class="content-wrap">
                 <div class="main">
                     <div class="container-fluid">
-                        <div class="row">
 
-                            <!-- /# column -->
-                            <div class="col-lg-4 p-l-0 title-margin-left">
-                                <div class="page-header">
-                                    <div class="page-title">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Table-Basic</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /# column -->
-                        </div>
                         <form  method="GET" action="{{ route('pedidosCompras.index') }}">
                           <div class="row">
                             <div class="col-lg-6">
@@ -47,9 +33,10 @@
                                           <i class="ti-plus"></i>Adicionar
                                       </a>
                                   </p>
-                                  <div class="card">
+                                  <div class="card table-responsive">
+                                    <h4>Listagem de Pedidos de Compra</h4>
                                       @if(count($pedidosCompras))
-                                      <table>
+                                      <table class="table table-bordered">
                                           <thead>
                                               <tr>
                                                   <th>ID</th>
@@ -68,8 +55,8 @@
                                                   <td>{{$pedidoCompra->nome}}</td>
                                                   <td>{{date("d/m/Y", strtotime($pedidoCompra->data))}}</td>
                                                   <td>{{$pedidoCompra->situacao_descricao}}</td>
-                                                  <td>{{number_format($pedidoCompra->titulo->preco,2,',','.')}}</td>
-                                                  <td style="width: 30%">
+                                                  <td style="text-align: right">R$ {{isset($pedidoCompra->titulo) ? number_format($pedidoCompra->titulo->preco,2,',','.') : '0,00'}}</td>
+                                                  <td>
                                                     @if($pedidoCompra->situacao == 1)
                                                     <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosCompras.show', ['$pedidoCompra' => $pedidoCompra->id]) }}"><i class="ti-settings"></i>Ver / Editar</a>
 

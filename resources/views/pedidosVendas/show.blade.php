@@ -81,10 +81,10 @@
                                 </button>
 
                             @endif
-                            <div class="card">
+                            <div class="card table-responsive">
                               <?php $totalpedido = 0; ?>
                                 @if(count($pedidoVenda->itens))
-                                <table>
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Produto</th>
@@ -102,8 +102,8 @@
                                         <tr class="with-options">
                                             <td>{{$item->produto->nome}}</td>
                                             <td>{{$item->quantidade}}</td>
-                                            <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
-                                            <td>{{number_format($item->preco, 2, ',', '.')}}</td>
+                                            <td style="text-align: right">R$ {{number_format($item->valorUnitario, 2, ',', '.')}}</td>
+                                            <td style="text-align: right">R$ {{number_format($item->preco, 2, ',', '.')}}</td>
                                             <td >
                                 @if($pedidoVenda->situacao == 1)
 

@@ -6,7 +6,7 @@
               font-family: 'Arial', sans-serif;
               margin: 0;
               font-size: 15px;
-              background-color: #ccc;
+
           }
 
           main {
@@ -52,6 +52,7 @@
   <h1 align="center">Pedidos Vendas</h1>
       <table style="width: 100% !important">
                 <thead>
+
                     <tr>
 
                         <th align="center" style="width:20% !important">ID</th>
@@ -78,6 +79,41 @@
 
 
         </tr>
+            @if($pedidoVenda->idProduto > 0)
+
+                <thead>
+                    <tr>
+                        <th></th>
+
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor Unitário</th>
+                        <th>Total</th>
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td></td>
+
+                        <td>{{$pedidoVenda->idProduto}}</td>
+                        <td>{{$pedidoVenda->quantidade}}</td>
+                        <td style="text-align: right">R$ {{number_format($pedidoVenda->valorUnitario, 2, ',', '.')}}</td>
+                        <td style="text-align: right">R$ {{number_format($pedidoVenda->preco, 2, ',', '.')}}</td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="5" style="border:none; height: 15px;"></td>
+                    </tr>
+
+
+                </tbody>
+
+              @endif
+
           @endforeach
 
         </tbody>

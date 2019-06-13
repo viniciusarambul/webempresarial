@@ -49,10 +49,7 @@
                                           @endforeach
                                         </select>
                                       </div>
-                                      <div class="input col s6" style="display:none">
-                                          <label for="valorUnitario">Valor Unitário *</label><br />
-                                          <input class="form-control input-default " type="hidden" name="valorUnitario" id="valor" min="0" placeholder="Valor unitario" value="{{ $produto->valorUnitario }}">
-                                      </div>
+                
                                       <div class="input col s4">
                                            <label for="fornecedor">Fornecedor *</label><br />
                                         <select class="form-control input-default " required name="fornecedor">
@@ -61,6 +58,16 @@
                                           <option value="{{ $fornecedor->id }}" {{$fornecedor->id ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
                                           @endforeach
                                         </select>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <div class="input col s4">
+                                          <label for="valorUnitario">Valor Unitário *</label><br />
+                                          <input class="form-control input-default " type="text" name="valorUnitario" id="nome" placeholder="Valor Unitário" value="{{ $produto->valorUnitario }}">
+                                      </div>
+                                      <div class="input col s4">
+                                          <label for="valorSugerido">Valor Sugerido Venda *</label><br />
+                                          <input class="form-control input-default " type="text" name="valorSugerido" id="valorSugerido" placeholder="Valor Sugerido" value="{{ $produto->valorSugerido }}">
                                       </div>
                                     </div>
                                   </div>
