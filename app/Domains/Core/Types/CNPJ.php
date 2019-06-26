@@ -90,7 +90,8 @@ private $value = '';
 public function __construct(string $str = null){
 
   if(!$this->validator($str)){
-    throw new \Exception("CNPJ Inválido");
+    //throw new \Exception("CNPJ Inválido");
+      exit('CNPJ Inválido');
   }
 
 

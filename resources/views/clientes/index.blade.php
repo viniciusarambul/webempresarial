@@ -2,20 +2,7 @@
 @section('content-wrap')
 <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
         <div class="content-wrap">
-          @if (\Session::has('error'))
-              <div class="alert alert-danger">
-                  <ul>
-                      <li>{!! \Session::get('error') !!}</li>
-                  </ul>
-              </div>
-          @endif
-          @if (\Session::has('success'))
-              <div class="alert alert-success">
-                  <ul>
-                      <li>{!! \Session::get('success') !!}</li>
-                  </ul>
-              </div>
-          @endif
+
                 <div class="main">
                     <div class="container-fluid">
 

@@ -17,6 +17,10 @@ class PedidoVendaController extends Controller
     {
       $query = PedidoVenda::query();
 
+        if($request->get('situacao_enum') !== null){
+            $query->where('situacao', $request->get('situacao_enum'));
+        }
+
         if($request->get('filter')){
             $query->where('nome', 'like', '%' . $request->get('filter') . '%');
         }
@@ -48,12 +52,14 @@ class PedidoVendaController extends Controller
     {
 
       $produtos = Produto::all();
+      $pedidosVendaConta = db::select("SELECT * FROM sandbox.contaReceber where idPedidoVenda = '$pedidoVenda->id' ");
 
       return view('pedidosVendas.show', [
         'pedidoVenda' => $pedidoVenda,
         'pedidoTitulo' => $pedidoTitulo,
         'pedidoItem' => $pedidoItem,
         'produtos' => $produtos,
+        'pedidosVendaConta' => $pedidosVendaConta,
         'total' => $pedidoVenda->itens->reduce(function($total, $item){
           return $total+$item->preco;
         })
@@ -128,12 +134,47 @@ class PedidoVendaController extends Controller
 
     }
 
-    public function faturar(PedidoVenda $pedidoVenda){
+    public function faturar(PedidoVenda $pedidoVenda, PedidoItem $pedidoItem){
 
-
+    if($request->get('quantidade') > $pedidoItem->produto->quantidade){
+      return redirect()->route('pedidosVendas.index')->with('error', 'Quantidade Indisponivel');
+    }
       $pedidoVenda->situacao = 1;
       $pedidoVenda->save();
-      return redirect()->route('pedidosVendas.index');
+
+
+        $pedidoVenda->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade -= $item->quantidade;
+          $produto->save();
+        });
+
+      return redirect()->route('pedidosVendas.index')->with('success', 'Pedido Faturado com sucesso');
+    }
+
+    public function cancelar(PedidoVenda $pedidoVenda){
+
+
+      $pedidoVenda->situacao = 2;
+      $pedidoVenda->save();
+
+
+        $pedidoVenda->itens->each(function($item){
+          $produto = $item->produto;
+          $produto->quantidade += $item->quantidade;
+          $produto->save();
+        });
+
+      return redirect()->route('pedidosVendas.index')->with('success', 'Pedido Cancelado com sucesso');;
+    }
+
+    public function imprimir(PedidoVenda $pedidoVenda){
+
+        $pedidosVendaConta = db::select("SELECT * FROM sandbox.contaReceber where idPedidoVenda = '$pedidoVenda->id' ");
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('pedidosVendas.imprimir', ['pedidoVenda' => $pedidoVenda, 'pedidosVendaConta' => $pedidosVendaConta]);
+        return $pdf->stream();
     }
 
     public function Baixar(Request $request)

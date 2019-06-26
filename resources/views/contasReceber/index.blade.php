@@ -5,16 +5,30 @@
                 <div class="main">
                     <div class="container-fluid">
                         <form  method="GET" action="{{ route('contasReceber.index') }}">
-                          <div class="row">
-                            <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-6">
 
-                                <input class="form-control input-default "  type="text" name="filter" placeholder="Buscar uma conta" value="{{$filter}}" />
+                                    <input class="form-control input-default "  type="text" name="filter" placeholder="Buscar um Titulo" value="{{$filter}}" />
 
+                                </div>
+                                <div class="col-lg-3">
+
+                                    <select id="situacao_enum" name="situacao_enum" class="form-control input-default " class="validate" style="height: 38px; margin-bottom: 20px;">
+                                        <option value="" selected>Situação</option>
+
+                                        <option value="0">Aberto</option>
+                                        <option value="1">Baixado</option>
+
+
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Filtrar</button>
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Filtrar</button>
-                              </div>
-                          </div>
+
+
+
                         </form>
                         <!-- /# row -->
 
@@ -65,9 +79,11 @@
                                                           <i class="ti-minus"></i>Baixar</a>
 
                                                       @else
-                                                      <a class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
+                                                          <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" target="_blank" href="{{ route('contasReceber.imprimir', ['$contaReceber' => $contaReceber->id]) }}"><i class="ti-printer"></i>Imprimir</a>
+
+                                                          <a class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.show', ['$contaReceber' => $contaReceber->id]) }}">
                                                           <i class="ti-eye"></i>Ver</a>
-                                                      </a>
+
                                                       <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="{{ route('contasReceber.cancel', ['$contaReceber' => $contaReceber->id]) }}">
                                                         <i class="ti-close"></i>Cancelar Baixa</a>
                                                       </a>

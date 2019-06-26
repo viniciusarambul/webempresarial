@@ -55,25 +55,25 @@
 
 <main>
     <table style="width: 100% !important; margin-top: 5%;">
-      <tr>
-        <td style="font-size: 25px!important; padding: 20px; width: 60%!important;">WEB EMPRESARIAL</td>
+        <tr>
+            <img src="http://sistema.awfranchising.com.br/web.png"  height="150" width="500" style="margin-left: 28%" />
+        </tr>
 
 
-      </tr>
     </table>
 
   <h1 align="center">Relatório de Clientes</h1>
-      <table >
-                <thead>
+      <table style="width: 100%">
+                <thead >
                     <tr>
 
                         <th align="center" style="width:11% !important">Nome</th>
-                        <th align="center" style="width:12% !important">Sobrenome</th>
+                        <th align="center" style="width:11% !important">Sobrenome</th>
                         <th align="center" style="width:11% !important">Status</th>
                         <th align="center" style="width:11% !important">Telefone</th>
                         <th align="center" style="width:11% !important">E-mail</th>
-                        <th align="center" style="width:11% !important">Cidade</th>
-                        <th align="center" style="width:11% !important">Estado</th>
+                        <th align="center" style="width:8% !important">Cidade</th>
+                        <th align="center" style="width:5% !important">Estado</th>
                         <th align="center" style="width:11% !important">CPF</th>
                         <th align="center" style="width:11% !important">CNPJ</th>
                     </tr>
@@ -87,7 +87,7 @@
               <td style="text-align: center">{{ $cliente->sobrenome }}</td>
               <td style="text-align: center">{{ $cliente->status }}</td>
               <td style="text-align: center">{{ $cliente->telefone }}</td>
-              <td style="text-align: center">{{ $cliente->email }}</td>
+              <td style="text-align: left">{{ $cliente->email }}</td>
               <td style="text-align: center">{{ $cliente->cidade }}</td>
               <td style="text-align: center">{{ $cliente->estado }}</td>
               <td style="text-align: center">{{ $cliente->cpf }}</td>

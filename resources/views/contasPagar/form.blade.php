@@ -12,18 +12,7 @@
                           </div>
                       </div>
                   </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Basic</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
@@ -40,16 +29,16 @@
                                       </div>
                                       <div class="col-lg-3">
                                           <label for="dataEmissao">Data Emissão *</label><br />
-                                          <input class="form-control input-default " type="date" name="dataEmissao" id="dataEmissao" placeholder="Data" value="{{ $contaPagar->dataEmissao }}">
+                                          <input class="form-control input-default " type="date" name="dataEmissao" required id="dataEmissao" placeholder="Data" value="{{ $contaPagar->dataEmissao }}">
                                       </div>
 
                                       <div class="col-lg-3">
                                            <label for="situacao">Situação *</label><br />
-                                        <select class="form-control input-default " required name="situacao">
+                                        <select class="form-control input-default " readonly required name="situacao">
                                           <option value="">Selecione</option>
-                                          <option value="Aberto">Aberto</option>
-                                          <option value="Fechado">Baixado</option>
-                                          <option value="Atrasado">Atrasado</option>
+                                          <option value="0" selected>Aberto</option>
+                                          <option value="1">Baixado</option>
+                                          <option value="2">Atrasado</option>
                                         </select>
                                       </div>
                                       <div class="col-lg-3">

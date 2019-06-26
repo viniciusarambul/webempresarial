@@ -42,7 +42,7 @@
                   <form method="post" action="{{route('contasReceber.store')}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" id="id" name="id" value="{{ $contaReceber->id }}" />
-                    <input type="hidden" id="baixa" name="baixa" value="{{ $contaReceber->baixa }}" />
+                    <input type="hidden" id="baixa" name="baixa" value="1" />
 
                         <div class="col-lg-4">
                           <label for="dataPagamento">Data Pagamento</label><br />

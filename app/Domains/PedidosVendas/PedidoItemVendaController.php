@@ -24,11 +24,14 @@ class PedidoItemVendaController extends Controller
 
     public function store(PedidoVenda $pedidoVenda, PedidoItemRequest $request)
     {
+
         if ($request->get('id')){
+
             return $this->save($pedidoVenda, $request, PedidoItem::find($request->get('id')));
         }
 
         return $this->save($pedidoVenda, $request, new PedidoItem());
+
     }
 
     public function show(PedidoVenda $pedidoVenda)
@@ -72,6 +75,26 @@ class PedidoItemVendaController extends Controller
           'clientes' => $clientes
         ]);
     }
+    public function faturar(PedidoVenda $pedidoVenda, PedidoItem $pedidoItem){
+
+
+        $pedidoVenda->itens->each(function($item){
+          $produto = $item->produto;
+
+          if($produto->quantidade < $item->quantidade)
+          {
+            return redirect()->back()->with('error', 'Quantidade Indisponivel');
+          }
+          $produto->quantidade -= $item->quantidade;
+          $produto->save();
+        });
+
+        $pedidoVenda->situacao = 1;
+        $pedidoVenda->save();
+
+      return redirect()->route('pedidosVendas.index');
+    }
+
 
 
     private function save(PedidoVenda $pedidoVenda, PedidoItemRequest $request, PedidoItem $pedidoItem)
@@ -88,8 +111,20 @@ class PedidoItemVendaController extends Controller
       $pedidoItem->tipo_pedido = 'VENDA';
       $pedidoItem->idPedido = $pedidoVenda->id;
       $pedidoItem->preco = $request->get('preco');
-      $pedidoItem->valorUnitario = $request->get('valorUnitario');
+
+      $valorUnitario = str_replace(',','.', $request->get('valorUnitario'));
+
+
+      $pedidoItem->valorUnitario = $valorUnitario;
+
       $pedidoItem->save();
+
+      $pedidoItem->valorSugerido = $request->get('valorSugerido');
+
+      if ($pedidoItem->valorUnitario < $pedidoItem->valorSugerido ){
+          return redirect()->route('pedidosVendas.show', ['pedidoVenda' => $pedidoVenda->id])->with('error', 'Produto Inserido, porém o valor esta abaixo do Sugerido!');
+
+      }
 
       return redirect()->route('pedidosVendas.show', ['pedidoVenda' => $pedidoVenda->id])->with('success', 'Item inserido com Sucesso');
       }

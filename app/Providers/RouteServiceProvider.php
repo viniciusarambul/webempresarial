@@ -38,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('contasReceber', \App\Domains\ContasReceber\ContaReceber::class);
         Route::model('contasPagar', \App\Domains\ContasPagar\ContaPagar::class);
         Route::model('categoria', \App\Domains\Categorias\Categoria::class);
+        Route::model('permisso', \App\Domain\Usuarios\Permissao\Permissao::class);
 
     }
 

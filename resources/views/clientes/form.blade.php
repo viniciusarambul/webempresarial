@@ -1,8 +1,8 @@
 @extends('templates.layout')
 @section('content-wrap')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 <div class="content-wrap">
-        <div class="main" style="background-image: url(http://wsmart.awfranchising.com.br/img/bk.png);">
+        <div class="main">
             <div class="container-fluid">
                 <div class="row">
                   <div class="col-lg-8 p-r-0 title-margin-right">
@@ -13,17 +13,7 @@
                       </div>
                   </div>
                     <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Basic</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">

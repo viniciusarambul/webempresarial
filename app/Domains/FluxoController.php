@@ -12,14 +12,26 @@ use Illuminate\Support\Facades\DB;
 
 class FluxoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-      $contasPagar = db::select("SELECT * FROM sandbox.contaPagar where dataPagamento <> '0000-00-00'");
+        if($request->get('filter') !== null)
+      {
+          $data = $request->get('filter');
 
 
+          $query = db::select("SELECT id, descricao, dataEmissao, dataVencimento, situacao, dataPagamento, valor, valorPago FROM sandbox.contaPagar where (dataPagamento = '$data') union SELECT id, descricao, dataEmissao, dataVencimento, situacao, dataPagamento, valor, valorPago FROM sandbox.contaReceber where (dataPagamento = '$data')");
+
+      }else{
+            $hoje = date('Y-m-d');
+            $query = db::select("SELECT id, descricao, dataEmissao, dataVencimento, situacao, dataPagamento, valor, valorPago FROM sandbox.contaPagar where (dataPagamento = '$hoje') union SELECT id, descricao, dataEmissao, dataVencimento, situacao, dataPagamento, valor, valorPago FROM sandbox.contaReceber where (dataPagamento = '$hoje')");
+
+        }
+
+     $contasPagar = $query;
      return view('fluxoCaixa',[
-       'contasPagar' => $contasPagar
+       'contasPagar' => $contasPagar,
+         'filter' => $request->get('filter')
      ]);
     }
 }

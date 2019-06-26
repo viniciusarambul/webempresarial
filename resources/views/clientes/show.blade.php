@@ -46,7 +46,7 @@
            <input type="hidden" name="_method" value="DELETE">
            <button class="btn block red">Excluir</button>
         <a class="btn blue white-text" href="{{ route('clientes.edit', ['id' => $cliente->id ]) }}"><i class="mdi mdi-pencil"></i>Editar</a>
-  </form>
+    </form>
 
 
   </div>

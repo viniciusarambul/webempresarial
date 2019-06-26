@@ -11,7 +11,7 @@ class Vendedor extends Model
   protected $table = 'vendedors';
 
   public function vendedor(){
-    return $this->hasOne(Vendedors::class, 'id','idVendedor');
+    return $this->hasOne(Vendedor::class, 'id','idVendedor');
   }
   // public function setCpfAttribute(CPF $cpf){
   //   $this->cpf = $cpf->get();
@@ -20,7 +20,7 @@ class Vendedor extends Model
   //   $this->cnpj = $cnpj->get();
   // }
 
-  public function receber(){
-    return $this->belongsTo(ContaReceber::class, 'idVendedor', 'id');
+  public function vendedores(){
+    return $this->hasOne(ContaReceber::class, 'idVendedor', 'id');
   }
 }

@@ -41,17 +41,12 @@
                 <div class="nano-content">
                     <div class="logo"><a href="{{route('dashboard')}}"><!-- <img src="assets/images/logo.png" alt="" /> --><span>WEB EMPRESARIAL</span></a></div>
                     <ul>
-                        <li class="label">Main</li>
-                        <li class="active"><a class="sidebar-sub-toggle"><i class="ti-home"></i> Dashboard<span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                            <ul>
-                                <li><a href="{{route('dashboard')}}">Dashboard</a></li>
 
+                        <li class="active"><a class="sidebar-sub-toggle" href="{{route('dashboard')}}"><i class="ti-home"></i> Dashboard</a>
 
-
-                            </ul>
                         </li>
 
-                        <li class="label">Appicações</li>
+                        <li class="label">Aplicações</li>
                         <li><a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i>  Cadastros  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
                                 <li><a href="{{route('categorias.index')}}">Categorias</a></li>
@@ -59,7 +54,7 @@
                                 <li><a href="{{route('fornecedores.index')}}">Fornecedores</a></li>
                                 <li><a href="{{route('produtos.index')}}">Produtos</a></li>
                                 <li><a href="{{route('vendedores.index')}}">Vendedores</a></li>
-                                <li><a href="{{route('usuarios.index')}}">Usuários</a></li>
+
 
                             </ul>
                         </li>
@@ -88,13 +83,21 @@
                             <ul>
                                 <li><a href="{{route('contasPagar.index')}}">Contas a Pagar</a></li>
                                 <li><a href="{{route('contasReceber.index')}}">Contas a Receber</a></li>
-                                <li><a href="{{route('fluxoCaixa')}}">Fluxo de Caixa</a></li>
+                                <li><a href="{{route('fluxoCaixa.index')}}">Fluxo de Caixa</a></li>
                             </ul>
                         </li>
+                        <li><a class="sidebar-sub-toggle"><i class="ti-user"></i>  Usuários  <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                            <ul>
+                                <li><a href="{{route('usuarios.index')}}">Cadastrar Usuário</a></li>
+
+                            </ul>
+                        </li>
+                        <li  ><a  href="{{ url('/main/logout') }}"><i class="ti-close"></i> Logout</a></li>
+
                         <!--<li><a href="app-event-calender.html"><i class="ti-calendar"></i> Calendário </a></li>
                         <li><a href="app-email.html"><i class="ti-email"></i> Email</a></li>
                         <li><a href="app-profile.html"><i class="ti-user"></i> Perfil</a></li>-->
-                        <li><a><i class="ti-close"></i> Logout</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -225,7 +228,8 @@
                                         </div>
                                     </div>
                                 </li>-->
-                                <li class="header-icon dib"><span class="user-avatar">Vinicius Arambul <i class="ti-angle-down f-s-10"></i></span>
+
+                                <li class="header-icon dib"><span class="user-avatar">{{ auth()->user()->nome }}<i class="ti-angle-down f-s-10"></i></span>
                                     <div class="drop-down dropdown-profile">
 
                                         <div class="dropdown-content-body">
@@ -246,6 +250,22 @@
                     </div>
                 </div>
             </div>
+
+                    @if (\Session::has('error'))
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li>{!! \Session::get('error') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
+                    @if (\Session::has('success'))
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{!! \Session::get('success') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
+
         </div>
         <div id="search">
             <button type="button" class="close">×</button>
@@ -254,6 +274,7 @@
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
+
 
 
             @yield('content-wrap')
@@ -267,82 +288,20 @@
         <!-- sidebar -->
         <script src="{{ asset('assets/js/lib/bootstrap.min.js')}}"></script>
 
-        <!-- bootstrap -->
-
-        <script src="{{ asset('assets/js/lib/circle-progress/circle-progress.min.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/circle-progress/circle-progress-init.js')}}"></script>
-
-        <script src="{{ asset('assets/js/lib/morris-chart/raphael-min.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/morris-chart/morris.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/morris-chart/morris-init.js')}}"></script>
-
-        <!--  flot-chart js -->
-        <script src="{{ asset('assets/js/lib/flot-chart/jquery.flot.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/flot-chart/jquery.flot.resize.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/flot-chart/flot-chart-init.js')}}"></script>
-        <!-- // flot-chart js -->
 
 
-        <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.algeria.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.argentina.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.brazil.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.france.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.germany.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.greece.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.iran.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.iraq.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.russia.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.tunisia.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.europe.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.usa.js')}}"></script>
-        <!-- scripit init-->
-        <script src="{{ asset('assets/js/lib/vector-map/vector.init.js')}}"></script>
-
-        <script src="{{ asset('assets/js/lib/weather/jquery.simpleWeather.min.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/weather/weather-init.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/owl-carousel/owl.carousel.min.js')}}"></script>
-        <script src="{{ asset('assets/js/lib/owl-carousel/owl.carousel-init.js')}}"></script>
-        <script src="{{ asset('assets/js/scripts.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
-        <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="{{ asset('libs/jquery/jquery-3.1.1.min.js') }}"></script>
         <!-- <script type="text/javascript" src="{{ asset('libs/jquery/jquery.maskMoney.js') }}"></script> -->
         <script type="text/javascript" src="{{ asset('libs/jquery-price/jquery.price_format.1.8.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libs/morris.js/morris.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libs/morris.js/raphael-min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
         <script type="text/javascript" src="{{ asset('libs/sweetAlert/sweetalert.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/tinymce/js/tinymce/tinymce.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
+
         <!-- scripit init-->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script>
-      $(document).ready(function () {
-          app.init();
-      });
-      </script>
+
       <script>
-      $(document).ready(function(){
+
       $('.date').mask('11/11/1111');
       $('.time').mask('00:00:00');
       $('.date_time').mask('00/00/0000 00:00:00');
@@ -352,15 +311,11 @@
       $('.mixed').mask('AAA 000-S0S');
       $('.cpf').mask('000.000.000-00', {reverse: true});
       $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
-      });
+
 
 
       </script>
 
-      <!-- Adicionando JQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
 
     <!-- Adicionando Javascript -->
     <script type="text/javascript" >
@@ -436,8 +391,8 @@
       $(function() {
       $('#valor').priceFormat({
           prefix: '',
-          centsSeparator: ',',
-           thousandsSeparator: '.'
+          centsSeparator: '.',
+           thousandsSeparator: ''
           });
 
       });
@@ -453,10 +408,48 @@
       });
 
       $(function() {
+      $('#valorUnitario').priceFormat({
+          prefix: '',
+          centsSeparator: '.',
+           thousandsSeparator: ''
+          });
+
+      });
+
+      $(document).ready(function(e) {
+        $('#valorUnitario').blur(function () {
+        var valor = $(this).val();
+        if (valor == '0,00') {
+          $(this).val(' ');
+        }
+
+      });
+      });
+
+      $(function() {
+          $('#valorSugerido').priceFormat({
+              prefix: '',
+              centsSeparator: '.',
+              thousandsSeparator: ''
+          });
+
+      });
+
+      $(document).ready(function(e) {
+          $('#valorSugerido').blur(function () {
+              var valor = $(this).val();
+              if (valor == '0,00') {
+                  $(this).val(' ');
+              }
+
+          });
+      });
+
+      $(function() {
       $('#valorPago').priceFormat({
           prefix: '',
-          centsSeparator: ',',
-           thousandsSeparator: '.'
+          centsSeparator: '.',
+           thousandsSeparator: ''
           });
 
       });

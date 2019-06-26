@@ -127,15 +127,15 @@
                       <div class="col-lg-12">
                           <div class="card">
                             <div class="col-lg-12">
-                              Deseja realmente excluir o Produto <span id="categoriaDescricao"> </span> {{$produto->nome}} ?
+                              Deseja realmente excluir o Vendedor <span id="categoriaDescricao"> </span> {{$vendedor->nome}} ?
                             </div>
-                            <form class="col-lg-12" method="post" action="{{ route('produtos.destroy',['$produto' => $produto->id])}}">
+                            <form class="col-lg-12" method="post" action="{{ route('vendedores.destroy',['$vendedor' => $vendedor->id])}}">
                                 {{ csrf_field() }}
                                  <input type="hidden" name="_method" value="DELETE">
-                                 <input type="hidden" name="id" id="id" value="{{$produto->id}}">
+                                 <input type="hidden" name="id" id="id" value="{{$vendedor->id}}">
                                  <div class="col-lg-12">
                                      <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Sim</button>
-                                       <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('produtos.index') }}">Cancelar</a>
+                                       <a class="btn btn-danger btn-flat m-b-15 m-l-15" href="{{ route('vendedores.index') }}">Cancelar</a>
                                          <a class="btn btn-danger btn-flat m-b-15 m-l-15" style="color:white"  data-toggle="modal" data-target="#meuModal">Excluir</a>
                                   </div>
                             </form>

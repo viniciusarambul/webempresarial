@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Domains\ContasReceber;
+use App\Domains\ContasPagar\ContaPagar;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Domains\Clientes\Cliente;
@@ -14,9 +15,13 @@ class ContaReceberController extends Controller
     {
       $query = ContaReceber::query();
 
+        if($request->get('situacao_enum') !== null){
+            $query->where('situacao', $request->get('situacao_enum'));
+
+        }
+
         if($request->get('filter')){
-          $query->where('id', 'like', '%' . $request->get('filter') . '%')
-          ->orWhere('descricao', 'like', '%' . $request->get('filter') . '%');
+            $query->where('id', 'like', '%' . $request->get('filter') . '%');
         }
 
         $contasReceber = $query->paginate(5);
@@ -37,6 +42,7 @@ class ContaReceberController extends Controller
       if ($request->get('id')) {
             return $this->save(ContaReceber::find($request->get('id')), $request);
         }
+
         return $this->save(new ContaReceber(), $request);
     }
 
@@ -108,7 +114,8 @@ class ContaReceberController extends Controller
 
     private function save(ContaReceber $contaReceber, ContaReceberRequest $request)
     {
-      if($request->get('baixa') == null){
+
+      if($request->get('baixa') == 1){
       $contaReceber->situacao = 1;
       $contaReceber->valorPago = $request->get('valorPago');
       $contaReceber->dataPagamento = $request->get('dataPagamento');
@@ -130,67 +137,147 @@ class ContaReceberController extends Controller
       $contaReceber->save();
     }
 
-    if($contaReceber->valorPago < $contaReceber->valor){
-      $contanova = new ContaReceber;
-      $contanova->descricao = $contaReceber->id .' Parcial '. $contaReceber->descricao;
-      $contanova->dataEmissao = date('Y-m-d');
-      $contanova->dataVencimento = date('Y-m-d', strtotime('+' . 30 . 'days'));
-      $contanova->situacao = 0;
-      $contanova->idVendedor = $contaReceber->idVendedor;
-      $contanova->idProduto = $contaReceber->idCliente;
-      $contanova->quantidade = $contaReceber->quantidade;
-      $contanova->parcelas = '1';
-      $contanova->tipoPagamento = $contaReceber->tipoPagamento;
-      $contanova->valor = ($contaReceber->valor - $contaReceber->valorPago);
+        if($request->get('baixa') == 1) {
+            if ($contaReceber->valorPago < $contaReceber->valor) {
 
-      $contanova->save();
-    }
+                $contanova = new ContaReceber;
+                $contanova->descricao = 'Parcial Conta Receber id ' . $contaReceber->id;
+                $contanova->dataEmissao = date('Y-m-d');
+                $contanova->dataVencimento = date('Y-m-d', strtotime('+' . 30 . 'days'));
+                $contanova->situacao = 0;
+                $contanova->idVendedor = $contaReceber->idVendedor;
+                $contanova->idProduto = $contaReceber->idCliente;
+                $contanova->quantidade = $contaReceber->quantidade;
+                $contanova->parcelas = '1';
+                $contanova->tipoPagamento = $contaReceber->tipoPagamento;
+                $contanova->valor = ($contaReceber->valor - $contaReceber->valorPago);
+
+                $contanova->save();
+            }
+        }
 
 
       if($contaReceber->wasRecentlyCreated){
-        $parcelas = $contaReceber->parcelas ? $contaReceber->parcelas : 1;
-        for ($x = 0; $x<$parcelas; $x++){
-          $conta = new ContaReceber;
-          $conta->descricao = $contaReceber->id . '/' . $contaReceber->parcela;
-          $conta->dataEmissao = $contaReceber->dataEmissao;
-          $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
-          $conta->situacao = $contaReceber->situacao;
-          $conta->valor = round($contaReceber->valor/$contaReceber->parcelas, 2);
 
-          $conta->save();
-        }
+          $parcelas = $contaReceber->parcelas ? $contaReceber->parcelas : 1;
+          $valores = $this->getValores($parcelas, $contaReceber->valor);
+
+          foreach ($valores as $key => $valor) {
+              $conta = new ContaReceber;
+              $conta->descricao = $contaReceber->id .' '. $contaReceber->descricao . ' '. $key .'/' . $contaReceber->parcelas;
+              $conta->dataEmissao = $contaReceber->dataEmissao;
+              $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $key . 'days'));
+              $conta->situacao = $contaReceber->situacao;
+              $conta->idFornecedor = $contaReceber->idFornecedor;
+              $conta->valor = $valor;
+
+              $conta->save();
+          }
       }
 
       return redirect()->route('contasReceber.index');
     }
 
+
+    private function getValores($numeroParcelas, $valorTotal)
+    {
+        $valores = [];
+        $sobra = $valorTotal;
+
+        for ($i=1; $i <= $numeroParcelas; $i++) {
+            $divisao = round($valorTotal / $numeroParcelas, 2);
+            $valores[$i] = $divisao;
+            $sobra -= $divisao;
+        }
+
+        if($sobra > 0)
+        {
+            $valores[$numeroParcelas] += $sobra;
+        }
+
+        return $valores;
+    }
+
     public function consulta(Request $request){
       $contasReceber = ContaReceber::all();
+      $clientes = CLiente::all();
       return view('contasReceber.consulta', [
-        'contasReceber' => $contasReceber
+        'contasReceber' => $contasReceber,
+        'clientes' => $clientes
 
       ]);
 
+    }
+
+
+    public function imprimir(ContaReceber $contaReceber){
+
+        $conta = db::select("SELECT * FROM sandbox.contaPagar where id = '$contaReceber->id' ");
+
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('contasReceber.imprimir', [ 'contaReceber' => $contaReceber, 'conta' => $conta]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream();
     }
     public function Baixar(Request $request)
     {
         $datainicial = $request->get('data_incial');
         $datafinal = $request->get('data_final');
-        // $situacao = $request->get('situacao');
+        $situacao = $request->get('situacao');
+        $cliente = $request->get('cliente');
+        $pagamento = $request->get('pagamento');
         if($datainicial <> ''){
           $inicio = $datafinal;
           $fim = $datafinal;
-          // $situacao = $situacao;
-        $contasReceber = db::select("SELECT cp.*, pc.nome as pedidovendanome, pc.data as datapedido, f.nome as clientenome  from tcc.contareceber cp left join pedidovenda pc on pc.id = cp.idPedidoVenda left join clientes f on f.id = pc.idCliente where cp.dataVencimento >= '$datainicial' and cp.dataVencimento <= '$datafinal'  ");
+          if($situacao <> ''){
+            $situacao = "AND cp.situacao = '$situacao'";
+          }else{
+              $situacao = '';
+          }
+          if($cliente <> ''){
+            $cliente = "AND cp.idCliente = '$cliente'";
+          }else{
+            $cliente = '';
+          }
+          if($pagamento <> ''){
+            $pagamento = "AND cp.tipoPagamento = '$pagamento'";
+          }else{
+            $pagamento = '';
+          }
+
+        $contasReceber = db::select("SELECT cp.*, pc.nome as pedidovendanome, pc.data as datapedido, f.nome as clientenome  from sandbox.contaReceber cp left join pedidovenda pc on pc.id = cp.idPedidoVenda left join clientes f on f.id = pc.idCliente where
+          cp.dataVencimento >= '$datainicial' and cp.dataVencimento <= '$datafinal' $situacao  $cliente $pagamento ");
+
       }else{
         $inicio = '';
         $fim ='';
-        // $situacao = $situacao;
-        $contasReceber = db::select("SELECT cp.*, pc.nome as pedidovendanome, pc.data as datapedido, f.nome as clientenome  from tcc.contareceber cp left join pedidovenda pc on pc.id = cp.idPedidoVenda left join clientes f on f.id = pc.idCliente");
-      }
+        if($situacao <> ''){
+          $situacao = "AND cp.situacao = '$situacao'";
+        }else{
+            $situacao = '';
+        }
+        if($cliente <> ''){
+          $cliente = "AND cp.idCliente = '$cliente'";
+        }else{
+          $cliente = '';
+        }
+        if($pagamento <> ''){
+          $pagamento = "AND cp.tipoPagamento = '$pagamento'";
+        }else{
+          $pagamento = '';
+        }
+            $contasReceber = db::select("SELECT cp.*, pc.nome as pedidovendanome, pc.data as datapedido, f.nome as clientenome  from sandbox.contaReceber cp left join pedidovenda pc on pc.id = cp.idPedidoVenda left join clientes f on f.id = pc.idCliente where pc.id > 0 $situacao  $cliente $pagamento");
 
-        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contasReceber.relatorio', ['contasReceber' => $contasReceber, 'inicio' => $inicio, 'fim' => $fim]);
-        $pdf->setPaper('A4', 'landscape');
+    }
+
+      //  $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('contasReceber.relatorio', ['contasReceber' => $contasReceber, 'inicio' => $inicio, 'fim' => $fim]);
+        //$pdf->setPaper('A4', 'landscape');
+        //return $pdf->stream();
+
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('contasReceber.relatorio', ['contasReceber' => $contasReceber, 'inicio' => $inicio, 'fim' => $fim]);
         return $pdf->stream();
     }
 

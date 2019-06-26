@@ -141,6 +141,7 @@ class ClienteController extends Controller
 
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('clientes.relatorio', ['clientes' => $clientes]);
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }
 

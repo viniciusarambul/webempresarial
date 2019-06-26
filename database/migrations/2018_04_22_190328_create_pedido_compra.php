@@ -15,7 +15,7 @@ class CreatePedidoCompra extends Migration
     {
       Schema::create('pedidocompra', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('nome');
+        $table->string('nome')->nullable();
         $table->date('data');
         $table->text('situacao');
 

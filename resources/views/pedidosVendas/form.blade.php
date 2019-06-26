@@ -12,18 +12,7 @@
                           </div>
                       </div>
                   </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Basic</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
@@ -34,17 +23,14 @@
                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                   <input type="hidden" id="id" name="id" value="{{ $pedidoVenda->id }}" />
                                   <div class="row">
-                                      <div class="col-lg-6">
-                                          <label for="nome">Descrição *</label><br />
-                                          <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Descrição" value="{{ $pedidoVenda->nome }}">
-                                      </div>
+
                                       <div class="col-lg-3">
                                           <label for="data">Data *</label><br />
                                           <input class="form-control input-default " type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoVenda->data }}">
                                       </div>
                                       <div class="col-lg-3">
                                            <label for="situacao">Situação *</label><br />
-                                        <select class="form-control input-default " required name="situacao">
+                                        <select class="form-control input-default " readonly name="situacao">
                                           <option value="">Selecione</option>
                                           <option value="0" <?php if($pedidoVenda->situacao == 0) {echo 'selected';} ?>>Aberto</option>
                                           <option value="1" <?php if($pedidoVenda->situacao == 1) {echo 'selected';} ?>>Faturado</option>
@@ -52,19 +38,19 @@
                                         </select>
 
                                       </div>
-                                      <div class="col-lg-6">
+                                      <div class="col-lg-3">
                                         <label for="idCliente">Cliente</label><br />
                                         <select class="form-control input-default " name="idCliente">
                                         @foreach($clientes as $cliente)
-                                          <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                                          <option value="{{ $cliente->id }}">{{ $cliente->id }} - {{ $cliente->nome }}</option>
                                           @endforeach
                                         </select>
                                       </div>
-                                      <div class="col-lg-6">
+                                      <div class="col-lg-3">
                                         <label for="idVendedor">Vendedor</label><br />
                                         <select class="form-control input-default " name="idVendedor">
                                         @foreach($vendedores as $vendedor)
-                                          <option value="{{ $vendedor->id }}">{{ $vendedor->nome }}</option>
+                                          <option value="{{ $vendedor->id }}">{{ $vendedor->id }} - {{ $vendedor->nome }}</option>
                                           @endforeach
                                         </select>
                                       </div>

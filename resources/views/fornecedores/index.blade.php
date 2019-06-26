@@ -2,20 +2,7 @@
 @section('content-wrap')
 <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
         <div class="content-wrap">
-          @if (\Session::has('error'))
-              <div class="alert alert-danger">
-                  <ul>
-                      <li>{!! \Session::get('error') !!}</li>
-                  </ul>
-              </div>
-          @endif
-          @if (\Session::has('success'))
-              <div class="alert alert-success">
-                  <ul>
-                      <li>{!! \Session::get('success') !!}</li>
-                  </ul>
-              </div>
-          @endif
+
                 <div class="main">
                     <div class="container-fluid">
 
@@ -59,12 +46,12 @@
                                     </a>
                                 </p>
                                 <div class="card table-responsive">
-                                  <h4>Listagem de Fornecedores</h4>
+                                  <h4>Listagem de Fornecedores (Representantes)</h4>
                                     @if(count($fornecedores))
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Fornecedor</th>
+                                                <th>Representante</th>
                                                 <th>Telefone</th>
                                                 <th>CPF</th>
                                                 <th>CNPJ</th>

@@ -54,9 +54,8 @@
                                                   <td>{{$usuario->login}}</td>
                                                   <td style="text-align: center" >{{$usuario->email}}</td>
                                                   <td>
-                                                    <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('usuarios.edit', ['$usuario' => $usuario->id]) }}"><i class="ti-settings"></i>Editar</a>
+                                                    <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('usuarios.show', ['$usuario' => $usuario->id]) }}"><i class="ti-settings"></i>Ver</a>
 
-                                                    <a  class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('usuarios.destroy', ['$usuario' => $usuario->id]) }}"><i class="ti-settings"></i>Excluir</button>
 
                                                   </td>
 

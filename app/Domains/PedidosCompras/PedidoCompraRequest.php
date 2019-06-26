@@ -24,7 +24,7 @@ class PedidoCompraRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required'
+          
         ];
     }
 }

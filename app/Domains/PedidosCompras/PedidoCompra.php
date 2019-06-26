@@ -4,6 +4,7 @@ namespace App\Domains\PedidosCompras;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Pedidos\Pedidoitem;
+use App\Domains\Fornecedores\Fornecedor;
 use App\Domains\Pedidos\Pedidotitulo;
 
 class PedidoCompra extends Model
@@ -35,6 +36,11 @@ class PedidoCompra extends Model
     return $this->itens->reduce(function($total, $item){
       return $total+=$item->valorUnitario*$item->quantidade;
     });
+  }
+
+  public function fornecedores(){
+      return $this->hasOne(Fornecedor::class, 'id', 'idFornecedor');
+
   }
 
 

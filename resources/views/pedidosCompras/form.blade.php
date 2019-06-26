@@ -12,18 +12,7 @@
                           </div>
                       </div>
                   </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Basic</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
@@ -34,17 +23,17 @@
                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                   <input type="hidden" id="id" name="id" value="{{ $pedidoCompra->id }}" />
                                   <div class="row">
-                                      <div class="col-lg-6">
+                                      <!--<div class="col-lg-6">
                                           <label for="nome">Descrição *</label><br />
                                           <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Descrição" required value="{{ $pedidoCompra->nome }}">
-                                      </div>
+                                      </div>-->
                                       <div class="col-lg-3">
                                           <label for="data">Data *</label><br />
                                           <input class="form-control input-default " type="date" name="data" id="data" required placeholder="Data" value="{{ $pedidoCompra->data }}">
                                       </div>
                                       <div class="col-lg-3">
                                            <label for="situacao">Situação *</label><br />
-                                        <select class="form-control input-default " required name="situacao">
+                                        <select class="form-control input-default " readonly name="situacao">
                                           <option value="">Selecione</option>
                                           <option value="0" <?php if($pedidoCompra->situacao == 0) {echo 'selected';} ?>>Aberto</option>
                                           <option value="1" <?php if($pedidoCompra->situacao == 1) {echo 'selected';} ?>>Fechado</option>
@@ -56,7 +45,7 @@
                                         <label for="idFornecedor">Fornecedor</label><br />
                                         <select class="form-control input-default " name="idFornecedor">
                                         @foreach($fornecedores as $fornecedor)
-                                          <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
+                                          <option value="{{ $fornecedor->id }}">{{ $fornecedor->id }} - {{ $fornecedor->nome }}</option>
                                           @endforeach
                                         </select>
                                       </div>

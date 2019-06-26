@@ -16,7 +16,7 @@ class EstoqueController extends Controller
     {
       $query = Produto::query();
 
-        $produtos = $query->paginate(5);
+        $produtos = $query->paginate(125);
         $categorias = Categoria::all();
         return view('estoque', [
           'produtos' => $produtos,

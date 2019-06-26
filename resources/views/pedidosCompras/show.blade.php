@@ -5,25 +5,7 @@
         <div class="main" >
             <div class="container-fluid">
                 <div class="row">
-                  <div class="col-lg-8 p-r-0 title-margin-right">
-                      <div class="page-header">
-                          <div class="page-title">
-                              <h1>Cadastro de Pedidos de Compras</h1>
-                          </div>
-                      </div>
-                  </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Basic</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
+
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
@@ -35,10 +17,7 @@
                             <div class="card">
                                 <h5>Dados do Pedido:   {{ $pedidoCompra->nome }}</h5>
                                 <div class="row">
-                                <div class="col-lg-3">
-                                    <label for="nome">Descrição *</label><br />
-                                    <input class="form-control input-default " readonly type="text" name="nome" id="nome" placeholder="Descrição" value="{{ $pedidoCompra->nome }}">
-                                </div>
+
                                 <div class="col-lg-3">
                                     <label for="data">Data *</label><br />
                                     <input class="form-control input-default " readonly type="text" name="data" id="data" required placeholder="Data" value="{{ date('d/m/Y', strtotime($pedidoCompra->data)) }}">
@@ -49,7 +28,8 @@
                                 </div>
 
                               </div>
-                              @if($pedidoCompra->situacao == 1)
+                              @if($pedidoCompra->situacao == 1 OR !empty($pedidoCompra->titulo ))
+
 
                               @else
                               <div class="row">
@@ -67,7 +47,7 @@
 
                       <div class="row">
                         <div class="col s12">
-                          @if($pedidoCompra->situacao <> 1 )
+                          @if(empty($pedidoCompra->titulo ))
 
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#meuModal">
                                   Adicionar Produtos
@@ -98,7 +78,8 @@
                                             <td>{{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                                             <td style="text-align: right">R$ {{number_format($item->preco, 2, ',', '.')}}</td>
                                             <td >
-                                @if($pedidoCompra->situacao == 1)
+                                @if($pedidoCompra->situacao == 1 OR !empty($pedidoCompra->titulo ))
+
 
                                               @else
 
@@ -150,27 +131,91 @@
                                   Adicionar Pagamento
                                 </button>
                                 @else
-                                <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidosCompras.pedidoTitulo.edit',['pedidoCompra' => $pedidoCompra->id,'pedidoTitulo' => $pedidoCompra->titulo->id ]) }}">
+                            <!--    <a class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidosCompras.pedidoTitulo.edit',['pedidoCompra' => $pedidoCompra->id,'pedidoTitulo' => $pedidoCompra->titulo->id ]) }}">
                                     <i class="ti-plus"></i>Editar
-                                </a>
+                                </a>-->
                                 @endif
                                 @endif
 
 
                             <h5>Dados do Pagamento</h5>
-                            @if(!empty($pedidoCompra->titulo))
-                              <p><b>Codigo Titulo: </b>{{ $pedidoCompra->titulo->id }}</p>
-                              <p><b>Data Emissão: </b>{{ date('d/m/Y', strtotime($pedidoCompra->titulo->dataEmissao)) }}</p>
-                              <p><b>Primeiro Vencimento: </b>{{ date('d/m/Y', strtotime($pedidoCompra->titulo->dataVencimento)) }}</p>
-                              <p><b>Situacao: </b>{{ $pedidoCompra->titulo->situacao }}</p>
-                              <p><b>Parcelas: </b>{{ $pedidoCompra->titulo->parcelas }}</p>
-                              @else
-                              <p>Não existe Dados de Pagamento do Pedido</p>
-                              @endif
+
+                              @if(!empty($pedidoCompra->titulo))
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Codigo Titulo:</th>
+                                          <th>Data Emissão:</th>
+                                          <th>Primeiro Vencimento:</th>
+                                          <th>Situacao</th>
+                                          <th>Parcelas</th>
+                                          <th>Valor Total:</th>
+
+                                      </tr>
+                                  </thead>
+
+                                  <tbody>
+                                          <tr class="with-options">
+                                          <td>{{$pedidoCompra->titulo->id}}</td>
+                                          <td>{{date('d/m/Y', strtotime($pedidoCompra->titulo->dataEmissao))}}</td>
+                                          <td>{{date('d/m/Y', strtotime($pedidoCompra->titulo->dataVencimento))}}</td>
+                                          <td>{{$pedidoCompra->titulo->situacao}}</td>
+                                          <td>{{ $pedidoCompra->titulo->parcelas }}</td>
+                                          <td>{{ number_format($pedidoCompra->titulo->preco,2,',','.') }}</td>
+                                        </tr>
+                                 </tbody>
+                            </table>
+                              <br />
+                              <div class="row">
+                              @foreach($pedidosCompraConta as $conta)
+                              <div class="col-lg-6">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Data Vencimento</th>
+                                        <th>Valor</th>
+                                        <th>Valor Pago</th>
+                                        <th>Data Pagamento</th>
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+
+                                    <tr class="with-options">
+                                        <td>{{date('d/m/Y', strtotime($conta->dataVencimento))}}</td>
+                                        <td>R$ {{ number_format($conta->valor,2,',','.') }}</td>
+                                        <td>R$ {{ isset($conta->valorPago) ? number_format($conta->valorPago,2,',','.') : '0,00' }}</td>
+                                        <td>{{ isset($conta->dataPagamento) ? date('d/m/Y', strtotime($conta->dataPagamento)) : '' }}</td>
+
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                @endforeach
+                              </div>
+
+
+                            @else
+                            <p>Não existe Dados de Pagamento do Pedido</p>
+                            @endif
+
                           </div>
 
 
                       </div>
+                    </div>
+                    <div class="card row">
+                        <form method="post" action="{{route('pedidosCompras.observacao', ['pedidoCompra' => $pedidoCompra->id])}}" enctype="multipart/form-data">
+                      <div class="col-lg-12">
+                          <label for="nome">Observações</label><br />
+                          <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Observação" required value="{{ $pedidoCompra->nome }}">
+
+                      </div>
+                        <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
+                  </form>
                     </div>
 
                     </section>
@@ -178,54 +223,114 @@
                 </div>
               </div>
 
+      <script>
 
+      function calculo()
+      {
+      //passando os valores do campo do form para as variaveis
+          valor1 = parseFloat(document.meu_form.quantidade.value);
+          valor2 = parseFloat(document.meu_form.valorUnitario.value);
+
+          soma = eval(valor1 * valor2); //fazendo a soma
+
+
+      if(soma != undefined)
+      {
+      document.meu_form.preco.value = soma;
+      }
+      }
+
+      function calculo1()
+      {
+      //passando os valores do campo do form para as variaveis
+
+      valor3 = parseFloat(document.form_produto.produtoNovoQuantidade.value);
+      valor4 = parseFloat(document.form_produto.produtoNovoValorUnitario.value);
+
+      soma1 = eval(valor3 * valor4); //fazendo a soma
+
+      //no evento do onblur para que nao apareça 'undefined'
+      //eu faço a seguinte condição
+      //se a soma for diferente de undefined ele mostra no valor total
+      if(soma1 != undefined)
+      {
+      document.form_produto.produtoNovoPreco.value = soma1;
+      }
+      }
+
+      $(document).ready(function(e) {
+
+          $('#idProduto').on('change', function() {
+            var produto  = $('#idProduto option:selected').val();
+
+            console.log('Produto = '+ produto);
+
+            $.get('/produtos/' + produto, function (resposta) {
+               $('#id_produto div').remove();
+                $('#id_produto').append(resposta);
+
+               console.log(resposta);
+            });
+
+          });
+
+
+        });
+
+      </script>
               <script>
-              $(document).ready(function(e) {
 
-                  $('#idProduto').on('change', function() {
-                    var produto  = $('#idProduto option:selected').val();
-
-                    console.log('Produto = '+ produto);
-
-                    $.get('/produtos/' + produto, function (resposta) {
-                       $('#id_produto div').remove();
-                        $('#id_produto').append(resposta);
-                       //$('#id_matricula').innerHTML(resposta)
-                       console.log(resposta);
-                    });
-
+              jQuery(document).ready(function(){
+            		jQuery('#adicionarProduto').submit(function(){
+                  e.preventDefault();
+                  $.ajaxSetup({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                      }
                   });
+            			jQuery.ajax({
+                    url: "{{ url('/pedidosCompras/criarProduto') }}",
+                  method: 'post',
+                  data: {
+                     nome: jQuery('#produtoNovoNome').val(),
+                     categoria: jQuery('#produtoNovoCategoria').val(),
+                     fornecedor: jQuery('#produtoNovoFornecedor').val(),
+                     valorUnitario: jQuery('#produtoNovoValorUnitario').val(),
+                     valorSugerido: jQuery('#produtoNovoValorSugerido').val(),
+                     produtoNovoQuantidade: jQuery('#produtoNovoQuantidade').val(),
+                     produtoNovoPreco: jQuery('#produtoNovoPreco').val()
+                  },
 
+            				success: function( data )
+            				{
+            					alert( data );
+            				}
+            			});
 
-                });
+            			return false;
+            		});
+            	});
 
-              function calculo()
-              {
-              //passando os valores do campo do form para as variaveis
-
-              valor1 = parseFloat(document.meu_form.quantidade.value);
-              valor2 = parseFloat(document.meu_form.valorUnitario.value);
-
-              soma = eval(valor1 * valor2); //fazendo a soma
-
-              //no evento do onblur para que nao apareça 'undefined'
-              //eu faço a seguinte condição
-              //se a soma for diferente de undefined ele mostra no valor total
-              if(soma != undefined)
-              {
-              document.meu_form.preco.value = soma;
-              }
-              }
 
               </script>
 
 
-              <div class="modal" tabindex="-1" role="dialog" id="meuModal">
-                <div class="modal-dialog" role="document">
+              <div class="modal" tabindex="-1" role="dialog" id="meuModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
+                      <div class="modal-body">
+                        <div class="tabpanel">
+                          <ul class="nav nav-tabs">
+                               <li role="presentation" class="nav-link active"><a href="#produtos" aria-controls="produtos" role="tab" data-toggle="tab">Produtos</a>
 
-                            <div class="row">
+                               </li>
+                               <li role="presentation" class="nav-link"><a href="#adicionar" aria-controls="adicionar" role="tab" data-toggle="tab">Produto Novo</a>
+
+                               </li>
+                           </ul>
+                           <div class="tab-content">
+                        <div class="row tab-pane active" role="tabpanel" id="produtos">
                                 <div class="col s12">
                                     <div class="card">
                                         <form method="post" name="meu_form" action="{{route('pedidosCompras.pedidoItem.store', ['pedidoCompra' => $pedidoCompra->id])}}" enctype="multipart/form-data">
@@ -233,52 +338,124 @@
                                             <input type="hidden" id="id" name="id" value="{{ $pedidoItem->id }}" />
                                             <input type="hidden" id="idPedido" name="idPedido" value="{{ $pedidoItem->idPedido }}" />
                                             <div class="row">
-                                              <button type="button" class="btn btn-primary" data-dismiss="modal"  data-toggle="modalCadastrarProduto" data-target="#modalCadastrarProduto">
-                                                Adicionar Produtos
-                                              </button>
+
 
                                               <div class="col-lg-6">
-                                                <label for="idProduto">Produto</label><br />
+
+                                                <label for="idProduto">Produto</label> <br />
                                                 <select id="idProduto" class="form-control input-default " name="idProduto">
                                                   <option value="">Selecione</option>
                                                 @foreach($produtos as $produto)
 
-                                                  <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
+                                                  <option value="{{ $produto->id }}">{{ $produto->id }} - {{ $produto->nome }}</option>
                                                   @endforeach
                                                 </select>
+                                                <br />
+
+
                                               </div>
+                                              <div class="col-lg-6">
+
+                                             </div>
+                                             <div class="row" id="id_produto">
+                                             </div>
                                                 <div class="col-lg-6">
                                                     <label for="quantidade">Quantidade</label><br />
                                                     <input class="form-control input-default " type="text" name="quantidade" id="quantidade" min="1" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
                                                 </div>
-                                                <div class="col-lg-6" id="id_produto">
-                                                </div>
+
                                                 <div class="col-lg-6">
                                                     <label for="preco">Valor Total</label><br />
                                                     <input class="form-control input-default " type="text" onBlur="calculo();" name="preco" id="preco" value="{{ number_format($pedidoItem->preco,2,',','.') }}">
 
                                                 </div>
 
-
-
-
                                               </div>
-
-
-
-
                                     </div>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
+                                        <a class="btn btn-danger btn-flat m-b-15 m-l-15"href="{{ route('pedidosCompras.show', ['pedidoCompra' => $pedidoCompra->id]) }}">Cancelar</a>
+                                    </div>
+                                      </form>
                                 </div>
 
                             </div>
 
-                    </div>
-                    <div class="row">
-                        <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
-                        <a class="btn btn-danger btn-flat m-b-15 m-l-15"href="{{ route('pedidosCompras.show', ['pedidoCompra' => $pedidoCompra->id]) }}">Cancelar</a>
-                    </div>
-                      </form>
+                            <!-- ADICIONAR OS PRODUTOS -->
+                            <div class="row tab-pane" role="tabpanel" id="adicionar">
+                                <div class="col s12">
+                                    <div class="card">
+                                        <form method="post" name="form_produto" action="" id="adicionarProduto" enctype="multipart/form-data">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                                            <div class="row">
+                                              <div class="col-lg-6">
+
+                                                <div class="input col s4">
+                                                    <label for="produtoNovoNome">Nome *</label><br />
+                                                    <input class="form-control input-default " type="text" name="produtoNovoNome" id="produtoNovoNome" placeholder="produtoNovoNome" >
+                                                </div>
+                                                <div class="input col s4">
+                                                     <label for="produtoNovoCategoria">Categoria *</label><br />
+                                                  <select class="form-control input-default " id="produtoNovoCategoria" required name="produtoNovoCategoria">
+                                                    <option value="">Selecione</option>
+                                                  @foreach($categorias as $categoria)
+                                                    <option value="{{ $categoria->id }}"{{$categoria->id ? 'selected' : '' }}>{{ $categoria->descricao }}</option>
+                                                    @endforeach
+                                                  </select>
+                                                </div>
+
+                                                <div class="input col s4">
+                                                     <label for="produtoNovoFornecedor">Fornecedor *</label><br />
+                                                  <select class="form-control input-default " id="produtoNovoFornecedor" required name="produtoNovoFornecedor">
+                                                    <option value="">Selecione</option>
+                                                  @foreach($fornecedores as $fornecedor)
+                                                    <option value="{{ $fornecedor->id }}" {{$fornecedor->id ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
+                                                    @endforeach
+                                                  </select>
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-6">
+                                                <div class="input col s4">
+                                                    <label for="produtoNovoValorUnitario">Valor Unitário *</label><br />
+                                                    <input class="form-control input-default " type="text" name="produtoNovoValorUnitario" id="produtoNovoValorUnitario" placeholder="Valor Unitário" >
+                                                </div>
+                                                <div class="input col s4">
+                                                    <label for="produtoNovoValorUnitario">Valor Sugerido Venda *</label><br />
+                                                    <input class="form-control input-default " type="text" name="produtoNovoValorSugerido" id="produtoNovoValorSugerido" placeholder="Valor Sugerido" >
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-6">
+                                                <div class="col-lg-6">
+                                                    <label for="quantidade">Quantidade</label><br />
+                                                    <input class="form-control input-default " type="text" name="produtoNovoQuantidade" id="produtoNovoQuantidade" min="1" placeholder="Quantidade">
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="preco">Valor Total</label><br />
+                                                    <input class="form-control input-default " type="text" onBlur="calculo1();" name="produtoNovoPreco" id="produtoNovoPreco">
+
+                                                </div>
+                                              </div>
+                                            </div>
+
+
+                                            <div class="row" style="margin-top: 2%">
+                                                <button type="submit" id="adicionarProduto" class="btn btn-success btn-flat m-b-15 m-l-15">Salvar</button>
+
+                                            </div>
+                                        </form>
+                                        <p style="margin-left: 2%">* Campos Obrigatórios</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                          </div>
+
+                          </div>
+                    </div>
+
+                      </div>
                   </div>
                 </div>
               </div>
@@ -306,7 +483,7 @@
 
                                 <div <div class="col-lg-6">
                                      <label for="situacao">Situação *</label><br />
-                                  <select class="form-control input-default " required name="situacao">
+                                  <select class="form-control input-default " readonly required name="situacao">
                                     <option value="">Selecione</option>
                                     <option value="Aberto" <?php if($pedidoCompra->situacao == 'Aberto') {echo 'selected';} ?>selected>Aberto</option>
                                     <option value="Fechado" <?php if($pedidoCompra->situacao == 'Fechado') {echo 'selected';} ?>>Baixado</option>
@@ -317,12 +494,12 @@
 
                                 <div <div class="col-lg-6">
                                   <label for="tipoPagamento">Tipo Documento</label><br />
-                                  <select class="form-control input-default " name="tipoPagamento">
+                                  <select class="form-control input-default "  name="tipoPagamento">
 
-                                    <option value="0" <?php if($pedidoCompra->situacao == '0') {echo 'selected';} ?>>Boleto</option>
-                                    <option value="1" <?php if($pedidoCompra->situacao == '1') {echo 'selected';} ?>>Cartão de Crédito</option>
-                                    <option value="2" <?php if($pedidoCompra->situacao == '2') {echo 'selected';} ?>>Cartão de Débito</option>
-                                    <option value="6" <?php if($pedidoCompra->situacao == '6') {echo 'selected';} ?>>Recibo</option>
+                                    <option value="0" <?php if($pedidoTitulo->tipoPagamento == '0') {echo 'selected';} ?>>Boleto</option>
+                                    <option value="1" <?php if($pedidoTitulo->tipoPagamento == '1') {echo 'selected';} ?>>Cartão de Crédito</option>
+                                    <option value="2" <?php if($pedidoTitulo->tipoPagamento == '2') {echo 'selected';} ?>>Cartão de Débito</option>
+                                    <option value="6" <?php if($pedidoTitulo->tipoPagamento == '6') {echo 'selected';} ?>>Recibo</option>
 
                                   </select>
                                 </div>
@@ -339,7 +516,7 @@
 
                                 <div <div class="col-lg-6">
                                     <label for="preco">Valor</label><br />
-                                    <input class="form-control input-default " type="text" name="preco" id="preco" placeholder="Valor" value="{{ $pedidoCompra->totalpreco }}">
+                                    <input class="form-control input-default " type="text" name="preco" id="preco" readonly placeholder="Valor" value="{{ $pedidoCompra->totalpreco }}">
                                 </div>
                               </div>
                               <div class="row" style="margin-top: 2%">
@@ -361,11 +538,12 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
 
+
               <div class="row">
                   <div class="col-lg-12">
                       <div class="card">
                         <div class="col-lg-12">
-                          Deseja realmente excluir o Cliente <span id="categoriaDescricao"> </span> {{$pedidoCompra->nome}} ?
+                          Deseja realmente excluir a Compra <span id="categoriaDescricao"> </span> {{$pedidoCompra->nome}} ?
                         </div>
                         <form class="col-lg-12" method="post" action="{{ route('pedidosCompras.destroy',['$pedidoCompra' => $pedidoCompra->id])}}">
                             {{ csrf_field() }}

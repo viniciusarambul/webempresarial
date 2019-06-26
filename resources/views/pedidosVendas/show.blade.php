@@ -2,30 +2,10 @@
 @section('content-wrap')
 
 <div class="content-wrap">
+
         <div class="main" >
             <div class="container-fluid">
-                <div class="row">
-                  <div class="col-lg-8 p-r-0 title-margin-right">
-                      <div class="page-header">
-                          <div class="page-title">
-                              <h1>Cadastro de Pedidos de Compras</h1>
-                          </div>
-                      </div>
-                  </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Table-Basic</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                </div>
-                <!-- /# row -->
+
                 <section id="main-content">
 
 
@@ -33,12 +13,9 @@
                     <div class="row">
                         <div class="col s12">
                             <div class="card">
-                                <h5>Dados do Pedido:   {{ $pedidoVenda->nome }}</h5>
+                                <h5>Dados do Pedido:   {{ $pedidoVenda->id }}</h5>
                                 <div class="row">
-                                <div class="col-lg-3">
-                                    <label for="nome">Descrição *</label><br />
-                                    <input class="form-control input-default " readonly type="text" name="nome" id="nome" placeholder="Descrição" value="{{ $pedidoVenda->nome }}">
-                                </div>
+
                                 <div class="col-lg-3">
                                     <label for="data">Data *</label><br />
                                     <input class="form-control input-default " readonly type="text" name="data" id="data" required placeholder="Data" value="{{ date('d/m/Y', strtotime($pedidoVenda->data)) }}">
@@ -49,7 +26,7 @@
                                 </div>
 
                               </div>
-                              @if($pedidoVenda->situacao == 1)
+                              @if($pedidoVenda->situacao == 1 OR !empty($pedidoVenda->titulo ))
 
                               @else
                               <div class="row">
@@ -67,7 +44,7 @@
 
                       <div class="row">
                         <div class="col s12">
-                          @if($pedidoVenda->situacao == 1 )
+                          @if($pedidoVenda->situacao == 1  OR !empty($pedidoVenda->titulo ))
 
                           @else
 
@@ -105,7 +82,7 @@
                                             <td style="text-align: right">R$ {{number_format($item->valorUnitario, 2, ',', '.')}}</td>
                                             <td style="text-align: right">R$ {{number_format($item->preco, 2, ',', '.')}}</td>
                                             <td >
-                                @if($pedidoVenda->situacao == 1)
+                                @if($pedidoVenda->situacao == 1 OR !empty($pedidoVenda->titulo ))
 
                                               @else
 
@@ -147,7 +124,7 @@
                           <div class="col s12 m4">
 
                             <div class="card">
-                              @if($pedidoVenda->situacao == 1)
+                              @if($pedidoVenda->situacao == 1 OR !empty($pedidoVenda->titulo ))
 
                               @else
 
@@ -164,20 +141,79 @@
                                 @endif
 
 
-                            <h5>Dados do Pagamento</h5>
-                            @if(!empty($pedidoVenda->titulo))
-                              <p><b>Codigo Titulo: </b>{{ $pedidoVenda->titulo->id }}</p>
-                              <p><b>Data Emissão: </b>{{ date('d/m/Y', strtotime($pedidoVenda->titulo->dataEmissao)) }}</p>
-                              <p><b>Primeiro Vencimento: </b>{{ date('d/m/Y', strtotime($pedidoVenda->titulo->dataVencimento)) }}</p>
-                              <p><b>Situacao: </b>{{ $pedidoVenda->titulo->situacao }}</p>
-                              <p><b>Parcelas: </b>{{ $pedidoVenda->titulo->parcelas }}</p>
-                              @else
-                              <p>Não existe Dados de Pagamento do Pedido</p>
-                              @endif
+                                <h5>Dados do Pagamento</h5>
+
+                                  @if(!empty($pedidoVenda->titulo))
+                                  <table class="table table-bordered">
+                                      <thead>
+                                          <tr>
+                                              <th>Codigo Titulo:</th>
+                                              <th>Data Emissão:</th>
+                                              <th>Primeiro Vencimento:</th>
+                                              <th>Situacao</th>
+                                              <th>Parcelas</th>
+                                              <th>Valor Total:</th>
+
+                                          </tr>
+                                      </thead>
+
+                                      <tbody>
+                                              <tr class="with-options">
+                                              <td>{{$pedidoVenda->titulo->id}}</td>
+                                              <td>{{date('d/m/Y', strtotime($pedidoVenda->titulo->dataEmissao))}}</td>
+                                              <td>{{date('d/m/Y', strtotime($pedidoVenda->titulo->dataVencimento))}}</td>
+                                              <td>{{$pedidoVenda->titulo->situacao}}</td>
+                                              <td>{{ $pedidoVenda->titulo->parcelas }}</td>
+                                              <td>{{ number_format($pedidoVenda->titulo->preco,2,',','.') }}</td>
+                                            </tr>
+                                     </tbody>
+                                </table>
+                                  <br />
+                                  <div class="row">
+                                  @foreach($pedidosVendaConta as $conta)
+                                  <div class="col-lg-6">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Data Vencimento</th>
+                                            <th>Valor</th>
+                                            <th>Valor Pago</th>
+                                            <th>Data Pagamento</th>
+
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+
+                                        <tr class="with-options">
+                                            <td>{{date('d/m/Y', strtotime($conta->dataVencimento))}}</td>
+                                            <td>R$ {{ number_format($conta->valor,2,',','.') }}</td>
+                                            <td>R$ {{ isset($conta->valorPago) ? number_format($conta->valorPago,2,',','.') : '0,00' }}</td>
+                                            <td>{{ isset($conta->dataPagamento) ? date('d/m/Y', strtotime($conta->dataPagamento)) : '' }}</td>
+
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    @endforeach
+                                  </div>
+
+
+                                @else
+                                <p>Não existe Dados de Pagamento do Pedido</p>
+                                @endif
                           </div>
 
 
                       </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label for="nome">Observações do Pedido </label><br />
+                            <input class="form-control input-default " type="text" name="nome" id="nome" placeholder="Observações" value="{{ $pedidoVenda->nome }}">
+                        </div>
                     </div>
 
                     </section>
@@ -212,11 +248,31 @@
               document.meu_form.preco.value = soma;
               }
               }
+
+
+            $(document).ready(function(e) {
+
+                $('#idProduto').on('change', function() {
+                  var produto  = $('#idProduto option:selected').val();
+
+                  console.log('Produto = '+ produto);
+
+                  $.get('/produtos/' + produto, function (resposta) {
+                     $('#id_produto div').remove();
+                      $('#id_produto').append(resposta);
+
+                     console.log(resposta);
+                  });
+
+                });
+
+
+              });
               </script>
 
 
               <div class="modal" tabindex="-1" role="dialog" id="meuModal">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
 
@@ -231,21 +287,24 @@
 
                                               <div class="col-lg-6">
                                                 <label for="idProduto">Produto</label><br />
-                                                <select class="form-control input-default " name="idProduto">
+                                                <select id="idProduto" class="form-control input-default " name="idProduto">
+                                                    <option value="">Selecione</option>
                                                 @foreach($produtos as $produto)
-                                                  <option value="{{ $produto->id }}">{{ $produto->nome }}</option>
+
+                                                  <option value="{{ $produto->id }}">{{ $produto->id }} - {{ $produto->nome }}</option>
                                                   @endforeach
                                                 </select>
                                               </div>
+                                              <div class="col-lg-6">
+
+                                             </div>
+                                             <div class="row" id="id_produto">
+                                             </div>
                                                 <div class="col-lg-6">
                                                     <label for="quantidade">Quantidade</label><br />
                                                     <input class="form-control input-default " type="text" name="quantidade" id="quantidade" min="1" placeholder="Quantidade" value="{{ $pedidoItem->quantidade }}">
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <label for="valorUnitario">Valor Unitário</label><br />
-                                                    <input class="form-control input-default " type="text" name="valorUnitario" id="valorUnitario" >
 
-                                                </div>
                                                 <div class="col-lg-6">
                                                     <label for="preco">Valor Total</label><br />
                                                     <input class="form-control input-default " type="text" onBlur="calculo();" name="preco" id="preco" value="{{ number_format($pedidoItem->preco,2,',','.') }}">
@@ -286,12 +345,12 @@
 
                                 <div <div class="col-lg-6">
                                     <label for="dataEmissao">Data Emissão</label><br />
-                                    <input class="form-control input-default " type="date" name="dataEmissao" id="dataEmissao" placeholder="Data" value="{{ $pedidoTitulo->dataEmissao }}">
+                                    <input class="form-control input-default " type="date" name="dataEmissao" required id="dataEmissao" placeholder="Data" value="{{ $pedidoTitulo->dataEmissao }}">
                                 </div>
 
                                 <div <div class="col-lg-6">
                                      <label for="situacao">Situação *</label><br />
-                                  <select class="form-control input-default " required name="situacao">
+                                  <select class="form-control input-default " readonly required name="situacao">
                                     <option value="">Selecione</option>
                                     <option value="Aberto" <?php if($pedidoVenda->situacao == 'Aberto') {echo 'selected';} ?>selected>Aberto</option>
                                     <option value="Fechado" <?php if($pedidoVenda->situacao == 'Fechado') {echo 'selected';} ?>>Baixado</option>
@@ -314,7 +373,7 @@
 
                                 <div <div class="col-lg-6">
                                     <label for="dataVencimento">Data Vencimento</label><br />
-                                    <input class="form-control input-default " type="date" name="dataVencimento" id="dataVencimento" placeholder="Data" value="{{ $pedidoTitulo->dataVencimento }}">
+                                    <input class="form-control input-default " type="date" name="dataVencimento" required id="dataVencimento" placeholder="Data" value="{{ $pedidoTitulo->dataVencimento }}">
                                 </div>
                                 <div <div class="col-lg-6">
                                     <label for="parcelas">Parcelas (Preencha apenas para lançamentos parcelados)</label><br />
@@ -324,7 +383,7 @@
 
                                 <div <div class="col-lg-6">
                                     <label for="preco">Valor</label><br />
-                                    <input class="form-control input-default " type="text" name="preco" id="preco" placeholder="Valor" value="{{ $pedidoVenda->totalpreco }}">
+                                    <input class="form-control input-default " type="text" readonly name="preco" id="preco" placeholder="Valor" value="{{ $pedidoVenda->totalpreco }}">
                                 </div>
                               </div>
                               <div class="row" style="margin-top: 2%">

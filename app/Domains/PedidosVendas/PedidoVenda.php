@@ -5,6 +5,7 @@ namespace App\Domains\PedidosVendas;
 use Illuminate\Database\Eloquent\Model;
 use App\Domains\Pedidos\Pedidoitem;
 use App\Domains\Vendedores\Vendedor;
+use App\Domains\Clientes\Cliente;
 use App\Domains\Pedidos\Pedidotitulo;
 
 class PedidoVenda extends Model
@@ -32,7 +33,11 @@ class PedidoVenda extends Model
     return $this->hasOne(Pedidotitulo::class, 'idPedido', 'id')->where('tipo_pedido', 'VENDA');
   }
   public function vendedores(){
-    return $this->hasMany(Vendedor::class, 'idVendedor', 'id');
+    return $this->hasOne(Vendedor::class, 'id', 'idVendedor');
+  }
+
+  public function clientes(){
+    return $this->hasOne(Cliente::class, 'id', 'idCliente');
   }
 
   public function getTotalPrecoAttribute(){

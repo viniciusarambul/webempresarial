@@ -12,6 +12,17 @@
                                 <input class="form-control input-default "  type="text" name="filter" placeholder="Buscar um Pedido" value="{{$filter}}" />
 
                             </div>
+                              <div class="col-lg-3">
+
+                                  <select id="situacao_enum" name="situacao_enum" class="form-control input-default " class="validate" style="height: 38px; margin-bottom: 20px;">
+                                      <option value="" selected>Todos</option>
+
+                                      <option value="0">Aberto</option>
+                                      <option value="1">Faturado</option>
+                                      <option value="2">Cancelado</option>
+
+                                  </select>
+                              </div>
                             <div class="col-lg-6">
                                 <button type="submit" class="btn btn-success btn-flat m-b-15 m-l-15">Filtrar</button>
                               </div>
@@ -40,7 +51,7 @@
                                           <thead>
                                               <tr>
                                                   <th>ID</th>
-                                                  <th>Descrição</th>
+                                                  <th>Observação</th>
                                                   <th>Data Pedido</th>
                                                   <th>Situação</th>
                                                   <th>Valor Compra</th>
@@ -55,18 +66,45 @@
                                                   <td>{{$pedidoVenda->nome}}</td>
                                                   <td>{{date("d/m/Y", strtotime($pedidoVenda->data))}}</td>
                                                   <td>{{$pedidoVenda->situacao_descricao}}</td>
-                                                  <td style="text-align: right">R$ {{number_format($pedidoVenda->titulo->preco,2,',','.')}}</td>
-                                                  <td >
+                                                  <td style="text-align: right">R$ {{isset($pedidoVenda->titulo->preco) ? number_format($pedidoVenda->titulo->preco,2,',','.') : ''}}</td>
+                                                  <td>
                                                     @if($pedidoVenda->situacao == 1)
                                                     <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}"><i class="ti-settings"></i>Ver / Editar</a>
+                                                          <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" target="_blank" href="{{ route('pedidosVendas.imprimir', ['$pedidoVenda' => $pedidoVenda->id]) }}"><i class="ti-printer"></i>Imprimir</a>
 
-                                                    @else
-                                                    <a class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidosVendas.faturar', ['$pedidoVenda' => $pedidoVenda->id]) }}">
-                                                      Faturar
+                                                      @endif
+                                                    @if($pedidoVenda->situacao == 0)
+                                                    <a class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidoItemVenda.faturar', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                                      <i class="ti-check"></i>Faturar
                                                     </a>
                                                     <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}"><i class="ti-settings"></i>Ver / Editar</a>
-                                                    @endif
+                                                            <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" target="_blank" href="{{ route('pedidosVendas.imprimir', ['$pedidoVenda' => $pedidoVenda->id]) }}"><i class="ti-printer"></i>Imprimir</a>
+
+                                                      <!--<a class="waves-effect waves-light btn black" href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                                          <span style="font-size: 14px; color: white">Ver</span>
+                                                      </a>-->
+                                                      @endif
+                                                      @if($pedidoVenda->situacao == 1)
+                                                      <a class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5" href="{{ route('pedidosVendas.cancelar', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                                        <i class="ti-close"></i>Cancelar
+                                                      </a>
+
+                                                        <!--<a class="waves-effect waves-light btn black" href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                                            <span style="font-size: 14px; color: white">Ver</span>
+                                                        </a>-->
+                                                        @endif
+                                                        @if($pedidoVenda->situacao == 2)
+                                                        <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"  href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}"><i class="ti-settings"></i>Ver</a>
+                                                            <a  class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" target="_blank" href="{{ route('pedidosVendas.imprimir', ['$pedidoVenda' => $pedidoVenda->id]) }}"><i class="ti-printer"></i>Imprimir</a>
+
+
+                                                          <!--<a class="waves-effect waves-light btn black" href="{{ route('pedidosVendas.show', ['$pedidoVenda' => $pedidoVenda->id]) }}">
+                                                              <span style="font-size: 14px; color: white">Ver</span>
+                                                          </a>-->
+                                                          @endif
+
                                                   </td>
+
 
                                               </tr>
                                               @endforeach

@@ -83,8 +83,10 @@ class ProdutoController extends Controller
     private function save(Produto $produto, ProdutoRequest $request)
     {
       $produto->nome = $request->get('nome');
-      $produto->valorUnitario = $request->get('valorUnitario');
-      $produto->valorSugerido = $request->get('valorSugerido');
+      $valorUnitario = str_replace(',','.', $request->get('valorUnitario'));
+      $produto->valorUnitario = $valorUnitario;
+      $valorSugerido = str_replace(',','.', $request->get('valorSugerido'));
+      $produto->valorSugerido = $valorSugerido;
       $produto->quantidade = $request->get('quantidade');
       $produto->fornecedor = $request->get('fornecedor');
       $produto->categoria = $request->get('categoria');
@@ -121,7 +123,8 @@ class ProdutoController extends Controller
           fornecedores f on f.id = p.fornecedor where p.fornecedor = '$filtrofornecedor' and p.nome like '%". $filtronome ."%'");
       }else{
 
-        $produtos = db::select("SELECT * from sandbox.produtos where nome like '%". $filtronome ."%'");
+        $produtos = db::select("SELECT p.*, c.descricao as descricaocategoria, f.nome as nomeFornecedor from sandbox.produtos p left join sandbox.categorias c on c.id = p.categoria left join
+          fornecedores f on f.id = p.fornecedor ");
       }
 
         //$pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clientes.relatorio', ['clientes' => $produtos, 'inicio' => $inicio, 'fim' => $fim]);

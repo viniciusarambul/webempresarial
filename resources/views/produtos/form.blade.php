@@ -63,7 +63,7 @@
                                     <div class="col-lg-6">
                                       <div class="input col s4">
                                           <label for="valorUnitario">Valor Unitário *</label><br />
-                                          <input class="form-control input-default " type="text" name="valorUnitario" id="nome" placeholder="Valor Unitário" value="{{ $produto->valorUnitario }}">
+                                          <input class="form-control input-default " type="text" name="valorUnitario" id="valorUnitario" placeholder="Valor Unitário" value="{{ $produto->valorUnitario }}">
                                       </div>
                                       <div class="input col s4">
                                           <label for="valorSugerido">Valor Sugerido Venda *</label><br />

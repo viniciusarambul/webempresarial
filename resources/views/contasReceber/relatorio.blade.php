@@ -6,7 +6,7 @@
               font-family: 'Arial', sans-serif;
               margin: 0;
               font-size: 15px;
-              background-color: #ccc;
+
           }
 
           main {
@@ -42,12 +42,9 @@
 
 <main>
   <table style="width: 100% !important; margin-top: 5%;">
-    <tr>
-      <td style="font-size: 25px!important; padding: 20px; width: 60%!important;">WEB EMPRESARIAL</td>
-
-      <td style="width: 20%!important; text-align: center"><b>Filtros Selecionados </b><br><br>Filtro De:{{$inicio ? date('d/m/Y', strtotime($inicio)) : 'Todos'}}<br>Filtro Até:{{$fim ? date('d/m/Y', strtotime($fim)) : 'Todos'}}</td>
-
-    </tr>
+      <tr>
+          <img src="http://sistema.awfranchising.com.br/web.png"  height="150" width="500" style="margin-left: 20%" />
+      </tr>
   </table>
   <h1 align="center">Contas Receber</h1>
       <table style="width: 100% !important">
@@ -55,7 +52,7 @@
                     <tr>
 
                         <th align="center" style="width:5% !important">ID</th>
-                        <th align="center" style="width:10% !important">Descrição / Pedido </th>
+                        <th align="center" style="width:10% !important">Observação </th>
                         <!-- <th align="center" style="width:10% !important">Descrição Pedido Compra</th> -->
                         <th align="center" style="width:10% !important">Data Pedido Venda</th>
                         <th align="center" style="width:10% !important">Situação</th>
@@ -67,7 +64,7 @@
                 </thead>
 
                 <tbody>
-                  <?php $status = array('Aberto', 'Fechado', 'Cancelado'); ?>
+                  <?php $status = array('Aberto', 'Pago'); ?>
                   <?php $totalcontapagar = 0; $totaltudo = 0;?>
             @foreach($contasReceber as $contaReceber)
         <tr>

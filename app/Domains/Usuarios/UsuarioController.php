@@ -3,6 +3,9 @@
 namespace App\Domains\Usuarios;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Domains\Usuarios\Permissoes;
+use App\Domains\Usuarios\UsuarioPermissao;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -37,10 +40,14 @@ class UsuarioController extends Controller
 
     public function show(Usuario $usuario)
     {
+        $permissoes = Permissoes::getPermissoes($usuario);
+
         return view('usuarios.show', [
-          'usuario' => $usuario
+          'usuario' => $usuario,
+          'permissoes' => $permissoes
         ]);
     }
+
 
     public function edit(Usuario $usuario)
     {
@@ -54,9 +61,17 @@ class UsuarioController extends Controller
 
     public function destroy(Usuario $usuario)
     {
+
+
+
+        if (Auth::user()->id == $usuario->id) {
+          return redirect()->route('usuarios.index')->with('error', 'Você não pode se excluir!');
+        }
+
+
       $usuario->delete();
 
-      return redirect()->route('usuarios.index');
+      return redirect()->route('usuarios.index')->with('success', 'Usuário excluido com sucesso!');;
     }
 
     private function form(Usuario $usuario) {
@@ -65,12 +80,39 @@ class UsuarioController extends Controller
         ]);
     }
 
+
+    public function salvarPermissoes(Usuario $usuario, Request $request) {
+
+        UsuarioPermissao::where('usuario_id', $usuario->id)->delete();
+
+        $permissoes = $request->get('permissoes');
+
+        if($permissoes) {
+            foreach($permissoes as $permissao => $identificador) {
+                if($identificador == 'on') {
+                    $usuarioPermissao = new UsuarioPermissao();
+                    $usuarioPermissao->usuario_id = $usuario->id;
+                    $usuarioPermissao->permissao_id = $permissao;
+
+                    $usuarioPermissao->save();
+                }
+            }
+        }
+
+        return redirect()
+            ->route('usuarios.show', ['id' => $usuario->id])
+            ->with('success', 'Permissões salvas com sucesso. É necessário relogar para entrar em vigor.');
+    }
+
     private function save(Usuario $usuario, UsuarioRequest $request)
     {
       $usuario->nome = $request->get('nome');
       $usuario->email = $request->get('email');
       $usuario->login = $request->get('login');
-      $usuario->senha = $request->get('senha');
+      if($request->get('password'))
+      {
+        $usuario->senha = bcrypt($request->get('password'));
+      }
       $usuario->grupo_id = $request->get('grupo_id');
 
       $usuario->save();

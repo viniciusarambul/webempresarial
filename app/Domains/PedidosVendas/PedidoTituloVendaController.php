@@ -87,25 +87,44 @@ class PedidoTituloVendaController extends Controller
 
       if($pedidoTitulo->wasRecentlyCreated){
         $parcelas = $pedidoTitulo->parcelas ? $pedidoTitulo->parcelas : 1;
-        for ($x = 0; $x<$parcelas; $x++){
+        $valores = $this->getValores($parcelas, $pedidoTitulo->preco);
+
+        foreach ($valores as $key => $valor) {
+
           $conta = new ContaReceber;
           $conta->idPedidoVenda = $pedidoVenda->id;
-          $conta->descricao = 'Pedido Venda' . $pedidoVenda->id;
+          $conta->descricao = 'Pedido Venda ' . $pedidoVenda->id .' '. $key .' / ' . $pedidoTitulo->parcelas;
           $conta->dataEmissao = $pedidoTitulo->dataEmissao;
           $conta->idCliente = $pedidoVenda->idCliente;
-          $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $x . 'days'));
+          $conta->dataVencimento = date('Y-m-d', strtotime('+' . 30 * $key . 'days'));
           $conta->situacao = $pedidoVenda->situacao;
           $conta->idVendedor = $pedidoVenda->idVendedor;
           $conta->tipoPagamento = $pedidoTitulo->tipoPagamento;
           $conta->parcelas = $pedidoTitulo->parcelas;
-          if($pedidoTitulo->parcelas == null){
-            $conta->valor = $pedidoTitulo->preco;
-          }else{
-          $conta->valor = round($pedidoTitulo->preco/$pedidoTitulo->parcelas, 2);
-          }
+          $conta->valor = $valor;
+
           $conta->save();
         }
       }
       return redirect()->route('pedidosVendas.show', ['pedidoVenda' => $pedidoVenda->id])->with('success', 'Titulo inserido com Sucesso');
+    }
+
+    private function getValores($numeroParcelas, $valorTotal)
+    {
+      $valores = [];
+      $sobra = $valorTotal;
+
+      for ($i=1; $i <= $numeroParcelas; $i++) {
+        $divisao = round($valorTotal / $numeroParcelas, 2);
+        $valores[$i] = $divisao;
+        $sobra -= $divisao;
+      }
+
+      if($sobra > 0)
+      {
+        $valores[$numeroParcelas] += $sobra;
+      }
+
+      return $valores;
     }
 }

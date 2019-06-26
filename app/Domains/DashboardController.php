@@ -41,6 +41,9 @@ class DashboardController extends Controller
       $comprasdia = db::select("SELECT SUM(preco) as soma FROM sandbox.pedidotitulos where tipo_pedido = 'COMPRA' and dataEmissao = '$hoje'");
       //$fluxo = db::select("SELECT SUM(preco) as soma FROM sandbox.pedidotitulos where tipo_pedido = 'COMPRA' and dataEmissao = '$hoje'");
 
+      $contasdodia = db::select("SELECT cp.*, f.nome as nomefornecedor FROM sandbox.contaPagar cp left join fornecedores f on f.id=cp.idFornecedor where dataVencimento = '2019-06-13' and (dataPagamento is null or dataPagamento = '0000-00-00') LIMIT 10");
+      $receitasdodia = db::select("SELECT cp.*, f.nome as nomefornecedor FROM sandbox.contaReceber cp left join clientes f on f.id=cp.idCliente where dataVencimento = '2019-06-13' and (dataPagamento is null or dataPagamento = '0000-00-00') LIMIT 10");
+
      return view('dashboard',[
        'pedidocomprabar' => $pedidocomprabar,
        'pedidovendabar' => $pedidovendabar,
@@ -51,7 +54,10 @@ class DashboardController extends Controller
        'recebidos' => $recebidos,
        'pagos' => $pagos,
        'vendasdia' => $vendasdia,
-       'comprasdia' => $comprasdia
+       'comprasdia' => $comprasdia,
+       'hoje' => $hoje,
+       'contasdodia' => $contasdodia,
+       'receitasdodia' => $receitasdodia
      ]);
     }
 }

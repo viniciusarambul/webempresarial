@@ -8,7 +8,7 @@ class CPF implements TypeInterface{
   private function validator(string $str = null){
 
     if($str == null){
-      return true;
+      return false;
     }
 
         $cpf = str_pad(preg_replace('/[^0-9]/', '', $str), 11, '0', STR_PAD_LEFT);
@@ -47,7 +47,8 @@ class CPF implements TypeInterface{
     private $value = '';
     public function __construct(string $str = null){
       if(!$this->validator($str)){
-        throw new \Exception("CPF Inválido");
+        exit('CPF Inválido');
+
       }
 
       $this->value = $str;

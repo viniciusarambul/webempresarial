@@ -49,8 +49,8 @@
                                             <input class="form-control input-default " type="text" name="login" id="login" placeholder="Descrição" value="{{ $usuario->login }}">
                                         </div>
                                         <div class="col-lg-6">
-                                            <label for="senha">Senha *</label><br />
-                                            <input class="form-control input-default " type="text" name="senha" id="senha" placeholder="Descrição" value="{{ $usuario->senha }}">
+                                            <label for="password">Senha *</label><br />
+                                            <input class="form-control input-default " type="password" name="password" id="password" placeholder="senha" >
                                         </div>
                                         <div class="col-lg-6">
                                              <label for="grupo_id">Grupo *</label><br />
@@ -81,6 +81,8 @@
                 </div>
               </div>
             </div>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 var elems = document.querySelectorAll('.collapsible');
